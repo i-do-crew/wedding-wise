@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/fragments :: head}">
+    <meta charset="UTF-8">
+    <title>About Us</title>
+</head>
+<body>
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+
+<div class="container p-3">
+    <div class="card">
+        <div class="row">
+            <span class="col"></span>
+            <span class="col">
+                <h1>The I do Crew</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et minus nemo nobis, suscipit voluptatibus.</p>
+            </span>
+        </div>
+        <div class="row">
+            <span class="col">
+                <img id="micahpic"src="/static/img/micah_larson_headshot.jpg">
+                <h4>Micah Larson</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et minus nemo nobis, suscipit voluptatibus.</p>
+            </span>
+            <span class="col"></span>
+        </div>
+        <div class="row">
+            <span class="col"></span>
+            <span class="col">
+                <img id="andreapic"src="/img/andrea_varnado_headshot.jpg">
+                <h4>Andrea Varnado</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et minus nemo nobis, suscipit voluptatibus.</p>
+            </span>
+        </div>
+        <div class="row">
+            <span class="col">
+                <img id="billiepic"src="/static/img/billie_dorries_headshot.png">
+                <h4>Billie Dorries</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et minus nemo nobis, suscipit voluptatibus.</p>
+            </span>
+            <span class="col"></span>
+        </div>
+        <div class="row">
+            <span class="col"></span>
+            <span class="col">
+                <img id="claytonpic"src="/static/img/clayton_priestley_headshot.jpg">
+                <h4>Clayton Priestley</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et minus nemo nobis, suscipit voluptatibus.</p>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
+
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>
