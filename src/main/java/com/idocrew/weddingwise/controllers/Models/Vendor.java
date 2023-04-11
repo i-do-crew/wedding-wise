@@ -1,6 +1,16 @@
 package com.idocrew.weddingwise.controllers.Models;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+
+@Table(name="vendors")
 @Entity
 public class Vendor {
 
