@@ -1,6 +1,5 @@
-package com.idocrew.weddingwise.controllers;
+package com.idocrew.weddingwise.entity;
 
-import com.idocrew.weddingwise.controllers.Models.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
