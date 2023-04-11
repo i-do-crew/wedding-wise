@@ -8,7 +8,7 @@
     <script src="https://fontawesome.com/search?o=r&s=light&f=sharp" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar bg-light">
+    <nav th:fragment="navbar" class="navbar bg-light">
         <div class="container-fluid ">
             <a class="navbar-brand" href="#">Wedding Wise</a>
             <ul class="navbar-nav me-auto">
@@ -22,9 +22,16 @@
             <span class="navbar-text me-2">
                 <a class="nav-link" href="#">Login</a>
             </span>
-            <span class="nav-item">
-                <button class="btn btn-sm btn-outline-secondary" type="button">Sign-Up</button>
-            </span>
+                <span class="nav-item dropstart ">
+                  <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sign-Up
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Sign-up as Client</a></li>
+                    <li><a class="dropdown-item" href="#">Sign-up as Vendor</a></li>
+                  </ul>
+                </span>
+
         </div>
     </nav>
 
