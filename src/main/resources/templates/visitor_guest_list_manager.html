@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/fragments :: head}">
+    <meta charset="UTF-8">
+    <title>Visitor Guest List Manager</title>
+</head>
+<body>
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+
+<div class="container p-3">
+    <div class="card row">
+        <span class="col">
+            <h1 class="text-center">Guest List Manager</h1>
+            <p>Keep track of your wedding guests and their RSVPs with Wedding Wise's guest list manager. You can also use this feature to communicate with your guests and send out invitations via group email.</p>
+            <button class="btn btn-outline-secondary">Sign-Up Here</button>
+        </span>
+        <span class="col">
+            <img src="..." alt="picture">
+        </span>
+    </div>
+</div>
+
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
+
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>
