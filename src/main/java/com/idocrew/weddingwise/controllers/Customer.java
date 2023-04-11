@@ -1,5 +1,6 @@
 package com.idocrew.weddingwise.controllers;
 
+import com.idocrew.weddingwise.controllers.Models.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-
 @Table(name="customers")
 @Entity
 public class Customer {
@@ -28,6 +28,7 @@ public class Customer {
     private String partnerFName;
     @Column(name="partner_lname", columnDefinition="varchar(50)")
     private String partnerLName;
-    @Column(name="user_id", columnDefinition="bigint(20)")
-    private long userId;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
+    private User user;
 }

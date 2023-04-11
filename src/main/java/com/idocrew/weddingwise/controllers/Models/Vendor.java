@@ -9,7 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-
 @Table(name="vendors")
 @Entity
 public class Vendor {
@@ -25,4 +24,6 @@ public class Vendor {
     private String cityState;
     @Column(name="about", columnDefinition="longtext")
     private String about;
+    @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
+    private User user;
 }

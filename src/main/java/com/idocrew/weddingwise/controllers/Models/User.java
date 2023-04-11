@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-
 @Table(name="users")
 @Entity
 public class User {
@@ -28,7 +27,6 @@ public class User {
     private int roleId;
     @Column(name="first_name", columnDefinition="varchar(25) not null")
     private String firstName;
-
     @Column(name="last_name", columnDefinition="varchar(25) not null")
     private String lastName;
     @Column(name="account_verified", columnDefinition = "bit")
