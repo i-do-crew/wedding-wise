@@ -1,7 +1,17 @@
 package com.idocrew.weddingwise.controllers.Models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+
+@Table(name="users")
 @Entity
 public class User {
 
@@ -34,98 +44,5 @@ public class User {
     @Column(name="credentials_non_expired", columnDefinition = "bit")
     private boolean credentialsNonExpired;
 
-    public int getRoleId() {
-        return roleId;
-    }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public boolean isAccountVerified() {
-        return accountVerified;
-    }
-
-    public void setAccountVerified(boolean accountVerified) {
-        this.accountVerified = accountVerified;
-    }
-
-    public int getFailedLoginAttempts() {
-        return failedLoginAttempts;
-    }
-
-    public void setFailedLoginAttempts(int failedLoginAttempts) {
-        this.failedLoginAttempts = failedLoginAttempts;
-    }
-
-    public boolean isLoginDisabled() {
-        return loginDisabled;
-    }
-
-    public void setLoginDisabled(boolean loginDisabled) {
-        this.loginDisabled = loginDisabled;
-    }
-
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public User(){
-    }
-
-    public User(User copy) {
-
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
