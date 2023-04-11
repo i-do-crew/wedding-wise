@@ -8,6 +8,7 @@
     <script src="https://fontawesome.com/search?o=r&s=light&f=sharp" crossorigin="anonymous"></script>
 </head>
 <body>
+<!--NAVBAR-->
     <nav th:fragment="navbar" class="navbar bg-light">
         <div class="container-fluid ">
             <a class="navbar-brand" href="#">Wedding Wise</a>
@@ -35,47 +36,27 @@
         </div>
     </nav>
 
-<div th:fragment="bootstrapJs">
-    <!--bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-            crossorigin="anonymous"></script>
-    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
-            integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
-            crossorigin="anonymous"></script>
-</div>
-
 <!--FOOTER-->
 <footer class="text-black pt-5 pb-4 fixed-bottom" style="background-color: ivory" th:fragment="footer">
     <div class="container text-center text-md-left">
         <div class="row text-center text-md-left">
             <div class="col-md-3 col-lg-6 col-xl-6 mx-auto mt-3">
                 <h5>Wedding Wise</h5>
-<!--                <p>-->
                     <span style="text-align: center">
                     <a href="#" class="text-black align-self-center" style="text-decoration: beige">Venue</a>
                     </span>
-<!--                </p>-->
-<!--                <p>-->
                     <span style="text-align: center">
                     <a href="#" class="text-black align-self-center" style="text-decoration: beige">Vendors</a>
                     </span>
-<!--                </p>-->
-<!--                <p>-->
                     <span style="text-align: center">
                     <a href="#" class="text-black align-self-center" style="text-decoration: beige">Budget Tracker</a>
                     </span>
-<!--                </p>-->
-<!--                <p>-->
                     <span style="text-align: center">
                     <a href="#" class="text-black align-self-center" style="text-decoration: beige">Guest List Manager</a>
                     </span>
-<!--                </p>-->
-<!--                <p>-->
                     <span style="text-align: center">
                     <a href="#" class="text-black align-self-center" style="text-decoration: beige">Idea Board</a>
                     </span>
-<!--                </p>-->
             </div>
             <div>
                 <i class="fa-sharp fa-light fa-square-f"></i>
@@ -91,5 +72,15 @@
     </div>
 </footer>
 
+
+    <div th:fragment="bootstrapJs">
+        <!--bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+                integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+                crossorigin="anonymous"></script>
+        <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
+                integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
+                crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>
