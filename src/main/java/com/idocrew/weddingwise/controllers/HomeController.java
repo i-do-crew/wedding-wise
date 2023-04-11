@@ -25,4 +25,8 @@ public class HomeController {
     public String aboutUs() {
         return "about_us";
     }
+    @GetMapping("/client/login")
+    public String clientLogin() {
+        return "client_login";
+    }
 }
