@@ -3,7 +3,9 @@
 <head th:fragment="head">
     <meta charset="UTF-8">
     <!--  bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://fontawesome.com/search?o=r&s=light&f=sharp" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar bg-light">
@@ -26,14 +28,61 @@
         </div>
     </nav>
 
-
-
-
-
 <div th:fragment="bootstrapJs">
     <!--bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
+            integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
+            crossorigin="anonymous"></script>
 </div>
+
+<!--FOOTER-->
+<footer class="text-black pt-5 pb-4 fixed-bottom" style="background-color: ivory" th:fragment="footer">
+    <div class="container text-center text-md-left">
+        <div class="row text-center text-md-left">
+            <div class="col-md-3 col-lg-6 col-xl-6 mx-auto mt-3">
+                <h5>Wedding Wise</h5>
+<!--                <p>-->
+                    <span style="text-align: center">
+                    <a href="#" class="text-black align-self-center" style="text-decoration: beige">Venue</a>
+                    </span>
+<!--                </p>-->
+<!--                <p>-->
+                    <span style="text-align: center">
+                    <a href="#" class="text-black align-self-center" style="text-decoration: beige">Vendors</a>
+                    </span>
+<!--                </p>-->
+<!--                <p>-->
+                    <span style="text-align: center">
+                    <a href="#" class="text-black align-self-center" style="text-decoration: beige">Budget Tracker</a>
+                    </span>
+<!--                </p>-->
+<!--                <p>-->
+                    <span style="text-align: center">
+                    <a href="#" class="text-black align-self-center" style="text-decoration: beige">Guest List Manager</a>
+                    </span>
+<!--                </p>-->
+<!--                <p>-->
+                    <span style="text-align: center">
+                    <a href="#" class="text-black align-self-center" style="text-decoration: beige">Idea Board</a>
+                    </span>
+<!--                </p>-->
+            </div>
+            <div>
+                <i class="fa-sharp fa-light fa-square-f"></i>
+                <i class="fa-sharp fa-light fa-square-f"></i>
+                <i class="fa-sharp fa-light fa-square-f"></i>
+            </div>
+            <hr class="mt-2 mb-3"/>
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2020 Copyright:
+                <a class="text-dark" href="https://weddingwise.com/">MDBootstrap.com</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
