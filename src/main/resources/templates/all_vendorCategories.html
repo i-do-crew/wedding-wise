@@ -7,7 +7,9 @@
 
 <body>
 <!--NAVBAR-->
-<nav th:insert="~{fragment/fragment} :: navbar"></nav>
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
 
 
 <div class="container-sm">
@@ -86,11 +88,11 @@
     </div>
     </div>
     </span>
-
+</div>
 <!--FOOTER-->
     <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
     <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
-</div>
+
 </body>
 </html>

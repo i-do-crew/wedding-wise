@@ -2,6 +2,7 @@ package com.idocrew.weddingwise.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
@@ -33,8 +34,26 @@ public class HomeController {
     public String clientRegistration() {
         return "client_registration";
     }
+//    @PostMapping("/client/registration")
+//    public String clientRegistrationPost(){
+//        return "redirect:/verification";
+//    }
+
     @GetMapping("/vendor/registration")
-    public String login(){
+    public String vendorRegistration(){
         return "vendor_registration";
+    }
+//    @PostMapping("/vendor/registration")
+//    public String vendorRegistrationPost(){
+//        return "redirect:/verification";
+//    }
+
+    @GetMapping("/verification")
+    public String emailVerification(){
+        return "email_verification";
+    }
+    @GetMapping("/vendors")
+    public String vendorCategories(){
+        return "all_vendorCategories";
     }
 }

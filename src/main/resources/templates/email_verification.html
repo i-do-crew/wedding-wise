@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/fragments :: head}" >
+    <meta charset="UTF-8">
+    <title>Email Verification</title>
+</head>
+<body>
+<!--NAVBAR-->
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Congratulations! Hit continue to begin planning</h1>
+      <a href="/"><button>Continue</button></a>
+    </div>
+    <div class="col">
+      <img src="/static/img/flowers.jpg" alt="picture" id="emailVerificationImg1">
+    </div>
+    <div class="col">
+      <img src="/static/img/flowers.jpg" alt="picture" id="emailVerificationImg2">
+    </div>
+  </div>
+</div>
+
+<!--FOOTER-->
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>
