@@ -22,17 +22,17 @@ public class HomeController {
 
     @GetMapping("/visitor/budgettracker")
     public String visitorBudgetTracker() {
-        return "visitor_budget_tracker";
+        return "visitor_views/visitor_budget_tracker";
     }
 
     @GetMapping("/visitor/guestlistmanager")
     public String guestListManager() {
-        return "visitor_guest_list_manager";
+        return "visitor_views/visitor_guest_list_manager";
     }
 
     @GetMapping("/visitor/ideaboard")
     public String visitorIdeaBoard() {
-        return "visitor_idea_board";
+        return "visitor_views/visitor_idea_board";
     }
 
     @GetMapping("/aboutus")
@@ -42,14 +42,18 @@ public class HomeController {
 
     @GetMapping("/client/login")
     public String clientLogin() {
-        return "client_login";
+        return "login_and_signup/client_login";
     }
 
     @GetMapping("/client/registration")
     public String clientRegistration() {
+<<<<<<< HEAD
         return "client_registration";
 <<<<<<< HEAD
 =======
+=======
+        return "login_and_signup/client_registration";
+>>>>>>> 9cd1a997cd2c3218a582d29449f17399c829cecc
     }
 
 //    @PostMapping("/client/registration")
@@ -59,7 +63,7 @@ public class HomeController {
 
     @GetMapping("/vendor/registration")
     public String vendorRegistration(){
-        return "vendor_registration";
+        return "login_and_signup/vendor_registration";
     }
 
 //    @PostMapping("/vendor/registration")
@@ -76,7 +80,16 @@ public class HomeController {
     public String vendorCategories(Model model){
         List<Vendor> vendors = vendorDao.findAll();
         model.addAttribute("vendors",vendors);
+<<<<<<< HEAD
         return "all_vendorCategories";
 >>>>>>> f37fa39778499240fac6fbeb4e8eab8af39f8ec5
+=======
+        return "vendors/all_vendorCategories";
+    }
+
+    @GetMapping("/ideaboard")
+    public String ideaBoard(){
+        return "customer_views/idea_board";
+>>>>>>> 9cd1a997cd2c3218a582d29449f17399c829cecc
     }
 }
