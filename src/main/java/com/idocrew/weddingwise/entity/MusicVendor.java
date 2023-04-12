@@ -9,9 +9,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="music_genres")
+@Table(name="djs_and_live_bands")
 @Entity
-public class MusicGenre {
+public class MusicVendor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,11 +19,9 @@ public class MusicGenre {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @ManyToMany
-    @JoinTable(
-        name="vendors_music_genres",
-        joinColumns = @JoinColumn(name = "id"),
-        inverseJoinColumns = @JoinColumn(name = "vendor_id")
-    )
-    private Set<Vendor> vendors;
+    @Column(name="category", columnDefinition="varchar(50)")
+    private String category;
+
+    @JoinColumn(name="vendor_id", referencedColumnName="id", columnDefinition="bigint unsigned")
+    private long vendor_id;
 }
