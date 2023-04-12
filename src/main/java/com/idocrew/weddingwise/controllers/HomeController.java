@@ -47,7 +47,13 @@ public class HomeController {
 
     @GetMapping("/client/registration")
     public String clientRegistration() {
+<<<<<<< HEAD
+        return "client_registration";
+<<<<<<< HEAD
+=======
+=======
         return "login_and_signup/client_registration";
+>>>>>>> 9cd1a997cd2c3218a582d29449f17399c829cecc
     }
 
 //    @PostMapping("/client/registration")
@@ -74,11 +80,16 @@ public class HomeController {
     public String vendorCategories(Model model){
         List<Vendor> vendors = vendorDao.findAll();
         model.addAttribute("vendors",vendors);
+<<<<<<< HEAD
+        return "all_vendorCategories";
+>>>>>>> f37fa39778499240fac6fbeb4e8eab8af39f8ec5
+=======
         return "vendors/all_vendorCategories";
     }
 
     @GetMapping("/ideaboard")
     public String ideaBoard(){
         return "customer_views/idea_board";
+>>>>>>> 9cd1a997cd2c3218a582d29449f17399c829cecc
     }
 }
