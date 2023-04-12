@@ -40,9 +40,9 @@ public class HomeController {
         return "about_us";
     }
 
-    @GetMapping("/client/login")
+    @GetMapping("/login")
     public String clientLogin() {
-        return "login_and_signup/client_login";
+        return "login_and_signup/login";
     }
 
     @GetMapping("/client/registration")
@@ -73,7 +73,7 @@ public class HomeController {
 
     @GetMapping("/verification")
     public String emailVerification(){
-        return "email_verification";
+        return "login_and_signup/email_verification";
     }
 
     @GetMapping("/vendors")
@@ -91,5 +91,10 @@ public class HomeController {
     public String ideaBoard(){
         return "customer_views/idea_board";
 >>>>>>> 9cd1a997cd2c3218a582d29449f17399c829cecc
+    }
+
+    @GetMapping("/vendor/profile")
+    public String vendorProfile(){
+        return "vendor_views/vendor_profile";
     }
 }
