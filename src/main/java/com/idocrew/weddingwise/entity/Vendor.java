@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -29,6 +31,6 @@ public class Vendor {
     private User user;
     @ManyToOne
     private Category category;
-    @ManyToOne
-    private VendorPackage vendorPackage;
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<VendorPackage> vendorPackages;
 }
