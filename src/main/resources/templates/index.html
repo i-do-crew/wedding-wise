@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/fragments :: head}" >
+<head th:replace="fragments/fragments :: head" >
     <meta charset="UTF-8">
     <title>Wedding Wise Landing Page</title>
 </head>
 <body>
 <header>
-    <nav th:insert="~{fragments/fragments :: navbar}"></nav>
+    <!--NAVBAR-->
+<!--    <nav th:insert="~{fragments/fragments} :: navbar"></nav>-->
+    <nav th:insert="fragments/fragments :: navbar"></nav>
+
 
     <div class="p-5 text-center bg-light">
         <h1 class="mb-3">WEDDING WISE</h1>
@@ -14,13 +17,16 @@
     </div>
 </header>
 
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
+
 <div class="container">
     <div class="row">
         <span class="col">
             <b>Vendors</b>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-            <button class="btn btn-outline-secondary">Learn More</button>
+            <a href="/vendors"><button class="btn btn-outline-secondary">Learn More</button></a>
         </span>
         <span class="col mt-3 ms-5">
             <img src="..." alt="">
@@ -34,7 +40,7 @@
             <b>Budget Tracker</b>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-            <button class="btn btn-outline-secondary" >Learn More</button>
+            <a href="/visitor/budgettracker"><button class="btn btn-outline-secondary" >Learn More</button></a>
         </span>
     </div>
     <div class="row">
@@ -42,7 +48,7 @@
             <b>Guest List Manager</b>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-            <button class="btn btn-outline-secondary">Learn More</button>
+            <a href="/visitor/guestlistmanager"><button class="btn btn-outline-secondary">Learn More</button></a>
         </span>
         <span class="col mt-3 ms-5">
             <img src="..." alt="">
@@ -56,12 +62,14 @@
             <b>Idea Board</b>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-            <button class="btn btn-outline-secondary">Learn More</button>
+            <a href="/visitor/ideaboard"><button class="btn btn-outline-secondary">Learn More</button></a>
         </span>
     </div>
 </div>
 
-<footer th:insert="~{fragments/fragments :: footer}"></footer>
-<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--FOOTER-->
+<footer th:insert="fragments/fragments :: footer"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="fragments/fragments :: bootstrapJs"></div>
 </body>
 </html>

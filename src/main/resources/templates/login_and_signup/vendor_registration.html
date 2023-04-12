@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/fragments :: head}">
+    <meta charset="UTF-8">
+    <title>Vendor Registration</title>
+</head>
+<body>
+<!--NAVBAR-->
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
+
+<div class="card mx-5 mt-5 mb-5">
+    <div class="row">
+        <div class="col">
+            <img id="loginimage" src="/img/flowers.jpg">
+        </div>
+        <div class="col text-center px-3 pt-5">
+            <h1>HELP US MAKE DREAMS COME TRUE</h1>
+            <form>
+                <div class="mb-3">
+                    <label for="businessName" class="form-label"></label>
+                    <input type="text" name="businessName" class="form-control" id="businessName" placeholder="Enter your Business Name">
+                </div>
+                <div class="mb-3">
+                    <label for="businessEmail" class="form-label"></label>
+                    <input type="text" name="businessEmail" class="form-control" id="businessEmail" placeholder="Enter your Business Email">
+                </div>
+                <div class="mb-3">
+                    <label for="pFirstName" class="form-label"></label>
+                    <input type="text" name="firstName" class="form-control" id="pFirstName" placeholder="Enter your Business Address">
+                </div>
+                <div class="mb-3">
+                    <label for="pLastName" class="form-label"></label>
+                    <input type="text" name="pLastName" class="form-control" id="pLastName" placeholder="Enter your Business Phone Number">
+                </div>
+                <div class="col-auto mt-1">
+                        <select class="form-select">
+                            <option selected>Select your Vendor Category...</option>
+                            <option value="Venues">Venues</option>
+                            <option value="Musicians">Bands/Djs</option>
+                            <option value="Caterers">Caterers</option>
+                            <option value="AR">Florists</option>
+                            <option value="CA">Photographers</option>
+                            <option value="CO">Bar/Drinks</option>
+                            <option value="CT">Cake/Desserts</option>
+                        </select>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label"></label>
+                    <input type="text" name="date" class="form-control" id="date" placeholder="Enter your Capacity -if venue category">
+                </div>
+                <div class="col-auto mt-1 mb-3">
+                    <select class="form-select">
+                        <option selected>Select your Price Tier...</option>
+                        <option value="$">$</option>
+                        <option value="$$">$$</option>
+                        <option value="$$$">$$$</option>
+                        <option value="$$$$">$$$$</option>
+                    </select>
+                </div>
+
+            </form>
+            <span class="mb-3">
+                    <a href="/verification"><button class="btn btn-secondary">Sign-up</button></a>
+                </span>
+        </div>
+    </div>
+</div>
+
+<!--FOOTER-->
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>

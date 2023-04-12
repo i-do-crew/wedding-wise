@@ -24,6 +24,7 @@ public class Vendor {
     private String cityState;
     @Column(name="about", columnDefinition="longtext")
     private String about;
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
     private User user;
 }
