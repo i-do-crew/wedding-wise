@@ -5,7 +5,10 @@
     <title>Client Registration</title>
 </head>
 <body>
-<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<!--NAVBAR-->
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
 
 <div class="card mx-5 mt-5 mb-5">
   <div class="row">
@@ -105,15 +108,18 @@
               <label for="guestCount" class="form-label"></label>
               <input type="text" name="guestCount" class="form-control" id="guestCount" placeholder="Enter your Estimated Guest Count">
           </div>
-        <span class="pb-3">
-            <button type="submit" class="btn btn-secondary">Sign-up</button>
-        </span>
+
       </form>
+        <span class="pb-3">
+            <a href="/verification"><button  class="btn btn-secondary">Sign-up</button></a>
+        </span>
     </div>
   </div>
 </div>
 
+<!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
+<!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 </body>
 </html>

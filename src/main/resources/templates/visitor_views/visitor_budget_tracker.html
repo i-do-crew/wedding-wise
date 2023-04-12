@@ -5,14 +5,16 @@
     <title>Visitor Budget Tracker</title>
 </head>
 <body>
-<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
 
 <div class="container p-3">
     <div class="card row">
         <span class="col">
             <h1 class="text-center">Budget Tracker</h1>
             <p>With Wedding Wise, you can easily set and track your wedding budget to ensure that you stay on track financially. The app will automatically calculate your expenses and help you stay within your budget.</p>
-            <button class="btn btn-outline-secondary">Sign-Up Here</button>
+            <a href="/client/registration"><button class="btn btn-outline-secondary">Sign-Up Here</button></a>
         </span>
         <span class="col">
             <img src="..." alt="picture">

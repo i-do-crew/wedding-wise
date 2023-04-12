@@ -5,14 +5,16 @@
     <title>Visitor Guest List Manager</title>
 </head>
 <body>
-<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
 
 <div class="container p-3">
     <div class="card row">
         <span class="col">
             <h1 class="text-center">Guest List Manager</h1>
             <p>Keep track of your wedding guests and their RSVPs with Wedding Wise's guest list manager. You can also use this feature to communicate with your guests and send out invitations via group email.</p>
-            <button class="btn btn-outline-secondary">Sign-Up Here</button>
+            <a href="/client/registration"><button class="btn btn-outline-secondary">Sign-Up Here</button></a>
         </span>
         <span class="col">
             <img src="..." alt="picture">

@@ -5,14 +5,16 @@
     <title>Visitor Idea Board</title>
 </head>
 <body>
-<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
 
 <div class="container p-3">
   <div class="card row">
         <span class="col">
             <h1 class="text-center">Idea Board</h1>
             <p>With Wedding Wise's idea board, you can collect and organize all of your wedding inspiration in one place. Whether it's photos, articles, or Pinterest boards, you can save it all in Wedding Wise.</p>
-            <button class="btn btn-outline-secondary">Sign-Up Here</button>
+            <a href="/client/registration"><button class="btn btn-outline-secondary">Sign-Up Here</button></a>
         </span>
         <span class="col">
             <img src="..." alt="picture">

@@ -7,6 +7,7 @@
     <!--BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <!--FONT AWESOME-->
     <script src="https://fontawesome.com/search?o=r&s=light&f=sharp" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -16,30 +17,68 @@
             <a class="navbar-brand" href="/">Wedding Wise</a>
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Vendors</a>
+                    <a class="nav-link" href="/vendors">Vendors</a>
                 </li>
             </ul>
+            <span class="navbar-text me-2">
+                <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample">Profile</a>
+            </span>
             <span class="navbar-text me-2">
                 <a class="nav-link" href="/aboutus">About Us</a>
             </span>
             <span class="navbar-text me-2">
                 <a class="nav-link" href="/client/login">Login</a>
             </span>
-                <span class="nav-item dropstart ">
-                  <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Sign-Up
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
-                    <li><a class="dropdown-item" href="#">Sign-up as Vendor</a></li>
+            <span class="nav-item dropstart ">
+                <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sign-Up
+                </button>
+                <ul class="dropdown-menu"><li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li><li><a class="dropdown-item" href="/vendor/registration">Sign-up as Vendor</a></li>
                   </ul>
-                </span>
-
+            </span>
         </div>
     </nav>
 
+<!--SIDEBAR-->
+<div th:fragment="sidebar">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header ">
+                <div class="row">
+                    <button type="button" class="btn-close ps-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="offcanvas-body">
+                <div class="">
+                    <img src="/img/flowers.jpg" alt="picture" id="profileImg">
+                    <button class="btn btn-outline-secondary"><i class="fa-light fa-pen text-dark"></i></button>
+                </div>
+                <div class="row pb-4">
+                    <h3>Lastname-Lastname</h3>
+                </div>
+                <div class="row pb-4 pt-5">
+                    <a href="/budgettracker">Budget: $$$$</a>
+                </div>
+                <div class="row pb-4">
+                    <h6>Wedding Date:</h6>
+                    <h6>00/00/0000</h6>
+                </div>
+                <div class="row pb-4">
+                    <a href="/guestlistmanager">Guest Count: 0000</a>
+                </div>
+                <div class="position-absolute bottom-0">
+                    <div class="row pb-4 pt-5">
+                        <a href="/ideaboard">Idea Board</a>
+                    </div>
+                    <div class="row pb-4 ">
+                        <a href="/vendors">Vendors</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
 <!--FOOTER-->
-<footer class="text-black pt-5 pb-4" style="background-color: ivory" th:fragment="footer">
+<footer class="text-black pt-5 pb-4 position-absolut bottom-0 top-100" style="background-color: ivory" th:fragment="footer">
     <div class="container text-center text-md-left">
         <div class="row text-center text-md-left">
             <div class="col-md-3 col-lg-6 col-xl-6 mx-auto mt-3">
@@ -74,14 +113,14 @@
     </div>
 </footer>
 
-    <div th:fragment="bootstrapJs">
-        <!--BOOTSTRAP-->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-                integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-                crossorigin="anonymous"></script>
-        <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
-                integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
-                crossorigin="anonymous"></script>
-    </div>
+<div th:fragment="bootstrapJs">
+    <!--BOOTSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
+            integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
+            crossorigin="anonymous"></script>
+</div>
 </body>
 </html>
