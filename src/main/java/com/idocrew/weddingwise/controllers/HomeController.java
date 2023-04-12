@@ -32,5 +32,8 @@ public class HomeController {
     @GetMapping("/client/registration")
     public String clientRegistration() {
         return "client_registration";
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 }
