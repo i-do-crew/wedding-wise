@@ -14,6 +14,21 @@ import lombok.Setter;
 @Entity
 public class User {
 
+    public User (User copy) {
+        id = copy.id;
+        email = copy.email;
+        password = copy.password;
+        username = copy.username;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        roleId = copy.roleId;
+        accountVerified = copy.accountVerified;
+        failedLoginAttempts = copy.failedLoginAttempts;
+        loginDisabled = copy.loginDisabled;
+        accountNonExpired = copy.accountNonExpired;
+        accountNonLocked = copy.accountNonLocked;
+        credentialsNonExpired = copy.credentialsNonExpired;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
