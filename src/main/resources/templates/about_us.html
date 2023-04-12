@@ -5,10 +5,13 @@
     <title>About Us</title>
 </head>
 <body>
-<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<!--NAVBAR-->
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
 
 <div class="container p-3">
-    <div class="card">
+    <div class="card container">
         <div class="row">
             <span class="col"></span>
             <span class="col">
@@ -18,7 +21,7 @@
         </div>
         <div class="row">
             <span class="col">
-                <img id="micahpic"src="/static/img/micah_larson_headshot.jpg">
+                <img id="micahpic"src="/img/micah_larson_headshot.jpg">
                 <h4>Micah Larson</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et minus nemo nobis, suscipit voluptatibus.</p>
             </span>
@@ -34,7 +37,7 @@
         </div>
         <div class="row">
             <span class="col">
-                <img id="billiepic"src="/static/img/billie_dorries_headshot.png">
+                <img id="billiepic"src="/img/billie_dorries_headshot.png">
                 <h4>Billie Dorries</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et minus nemo nobis, suscipit voluptatibus.</p>
             </span>
@@ -43,7 +46,7 @@
         <div class="row">
             <span class="col"></span>
             <span class="col">
-                <img id="claytonpic"src="/static/img/clayton_priestley_headshot.jpg">
+                <img id="claytonpic"src="/img/clayton_priestley_headshot.jpg">
                 <h4>Clayton Priestley</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et minus nemo nobis, suscipit voluptatibus.</p>
             </span>
