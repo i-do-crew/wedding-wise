@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/fragments :: head}">
+    <meta charset="UTF-8">
+    <title>Visitor Budget Tracker</title>
+</head>
+<body>
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+
+<div class="container p-3">
+    <div class="card row">
+        <span class="col">
+            <h1 class="text-center">Budget Tracker</h1>
+            <p>With Wedding Wise, you can easily set and track your wedding budget to ensure that you stay on track financially. The app will automatically calculate your expenses and help you stay within your budget.</p>
+            <button class="btn btn-outline-secondary">Sign-Up Here</button>
+        </span>
+        <span class="col">
+            <img src="..." alt="picture">
+        </span>
+    </div>
+</div>
+
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
+
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>

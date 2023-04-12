@@ -1,0 +1,11 @@
+#micahpic,#andreapic,#billiepic,#claytonpic {
+    width: 45px;
+    height: 55px;
+}
+
+#loginimage{
+    background: url("../img/flowers.jpg") no-repeat;
+    height: 100vh;
+    width:50vw;
+    background-size: cover;
+}

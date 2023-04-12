@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client's Profile</title>
+    <nav th:insert="~{fragments/fragments :: navbar}"></nav>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div style="text-align: center">
+<h1 style="font: common-ligatures">Welcome to the
+    Lastname-Lastname
+    wedding profile</h1>
+    </div>
+    <div class="snippet-container">
+<h4>Venue</h4>
+<img class="card-img-top" src="..." alt="Vendor Img">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+<h4>Photographer</h4>
+<img class="card-img-top" src="..." alt="Vendor Img">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+<h4>Band/DJ</h4>
+<img class="card-img-top" src="..." alt="Vendor Img">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+<h4>Florist</h4>
+<img class="card-img-top" src="..." alt="Vendor Img">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+<h4>Caterer</h4>
+<img class="card-img-top" src="..." alt="Vendor Img">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+</div>
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
+
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>
