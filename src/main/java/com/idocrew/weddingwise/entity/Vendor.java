@@ -27,4 +27,8 @@ public class Vendor {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
     private User user;
+    @ManyToOne
+    private Category category;
+    @ManyToOne
+    private VendorPackage vendorPackage;
 }
