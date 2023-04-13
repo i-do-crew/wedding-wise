@@ -43,7 +43,7 @@ public class VendorController {
     }
     @GetMapping("/likedVendors")
     public String likedVendors() {
-        return "customer_views/liked_vendors";
+        return "/likedVendors";
     }
 
 }

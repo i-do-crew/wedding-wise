@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:replace="fragments/fragments :: head">
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/static/css/guest_list.css"/>
@@ -9,6 +9,10 @@
 
 </head>
 <body>
+<!--NAVBAR-->
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
 <h1 style="text-align: center">Your Guests</h1>
 <div class="container" id="border">
     <div class="row">
@@ -77,9 +81,9 @@
                     <h4 class="modal-title">Edit a Guest</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="Name" name="Guest Name">
-                    <input type="text" id="Name" name="Guest Name">
-                    <input type="text" id="Name" name="Guest Name">
+                    <input type="text" id="Name1" name="Guest Name">
+                    <input type="text" id="Name2" name="Guest Name">
+                    <input type="text" id="Name3" name="Guest Name">
 
                 </div>
                 <div class="modal-footer">
@@ -90,5 +94,9 @@
         </div>
     </div>
 </div>
+<!--FOOTER-->
+<footer th:insert="fragments/fragments :: footer"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="fragments/fragments :: bootstrapJs"></div>
 </body>
 </html>
