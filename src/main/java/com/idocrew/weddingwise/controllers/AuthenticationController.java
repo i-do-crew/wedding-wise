@@ -18,12 +18,12 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "client_login";
+        return "login_and_signup/login";
     }
     @GetMapping("/client/registration")
     public String clientRegistration(Model model) {
         model.addAttribute("user", new User());
-        return "client_registration";
+        return "login_and_signup/client_registration";
     }
     @PostMapping("/client/registration")
     public String clientRegistrationPost(@ModelAttribute User user){
@@ -32,7 +32,7 @@ public class AuthenticationController {
     }
     @GetMapping("/vendor/registration")
     public String vendorRegistration(){
-        return "vendor_registration";
+        return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
     public String vendorRegistrationPost(){
@@ -41,7 +41,7 @@ public class AuthenticationController {
 
     @GetMapping("/verification")
     public String emailVerification(){
-        return "email_verification";
+        return "login_and_signup/email_verification";
     }
 
 }
