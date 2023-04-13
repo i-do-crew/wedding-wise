@@ -1,13 +1,9 @@
 package com.idocrew.weddingwise.services.impl;
 
-import com.idocrew.weddingwise.entity.Customer;
 import com.idocrew.weddingwise.entity.Group;
 import com.idocrew.weddingwise.entity.User;
-import com.idocrew.weddingwise.entity.Vendor;
-import com.idocrew.weddingwise.repositories.CustomerRepository;
 import com.idocrew.weddingwise.repositories.UserGroupRepository;
 import com.idocrew.weddingwise.repositories.UserRepository;
-import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.EmailService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import lombok.AllArgsConstructor;
@@ -16,6 +12,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("userService")
 @AllArgsConstructor
 public class UserRegistrationServiceImpl implements UserRegistrationService {
@@ -23,7 +21,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final UserRepository userRepository;
     private final VendorRepository vendorRepository;
     private final CustomerRepository customerRepository;
-
     private final UserGroupRepository groupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
@@ -63,7 +60,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void updateUserGroup(User userEntity){
-        Group group = groupRepository.findByCode("customer");
-        userEntity.setUserGroup(group);
+        Group group = groupRepository.findByCode("CUSTOMER");
+        userEntity.setUserGroups(List.of(group));
     }
 }

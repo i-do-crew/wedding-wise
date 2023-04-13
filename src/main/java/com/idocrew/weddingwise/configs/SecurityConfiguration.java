@@ -39,7 +39,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(request -> request
                     .requestMatchers("/profile","/clients/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker")
                     .authenticated()
-                    .requestMatchers("/","/aboutus","/vendors","/visitor/budgettracker", "/visitor/guestlistmanager", "/visitor/ideaboard","/client/registration", "/client/registration", "/each_vendorCategories","/individualVendor", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
+                    .requestMatchers("/","/aboutus","/vendors","/info/budget", "/info/guests", "/info/ideas", "/info/vendors","/client/registration", "/vendor/registration", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
                     .permitAll()
             );
         return http.build();
