@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="categories")
+@Table(name="vendor_categories")
 @Entity
 public class Category {
     @Id
@@ -20,6 +20,5 @@ public class Category {
     private String title;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "category")
-    @JoinColumn(name = "vendor_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
     private List<Vendor> vendors;
 }

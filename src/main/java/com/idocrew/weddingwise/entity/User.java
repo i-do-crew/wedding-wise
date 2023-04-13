@@ -56,6 +56,10 @@ public class User {
     private boolean accountNonLocked;
     @Column(name="credentials_non_expired", columnDefinition = "bit")
     private boolean credentialsNonExpired;
-
+    @ManyToOne(optional = false, cascade = CascadeType.DETACH)
+    @JoinTable(name = "user_groups",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+    private Group userGroup;
 
 }

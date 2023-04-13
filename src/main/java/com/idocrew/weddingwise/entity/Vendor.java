@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -18,8 +20,9 @@ public class Vendor {
     private long id;
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
-    @Column(name="categories_id", columnDefinition="bigint(20)")
-    private String categoriesId;
+    @ManyToOne
+    @JoinColumn(name="category_id", columnDefinition="bigint(20)")
+    private Category category;
     @Column(name="city_state", columnDefinition="varchar(25)")
     private String cityState;
     @Column(name="about", columnDefinition="longtext")
@@ -27,8 +30,7 @@ public class Vendor {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
     private User user;
-    @ManyToOne
-    private Category category;
-    @ManyToOne
-    private VendorPackage vendorPackage;
+
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<VendorPackage> vendorPackages;
 }

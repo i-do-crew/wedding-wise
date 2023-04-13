@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -25,7 +23,7 @@ public class VendorPackage {
     @Column(name="description", columnDefinition="varchar(1000)")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "vendorPackage")
+    @ManyToOne(optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "vendor_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
-    private List<Vendor> vendors;
+    private Vendor vendor;
 }
