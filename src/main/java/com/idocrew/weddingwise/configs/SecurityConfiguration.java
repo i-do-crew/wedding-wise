@@ -1,7 +1,8 @@
-package com.idocrew.weddingwise;
+package com.idocrew.weddingwise.configs;
 
 
 import com.idocrew.weddingwise.services.UserDetailsLoader;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,12 +17,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    private UserDetailsLoader usersLoader;
-
-    public SecurityConfiguration(UserDetailsLoader usersLoader) {
-        this.usersLoader = usersLoader;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -35,32 +30,22 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                /* Login configuration */
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/client_dashboard",true) // user's home page, it can be any URL
-                .permitAll() // Anyone can go to the login page
-                /* Logout configuration */
-                .and()
-                .logout()
-                .logoutSuccessUrl("/") // append a query string value
-                /* Pages that require authentication */
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers(
-                        "/profile", "/guest_listManager","/likedVendors", "/budget_tracker"
-                )
-                .authenticated()
-                /* Pages that can be viewed without having to log in */
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/","/all_vendorCategories","/each_vendorCategories","/individualVendor", "/login", "/sign-up", "/js/**", "/css/**") // anyone can see
-                .permitAll()
-
-        ;
+            .formLogin()
+            .loginPage("/login")
+            .defaultSuccessUrl("/client_dashboard") // user's home page, it can be any URL
+            .permitAll() // Anyone can go to the login page
+            .and()
+            .logout()
+            .logoutSuccessUrl("/") // append a query string value
+            .and()
+            .authorizeHttpRequests(request -> request
+                    .requestMatchers("/profile","/client_dashboard", "/guest_listManager","/likedVendors", "/budget_tracker")
+                    .authenticated()
+                    .requestMatchers("/","/aboutus","/vendors","/visitor/budgettracker", "/visitor/guestlistmanager", "/visitor/ideaboard","/client/registration", "/client/registration", "/each_vendorCategories","/individualVendor", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
+                    .permitAll()
+            );
         return http.build();
     }
 
 }
-
 
