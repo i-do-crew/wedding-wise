@@ -1,8 +1,11 @@
 package com.idocrew.weddingwise.controllers;
 
+import com.idocrew.weddingwise.entity.Customer;
 import com.idocrew.weddingwise.entity.User;
+import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.repositories.UserRepository;
 import com.idocrew.weddingwise.services.UserRegistrationService;
+import com.idocrew.weddingwise.services.impl.UserRegistrationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +25,12 @@ public class AuthenticationController {
     }
     @GetMapping("/client/registration")
     public String clientRegistration(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("customer", new Customer());
         return "login_and_signup/client_registration";
     }
     @PostMapping("/client/registration")
-    public String clientRegistrationPost(@ModelAttribute User user){
-        userRegistrationService.register(user);
+    public String clientRegistrationPost(@ModelAttribute Customer customer){
+        userRegistrationService.register(customer);
         return "redirect:/verification";
     }
     @GetMapping("/vendor/registration")
@@ -35,13 +38,12 @@ public class AuthenticationController {
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
-    public String vendorRegistrationPost(){
+    public String vendorRegistrationPost(@ModelAttribute Vendor vendor){
+        userRegistrationService.register(vendor);
         return "redirect:/verification";
     }
-
     @GetMapping("/verification")
     public String emailVerification(){
         return "login_and_signup/email_verification";
     }
-
 }
