@@ -57,10 +57,10 @@
                 <div class="row g-3 d-flex align-items-center">
                     <div class="col-auto">
                         <label for="city" class="form-label"></label>
-                        <input type="text" name="city" class="form-control" id="city" placeholder="Enter your City">
+                        <input th:field="*{city}" type="text" name="city" class="form-control" id="city" placeholder="Enter your City">
                     </div>
                     <div class="col-auto mt-1">
-                        <select class="form-select">
+                        <select th:field="*{state}" class="form-select">
                             <option selected>Select your State...</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -118,16 +118,16 @@
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label"></label>
-                    <input type="text" name="date" class="form-control" id="date" placeholder="Enter your Wedding Date">
+                    <input th:field="*{weddingDt}" type="text" name="date" class="form-control" id="date" placeholder="Enter your Wedding Date">
                 </div>
                 <div class="mb-3">
-                    <label for="range" class="form-label"></label>
-                    <input type="text" name="range" class="form-control" id="range"
+                    <label for="budget" class="form-label"></label>
+                    <input th:field="*{budget}" type="text" name="budget" class="form-control" id="budget"
                            placeholder="Enter your Budget Range">
                 </div>
                 <div class="mb-3">
                     <label for="guestCount" class="form-label"></label>
-                    <input type="text" name="guestCount" class="form-control" id="guestCount"
+                    <input th:field="*{guestCount}" type="text" name="guestCount" class="form-control" id="guestCount"
                            placeholder="Enter your Estimated Guest Count">
                 </div>
 
