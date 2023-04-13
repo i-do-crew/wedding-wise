@@ -41,7 +41,7 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String clientLogin() {
+    public String login() {
         return "login_and_signup/login";
     }
 
