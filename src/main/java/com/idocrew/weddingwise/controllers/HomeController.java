@@ -19,21 +19,24 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/visitor/budgettracker")
+    @GetMapping("/info/budget")
     public String visitorBudgetTracker() {
         return "visitor_views/visitor_budget_tracker";
     }
 
-    @GetMapping("/visitor/guestlistmanager")
+    @GetMapping("/info/guests")
     public String guestListManager() {
         return "visitor_views/visitor_guest_list_manager";
     }
 
-    @GetMapping("/visitor/ideaboard")
+    @GetMapping("/info/ideas")
     public String visitorIdeaBoard() {
         return "visitor_views/visitor_idea_board";
     }
-
+    @GetMapping("/info/vendors")
+    public String visitorVendors() {
+        return "visitor_views/vendors_learn_more";
+    }
     @GetMapping("/aboutus")
     public String aboutUs() {
         return "about_us";

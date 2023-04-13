@@ -11,6 +11,6 @@ public class CustomerController {
     }
     @GetMapping("/clients/dashboard")
     public String clientProfile(){
-        return "/customer_views/client_profileDashboard";
+        return "customer_views/client_profileDashboard";
     }
 }
