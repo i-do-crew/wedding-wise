@@ -30,14 +30,14 @@ public class SecurityConfiguration {
         http
             .formLogin()
             .loginPage("/login")
-            .defaultSuccessUrl("/client/dashboard") // user's home page, it can be any URL
+            .defaultSuccessUrl("/clients/dashboard") // user's home page, it can be any URL
             .permitAll() // Anyone can go to the login page
             .and()
             .logout()
             .logoutSuccessUrl("/") // append a query string value
             .and()
             .authorizeHttpRequests(request -> request
-                    .requestMatchers("/profile","/client/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker")
+                    .requestMatchers("/profile","/clients/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker")
                     .authenticated()
                     .requestMatchers("/","/aboutus","/vendors","/visitor/budgettracker", "/visitor/guestlistmanager", "/visitor/ideaboard","/client/registration", "/client/registration", "/each_vendorCategories","/individualVendor", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
                     .permitAll()
