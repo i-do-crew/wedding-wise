@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/fragments :: head}" >
+<head th:replace="fragments/fragments :: head" >
     <meta charset="UTF-8">
     <title>Wedding Wise Landing Page</title>
 </head>
 <body>
 <header>
     <!--NAVBAR-->
-<!--    <nav th:insert="~{fragments/fragments} :: navbar"></nav>-->
     <nav th:insert="fragments/fragments :: navbar"></nav>
 
 
@@ -67,7 +66,9 @@
     </div>
 </div>
 
-<footer th:insert="~{fragments/fragments :: footer}"></footer>
-<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--FOOTER-->
+<footer th:insert="fragments/fragments :: footer"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="fragments/fragments :: bootstrapJs"></div>
 </body>
 </html>
