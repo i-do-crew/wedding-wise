@@ -12,6 +12,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("userService")
 @AllArgsConstructor
 public class UserRegistrationServiceImpl implements UserRegistrationService {
@@ -49,7 +51,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void updateUserGroup(User userEntity){
-        Group group = groupRepository.findByCode("user");
-        userEntity.setUserGroup(group);
+        Group group = groupRepository.findByCode("CUSTOMER");
+        userEntity.setUserGroups(List.of(group));
     }
 }
