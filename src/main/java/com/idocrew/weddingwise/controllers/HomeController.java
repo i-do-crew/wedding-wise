@@ -13,7 +13,6 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    private final VendorRepository vendorDao;
 
     @GetMapping("/")
     public String index() {
@@ -40,50 +39,8 @@ public class HomeController {
         return "about_us";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login_and_signup/login";
-    }
 
-    @GetMapping("/client/registration")
-    public String clientRegistration() {
-        return "login_and_signup/client_registration";
-    }
 
-//    @PostMapping("/client/registration")
-//    public String clientRegistrationPost(){
-//        return "redirect:/verification";
-//    }
 
-    @GetMapping("/vendor/registration")
-    public String vendorRegistration(){
-        return "login_and_signup/vendor_registration";
-    }
 
-//    @PostMapping("/vendor/registration")
-//    public String vendorRegistrationPost(){
-//        return "redirect:/verification";
-//    }
-
-    @GetMapping("/verification")
-    public String emailVerification(){
-        return "login_and_signup/email_verification";
-    }
-
-    @GetMapping("/vendors")
-    public String vendorCategories(Model model){
-        List<Vendor> vendors = vendorDao.findAll();
-        model.addAttribute("vendors",vendors);
-        return "vendors/all_vendorCategories";
-    }
-
-    @GetMapping("/ideaboard")
-    public String ideaBoard(){
-        return "customer_views/idea_board";
-    }
-
-    @GetMapping("/vendor/profile")
-    public String vendorProfile(){
-        return "vendor_views/vendor_profile";
-    }
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/fragments :: head" >
+    <meta charset="UTF-8">
+    <title>Client's Profile</title>
+
+</head>
+<body>
+<!--NAVBAR-->
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
+
+<div class="container-fluid">
+    <div style="text-align: center">
+        <h1>Welcome to the
+            Lastname-Lastname
+            wedding profile</h1>
+    </div>
+    <div class="container-sm">
+<hr>
+        <a href=""><h4>Venue</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<hr>
+        <a href=""><h4>Photographer</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<hr>
+        <a href=""><h4>Band/DJ</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<hr>
+        <a href=""><h4>Florist</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<hr>
+        <a href=""><h4>Caterer</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+</div>
+
+<!--FOOTER-->
+<footer th:insert="fragments/fragments :: footer"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="fragments/fragments :: bootstrapJs"></div>
+</body>
+</html>
