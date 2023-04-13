@@ -15,9 +15,6 @@
 <div th:insert="fragments/fragments :: sidebar"></div>
 
 <div class="container-sm">
-
-
-
   <!--    cards-->
   <span class=" card border border-dark border-2">
     <div class="card-title ">
@@ -42,7 +39,13 @@
           <h5 th:if="${id == 6}" class="text-center">Barmasters Texas</h5>
           <h5 th:if="${id == 7}" class="text-center">DJMusic Entertainment LLC</h5>
           <p class="card-text">Vendor's information.</p>
-          <a href="/vendors/individual/1" class="btn btn-primary">Book This Vendor</a>
+            <a th:if="${id == 1}" class="text-center" href="/vendors/individual/1">Book This Vendor</a>
+          <a th:if="${id == 2}" class="text-center" href="/vendors/individual/2">Book This Vendor</a>
+          <a th:if="${id == 3}" class="text-center" href="/vendors/individual/3">Book This Vendor</a>
+          <a th:if="${id == 4}" class="text-center" href="/vendors/individual/4">Book This Vendor</a>
+          <a th:if="${id == 5}" class="text-center" href="/vendors/individual/5">Book This Vendor</a>
+          <a th:if="${id == 6}" class="text-center" href="/vendors/individual/6">Book This Vendor</a>
+          <a th:if="${id == 7}" class="text-center" href="/vendors/individual/7">Book This Vendor</a>
         </div>
       </div>
       <br>

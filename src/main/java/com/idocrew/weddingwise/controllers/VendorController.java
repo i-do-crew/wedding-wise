@@ -41,5 +41,9 @@ public class VendorController {
     public String vendorProfile() {
         return "vendor_views/vendor_profile";
     }
+    @GetMapping("/likedVendors")
+    public String likedVendors() {
+        return "customer_views/liked_vendors";
+    }
 
 }
