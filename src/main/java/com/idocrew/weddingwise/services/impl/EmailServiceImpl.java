@@ -18,7 +18,9 @@ public class EmailServiceImpl implements EmailService {
     private String from;
 
     @Override
-    public void prepareAndSend(User user, String subject, String body) {
+    public void sendVerificationRequest(User user) {
+        String subject = "Welcome, [%s]".formatted(user.getFirstName());
+        String body = "You have been registered";
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
         msg.setTo(user.getEmail());
@@ -31,17 +33,4 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
-    @Override
-    public void sendWelcomeEmail(User user, String subject, String body) {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom(from);
-        msg.setTo(user.getEmail());
-        msg.setSubject(subject);
-        msg.setText(body);
-        try {
-            emailSender.send(msg);
-        } catch (MailException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

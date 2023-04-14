@@ -56,11 +56,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void sendRegistrationConfirmationEmail(User userEntity) {
-        emailService.sendWelcomeEmail(
-            userEntity,
-            "Welcome, [%s]".formatted(userEntity.getFirstName()),
-            "You have been registered"
-        );
+        emailService.sendVerificationRequest(userEntity);
     }
 
     private void updateUserGroup(User userEntity){
