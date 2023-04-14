@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,22 +31,26 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final EmailService emailService;
 
     @Override
+    @Transactional
     public void register(Customer customer) throws DuplicateKeyException {
         if(checkIfUserExist(customer.getUser().getEmail())){
             throw new DuplicateKeyException("User already exists for this email");
         }
         //TODO: Note To Billy - Revised to get user from customer
+        //set username and user gruop
         User userEntity = new User();
         Customer custEntity = new Customer();
         BeanUtils.copyProperties(customer.getUser(), userEntity);
         BeanUtils.copyProperties(customer, custEntity);
         String hash = passwordEncoder.encode(customer.getUser().getPassword());
         userEntity.setPassword(hash);
+        userEntity.setUsername(customer.getUser().getEmail());
         addCustomerUserGroup(userEntity);
         //TODO: Note To Billy - Revised to save user first due to foreign key constraint
-        userRepository.save(userEntity);
-        customerRepository.save(custEntity);
-        sendRegistrationConfirmationEmail(customer.getUser());
+        userEntity = userRepository.save(userEntity);
+        custEntity.setUser(userEntity);
+        custEntity = customerRepository.save(custEntity);
+        //sendRegistrationConfirmationEmail(customer.getUser());
     }
 
     @Override

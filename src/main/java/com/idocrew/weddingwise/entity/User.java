@@ -59,8 +59,8 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinTable(
         name = "user_groups",
-        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false))
     private List<Group> userGroups;
 
 }
