@@ -31,19 +31,21 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     @Override
     public void register(Customer customer) throws DuplicateKeyException {
-        if(checkIfUserExist(customer.getEmail())){
+        if(checkIfUserExist(customer.getUser().getEmail())){
             throw new DuplicateKeyException("User already exists for this email");
         }
+        //TODO: Note To Billy - Revised to get user from customer
         User userEntity = new User();
         Customer custEntity = new Customer();
-        BeanUtils.copyProperties(customer, userEntity);
+        BeanUtils.copyProperties(customer.getUser(), userEntity);
         BeanUtils.copyProperties(customer, custEntity);
-        String hash = passwordEncoder.encode(customer.getPassword());
+        String hash = passwordEncoder.encode(customer.getUser().getPassword());
         userEntity.setPassword(hash);
-        updateUserGroup(userEntity);
-        customerRepository.save(custEntity);
+        addCustomerUserGroup(userEntity);
+        //TODO: Note To Billy - Revised to save user first due to foreign key constraint
         userRepository.save(userEntity);
-        sendRegistrationConfirmationEmail(custEntity);
+        customerRepository.save(custEntity);
+        sendRegistrationConfirmationEmail(customer.getUser());
     }
 
     @Override
@@ -63,7 +65,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         );
     }
 
-    private void updateUserGroup(User userEntity){
+    private void addCustomerUserGroup(User userEntity){
         Group group = groupRepository.findByCode("CUSTOMER");
         userEntity.setUserGroups(List.of(group));
     }

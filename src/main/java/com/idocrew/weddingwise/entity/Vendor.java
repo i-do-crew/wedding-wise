@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Table(name="vendors")
 @Entity
-public class Vendor extends User{
+public class Vendor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,6 @@ public class Vendor extends User{
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
     private User user;
-
     @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<VendorPackage> vendorPackages;
 }
