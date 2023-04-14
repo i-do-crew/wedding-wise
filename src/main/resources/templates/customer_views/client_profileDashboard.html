@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:replace="fragments/fragments :: head" >
     <meta charset="UTF-8">
     <title>Client's Profile</title>
-    <nav th:insert="~{fragments/fragments :: navbar}"></nav>
 
 </head>
 <body>
+<!--NAVBAR-->
+<nav th:insert="fragments/fragments :: navbar"></nav>
+<!--SIDEBAR-->
+<div th:insert="fragments/fragments :: sidebar"></div>
+
 <div class="container-fluid">
     <div style="text-align: center">
-        <h1 style="font: common-ligatures">Welcome to the
+        <h1>Welcome to the
             Lastname-Lastname
             wedding profile</h1>
     </div>
     <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-target="#myModal">Edit Profile</button>
+    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">Edit Profile</button>
     <div class="container-sm">
-        <hr>
-        <a href="url"><h4>Venue</h4></a>
-        <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
+<hr>
+        <a href="/vendors/categories/1"><h4>Venue</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<hr>
+        <a href="/vendors/categories/1"><h4>Caterer</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <hr>
+        <a href="/vendors/categories/2"><h4>Photographer</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<hr>
+        <a href="/vendors/categories/"><h4>Band/DJ</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<hr>
+        <a href="/vendors/categories/1"><h4>Florist</h4></a>
+        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <hr>
 
-        <hr>
-        <a href="url"><h4>Photographer</h4></a>
-        <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <hr>
-        <a href="url"><h4>Band/DJ</h4></a>
-        <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <hr>
-        <a href="url"><h4>Florist</h4></a>
-        <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <hr>
-        <a href="url"><h4>Caterer</h4></a>
-        <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </div>
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
@@ -64,8 +69,10 @@
         </div>
     </div>
 </div>
-<footer th:insert="~{fragments/fragments :: footer}"></footer>
 
-<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--FOOTER-->
+<footer th:insert="fragments/fragments :: footer"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="fragments/fragments :: bootstrapJs"></div>
 </body>
 </html>

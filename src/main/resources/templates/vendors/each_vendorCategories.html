@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/fragments :: head}" >
   <meta charset="UTF-8">
   <!--  bootstrap-->
@@ -16,17 +16,33 @@
 
 <div class="container-sm">
 
-  <h1 style="text-align: center">Specific Category</h1>
+
+
   <!--    cards-->
   <span class=" card border border-dark border-2">
+    <div class="card-title ">
+ <h1 th:if="${id == 1}" class="text-center" th:text="Venues"></h1>
+  <h1 th:if="${id == 2}" class="text-center" th:text="Photographers"></h1>
+  <h1 th:if="${id == 3}" class="text-center" th:text="Florists"></h1>
+  <h1 th:if="${id == 4}" class="text-center" th:text="Caterers"></h1>
+  <h1 th:if="${id == 5}" class="text-center" th:text="Cakes and Desserts"></h1>
+  <h1 th:if="${id == 6}" class="text-center" th:text="Bar and Beverage"></h1>
+  <h1 th:if="${id == 7}" class="text-center" th:text="Bands and DJs"></h1>
+    </div>
   <div class="card-body d-flex flex-column flex-wrap align-items-center">
     <div class="row align-items-center vh-100">
       <div class="Venues" style="width: 18rem;">
         <img class="card-img-top" src="..." alt="Vendor Name">
         <div class="card-body">
-          <h5 class="card-title">Vendor Name</h5>
+          <h5 th:if="${id == 1}" class="text-center">Rancho La Mission</h5>
+          <h5 th:if="${id == 2}" class="text-center">Evelyn Photography</h5>
+          <h5 th:if="${id == 3}" class="text-center">Greg Reese Events</h5>
+          <h5 th:if="${id == 4}" class="text-center">Scratch Kitchen</h5>
+          <h5 th:if="${id == 5}" class="text-center">Tasty Swirls Company</h5>
+          <h5 th:if="${id == 6}" class="text-center">Barmasters Texas</h5>
+          <h5 th:if="${id == 7}" class="text-center">DJMusic Entertainment LLC</h5>
           <p class="card-text">Vendor's information.</p>
-          <a href="#" class="btn btn-primary">Book This Vendor</a>
+          <a href="/vendors/individual/1" class="btn btn-primary">Book This Vendor</a>
         </div>
       </div>
       <br>

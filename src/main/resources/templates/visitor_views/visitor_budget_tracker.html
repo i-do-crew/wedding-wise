@@ -5,6 +5,7 @@
     <title>Visitor Budget Tracker</title>
 </head>
 <body>
+<!--NAVBAR-->
 <nav th:insert="fragments/fragments :: navbar"></nav>
 <!--SIDEBAR-->
 <div th:insert="fragments/fragments :: sidebar"></div>
@@ -14,7 +15,15 @@
         <span class="col">
             <h1 class="text-center">Budget Tracker</h1>
             <p>With Wedding Wise, you can easily set and track your wedding budget to ensure that you stay on track financially. The app will automatically calculate your expenses and help you stay within your budget.</p>
-            <a href="/client/registration"><button class="btn btn-outline-secondary">Sign-Up Here</button></a>
+            <span class="dropdown ">
+                <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sign-Up Here
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
+                    <li><a class="dropdown-item" href="/vendor/registration">Sign-up as Vendor</a></li>
+                </ul>
+            </span>
         </span>
         <span class="col">
             <img src="..." alt="picture">
@@ -22,8 +31,9 @@
     </div>
 </div>
 
-<footer th:insert="~{fragments/fragments :: footer}"></footer>
-
-<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--FOOTER-->
+<footer th:insert="fragments/fragments :: footer"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="fragments/fragments :: bootstrapJs"></div>
 </body>
 </html>

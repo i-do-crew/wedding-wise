@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/fragments :: head}" >
     <meta charset="UTF-8">
     <title>Client Login</title>
@@ -17,10 +17,10 @@
         </div>
         <div class="col text-center px-3 pt-5">
             <h1>CREATE YOUR DREAM WEDDING ONE CLICK AT A TIME</h1>
-            <form>
+            <form th:action="@{/login}" method="post">
                 <div class="mb-3">
-                    <label for="email" class="form-label"></label>
-                    <input type="email" name="email"class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your Email Address">
+                    <label for="username" class="form-label"></label>
+                    <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter your Email">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label"></label>
@@ -28,7 +28,7 @@
                 </div>
                 <span class="pb-3">
                     <button type="submit" class="btn btn-primary">Login</button>
-                    <button type="submit" class="btn btn-secondary">Sign-up</button>
+<!--                    <a href="/"><button type="submit" class="btn btn-secondary">Sign-up</button></a>-->
                 </span>
             </form>
         </div>

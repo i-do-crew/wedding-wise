@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/fragments :: head}">
+<head th:replace="fragments/fragments :: head" >
     <meta charset="UTF-8">
-    <title>Visitor Idea Board</title>
+    <title>Title</title>
 </head>
 <body>
+<!--NAVBAR-->
 <nav th:insert="fragments/fragments :: navbar"></nav>
 <!--SIDEBAR-->
 <div th:insert="fragments/fragments :: sidebar"></div>
@@ -12,8 +13,8 @@
 <div class="container p-3">
   <div class="card row">
         <span class="col">
-            <h1 class="text-center">Idea Board</h1>
-            <p>With Wedding Wise's idea board, you can collect and organize all of your wedding inspiration in one place. Whether it's photos, articles, or Pinterest boards, you can save it all in Wedding Wise.</p>
+            <h1 class="text-center">Vendors</h1>
+            <p>Wedding Wise's vendor directory includes a list of vendors for couples to choose from. Whether you're looking for a photographer, florist, caterer, musician, or other kinds of vendors, you can find it all in Wedding Wise.</p>
             <span class="dropdown ">
                 <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Sign-Up Here
@@ -24,14 +25,15 @@
                 </ul>
             </span>
         </span>
-        <span class="col">
+    <span class="col">
             <img src="..." alt="picture">
         </span>
   </div>
 </div>
 
-<footer th:insert="~{fragments/fragments :: footer}"></footer>
-
-<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--FOOTER-->
+<footer th:insert="fragments/fragments :: footer"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="fragments/fragments :: bootstrapJs"></div>
 </body>
 </html>
