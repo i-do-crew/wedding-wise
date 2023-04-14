@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/static/css/guest_list.css"/>
-    <script type="text/javascript" src="/static/guest_listModal.js">
-        <script src="https://kit.fontawesome.com/a88297ca40.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
 <!--NAVBAR-->
@@ -77,7 +74,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Edit a Guest</h4>
                 </div>
                 <div class="modal-body">
@@ -87,7 +84,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
 
@@ -98,5 +95,8 @@
 <footer th:insert="fragments/fragments :: footer"></footer>
 <!--BOOTSTRAP-->
 <div th:insert="fragments/fragments :: bootstrapJs"></div>
+<!--JAVASCRIPT-->
+<script type="text/javascript" src="/static/guest_listModal.js">
+    <script src="https://kit.fontawesome.com/a88297ca40.js" crossorigin="anonymous"></script>
 </body>
 </html>
