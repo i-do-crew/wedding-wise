@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/fragments :: head" >
+<head th:replace="~{fragments/fragments :: head}" >
     <meta charset="UTF-8">
     <title>Idea Board</title>
 </head>
 <body>
 <!--NAVBAR-->
-<nav th:insert="fragments/fragments :: navbar"></nav>
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
 <!--SIDEBAR-->
-<div th:insert="fragments/fragments :: sidebar"></div>
+<div th:insert="~{fragments/fragments :: sidebar}"></div>
 
 <div class="container mt-3 mb-3">
     <div class="card">
@@ -29,8 +29,8 @@
 </div>
 
 <!--FOOTER-->
-<footer th:insert="fragments/fragments :: footer"></footer>
+<footer th:insert="~{fragments/fragments :: sidebar}"></footer>
 <!--BOOTSTRAP-->
-<div th:insert="fragments/fragments :: bootstrapJs"></div>
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 </body>
 </html>
