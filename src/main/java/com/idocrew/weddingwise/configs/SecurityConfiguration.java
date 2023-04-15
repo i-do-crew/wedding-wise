@@ -30,17 +30,19 @@ public class SecurityConfiguration {
         http
             .formLogin()
             .loginPage("/login")
-            .defaultSuccessUrl("/clients/dashboard") // user's home page, it can be any URL
-            .permitAll() // Anyone can go to the login page
+                .defaultSuccessUrl("/clients/dashboard") // user's home page, it can be any URL
+                .permitAll() // Anyone can go to the login page
             .and()
             .logout()
-            .logoutSuccessUrl("/") // append a query string value
+                .logoutSuccessUrl("/") // append a query string value
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
             .and()
             .authorizeHttpRequests(request -> request
-                    .requestMatchers("/profile","/clients/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker")
-                    .authenticated()
-                    .requestMatchers("/","/aboutus","/vendors","/info/budget", "/info/guests", "/info/ideas", "/info/vendors","/client/registration", "/vendor/registration", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
-                    .permitAll()
+                .requestMatchers("/profile","/clients/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker")
+                .authenticated()
+                .requestMatchers("/","/aboutus","/vendors","/info/budget", "/info/guests", "/info/ideas", "/info/vendors","/client/registration", "/vendor/registration", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
+                .permitAll()
             );
         return http.build();
     }
