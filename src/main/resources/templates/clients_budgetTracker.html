@@ -1,28 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:replace="~{fragments/fragments :: head}">
     <meta charset="UTF-8">
     <title>Categories of Vendors</title>
-
-    <!--  bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css"
-          integrity="sha384-+f01tPywJtZ3LMtJhFxXH+REzFvazkDDDR/GcRJk8s4s4K4">
-
-    <script src="budgetModal.js"></script>
-    <link rel="stylesheet" href="/static/css/budgetModal.css">
-
 </head>
 
 <body>
-<!--bootstrap-->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-<script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
-        integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
-        crossorigin="anonymous"></script>
+<!--NAVBAR-->
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<!--SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebar}"></div>
 <h1 style="text-align: center">Your Budget</h1>
 
 <!--  Budget Modal-->
@@ -42,35 +29,39 @@
 
 <div class="container-sm">
     <hr>
-    <a href="url"><h4>Venue</h4></a>
-    <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
+    <a href=""><h4>Venue</h4></a>
+    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
     <p>Business Name:</p>
     <p>Cost:</p>
     <i class="fa-solid fa-check"></i>
 
     <hr>
-    <a href="url"><h4>Photographer</h4></a>
-    <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
+    <a href=""><h4>Photographer</h4></a>
+    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
     <p>Business Name:</p>
     <p>Cost:</p>
     <hr>
-    <a href="url"><h4>Band/DJ</h4></a>
-    <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
+    <a href=""><h4>Band/DJ</h4></a>
+    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
     <p>Business Name:</p>
     <p>Cost:</p>
 
     <hr>
-    <a href="url"><h4>Florist</h4></a>
-    <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
+    <a href=""><h4>Florist</h4></a>
+    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
     <p>Business Name:</p>
     <p>Cost:</p>
 
     <hr>
-    <a href="url"><h4>Caterer</h4></a>
-    <a href="url"><img class="card-img-top" src="..." alt="Vendor Img"></a>
+    <a href=""><h4>Caterer</h4></a>
+    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
     <p>Business Name:</p>
     <p>Cost:</p>
 </div>
-</div>
+
+<!--FOOTER-->
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 </body>
 </html>

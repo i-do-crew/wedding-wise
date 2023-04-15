@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                 .deleteCookies("JSESSIONID")
             .and()
             .authorizeHttpRequests(request -> request
-                .requestMatchers("/profile","/clients/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker")
+                .requestMatchers("/profile","/clients/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker", "/ideaboard", "/vendor/profile")
                 .authenticated()
                 .requestMatchers("/","/aboutus","/vendors","/info/budget", "/info/guests", "/info/ideas", "/info/vendors","/client/registration", "/vendor/registration", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
                 .permitAll()

@@ -13,4 +13,12 @@ public class CustomerController {
     public String clientProfile(){
         return "customer_views/client_profileDashboard";
     }
+    @GetMapping("/guest_listManager")
+    public String guestListManager(){
+        return "/guest_listManager";
+    }
+    @GetMapping("/budget_tracker")
+    public String budgetTracker(){
+        return "/clients_budgetTracker";
+    }
 }

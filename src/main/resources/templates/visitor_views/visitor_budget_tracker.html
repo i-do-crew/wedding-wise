@@ -6,9 +6,9 @@
 </head>
 <body>
 <!--NAVBAR-->
-<nav th:insert="fragments/fragments :: navbar"></nav>
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
 <!--SIDEBAR-->
-<div th:insert="fragments/fragments :: sidebar"></div>
+<div th:insert="~{fragments/fragments :: sidebar}"></div>
 
 <div class="container p-3">
     <div class="card row">
@@ -26,14 +26,14 @@
             </span>
         </span>
         <span class="col">
-            <img src="..." alt="picture">
+            <img src="http://via.placeholder.com/640x360" alt="picture">
         </span>
     </div>
 </div>
 
 <!--FOOTER-->
-<footer th:insert="fragments/fragments :: footer"></footer>
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
-<div th:insert="fragments/fragments :: bootstrapJs"></div>
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 </body>
 </html>
