@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <!--CSS STYLESHEET-->
@@ -33,16 +33,17 @@
             </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item  me-2">
-                        <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBar">Profile</a>
+                        <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarCustomer">Profile</a>
+                        <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarVendor">Profile</a>
                     </li>
                     <li class="nav-item  me-2">
-                        <a class="nav-link" href="/clients/dashboard"> Client Dashboard</a>
-                        <a class="nav-link" href="/vendor/profile"> Vendor Dashboard</a>
+                        <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard"> Client Dashboard</a>
+                        <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile"> Vendor Dashboard</a>
                     </li>
                     <li class="nav-item me-2">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
-                    <li class="nav-item dropstart">
+                    <li class="nav-item dropstart ">
                         <button id="sign-up-btn" class="dropdown-toggle btn text-light" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sign-Up
                         </button>
@@ -56,9 +57,9 @@
         </div>
     </nav>
 
-<!--SIDEBAR-->
-<div th:fragment="sidebar" id="sidebar">
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideBar" aria-labelledby="offcanvasExampleLabel">
+<!--CUSTOMER SIDEBAR-->
+<div th:fragment="sidebarCustomer" class="sidebar">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideBarCustomer" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header ">
                 <div class="row">
                     <button type="button" class="btn-close ps-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -66,7 +67,7 @@
             </div>
             <div class="offcanvas-body">
                 <div class="">
-                    <img src="/img/flowers.jpg" alt="picture" id="profileImg">
+                    <img src="/img/flowers.jpg" alt="picture" class="profileImg">
                     <i class="fa-solid fa-pencil"></i>
                 </div>
                 <div class="row pb-4">
@@ -92,6 +93,42 @@
                 </div>
             </div>
         </div>
+</div>
+<!--VENDOR SIDEBAR-->
+<div th:fragment="sidebarVendor" class="sidebar">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideBarVendor" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header ">
+            <div class="row">
+                <button type="button" class="btn-close ps-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="offcanvas-body">
+            <div class="">
+                <img src="/img/flowers.jpg" alt="picture" class="profileImg">
+                <i class="fa-solid fa-pencil"></i>
+            </div>
+            <div class="row pb-4">
+                <h3>Business Name</h3>
+                <p>vendor@vendor.com</p>
+                <p>000-000-0000</p>
+                <p>000 Vendor St</p>
+            </div>
+            <div class="position-absolute bottom-0">
+                <div class="row pb-4 pt-5">
+                    <a href="https://facebook.com" class="text-decoration-none text-dark"><i class="fa-brands fa-facebook"></i> facebookusername</a>
+                </div>
+                <div class="row pb-4">
+                    <a href="https://instagram.com" class="text-decoration-none text-dark"><i class="fa-brands fa-instagram"></i> instagramusername</a>
+                </div>
+                <div class="row pb-4">
+                    <a href="https://twitter.com" class="text-decoration-none text-dark"><i class="fa-brands fa-twitter"></i> twitterusername</a>
+                </div>
+                <div class="row pb-4 ">
+                    <a href="https://linkedin" class="text-decoration-none text-dark"><i class="fa-brands fa-linkedin"></i> linkedinusername</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--FOOTER-->
@@ -133,9 +170,9 @@
                 </ul>
             </div>
             <hr class="mt-2 mb-3"/>
-            <div class="text-center p-3" >
+            <div class="text-center p-3 nav-item" >
                 © 2023 Copyright:
-                <a class="text-dark" href="/">Wedding Wise</a>
+                <a class="text-dark " href="/">Wedding Wise</a>
             </div>
         </div>
 </footer>
