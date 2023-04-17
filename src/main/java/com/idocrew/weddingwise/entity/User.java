@@ -44,6 +44,10 @@ public class User {
     private String firstName;
     @Column(name="last_name", columnDefinition="varchar(25) not null")
     private String lastName;
+    @Column(name="city", columnDefinition="varchar(25)")
+    private String city;
+    @Column(name="state", columnDefinition="varchar(25)")
+    private String state;
     @Column(name="account_verified", columnDefinition = "bit")
     private boolean accountVerified;
     @Column(name="failed_login_attempts", columnDefinition = "int 11")
@@ -59,8 +63,8 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinTable(
         name = "user_groups",
-        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false))
     private List<Group> userGroups;
 
 }

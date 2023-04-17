@@ -94,9 +94,6 @@ cmake-build-*/
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
 
-# File-based project format
-*.iws
-
 # IntelliJ
 out/
 
@@ -192,7 +189,6 @@ Temporary Items
 *.icloud
 
 ### Xill ###
-.project
 .xlib
 testit-reports/
 .generated-tests/
@@ -201,3 +197,4 @@ xill.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,intellij,database,xill
 src/main/resources/application.properties
+/src/main/resources/application.yml

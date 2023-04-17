@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface VendorRepository extends JpaRepository<Vendor, Long> {
     Vendor findById(long id);
-    Vendor findByTitle(String title);
+    Vendor findByBusinessName(String businessName);
     List<Vendor> findByCategory(Category category);
 }
