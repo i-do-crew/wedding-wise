@@ -6,7 +6,6 @@ import com.idocrew.weddingwise.entity.User;
 import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.repositories.CategoryRepository;
 import com.idocrew.weddingwise.repositories.UserRepository;
-import com.idocrew.weddingwise.services.UserRegistrationService;
 import com.idocrew.weddingwise.services.impl.UserRegistrationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
