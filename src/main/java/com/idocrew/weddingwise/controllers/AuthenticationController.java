@@ -6,7 +6,6 @@ import com.idocrew.weddingwise.entity.User;
 import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.repositories.CategoryRepository;
 import com.idocrew.weddingwise.repositories.UserRepository;
-import com.idocrew.weddingwise.services.impl.UserRegistrationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,9 @@ import java.util.List;
 public class AuthenticationController {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
-    private final UserRegistrationService userRegistrationService;
+
+    com.idocrew.weddingwise.services.UserRegistrationService userRegistrationService;
+
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
     @GetMapping("/login")
