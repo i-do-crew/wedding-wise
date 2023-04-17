@@ -60,7 +60,10 @@
                 </div>
                 <div class="mb-3 d-none" id="musicGenre">
                     <label for="capacity" class="form-label"></label>
-                    <input type="text" name="genre" class="form-control" id="genre" placeholder="Enter your genre of music">
+                    <select th:object="${genre}" id="genre" th:field="*{title}" class="form-select">
+                        <option th:value="xx" selected>Select your genre(s)...</option>
+                        <option th:each="genre : ${musicGenres}" th:text="${genre}" th:value="${genre}"></option>
+                    </select>
                 </div>
                 <div class="mb-3 d-none" id="photoType">
                     <label for="capacity" class="form-label"></label>
@@ -94,6 +97,10 @@
             $("#venueCapacity").addClass('d-none');
             $('#musicGenre').addClass('d-none');
             $('#photoType').removeClass('d-none');
+        } else{
+            $("#venueCapacity").addClass('d-none');
+            $('#musicGenre').addClass('d-none');
+            $('#photoType').addClass('d-none');
         }
     });
 </script>

@@ -1,10 +1,8 @@
 package com.idocrew.weddingwise.controllers;
 
-import com.idocrew.weddingwise.entity.Category;
-import com.idocrew.weddingwise.entity.Customer;
-import com.idocrew.weddingwise.entity.User;
-import com.idocrew.weddingwise.entity.Vendor;
+import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.repositories.CategoryRepository;
+import com.idocrew.weddingwise.repositories.GenreRepository;
 import com.idocrew.weddingwise.repositories.UserRepository;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import com.idocrew.weddingwise.services.impl.UserRegistrationServiceImpl;
@@ -23,6 +21,7 @@ import java.util.List;
 public class AuthenticationController {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final GenreRepository genreRepository;
     private final UserRegistrationService userRegistrationService;
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
@@ -46,6 +45,8 @@ public class AuthenticationController {
         model.addAttribute("options", states);
         model.addAttribute("vendor", new Vendor());
         model.addAttribute("vendorCategories", categoryRepository.findAll());
+        model.addAttribute("genre", new MusicGenre());
+        model.addAttribute("musicGenres", genreRepository.findAll());
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
