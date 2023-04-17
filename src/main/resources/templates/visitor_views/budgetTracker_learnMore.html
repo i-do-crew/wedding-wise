@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <title>Budget Tracker Info</title>
@@ -8,8 +8,10 @@
 <body id="body">
 <!--NAVBAR-->
 <nav th:insert="~{fragments/fragments :: navbar}"></nav>
-<!--SIDEBAR-->
-<div th:insert="~{fragments/fragments :: sidebar}"></div>
+<!--CUSTOMER SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
+<!--VENDOR SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <div class="container rounded p-3" id="budgetCard">
     <div class="card">

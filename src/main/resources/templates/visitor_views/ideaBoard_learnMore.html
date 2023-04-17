@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/fragments :: head}">
     <meta charset="UTF-8">
     <title>Visitor Idea Board</title>
 </head>
 <body>
+<!--NAVBAR-->
 <nav th:insert="~{fragments/fragments :: navbar}"></nav>
-<!--SIDEBAR-->
-<div th:insert="~{fragments/fragments :: sidebar}"></div>
+<!--CUSTOMER SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
+<!--VENDOR SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <div class="container p-3">
   <div class="card row">
