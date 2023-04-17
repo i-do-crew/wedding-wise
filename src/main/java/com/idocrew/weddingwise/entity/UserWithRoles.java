@@ -19,7 +19,6 @@ public class UserWithRoles extends User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<Group> groups = this.getUserGroups();
         List<String> list = new ArrayList<>();
-        list.add("ROLE_USER");
         for (Group group : groups) {
             list.add("ROLE_" + group.getCode());
         }
