@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/fragments :: head}">
     <meta charset="UTF-8">
-    <title>Visitor Idea Board</title>
+    <title>Visitor Guest List Manager</title>
 </head>
 <body>
+<!--NAVBAR-->
 <nav th:insert="~{fragments/fragments :: navbar}"></nav>
-<!--SIDEBAR-->
-<div th:insert="~{fragments/fragments :: sidebar}"></div>
+<!--CUSTOMER SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
+<!--VENDOR SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <div class="container p-3">
-  <div class="card row">
+    <div class="card row">
         <span class="col">
-            <h1 class="text-center">Idea Board</h1>
-            <p>With Wedding Wise's idea board, you can collect and organize all of your wedding inspiration in one place. Whether it's photos, articles, or Pinterest boards, you can save it all in Wedding Wise.</p>
+            <h1 class="text-center">Guest List Manager</h1>
+            <p>Keep track of your wedding guests and their RSVPs with Wedding Wise's guest list manager. You can also use this feature to communicate with your guests and send out invitations via group email.</p>
             <span class="dropdown ">
                 <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Sign-Up Here
@@ -27,7 +30,7 @@
         <span class="col">
             <img src="http://via.placeholder.com/640x360" alt="picture">
         </span>
-  </div>
+    </div>
 </div>
 
 <!--FOOTER-->

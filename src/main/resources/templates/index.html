@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/fragments :: head}" >
     <meta charset="UTF-8">
     <title>Wedding Wise Landing Page</title>
@@ -7,8 +7,7 @@
 <body>
 <header>
     <!--NAVBAR-->
-    <nav th:insert="~{fragments/fragments :: navbar}"></nav>
-
+    <nav th:replace="~{fragments/fragments :: navbar}"></nav>
 
     <div class="p-5 text-center bg-light">
         <h1 class="mb-3">WEDDING WISE</h1>
@@ -16,8 +15,10 @@
     </div>
 </header>
 
-<!--SIDEBAR-->
-<div th:insert="~{fragments/fragments :: sidebar}"></div>
+<!--CUSTOMER SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
+<!--VENDOR SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <div class="container">
     <div class="row">
@@ -25,6 +26,7 @@
             <b>Vendors</b>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
+
             <a href="/info/vendors"><button class="btn btn-outline-secondary">Learn More</button></a>
         </div>
         <span class="col mt-3 ms-5">
