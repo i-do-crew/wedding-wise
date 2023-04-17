@@ -36,8 +36,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         if(checkIfUserExist(customer.getUser().getEmail())){
             throw new DuplicateKeyException("User already exists for this email");
         }
-        //TODO: Note To Billy - Revised to get user from customer
-        //set username and user gruop
         User userEntity = new User();
         Customer custEntity = new Customer();
         BeanUtils.copyProperties(customer.getUser(), userEntity);
@@ -45,8 +43,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         String hash = passwordEncoder.encode(customer.getUser().getPassword());
         userEntity.setPassword(hash);
         userEntity.setUsername(customer.getUser().getEmail());
-        addCustomerUserGroup(userEntity);
-        //TODO: Note To Billy - Revised to save user first due to foreign key constraint
+        addUserGroup(userEntity, "CUSTOMER");
         userEntity = userRepository.save(userEntity);
         custEntity.setUser(userEntity);
         custEntity = customerRepository.save(custEntity);
@@ -54,8 +51,22 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     @Override
+    @Transactional
     public void register(Vendor vendor) {
-
+        if(checkIfUserExist(vendor.getUser().getEmail())){
+            throw new DuplicateKeyException("User already exists for this email");
+        }
+        User userEntity = new User();
+        Vendor vendorEntity = new Vendor();
+        BeanUtils.copyProperties(vendor.getUser(), userEntity);
+        BeanUtils.copyProperties(vendor, vendorEntity);
+        String hash = passwordEncoder.encode(vendor.getUser().getPassword());
+        userEntity.setPassword(hash);
+        userEntity.setUsername(vendor.getUser().getEmail());
+        addUserGroup(userEntity, "VENDOR");
+        userEntity = userRepository.save(userEntity);
+        vendorEntity.setUser(userEntity);
+        vendorEntity = vendorRepository.save(vendorEntity);
     }
 
     private boolean checkIfUserExist(String email) {
@@ -70,8 +81,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         );
     }
 
-    private void addCustomerUserGroup(User userEntity){
-        Group group = groupRepository.findByCode("CUSTOMER");
+    private void addUserGroup(User userEntity, String code){
+        Group group = groupRepository.findByCode(code);
         userEntity.setUserGroups(List.of(group));
     }
 }
