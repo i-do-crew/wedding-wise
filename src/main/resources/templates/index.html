@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/fragments :: head" >
+<head th:replace="~{fragments/fragments :: head}" >
     <meta charset="UTF-8">
     <title>Wedding Wise Landing Page</title>
 </head>
 <body>
 <header>
     <!--NAVBAR-->
-    <nav th:insert="fragments/fragments :: navbar"></nav>
+    <nav th:insert="~{fragments/fragments :: navbar}"></nav>
 
     <div class="p-5 text-center bg-light">
         <h1 class="mb-3">WEDDING WISE</h1>
@@ -16,7 +16,7 @@
 </header>
 
 <!--SIDEBAR-->
-<div th:insert="fragments/fragments :: sidebar"></div>
+<div th:insert="~{fragments/fragments :: sidebar}"></div>
 
 <div class="container">
     <div class="row">
@@ -28,12 +28,12 @@
             <a href="/info/vendors"><button class="btn btn-outline-secondary">Learn More</button></a>
         </div>
         <span class="col mt-3 ms-5">
-            <img src="..." alt="">
+            <img src="http://via.placeholder.com/640x360" alt="">
         </span>
     </div>
     <div class="row">
         <span class="col mt-3 ms-5">
-            <img src="..." alt="">
+            <img src="http://via.placeholder.com/640x360" alt="">
         </span>
         <span class="col">
             <b>Budget Tracker</b>
@@ -50,12 +50,12 @@
             <a href="/info/guests"><button class="btn btn-outline-secondary">Learn More</button></a>
         </span>
         <span class="col mt-3 ms-5">
-            <img src="..." alt="">
+            <img src="http://via.placeholder.com/640x360" alt="">
         </span>
     </div>
     <div class="row">
         <span class="col mt-3 ms-5">
-            <img src="..." alt="">
+            <img src="http://via.placeholder.com/640x360" alt="">
         </span>
         <div class="col">
             <b>Idea Board</b>
@@ -67,8 +67,8 @@
 </div>
 
 <!--FOOTER-->
-<footer th:insert="fragments/fragments :: footer"></footer>
+<footer th:insert="~{fragments/fragments :: sidebar}"></footer>
 <!--BOOTSTRAP-->
-<div th:insert="fragments/fragments :: bootstrapJs"></div>
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 </body>
 </html>

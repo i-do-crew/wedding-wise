@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/fragments :: head" >
+<head th:replace="~{fragments/fragments :: head}" >
     <meta charset="UTF-8">
     <title>Client's Profile</title>
-
 </head>
 <body>
 <!--NAVBAR-->
-<nav th:insert="fragments/fragments :: navbar"></nav>
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
 <!--SIDEBAR-->
-<div th:insert="fragments/fragments :: sidebar"></div>
+<div th:insert="~{fragments/fragments :: sidebar}"></div>
 
 <div class="container-fluid">
     <div style="text-align: center">
@@ -18,27 +17,35 @@
             wedding profile</h1>
     </div>
     <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal">Edit Profile</button>
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Edit Profile</button>
     <div class="container-sm">
 <hr>
         <a href="/vendors/categories/1"><h4>Venue</h4></a>
-        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <a href="/vendors/individual/1"><img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 <hr>
-        <a href="/vendors/categories/1"><h4>Caterer</h4></a>
-        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <a href="/vendors/categories/2"><h4>Photographer</h4></a>
+        <a href="/vendors/individual/2"><img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         <hr>
-        <a href="/vendors/categories/2"><h4>Photographer</h4></a>
-        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <a href="/vendors/categories/3"><h4>Florist</h4></a>
+        <a href="/vendors/individual/3"><img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <hr>
+        <a href="/vendors/categories/4"><h4>Caterer</h4></a>
+        <a href="/vendors/individual/4"><img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <hr>
+        <a href="/vendors/categories/5"><h4>Cake and Dessert</h4></a>
+        <a href="/vendors/individual/5"><img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 <hr>
-        <a href="/vendors/categories/"><h4>Band/DJ</h4></a>
-        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <a href="/vendors/categories/6"><h4>Bar and Beverage</h4></a>
+        <a href="/vendors/individual/6"><img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 <hr>
-        <a href="/vendors/categories/1"><h4>Florist</h4></a>
-        <a href=""><img class="card-img-top" src="..." alt="Vendor Img"></a>
+        <a href="/vendors/categories/7"><h4>Band/DJ</h4></a>
+        <a href="/vendors/individual/7"><img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         <hr>
 
@@ -52,18 +59,19 @@
                     <h4 class="modal-title">Edit your profile</h4>
                 </div>
                 <div class="modal-body">
-                    <p><input type="text" placeholder="Enter your first name">
-                        <input type="text" placeholder="Enter your last name">
-                        <input type="text" placeholder="Enter your partners first name">
-                        <input type="text" placeholder="Enter your partners last name">
-                        <input type="text" placeholder="Enter the date of your wedding">
-                        <input type="text" placeholder="Enter your budget range">
-                        <input type="text" placeholder="Enter your city">
-                        <input type="text" placeholder="Enter your state">
-                        <input type="text" placeholder="Enter your guest count"></p>
+
+                    <input type="text" placeholder="Enter your first name">
+                    <input type="text" placeholder="Enter your last name">
+                    <input type="text" placeholder="Enter your partners first name">
+                    <input type="text" placeholder="Enter your partners last name">
+                    <input type="text" placeholder="Enter the date of your wedding">
+                    <input type="text" placeholder="Enter your budget range">
+                    <input type="text" placeholder="Enter your city">
+                    <input type="text" placeholder="Enter your state">
+                    <input type="text" placeholder="Enter your guest count">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -71,8 +79,8 @@
 </div>
 
 <!--FOOTER-->
-<footer th:insert="fragments/fragments :: footer"></footer>
+<footer th:insert="~{fragments/fragments :: sidebar}"></footer>
 <!--BOOTSTRAP-->
-<div th:insert="fragments/fragments :: bootstrapJs"></div>
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 </body>
 </html>
