@@ -16,17 +16,17 @@ public class HomeController {
 
     @GetMapping("/info/budget")
     public String visitorBudgetTracker() {
-        return "visitor_views/visitor_budget_tracker";
+        return "visitor_views/budgetTracker_learnMore";
     }
 
     @GetMapping("/info/guests")
     public String guestListManager() {
-        return "visitor_views/visitor_guest_list_manager";
+        return "visitor_views/guestList_learnMore";
     }
 
     @GetMapping("/info/ideas")
     public String visitorIdeaBoard() {
-        return "visitor_views/visitor_idea_board";
+        return "visitor_views/ideaBoard_learnMore";
     }
     @GetMapping("/info/vendors")
     public String visitorVendors() {
