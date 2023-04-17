@@ -31,12 +31,12 @@
 }
 
 #navbar, #footer{
-    background-color: #FFFAF7;
+    background-color: #FFFAF7 !important;
 }
 
 #sign-up-btn{
     background-color: #212727;
-    text: white;
+    color: white;
 }
 
 .navbar-brand{
