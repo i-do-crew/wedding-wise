@@ -18,7 +18,7 @@ public class Vendor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name="title", columnDefinition="varchar(50)")
+    @Column(name="business_name", columnDefinition="varchar(50)")
     private String title;
     @ManyToOne
     @JoinColumn(name="category_id", columnDefinition="bigint(20)")
