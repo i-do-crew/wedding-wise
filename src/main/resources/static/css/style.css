@@ -29,3 +29,19 @@
     height:250px;
     width:250px;
 }
+
+#navbar, #footer{
+    background-color: #FFFAF7;
+}
+
+#sign-up-btn{
+    background-color: #212727;
+    text: white;
+}
+
+.navbar-brand{
+    font-family: 'Luxurious Roman', cursive;
+}
+.nav-item {
+    font-family: 'Nunito Sans', sans-serif;
+}
