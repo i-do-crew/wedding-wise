@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/fragments :: head}" >
     <meta charset="UTF-8">
     <title>Email Verification</title>
 </head>
 <body>
 <!--NAVBAR-->
-<nav th:insert="fragments/fragments :: navbar"></nav>
-<!--SIDEBAR-->
-<div th:insert="fragments/fragments :: sidebar"></div>
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<!--CUSTOMER SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
+<!--VENDOR SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <div class="container">
   <div class="row ">

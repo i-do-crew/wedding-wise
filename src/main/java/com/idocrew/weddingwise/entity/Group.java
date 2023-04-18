@@ -22,6 +22,6 @@ public class Group {
     private String group;
     @Column(name = "description")
     private String description;
-    @ManyToMany(mappedBy = "userGroups", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy ="userGroups", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private List<User> users;
 }

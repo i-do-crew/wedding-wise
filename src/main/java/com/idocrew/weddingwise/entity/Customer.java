@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Table(name="customers")
 @Entity
-public class Customer extends User{
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,6 @@ public class Customer extends User{
     private int budget;
     @Column(name="guest_count", columnDefinition="int(11)")
     private int guestCount;
-    @Column(name="city", columnDefinition="varchar(25)")
-    private String city;
-    @Column(name="state", columnDefinition="varchar(25)")
-    private String state;
     @Column(name="partner_fname", columnDefinition="varchar(50)")
     private String partnerFName;
     @Column(name="partner_lname", columnDefinition="varchar(50)")

@@ -1,12 +1,12 @@
 package com.idocrew.weddingwise.controllers;
 
-import com.idocrew.weddingwise.entity.Customer;
-import com.idocrew.weddingwise.entity.User;
-import com.idocrew.weddingwise.entity.Vendor;
+import com.idocrew.weddingwise.entity.*;
+import com.idocrew.weddingwise.repositories.CategoryRepository;
+import com.idocrew.weddingwise.repositories.MusicGenreRepository;
 import com.idocrew.weddingwise.repositories.UserRepository;
 import com.idocrew.weddingwise.services.UserRegistrationService;
-import com.idocrew.weddingwise.services.impl.UserRegistrationServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +17,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
+    private final MusicGenreRepository musicGenreRepository;
     private final UserRegistrationService userRegistrationService;
-
+    @Value("#{'${us.states}'.split(',')}")
+    private final String[] states;
     @GetMapping("/login")
     public String showLoginForm() {
         return "login_and_signup/login";
     }
     @GetMapping("/client/registration")
     public String clientRegistration(Model model) {
+        model.addAttribute("options", states);
         model.addAttribute("customer", new Customer());
         return "login_and_signup/client_registration";
     }
@@ -34,7 +38,12 @@ public class AuthenticationController {
         return "redirect:/verification";
     }
     @GetMapping("/vendor/registration")
-    public String vendorRegistration(){
+    public String vendorRegistration(Model model){
+        model.addAttribute("options", states);
+        model.addAttribute("vendor", new Vendor());
+        model.addAttribute("vendorCategories", categoryRepository.findAll());
+        model.addAttribute("genre", new MusicGenre());
+        model.addAttribute("musicGenres", musicGenreRepository.findAll());
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")

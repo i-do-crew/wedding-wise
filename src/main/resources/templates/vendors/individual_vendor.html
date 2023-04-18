@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/fragments :: head" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/fragments :: head}" >
     <meta charset="UTF-8">
     <title>Individual Vendor</title>
 </head>
 <body>
 <!--NAVBAR-->
-<nav th:insert="fragments/fragments :: navbar"></nav>
-<!--SIDEBAR-->
-<div th:insert="fragments/fragments :: sidebar"></div>
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<!--CUSTOMER SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
+<!--VENDOR SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <div class="container">
   <div class="card container">
@@ -20,6 +22,10 @@
       <h1 th:if="${vid == 5}" class="text-center">Tasty Swirls Company</h1>
       <h1 th:if="${vid == 6}" class="text-center">Barmasters Texas</h1>
       <h1 th:if="${vid == 7}" class="text-center">DJMusic Entertainment LLC</h1>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" id="editBtn" data-bs-toggle="modal" data-target="#modalCenter">
+        Edit Profile
+      </button>
       <h6>This is a short description about the business</h6>
       <div class="text-center">
         <p>vendor@vendor.com</p>
@@ -75,12 +81,34 @@
         <p class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
       </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalVendor" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle"
+         aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalVendorEdit">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <!--FOOTER-->
-<footer th:insert="fragments/fragments :: footer"></footer>
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
-<div th:insert="fragments/fragments :: bootstrapJs"></div>
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 </body>
 </html>

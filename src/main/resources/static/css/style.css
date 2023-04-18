@@ -16,7 +16,7 @@
     width:50px;
 }
 
-#profileImg{
+.profileImg{
     border-radius: 50px;
     height: 100px;
     width:100px;
@@ -28,4 +28,20 @@
 #businessProfileImg{
     height:250px;
     width:250px;
+}
+
+#navbar, #footer{
+    background-color: #FFFAF7 !important;
+}
+
+#sign-up-btn{
+    background-color: #212727;
+    color: white;
+}
+
+.navbar-brand{
+    font-family: 'Luxurious Roman', cursive;
+}
+.nav-item {
+    font-family: 'Nunito Sans', sans-serif;
 }

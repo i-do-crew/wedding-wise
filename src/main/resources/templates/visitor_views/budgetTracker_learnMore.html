@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
+    <title>Budget Tracker Info</title>
+    <link th:rel="stylesheet" href="/css/learn_more/budgetTracker_learnMore.css"/>
+</head>
+<body id="body">
+<!--NAVBAR-->
+<nav th:insert="~{fragments/fragments :: navbar}"></nav>
+<!--CUSTOMER SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
+<!--VENDOR SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+
+<div class="container rounded p-3" id="budgetCard">
+    <div class="card">
+        <div class="row">
+        <span class="col">
+            <h1 class="text-center">Budget Tracker</h1>
+            <p id="p">With Wedding Wise, you can easily set and track your wedding budget to ensure that you stay on track financially. The app will automatically calculate your expenses and help you stay within your budget.</p>
+            <span class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
+                    <li><a class="dropdown-item" href="/vendor/registration">Sign-up as Vendor</a></li>
+                </ul>
+            </span>
+        </span>
+            <span class="col">
+            <img src="http://via.placeholder.com/640x360" alt="picture">
+        </span>
+            <div>
+                <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" id="button">
+                    Sign-Up Here
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--FOOTER-->
+<footer th:insert="~{fragments/fragments :: footer}"></footer>
+<!--BOOTSTRAP-->
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>

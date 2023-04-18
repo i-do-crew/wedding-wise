@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,25 +31,42 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final EmailService emailService;
 
     @Override
+    @Transactional
     public void register(Customer customer) throws DuplicateKeyException {
-        if(checkIfUserExist(customer.getEmail())){
+        if(checkIfUserExist(customer.getUser().getEmail())){
             throw new DuplicateKeyException("User already exists for this email");
         }
         User userEntity = new User();
         Customer custEntity = new Customer();
-        BeanUtils.copyProperties(customer, userEntity);
+        BeanUtils.copyProperties(customer.getUser(), userEntity);
         BeanUtils.copyProperties(customer, custEntity);
-        String hash = passwordEncoder.encode(customer.getPassword());
+        String hash = passwordEncoder.encode(customer.getUser().getPassword());
         userEntity.setPassword(hash);
-        updateUserGroup(userEntity);
-        customerRepository.save(custEntity);
-        userRepository.save(userEntity);
-        sendRegistrationConfirmationEmail(custEntity);
+        userEntity.setUsername(customer.getUser().getEmail());
+        addUserGroup(userEntity, "CUSTOMER");
+        userEntity = userRepository.save(userEntity);
+        custEntity.setUser(userEntity);
+        custEntity = customerRepository.save(custEntity);
+        //sendRegistrationConfirmationEmail(customer.getUser());
     }
 
     @Override
+    @Transactional
     public void register(Vendor vendor) {
-
+        if(checkIfUserExist(vendor.getUser().getEmail())){
+            throw new DuplicateKeyException("User already exists for this email");
+        }
+        User userEntity = new User();
+        Vendor vendorEntity = new Vendor();
+        BeanUtils.copyProperties(vendor.getUser(), userEntity);
+        BeanUtils.copyProperties(vendor, vendorEntity);
+        String hash = passwordEncoder.encode(vendor.getUser().getPassword());
+        userEntity.setPassword(hash);
+        userEntity.setUsername(vendor.getUser().getEmail());
+        addUserGroup(userEntity, "VENDOR");
+        userEntity = userRepository.save(userEntity);
+        vendorEntity.setUser(userEntity);
+        vendorEntity = vendorRepository.save(vendorEntity);
     }
 
     private boolean checkIfUserExist(String email) {
@@ -59,8 +77,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         emailService.sendVerificationRequest(userEntity);
     }
 
-    private void updateUserGroup(User userEntity){
-        Group group = groupRepository.findByCode("CUSTOMER");
+    private void addUserGroup(User userEntity, String code){
+        Group group = groupRepository.findByCode(code);
         userEntity.setUserGroups(List.of(group));
     }
 }
