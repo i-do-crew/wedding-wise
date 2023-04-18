@@ -50,19 +50,26 @@
                 </div>
                 <div class="col-auto mt-1">
                         <select id="vendorCategory" th:field="*{category}" class="form-select">
-                            <option th:value="xx" selected>Select your Vendor Category...</option>
-                            <option th:each="category : ${vendorCategories}" th:text="${category}" th:value="${category}"></option>
+                            <option th:value="xx" selected>Select your vendor category...</option>
+                            <option th:each="category : ${vendorCategories}" th:text="${category.title}" th:value="${category.title}"></option>
                         </select>
                 </div>
                 <div class="mb-3 d-none" id="venueCapacity">
                     <label for="capacity" class="form-label"></label>
                     <input type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
                 </div>
+<!--                <div class="mb-3 d-none" id="musicType">-->
+<!--                    <label for="capacity" class="form-label"></label>-->
+<!--                    <select th:object="${genre}" id="musicType" th:field="*{title}" class="form-select">-->
+<!--                        <option th:value="xx" selected>Select your genre(s)...</option>-->
+<!--                        <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>-->
+<!--                    </select>-->
+<!--                </div>-->
                 <div class="mb-3 d-none" id="musicGenre">
                     <label for="capacity" class="form-label"></label>
                     <select th:object="${genre}" id="genre" th:field="*{title}" class="form-select">
                         <option th:value="xx" selected>Select your genre(s)...</option>
-                        <option th:each="genre : ${musicGenres}" th:text="${genre}" th:value="${genre}"></option>
+                        <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>
                     </select>
                 </div>
                 <div class="mb-3 d-none" id="photoType">
@@ -70,7 +77,7 @@
                     <input type="text" name="type" class="form-control" id="type" placeholder="Enter the types of photography you offer">
                 </div>
             </form>
-            <button type="submit" id="verifyBtn" class="btn btn-secondary pb-3">Sign Up</button>
+            <button type="submit" id="verifyBtn" class="btn btn-secondary mb-3">Sign Up</button>
         </div>
     </div>
 </div>
@@ -83,24 +90,26 @@
 <!--Conditional attribute display-->
 <script>
     $('#vendorCategory').on('change', function() {
-        if(this.value === 'venue'){
+        console.log($('#vendorCategory').val())
+
+        $("#venueCapacity").addClass('d-none');
+        $('#musicGenre').addClass('d-none');
+        $('#photoType').addClass('d-none');
+
+        if($('#vendorCategory').val() === 'Venues'){
             $("#venueCapacity").removeClass('d-none');
             $('#musicGenre').addClass('d-none');
             $('#photoType').addClass('d-none');
         }
-        if(this.value === 'musician'){
+        if($('#vendorCategory').val() === 'Bands and DJs'){
             $("#venueCapacity").addClass('d-none');
             $('#musicGenre').removeClass('d-none');
             $('#photoType').addClass('d-none');
         }
-        if(this.value === 'photographer'){
+        if($('#vendorCategory').val() === 'Photographers'){
             $("#venueCapacity").addClass('d-none');
             $('#musicGenre').addClass('d-none');
             $('#photoType').removeClass('d-none');
-        } else{
-            $("#venueCapacity").addClass('d-none');
-            $('#musicGenre').addClass('d-none');
-            $('#photoType').addClass('d-none');
         }
     });
 </script>
