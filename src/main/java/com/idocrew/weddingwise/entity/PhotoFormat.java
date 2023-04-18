@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="djs_and_live_bands_categories")
+@Table(name="photo_format")
 @Entity
-public class MusicType {
+public class PhotoFormat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,7 +22,11 @@ public class MusicType {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @OneToMany
-    @JoinColumn(name="vendor_id", columnDefinition="bigint(20)")
+    @ManyToMany
+    @JoinTable(
+            name="vendors_photo_format",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "vendor_id")
+    )
     private Set<Vendor> vendors;
 }

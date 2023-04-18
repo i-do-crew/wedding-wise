@@ -58,23 +58,24 @@
                     <label for="capacity" class="form-label"></label>
                     <input type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
                 </div>
-<!--                <div class="mb-3 d-none" id="musicType">-->
-<!--                    <label for="capacity" class="form-label"></label>-->
-<!--                    <select th:object="${genre}" id="musicType" th:field="*{title}" class="form-select">-->
-<!--                        <option th:value="xx" selected>Select your genre(s)...</option>-->
-<!--                        <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>-->
-<!--                    </select>-->
-<!--                </div>-->
+                <div class="mb-3 d-none" id="VendorPhotoFormat">
+                    <label for="photoType" class="form-label"></label>
+                    <select th:object="${photoFormat}" id="photoType" th:field="*{title}" class="form-select">
+                        <option th:value="xx" selected>Select your formats available...</option>
+                        <option th:each="format : ${photoFormats}" th:text="${format.title}" th:value="${format.title}"></option>
+                    </select>
+                </div>
                 <div class="mb-3 d-none" id="musicGenre">
-                    <label for="capacity" class="form-label"></label>
+                    <label for="genre" class="form-label"></label>
                     <select th:object="${genre}" id="genre" th:field="*{title}" class="form-select">
                         <option th:value="xx" selected>Select your genre(s)...</option>
                         <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>
                     </select>
-                </div>
-                <div class="mb-3 d-none" id="photoType">
-                    <label for="capacity" class="form-label"></label>
-                    <input type="text" name="type" class="form-control" id="type" placeholder="Enter the types of photography you offer">
+                    <label for="musicType" class="form-label"></label>
+                    <select th:object="${musicType}" id="musicType" th:field="*{title}" class="form-select">
+                        <option th:value="xx" selected>Select the type of musical group...</option>
+                        <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.title}"></option>
+                    </select>
                 </div>
             </form>
             <button type="submit" id="verifyBtn" class="btn btn-secondary mb-3">Sign Up</button>
@@ -94,22 +95,22 @@
 
         $("#venueCapacity").addClass('d-none');
         $('#musicGenre').addClass('d-none');
-        $('#photoType').addClass('d-none');
+        $('#VendorPhotoFormat').addClass('d-none');
 
         if($('#vendorCategory').val() === 'Venues'){
             $("#venueCapacity").removeClass('d-none');
             $('#musicGenre').addClass('d-none');
-            $('#photoType').addClass('d-none');
+            $('#VendorPhotoFormat').addClass('d-none');
         }
         if($('#vendorCategory').val() === 'Bands and DJs'){
             $("#venueCapacity").addClass('d-none');
             $('#musicGenre').removeClass('d-none');
-            $('#photoType').addClass('d-none');
+            $('#VendorPhotoFormat').addClass('d-none');
         }
         if($('#vendorCategory').val() === 'Photographers'){
             $("#venueCapacity").addClass('d-none');
             $('#musicGenre').addClass('d-none');
-            $('#photoType').removeClass('d-none');
+            $('#VendorPhotoFormat').removeClass('d-none');
         }
     });
 </script>
