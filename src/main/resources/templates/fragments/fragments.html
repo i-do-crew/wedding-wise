@@ -44,6 +44,11 @@
                     <li class="nav-item me-2">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
+                    <li class="nav-item me-2">
+                        <form name="logoutForm" th:action="@{/logout}" method="post">
+                            <input class="nav-link" type="submit" value="Logout"/>
+                        </form>
+                    </li>
                     <li class="nav-item dropstart ">
                         <button id="sign-up-btn" class="dropdown-toggle btn text-light" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sign-Up
