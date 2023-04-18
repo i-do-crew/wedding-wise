@@ -1,0 +1,80 @@
+/*BODY*/
+main{
+    background-color: #E19B6E;
+}
+
+.col{
+    padding-left:100px;
+    padding-right:100px;
+}
+
+#titleRow {
+    padding-top: 100px;
+}
+
+#claytonRow{
+    padding-bottom: 100px;
+}
+
+.card{
+    border:none;
+    border-radius: 30px;
+}
+
+#micahCol, #billieCol {
+    margin-top:100px;
+    margin-left:200px;
+    margin-right:0;
+    margin-bottom:100px;
+}
+#andreaCol, #claytonCol {
+    margin-top:100px;
+    margin-right:100px;
+    margin-left:50px;
+    margin-bottom:100px;
+}
+
+/*IMAGES*/
+#micahpic,#billiepic {
+    width: 195px;
+    height: 195px;
+    border-radius: 30px;
+    object-fit: cover;
+    margin-top:100px;
+    margin-bottom: 100px;
+    margin-right: 100px;
+}
+#andreapic, #claytonpic {
+    width: 195px;
+    height: 195px;
+    border-radius: 30px;
+    object-fit: cover;
+    margin-top:100px;
+    margin-bottom: 100px;
+    margin-left: 200px;
+}
+
+/*FONTS*/
+.title{
+    text-align: center;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 100px;
+}
+.font{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+#title-text{
+    text-align: center;
+    font-size: 18px;
+}
+
+/*LINES*/
+hr{
+    border: 3px solid #212727;
+    border-radius: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
