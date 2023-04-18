@@ -32,68 +32,73 @@
                         <a class="nav-link" href="/aboutus">About Us</a>
                     </li>
             </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item  me-2">
-                        <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarCustomer">Profile</a>
-                        <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarVendor">Profile</a>
-                    </li>
-                    <li class="nav-item  me-2">
-                        <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard"> Client Dashboard</a>
-                        <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile"> Vendor Dashboard</a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item dropstart ">
-                        <button id="sign-up-btn" class="dropdown-toggle btn text-light" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sign-Up
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
-                            <li><a class="dropdown-item" href="/vendor/registration">Sign-up as Vendor</a></li>
-                        </ul>
-                    </li>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item  me-2">
+                    <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarCustomer">Profile</a>
+                    <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarVendor">Profile</a>
+                </li>
+                <li class="nav-item  me-2">
+                    <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard"> Client Dashboard</a>
+                    <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile"> Vendor Dashboard</a>
+                </li>
+                <li class="nav-item me-2" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item me-2" sec:authorize="isAuthenticated()">
+                    <form name="logoutForm" th:action="@{/logout}" method="post">
+                        <input class="nav-link" type="submit" value="Logout"/>
+                    </form>
+                </li>
+                <li class="nav-item dropstart">
+                    <button id="sign-up-btn" class="dropdown-toggle btn text-light" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sign-Up
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
+                        <li><a class="dropdown-item" href="/vendor/registration">Sign-up as Vendor</a></li>
+                    </ul>
+                </li>
             </ul>
-            </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <!--CUSTOMER SIDEBAR-->
 <div th:fragment="sidebarCustomer" class="sidebar">
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideBarCustomer" aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header ">
-                <div class="row">
-                    <button type="button" class="btn-close ps-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideBarCustomer" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header ">
+            <div class="row">
+                <button type="button" class="btn-close ps-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
-                <div class="">
-                    <img src="/img/flowers.jpg" alt="picture" class="profileImg">
-                    <i class="fa-solid fa-pencil"></i>
-                </div>
-                <div class="row pb-4">
-                    <h3>Lastname-Lastname</h3>
-                </div>
+        </div>
+        <div class="offcanvas-body">
+            <div class="">
+                <img src="/img/flowers.jpg" alt="picture" class="profileImg">
+                <i class="fa-solid fa-pencil"></i>
+            </div>
+            <div class="row pb-4">
+                <h3>Lastname-Lastname</h3>
+            </div>
+            <div class="row pb-4 pt-5">
+                <a href="/budget_tracker">Budget: $$$$</a>
+            </div>
+            <div class="row pb-4">
+                <h6>Wedding Date:</h6>
+                <h6>00/00/0000</h6>
+            </div>
+            <div class="row pb-4">
+                <a href="/guest_listManager">Guest Count: 0000</a>
+            </div>
+            <div class="position-absolute bottom-0">
                 <div class="row pb-4 pt-5">
-                    <a href="/budget_tracker">Budget: $$$$</a>
+                    <a href="/ideaboard">Idea Board</a>
                 </div>
-                <div class="row pb-4">
-                    <h6>Wedding Date:</h6>
-                    <h6>00/00/0000</h6>
-                </div>
-                <div class="row pb-4">
-                    <a href="/guest_listManager">Guest Count: 0000</a>
-                </div>
-                <div class="position-absolute bottom-0">
-                    <div class="row pb-4 pt-5">
-                        <a href="/ideaboard">Idea Board</a>
-                    </div>
-                    <div class="row pb-4 ">
-                        <a href="/likedVendors">Liked Vendors</a>
-                    </div>
+                <div class="row pb-4 ">
+                    <a href="/likedVendors">Liked Vendors</a>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 <!--VENDOR SIDEBAR-->
@@ -134,49 +139,49 @@
 </div>
 
 <!--FOOTER-->
-<footer th:fragment="footer" class="text-black mt-5 pt-5 pb-4  bottom-0 top-100" id="footer">
-        <div class="row ">
-            <div class=" mt-3 d-flex justify-content-evenly">
-                <ul class="navbar-nav ">
-                    <li class="nav-item me-3 ms-3">
-                        <h1 class="navbar-brand">Wedding Wise</h1>
-                    </li>
-                </ul>
-                <ul class="navbar-nav list-group-horizontal">
-                    <li class="nav-item me-3">
-                        <a href="/vendors" class="nav-link text-black align-self-center" >Vendors</a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a href="/budget_tracker" class="nav-link text-black align-self-center" >Budget Tracker</a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a href="/guest_listManager" class="nav-link text-black align-self-center" >Guest List Manager</a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a href="/ideaboard" class="nav-link text-black align-self-center" >Idea Board</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav list-group-horizontal me-3 ms-3">
-                    <li class="nav-item me-3">
-                        <a href="https://facebook.com" class="text-decoration-none text-dark"><i class="fa-brands fa-facebook"></i></a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a href="https://instagram.com" class="text-decoration-none text-dark"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a href="https://twitter.com" class="text-decoration-none text-dark"><i class="fa-brands fa-twitter"></i></a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a href="https://linkedin" class="text-decoration-none text-dark"><i class="fa-brands fa-linkedin"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <hr class="mt-2 mb-3"/>
-            <div class="text-center p-3 nav-item" >
-                © 2023 Copyright:
-                <a class="text-dark " href="/">Wedding Wise</a>
-            </div>
+<footer th:fragment="footer" class=" pt-5 pb-4  bottom-0 top-100" id="footer">
+    <div class="row ">
+        <div class=" mt-3 d-flex justify-content-evenly">
+            <ul class="navbar-nav ">
+                <li class="nav-item me-3 ms-3">
+                    <h1 class="navbar-brand">Wedding Wise</h1>
+                </li>
+            </ul>
+            <ul class="navbar-nav list-group-horizontal">
+                <li class="nav-item me-3">
+                    <a href="/vendors" class="nav-link text-black align-self-center">Vendors</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a href="/budget_tracker" class="nav-link text-black align-self-center">Budget Tracker</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a href="/guest_listManager" class="nav-link text-black align-self-center">Guest List Manager</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a href="/ideaboard" class="nav-link text-black align-self-center">Idea Board</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav list-group-horizontal me-3 ms-3">
+                <li class="nav-item me-3">
+                    <a href="https://facebook.com" class="text-decoration-none text-dark"><i class="fa-brands fa-facebook"></i></a>
+                </li>
+                <li class="nav-item me-3">
+                    <a href="https://instagram.com" class="text-decoration-none text-dark"><i class="fa-brands fa-instagram"></i></a>
+                </li>
+                <li class="nav-item me-3">
+                    <a href="https://twitter.com" class="text-decoration-none text-dark"><i class="fa-brands fa-twitter"></i></a>
+                </li>
+                <li class="nav-item me-3">
+                    <a href="https://linkedin" class="text-decoration-none text-dark"><i class="fa-brands fa-linkedin"></i></a>
+                </li>
+            </ul>
         </div>
+        <hr class="mt-2 mb-3"/>
+        <div class="text-center p-3 nav-item">
+            © 2023 Copyright:
+            <a class="text-dark " href="/">Wedding Wise</a>
+        </div>
+    </div>
 </footer>
 
 <!--BOOTSTRAP-->
