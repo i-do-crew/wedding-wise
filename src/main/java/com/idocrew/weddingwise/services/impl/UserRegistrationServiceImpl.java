@@ -10,6 +10,7 @@ import com.idocrew.weddingwise.repositories.UserRepository;
 import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.EmailService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DuplicateKeyException;
@@ -73,7 +74,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         return userRepository.findByEmail(email) != null;
     }
 
-    private void sendRegistrationConfirmationEmail(User userEntity) {
+    private void sendRegistrationConfirmationEmail(User userEntity) throws MessagingException {
         emailService.sendVerificationRequest(userEntity);
     }
 
