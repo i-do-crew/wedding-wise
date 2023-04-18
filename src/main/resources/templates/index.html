@@ -1,71 +1,81 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/fragments :: head}" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Wedding Wise Landing Page</title>
+    <link th:rel="stylesheet" href="/css/index.css">
 </head>
 <body>
+
 <header>
     <!--NAVBAR-->
-    <nav th:insert="~{fragments/fragments :: navbar}"></nav>
+    <nav th:replace="~{fragments/fragments :: navbar}"></nav>
 
-
-    <div class="p-5 text-center bg-light">
-        <h1 class="mb-3">WEDDING WISE</h1>
-        <h4 class="mb-3">Happily ever after starts with a WISE plan</h4>
+    <div class="p-5 text-center container-fluid" id="hero">
+        <div id="hero-text">
+            <div id="hero-text-background">
+                <h1 class="mb-3 brand-font" id="hero-brand">WEDDING WISE</h1>
+                <h4 class="mb-3" id="hero-tagline">Happily ever after starts with a <span class="brand-font">WISE</span> plan</h4>
+            </div>
+        </div>
     </div>
 </header>
 
-<!--SIDEBAR-->
-<div th:insert="~{fragments/fragments :: sidebar}"></div>
+<!--CUSTOMER SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
+<!--VENDOR SIDEBAR-->
+<div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <b>Vendors</b>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-            <a href="/info/vendors"><button class="btn btn-outline-secondary">Learn More</button></a>
-        </div>
-        <span class="col mt-3 ms-5">
-            <img src="http://via.placeholder.com/640x360" alt="">
-        </span>
-    </div>
-    <div class="row">
-        <div class="col mt-3 ms-5">
-            <img src="http://via.placeholder.com/640x360" alt="">
-        </div>
-        <div class="col">
-            <b>Budget Tracker</b>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-            <a href="/info/budget"><button class="btn btn-outline-secondary" >Learn More</button></a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <b>Guest List Manager</b>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-            <a href="/info/guests"><button class="btn btn-outline-secondary">Learn More</button></a>
-        </div>
-        <div class="col mt-3 ms-5">
-            <img src="http://via.placeholder.com/640x360" alt="">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col mt-3 ms-5">
-            <img src="http://via.placeholder.com/640x360" alt="">
-        </div>
-        <div class="col">
-            <b>Idea Board</b>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-            <a href="/info/ideas"><button class="btn btn-outline-secondary">Learn More</button></a>
-        </div>
-    </div>
-</div>
+<main>
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-between" id="vendorRow">
+            <div class="col " id="vendorCol">
+                <b>Vendors</b>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
 
+                <a href="/info/vendors"><button class="btn btn-outline-secondary">Learn More</button></a>
+            </div>
+            <div class="col " id="vendorColImg">
+                <img src="/img/home_page/vendor_home_page.jpg" alt="vendor img" id="vendorImg">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-between" id="budgetRow">
+            <div class="col " id="budgetColImg">
+                <img src="/img/home_page/budget_home_page.jpg" alt="" id="budgetImg">
+            </div>
+            <div class="col" id="budgetCol">
+                <b>Budget Tracker</b>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
+                <a href="/info/budget"><button class="btn btn-outline-secondary" >Learn More</button></a>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-between" id="guestRow">
+            <div class="col" id="guestCol">
+                <b>Guest List Manager</b>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
+                <a href="/info/guests"><button class="btn btn-outline-secondary">Learn More</button></a>
+            </div>
+            <div class="col " id="guestColImg">
+                <img src="/img/home_page/guest_home_page.jpg" alt="" id="guestImg">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-between" id="ideaRow">
+            <div class="col " id="ideaColImg">
+                <img src="/img/home_page/idea_home_page.jpg" alt="" id="ideaImg">
+            </div>
+            <div class="col" id="ideaCol">
+                <b>Idea Board</b>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
+                <a href="/info/ideas"><button class="btn btn-outline-secondary">Learn More</button></a>
+            </div>
+        </div>
+    </div>
+</main>
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->

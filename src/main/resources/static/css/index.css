@@ -1,0 +1,65 @@
+/*HERO*/
+.brand-font{
+    font-family: 'Luxurious Roman', cursive;
+}
+
+#hero{
+    background: url("../img/home_page/hero_background.jpg") ;
+    height: 800px;
+    /*width: 100vw;*/
+}
+#hero-text{
+    /*color:#FFFAF7;*/
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+#hero-brand{
+    font-size: xxx-large;
+}
+#hero-text-background{
+    background-color: #FFFAF7;
+    opacity: 90%;
+    border-radius: 50px;
+    padding:50px;
+}
+#hero-tagline{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/*MAIN*/
+main{
+    background-color:#FFE5D2;
+}
+
+#vendorRow, #budgetRow, #guestRow, #ideaRow {
+    text-align: left;
+    position: relative;
+}
+#vendorCol, #budgetCol, #guestCol, #ideaCol {
+    margin-top: 100px;
+    margin-left: 100px;
+    padding:75px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: x-large;
+}
+
+#vendorColImg, #budgetColImg, #guestColImg, #ideaColImg {
+    background-color: #212727;
+    padding:68px;
+}
+
+#vendorImg, #budgetImg, #guestImg, #ideaImg {
+    border-radius: 30px;
+    height: 360px;
+    width:640px;
+}
+#guestColImg{
+    padding:48px;
+}
+#vendorColImg{
+    padding:48px;
+}
