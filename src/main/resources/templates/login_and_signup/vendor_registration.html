@@ -20,61 +20,72 @@
             <form
                 th:action="@{/vendor/registration}"
                 method="POST"
-                th:object="${vendor}">
+                th:object="${vendorComposite}">
                 <div class="mb-3">
                     <label for="businessName" class="form-label"></label>
-                    <input th:field="*{businessName}" type="text" name="businessName" class="form-control" id="businessName" placeholder="Enter your Business Name">
+                    <input th:field="*{vendor.businessName}" type="text" name="businessName" class="form-control" id="businessName" placeholder="Enter your Business Name">
                 </div>
                 <div class="mb-3">
                     <label for="businessEmail" class="form-label"></label>
-                    <input th:field="*{user.email}" type="text" name="businessEmail" class="form-control" id="businessEmail" placeholder="Enter your Business Email">
+                    <input th:field="*{vendor.user.email}" type="text" name="businessEmail" class="form-control" id="businessEmail" placeholder="Enter your Business Email">
                 </div>
                 <div class="mb-3">
                     <label for="pFirstName" class="form-label"></label>
-                    <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="pFirstName" placeholder="Enter your Business Address">
+                    <input th:field="*{vendor.user.firstName}" type="text" name="firstName" class="form-control" id="pFirstName" placeholder="Enter your Business Address">
                 </div>
                 <div class="mb-3">
                     <label for="pLastName" class="form-label"></label>
-                    <input th:field="*{user.lastName}" type="text" name="pLastName" class="form-control" id="pLastName" placeholder="Enter your Business Phone Number">
+                    <input th:field="*{vendor.user.lastName}" type="text" name="pLastName" class="form-control" id="pLastName" placeholder="Enter your Business Phone Number">
                 </div>
                 <div class="col-auto">
                     <label for="city" class="form-label"></label>
-                    <input th:field="*{user.city}" type="text" name="city" class="form-control" id="city"
+                    <input th:field="*{vendor.user.city}" type="text" name="city" class="form-control" id="city"
                            placeholder="Enter your City">
                 </div>
                 <div class="col-auto mt-1">
-                    <select th:field="*{user.state}" class="form-select">
+                    <select th:field="*{vendor.user.state}" class="form-select">
                         <option th:value="xx">Select your State...</option>
                         <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
                     </select>
                 </div>
                 <div class="col-auto mt-1">
-                        <select id="vendorCategory" th:field="*{category}" class="form-select">
-                            <option th:value="xx" selected>Select your vendor category...</option>
-                            <option th:each="category : ${vendorCategories}" th:text="${category.title}" th:value="${category.title}"></option>
+                        <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select">
+                            <option th:value="xx" selected>Select your vendor vendorCategory...</option>
+                            <option th:each="vendorCategory : ${vendorCategories}" th:text="${vendorCategory.title}" th:value="${vendorCategory.title}"></option>
                         </select>
                 </div>
                 <div class="mb-3 d-none" id="venueCapacity">
+                    <label for="address" class="form-label"></label>
+                    <input th:field="*{venue.address}" type="text" name="address" class="form-control" id="address" placeholder="Enter your venue capacity">
+                    <label for="city" class="form-label"></label>
+                    <input th:field="*{venue.city}" type="text" name="city" class="form-control" id="city" placeholder="Enter your venue capacity">
                     <label for="capacity" class="form-label"></label>
-                    <input type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
+                    <input th:field="*{venue.state}" type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
+                    <label for="capacity" class="form-label"></label>
+                    <input th:field="*{venue.zip}" type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
+                    <label for="capacity" class="form-label"></label>
+                    <input th:field="*{venue.title}" type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
+                    <label for="capacity" class="form-label"></label>
+                    <input th:field="*{venue.capacity}" type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
+
                 </div>
                 <div class="mb-3 d-none" id="VendorPhotoFormat">
                     <label for="photoType" class="form-label"></label>
-                    <select th:object="${photoFormat}" id="photoType" th:field="*{title}" class="form-select">
+                    <select th:field="*{photoFormat}" id="photoType" class="form-select">
                         <option th:value="xx" selected>Select your formats available...</option>
                         <option th:each="format : ${photoFormats}" th:text="${format.title}" th:value="${format.title}"></option>
                     </select>
                 </div>
                 <div class="mb-3 d-none" id="musicGenre">
-                    <label for="genre" class="form-label"></label>
-                    <select th:object="${genre}" id="genre" th:field="*{title}" class="form-select">
-                        <option th:value="xx" selected>Select your genre(s)...</option>
-                        <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>
-                    </select>
                     <label for="musicType" class="form-label"></label>
-                    <select th:object="${musicType}" id="musicType" th:field="*{title}" class="form-select">
+                    <select th:field="*{musicType}" id="musicType" class="form-select">
                         <option th:value="xx" selected>Select the type of musical group...</option>
                         <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.title}"></option>
+                    </select>
+                    <label for="genre" class="form-label"></label>
+                    <select th:field="*{musicGenre}" id="genre" class="form-select">
+                        <option th:value="xx" selected>Select your genre(s)...</option>
+                        <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>
                     </select>
                 </div>
             </form>

@@ -35,14 +35,19 @@ public class RegistrationController {
     }
     @GetMapping("/vendor/registration")
     public String vendorRegistration(Model model){
+        VendorComposite vendorComposite = VendorComposite.builder()
+                .vendor(new Vendor())
+                .musicGenre(new MusicGenre())
+                .photoFormat(new PhotoFormat())
+                .musicType(new MusicType())
+                .venue(new Venue())
+                .vendorCategory(new VendorCategory())
+                .build();
         model.addAttribute("options", states);
-        model.addAttribute("vendor", new Vendor());
+        model.addAttribute("vendorComposite", new VendorComposite());
         model.addAttribute("vendorCategories", categoryRepository.findAll());
-        model.addAttribute("genre", new MusicGenre());
         model.addAttribute("musicGenres", musicGenreRepository.findAll());
-        model.addAttribute("photoFormat", new PhotoFormat());
         model.addAttribute("photoFormats", photoFormatRepository.findAll());
-        model.addAttribute("musicType", new MusicType());
         model.addAttribute("musicTypes", musicTypeRepository.findAll());
         return "login_and_signup/vendor_registration";
     }
