@@ -1,9 +1,5 @@
-#micahpic,#andreapic,#billiepic,#claytonpic {
-    width: 65px;
-    height: 75px;
-    border-radius: 50px;
-}
 
+/*IMAGES*/
 #loginimage{
     background: url("../img/flowers.jpg") no-repeat;
     height: 100vh;
@@ -16,11 +12,6 @@
     width:50px;
 }
 
-.profileImg{
-    border-radius: 50px;
-    height: 100px;
-    width:100px;
-}
 .image{
     height:300px;
 }
@@ -30,6 +21,7 @@
     width:250px;
 }
 
+/*BACKGROUNDS*/
 #navbar, #footer{
     background-color: #FFFAF7 !important;
 }
@@ -39,9 +31,21 @@
     color: white;
 }
 
+/*FONTS*/
 .navbar-brand{
     font-family: 'Luxurious Roman', cursive;
 }
 .nav-item {
     font-family: 'Nunito Sans', sans-serif;
+}
+
+/*CUSTOMER SIDEBAR*/
+#offcanvasSideBarCustomer{
+    background-color: #FFE5D2;
+}
+
+.profileImg{
+    border-radius: 50%;
+    height: 200px;
+    width:200px;
 }
