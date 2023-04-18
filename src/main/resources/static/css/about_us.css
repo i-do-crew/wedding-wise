@@ -22,36 +22,36 @@ main{
 }
 
 #micahCol, #billieCol {
-    margin-top:100px;
-    margin-left:200px;
-    margin-right:0;
-    margin-bottom:100px;
+    margin-top:50px;
+    /*margin-left:200px;*/
+    /*margin-right:0;*/
+    margin-bottom:50px;
 }
 #andreaCol, #claytonCol {
-    margin-top:100px;
-    margin-right:100px;
-    margin-left:50px;
-    margin-bottom:100px;
+    margin-top:50px;
+    /*margin-right:100px;*/
+    /*margin-left:50px;*/
+    margin-bottom:50px;
 }
 
 /*IMAGES*/
 #micahpic,#billiepic {
-    width: 195px;
-    height: 195px;
+    width: 400px;
+    height: 400px;
     border-radius: 30px;
     object-fit: cover;
-    margin-top:100px;
-    margin-bottom: 100px;
-    margin-right: 100px;
+    margin-top:50px;
+    margin-bottom: 50px;
+    /*margin-right: 100px;*/
 }
 #andreapic, #claytonpic {
-    width: 195px;
-    height: 195px;
+    width: 400px;
+    height: 400px;
     border-radius: 30px;
     object-fit: cover;
-    margin-top:100px;
-    margin-bottom: 100px;
-    margin-left: 200px;
+    margin-top:50px;
+    margin-bottom: 50px;
+/*    margin-left: 200px;*/
 }
 
 /*FONTS*/
