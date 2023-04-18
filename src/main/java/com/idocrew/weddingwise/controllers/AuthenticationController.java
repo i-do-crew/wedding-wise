@@ -1,11 +1,10 @@
 package com.idocrew.weddingwise.controllers;
 
-import com.idocrew.weddingwise.entity.Category;
-import com.idocrew.weddingwise.entity.Customer;
-import com.idocrew.weddingwise.entity.User;
-import com.idocrew.weddingwise.entity.Vendor;
+import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.repositories.CategoryRepository;
+import com.idocrew.weddingwise.repositories.MusicGenreRepository;
 import com.idocrew.weddingwise.repositories.UserRepository;
+import com.idocrew.weddingwise.services.UserRegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,16 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
-
-    com.idocrew.weddingwise.services.UserRegistrationService userRegistrationService;
-
+    private final MusicGenreRepository musicGenreRepository;
+    private final UserRegistrationService userRegistrationService;
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
     @GetMapping("/login")
@@ -46,6 +42,8 @@ public class AuthenticationController {
         model.addAttribute("options", states);
         model.addAttribute("vendor", new Vendor());
         model.addAttribute("vendorCategories", categoryRepository.findAll());
+        model.addAttribute("genre", new MusicGenre());
+        model.addAttribute("musicGenres", musicGenreRepository.findAll());
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
