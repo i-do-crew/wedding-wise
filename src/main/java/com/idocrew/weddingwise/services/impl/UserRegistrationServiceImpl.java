@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 @Service("userService")
 @AllArgsConstructor
@@ -20,9 +20,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final UserRepository userRepository;
     private final VendorRepository vendorRepository;
     private final CustomerRepository customerRepository;
-    private final PrincipalGroupRepository groupRepository;
+    private final PrincipalGroupRepository principalGroupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final UserGroupRepository userGroupRepository;
 
     @Override
     @Transactional
@@ -85,7 +86,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void addUserGroup(User userEntity, String code){
-        PrincipalGroup principalGroup = groupRepository.findByCode(code);
-        userEntity.setPrincipalGroups(List.of(principalGroup));
+        PrincipalGroup principalGroup =  principalGroupRepository.findByCode(code);
+        UserGroup userGroup = new UserGroup();
+        userGroup.setGroup(principalGroup);
+        userGroup.setUser(userEntity);
+        userEntity.setUserGroups(Set.of(userGroup));
     }
 }
