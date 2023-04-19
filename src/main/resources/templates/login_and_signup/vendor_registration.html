@@ -72,12 +72,12 @@
                             <label for="pFirstName" class="form-label"></label>
                             <input th:field="*{vendor.user.firstName}" type="text" name="firstName" class="form-control" id="pFirstName" placeholder="Enter your Business Address">
                         </div>
-                        <div class="">
+                        <div class="mb-3">
                             <label for="pLastName" class="form-label"></label>
                             <input th:field="*{vendor.user.lastName}" type="text" name="pLastName" class="form-control" id="pLastName" placeholder="Enter your Business Phone Number">
                         </div>
-                        <div class="col-auto ">
-                                <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select">
+                        <div class="col-auto">
+                                <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select  mb-3">
                                     <option th:value="xx" selected>Select your category...</option>
                                     <option th:each="vendorCategory : ${vendorCategories}" th:text="${vendorCategory.title}" th:value="${vendorCategory.title}"></option>
                                 </select>
@@ -88,7 +88,7 @@
                             <label for="venueCity" class="form-label"></label>
                             <input th:field="*{venue.city}" type="text" name="city" class="form-control" id="venueCity" placeholder="Enter your venue city">
                             <label for="venueState" class="form-label"></label>
-                            <select th:field="*{venue.state}" id="venueState" class="form-select">
+                            <select th:field="*{venue.state}" id="venueState" class="form-select mb-3">
                                 <option th:value="xx">Select your State...</option>
                                 <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
                             </select>
@@ -96,12 +96,12 @@
                             <label for="venueZip" class="form-label"></label>
                             <input th:field="*{venue.title}" type="text" name="venueTitle" class="form-control" id="venueTitle" placeholder="Enter your venue name">
                             <label for="venueTitle" class="form-label"></label>
-                            <input th:field="*{venue.capacity}" type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
+                            <input th:field="*{venue.capacity}" type="text" name="capacity" class="form-control mb-3" id="capacity" placeholder="Enter your venue capacity">
 
                                 </div>
                                 <div class=" d-none" id="VendorPhotoFormat">
                                     <label for="photoType" class="form-label"></label>
-                                    <select th:field="*{photoFormat}" id="photoType" class="form-select">
+                                    <select th:field="*{photoFormat}" id="photoType" class="form-select mb-3">
                                         <option th:value="xx" selected>Select your formats available...</option>
                                         <option th:each="format : ${photoFormats}" th:text="${format.title}" th:value="${format.title}"></option>
                                     </select>
@@ -113,7 +113,7 @@
                                         <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.title}"></option>
                                     </select>
                                     <label for="genre" class="form-label"></label>
-                                    <select th:field="*{musicGenre}" id="genre" class="form-select">
+                                    <select th:field="*{musicGenre}" id="genre" class="form-select mb-3">
                                         <option th:value="xx" selected>Select your genre(s)...</option>
                                         <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>
                                     </select>
