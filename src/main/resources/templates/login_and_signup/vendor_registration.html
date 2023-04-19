@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/fragments :: head}">
+<head>
+    <th:block th:replace="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Vendor Registration</title>
+    <link th:rel="stylesheet" href="/css/login_and_signup/vendor_registration.css">
 </head>
 <body>
 <!--NAVBAR-->
@@ -10,70 +12,74 @@
 <!--SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
-<div class="card mx-5 mt-5 mb-5">
-    <div class="row">
-        <div class="col">
-            <img id="loginimage" src="/img/flowers.jpg">
-        </div>
-        <div class="col text-center px-3 pt-5">
-            <h1>HELP US MAKE DREAMS COME TRUE</h1>
-            <form
-                th:action="@{/vendor/registration}"
-                method="POST"
-                th:object="${vendor}">
-                <div class="mb-3">
-                    <label for="businessName" class="form-label"></label>
-                    <input th:field="*{businessName}" type="text" name="businessName" class="form-control" id="businessName" placeholder="Enter your Business Name">
+<main>
+    <div class="container p-3 pt-4 pb-4">
+        <div class="card ">
+            <div class="row">
+                <div class="col">
+                    <img id="loginimage" src="/img/vendor_register.jpg" alt="register img">
                 </div>
-                <div class="mb-3">
-                    <label for="businessEmail" class="form-label"></label>
-                    <input th:field="*{user.email}" type="text" name="businessEmail" class="form-control" id="businessEmail" placeholder="Enter your Business Email">
+                <div class="col text-center px-3 pt-5">
+                    <h1 class="fontTitle">HELP US MAKE DREAMS COME TRUE</h1>
+                    <form
+                        th:action="@{/vendor/registration}"
+                        method="POST"
+                        th:object="${vendor}">
+                        <div class="mb-2">
+                            <label for="businessName" class="form-label"></label>
+                            <input th:field="*{businessName}" type="text" name="businessName" class="form-control" id="businessName" placeholder="Enter your Business Name">
+                        </div>
+                        <div class="mb-2">
+                            <label for="businessEmail" class="form-label"></label>
+                            <input th:field="*{user.email}" type="text" name="businessEmail" class="form-control" id="businessEmail" placeholder="Enter your Business Email">
+                        </div>
+                        <div class="mb-2">
+                            <label for="pFirstName" class="form-label"></label>
+                            <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="pFirstName" placeholder="Enter your Business Address">
+                        </div>
+                        <div class="mb-2">
+                            <label for="pLastName" class="form-label"></label>
+                            <input th:field="*{user.lastName}" type="text" name="pLastName" class="form-control" id="pLastName" placeholder="Enter your Business Phone Number">
+                        </div>
+                        <div class="col-auto mb-4">
+                            <label for="city" class="form-label"></label>
+                            <input th:field="*{user.city}" type="text" name="city" class="form-control" id="city"
+                                   placeholder="Enter your City">
+                        </div>
+                        <div class="col-auto mb-4">
+                            <select th:field="*{user.state}" class="form-select">
+                                <option th:value="xx">Select your State...</option>
+                                <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
+                            </select>
+                        </div>
+                        <div class="col-auto mb-4">
+                                <select id="vendorCategory" th:field="*{category}" class="form-select">
+                                    <option th:value="xx" selected>Select your Vendor Category...</option>
+                                    <option th:each="category : ${vendorCategories}" th:text="${category}" th:value="${category}"></option>
+                                </select>
+                        </div>
+                        <div class="mb-3 d-none" id="venueCapacity">
+                            <label for="capacity" class="form-label"></label>
+                            <input type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
+                        </div>
+                        <div class="mb-3 d-none" id="musicGenre">
+                            <label for="capacity" class="form-label"></label>
+                            <select th:object="${genre}" id="genre" th:field="*{title}" class="form-select">
+                                <option th:value="xx" selected>Select your genre(s)...</option>
+                                <option th:each="genre : ${musicGenres}" th:text="${genre}" th:value="${genre}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3 d-none" id="photoType">
+                            <label for="capacity" class="form-label"></label>
+                            <input type="text" name="type" class="form-control" id="type" placeholder="Enter the types of photography you offer">
+                        </div>
+                    </form>
+                    <button type="submit" id="verifyBtn" class="btn font">Sign Up</button>
                 </div>
-                <div class="mb-3">
-                    <label for="pFirstName" class="form-label"></label>
-                    <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="pFirstName" placeholder="Enter your Business Address">
-                </div>
-                <div class="mb-3">
-                    <label for="pLastName" class="form-label"></label>
-                    <input th:field="*{user.lastName}" type="text" name="pLastName" class="form-control" id="pLastName" placeholder="Enter your Business Phone Number">
-                </div>
-                <div class="col-auto">
-                    <label for="city" class="form-label"></label>
-                    <input th:field="*{user.city}" type="text" name="city" class="form-control" id="city"
-                           placeholder="Enter your City">
-                </div>
-                <div class="col-auto mt-1">
-                    <select th:field="*{user.state}" class="form-select">
-                        <option th:value="xx">Select your State...</option>
-                        <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
-                    </select>
-                </div>
-                <div class="col-auto mt-1">
-                        <select id="vendorCategory" th:field="*{category}" class="form-select">
-                            <option th:value="xx" selected>Select your Vendor Category...</option>
-                            <option th:each="category : ${vendorCategories}" th:text="${category}" th:value="${category}"></option>
-                        </select>
-                </div>
-                <div class="mb-3 d-none" id="venueCapacity">
-                    <label for="capacity" class="form-label"></label>
-                    <input type="text" name="capacity" class="form-control" id="capacity" placeholder="Enter your venue capacity">
-                </div>
-                <div class="mb-3 d-none" id="musicGenre">
-                    <label for="capacity" class="form-label"></label>
-                    <select th:object="${genre}" id="genre" th:field="*{title}" class="form-select">
-                        <option th:value="xx" selected>Select your genre(s)...</option>
-                        <option th:each="genre : ${musicGenres}" th:text="${genre}" th:value="${genre}"></option>
-                    </select>
-                </div>
-                <div class="mb-3 d-none" id="photoType">
-                    <label for="capacity" class="form-label"></label>
-                    <input type="text" name="type" class="form-control" id="type" placeholder="Enter the types of photography you offer">
-                </div>
-            </form>
-            <button type="submit" id="verifyBtn" class="btn btn-secondary pb-3">Sign Up</button>
+            </div>
         </div>
     </div>
-</div>
+</main>
 
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>

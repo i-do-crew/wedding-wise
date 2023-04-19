@@ -45,10 +45,11 @@
 }
 
 #customerProfileImg{
-    border-radius: 45%;
+    border-radius: 50%;
     object-fit: cover;
-    /*padding-left: 20px;*/
-    /*margin:20px;*/
+    height:250px;
+    width:300px;
+    margin-left: 20px;
 }
 .editIcon{
     flex:auto;
@@ -93,9 +94,10 @@
 .font{
     font-family: 'Nunito Sans', sans-serif;
 }
-font:hover{
-    color: #E19B6E;
-}
+/*a:hover {*/
+/*    color: #E19B6E;*/
+/*}*/
+
 ul{
     list-style-type: circle;
 }
