@@ -20,6 +20,9 @@ public class Venue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name="title", columnDefinition="varchar(50)")
+    private String title;
+
     @Column(name="address", columnDefinition="varchar(50)")
     private String address;
 
@@ -32,7 +35,7 @@ public class Venue {
     @Column(name="zip", columnDefinition="varchar(5)")
     private String zip;
 
-    @Column(name="address", columnDefinition="varchar(50)")
+    @Column(name="capacity", columnDefinition="varchar(50)")
     private int capacity;
 
     @ManyToOne

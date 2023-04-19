@@ -9,5 +9,5 @@ import java.util.List;
 public interface VendorRepository extends JpaRepository<Vendor, Long> {
     Vendor findById(long id);
     Vendor findByBusinessName(String businessName);
-    List<Vendor> findByCategory(VendorCategory vendorCategory);
+    List<Vendor> findByVendorCategory(VendorCategory vendorCategory);
 }
