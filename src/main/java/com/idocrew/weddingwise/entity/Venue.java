@@ -30,8 +30,11 @@ public class Venue {
     @Column(name="zip", columnDefinition="varchar(5)")
     private String zip;
 
-    @Column(name="address", columnDefinition="varchar(50)")
+    @Column(name="capacity", columnDefinition="int")
     private int capacity;
+
+    @Column(name="title", columnDefinition="varchar(50)")
+    private String title;
 
     @ManyToOne
     @JoinColumn(name="vendor_id", referencedColumnName="id", columnDefinition = "bigint(20)")
