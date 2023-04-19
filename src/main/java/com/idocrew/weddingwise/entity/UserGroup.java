@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entities;
+package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class UserGroup {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "group_id")
     private PrincipalGroup group;
 

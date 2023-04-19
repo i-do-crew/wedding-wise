@@ -1,10 +1,7 @@
 package com.idocrew.weddingwise.services.impl;
 
-import com.idocrew.weddingwise.entities.*;
-import com.idocrew.weddingwise.repositories.CustomerRepository;
-import com.idocrew.weddingwise.repositories.PrincipalGroupRepository;
-import com.idocrew.weddingwise.repositories.UserRepository;
-import com.idocrew.weddingwise.repositories.VendorRepository;
+import com.idocrew.weddingwise.entity.*;
+import com.idocrew.weddingwise.repositories.*;
 import com.idocrew.weddingwise.services.EmailService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import lombok.AllArgsConstructor;

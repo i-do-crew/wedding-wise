@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entities;
+package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

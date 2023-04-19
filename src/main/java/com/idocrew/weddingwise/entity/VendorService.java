@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entities;
+package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,16 +7,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "vendors_photo_format", schema = "weddingwise")
-public class VendorsPhotoFormat {
+@Table(name = "vendor_services", schema = "weddingwise", indexes = {
+        @Index(name = "vendor_id", columnList = "vendor_id")
+})
+public class VendorService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "photo_format_id", nullable = false)
-    private PhotoFormat photoFormat;
+    @Column(name = "title", nullable = false, length = 50)
+    private String title;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vendor_id", nullable = false)

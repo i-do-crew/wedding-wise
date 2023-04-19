@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entities;
+package com.idocrew.weddingwise.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -59,4 +58,5 @@ public class Vendor {
 
     @OneToMany(mappedBy = "vendor")
     private Set<CustomerVendor> customerVendors = new LinkedHashSet<>();
+
 }

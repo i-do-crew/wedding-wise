@@ -1,6 +1,6 @@
 package com.idocrew.weddingwise.controllers;
 
-import com.idocrew.weddingwise.entities.*;
+import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.repositories.*;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entities;
+package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -38,6 +37,7 @@ public class User {
         credentialsNonExpired = copy.credentialsNonExpired;
         vendors = copy.vendors;
         customers = copy.customers;
+        userGroups = copy.userGroups;
 
     }
 
@@ -85,19 +85,13 @@ public class User {
     @Column(name="credentials_non_expired", columnDefinition = "bit", nullable = false)
     private boolean credentialsNonExpired = false;
 
-    @OneToMany(mappedBy = "vendor")
-    private Set<VendorsMusicGenre> vendorsMusicGenres = new LinkedHashSet<>();
-
     @OneToMany(mappedBy = "user")
     private Set<Vendor> vendors = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
     private Set<Customer> customers = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "vendor")
-    private Set<VendorPackage> vendorPackages = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<UserGroup> userGroups = new LinkedHashSet<>();
 
 }

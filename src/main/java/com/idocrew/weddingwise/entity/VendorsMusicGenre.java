@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entities;
+package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,15 +9,15 @@ import lombok.Setter;
 @Entity
 @Table(name = "vendors_music_genres", schema = "weddingwise")
 public class VendorsMusicGenre {
-    @EmbeddedId
-    private VendorsMusicGenreId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @MapsId("id")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id", nullable = false)
-    private MusicGenre id1;
+    @JoinColumn(name = "music_genre_id", nullable = false)
+    private MusicGenre musicGenre;
 
-    @MapsId("vendorId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vendor_id", nullable = false)
     private Vendor vendor;

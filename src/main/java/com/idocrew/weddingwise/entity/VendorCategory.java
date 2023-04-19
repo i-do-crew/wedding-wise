@@ -1,9 +1,10 @@
-package com.idocrew.weddingwise.entities;
+package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +20,6 @@ public class VendorCategory {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "vendorCategory")
-    private List<Vendor> vendors;
+    @OneToMany(mappedBy = "vendorCategory")
+    private Set<Vendor> vendors = new LinkedHashSet<>();
 }

@@ -1,6 +1,6 @@
 package com.idocrew.weddingwise.repositories;
 
-import com.idocrew.weddingwise.entities.PhotoFormat;
+import com.idocrew.weddingwise.entity.PhotoFormat;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

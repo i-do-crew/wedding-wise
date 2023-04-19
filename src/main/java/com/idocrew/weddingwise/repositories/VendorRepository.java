@@ -1,7 +1,7 @@
 package com.idocrew.weddingwise.repositories;
 
-import com.idocrew.weddingwise.entities.VendorCategory;
-import com.idocrew.weddingwise.entities.Vendor;
+import com.idocrew.weddingwise.entity.VendorCategory;
+import com.idocrew.weddingwise.entity.Vendor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

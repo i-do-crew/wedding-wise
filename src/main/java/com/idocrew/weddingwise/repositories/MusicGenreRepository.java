@@ -1,6 +1,6 @@
 package com.idocrew.weddingwise.repositories;
 
-import com.idocrew.weddingwise.entities.MusicGenre;
+import com.idocrew.weddingwise.entity.MusicGenre;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

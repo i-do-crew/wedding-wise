@@ -1,13 +1,15 @@
-package com.idocrew.weddingwise.entities;
+package com.idocrew.weddingwise.entity;
 
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class UserWithRoles extends User implements UserDetails {
 
@@ -17,10 +19,10 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<PrincipalGroup> principalGroups = this.getPrincipalGroups();
+        Set<UserGroup> userGroups = this.getUserGroups();
         List<String> list = new ArrayList<>();
-        for (PrincipalGroup principalGroup : principalGroups) {
-            list.add("ROLE_" + principalGroup.getCode());
+        for (UserGroup userGroup : userGroups) {
+            list.add("ROLE_" + userGroup.getGroup().getCode());
         }
         String roles = StringUtils.join(list, ',');
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);

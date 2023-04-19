@@ -1,6 +1,6 @@
 package com.idocrew.weddingwise.repositories;
 
-import com.idocrew.weddingwise.entities.DjsAndLiveBandsCategory;
+import com.idocrew.weddingwise.entity.DjsAndLiveBandsCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
