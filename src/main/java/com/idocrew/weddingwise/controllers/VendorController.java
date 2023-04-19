@@ -1,7 +1,7 @@
 package com.idocrew.weddingwise.controllers;
 
 import com.idocrew.weddingwise.entity.Vendor;
-import com.idocrew.weddingwise.repositories.CategoryRepository;
+import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
 import com.idocrew.weddingwise.repositories.VendorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
