@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entity;
+package com.idocrew.weddingwise.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

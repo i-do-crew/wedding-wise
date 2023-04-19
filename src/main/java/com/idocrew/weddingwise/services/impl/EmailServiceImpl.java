@@ -1,6 +1,6 @@
 package com.idocrew.weddingwise.services.impl;
 
-import com.idocrew.weddingwise.entity.User;
+import com.idocrew.weddingwise.entities.User;
 import com.idocrew.weddingwise.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

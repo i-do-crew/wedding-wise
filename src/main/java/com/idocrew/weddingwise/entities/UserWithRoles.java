@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entity;
+package com.idocrew.weddingwise.entities;
 
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,10 +17,10 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<Group> groups = this.getUserGroups();
+        List<PrincipalGroup> principalGroups = this.getPrincipalGroups();
         List<String> list = new ArrayList<>();
-        for (Group group : groups) {
-            list.add("ROLE_" + group.getCode());
+        for (PrincipalGroup principalGroup : principalGroups) {
+            list.add("ROLE_" + principalGroup.getCode());
         }
         String roles = StringUtils.join(list, ',');
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);

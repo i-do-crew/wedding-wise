@@ -1,4 +1,4 @@
-package com.idocrew.weddingwise.entity;
+package com.idocrew.weddingwise.entities;
 
 import lombok.*;
 
@@ -13,5 +13,5 @@ public class VendorComposite {
     private VendorCategory vendorCategory;
     private MusicGenre musicGenre;
     private PhotoFormat photoFormat;
-    private MusicType musicType;
+    private DjsAndLiveBandsCategory djsAndLiveBandsCategory;
 }

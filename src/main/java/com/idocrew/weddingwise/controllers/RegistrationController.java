@@ -1,6 +1,6 @@
 package com.idocrew.weddingwise.controllers;
 
-import com.idocrew.weddingwise.entity.*;
+import com.idocrew.weddingwise.entities.*;
 import com.idocrew.weddingwise.repositories.*;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +39,7 @@ public class RegistrationController {
                 .vendor(new Vendor())
                 .musicGenre(new MusicGenre())
                 .photoFormat(new PhotoFormat())
-                .musicType(new MusicType())
+                .djsAndLiveBandsCategory(new DjsAndLiveBandsCategory())
                 .venue(new Venue())
                 .vendorCategory(new VendorCategory())
                 .build();

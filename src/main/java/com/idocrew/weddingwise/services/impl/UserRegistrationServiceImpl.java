@@ -1,8 +1,8 @@
 package com.idocrew.weddingwise.services.impl;
 
-import com.idocrew.weddingwise.entity.*;
+import com.idocrew.weddingwise.entities.*;
 import com.idocrew.weddingwise.repositories.CustomerRepository;
-import com.idocrew.weddingwise.repositories.UserGroupRepository;
+import com.idocrew.weddingwise.repositories.PrincipalGroupRepository;
 import com.idocrew.weddingwise.repositories.UserRepository;
 import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.EmailService;
@@ -23,7 +23,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final UserRepository userRepository;
     private final VendorRepository vendorRepository;
     private final CustomerRepository customerRepository;
-    private final UserGroupRepository groupRepository;
+    private final PrincipalGroupRepository groupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
 
@@ -56,7 +56,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         vendorCategory.getVendors().add(vendor);
         Venue venue = vendorComposite.getVenue();
         PhotoFormat photoFormat = vendorComposite.getPhotoFormat();
-        MusicType musicType = vendorComposite.getMusicType();
+        DjsAndLiveBandsCategory djsAndLiveBandsCategory = vendorComposite.getDjsAndLiveBandsCategory();
         MusicGenre musicGenre = vendorComposite.getMusicGenre();
 
         if(checkIfUserExist(user.getEmail())){
@@ -88,7 +88,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void addUserGroup(User userEntity, String code){
-        Group group = groupRepository.findByCode(code);
-        userEntity.setUserGroups(List.of(group));
+        PrincipalGroup principalGroup = groupRepository.findByCode(code);
+        userEntity.setPrincipalGroups(List.of(principalGroup));
     }
 }

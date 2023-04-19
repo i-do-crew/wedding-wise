@@ -1,7 +1,7 @@
 package com.idocrew.weddingwise.services;
 
 
-import com.idocrew.weddingwise.entity.User;
+import com.idocrew.weddingwise.entities.User;
 
 public interface EmailService {
     void prepareAndSend(User user, String subject, String body);

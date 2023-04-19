@@ -1,7 +1,7 @@
 package com.idocrew.weddingwise.services;
 
-import com.idocrew.weddingwise.entity.User;
-import com.idocrew.weddingwise.entity.UserWithRoles;
+import com.idocrew.weddingwise.entities.User;
+import com.idocrew.weddingwise.entities.UserWithRoles;
 import com.idocrew.weddingwise.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

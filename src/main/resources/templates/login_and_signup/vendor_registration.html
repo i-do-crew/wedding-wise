@@ -77,8 +77,8 @@
                     </select>
                 </div>
                 <div class="mb-3 d-none" id="musicGenre">
-                    <label for="musicType" class="form-label"></label>
-                    <select th:field="*{musicType}" id="musicType" class="form-select">
+                    <label for="djsAndLiveBandsCategory" class="form-label"></label>
+                    <select th:field="*{djsAndLiveBandsCategory}" id="djsAndLiveBandsCategory" class="form-select">
                         <option th:value="xx" selected>Select the type of musical group...</option>
                         <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.title}"></option>
                     </select>
