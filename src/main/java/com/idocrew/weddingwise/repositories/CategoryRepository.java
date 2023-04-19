@@ -1,11 +1,11 @@
 package com.idocrew.weddingwise.repositories;
 
-import com.idocrew.weddingwise.entity.Category;
+import com.idocrew.weddingwise.entity.VendorCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CategoryRepository extends JpaRepository<Category, Long> {
-    Category findById(long id);
-    List<Category> findAll();
+public interface CategoryRepository extends JpaRepository<VendorCategory, Long> {
+    VendorCategory findById(long id);
+    List<VendorCategory> findAll();
 }
