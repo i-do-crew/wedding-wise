@@ -143,8 +143,8 @@ INSERT INTO `music_genres` (`id`, `title`) VALUES
 (14,	'80s/90s Pop'),
 (15,	'Electronic/Dance');
 
-DROP TABLE IF EXISTS `photographers`;
-CREATE TABLE `photographers` (
+DROP TABLE IF EXISTS vendors_photo_format;
+CREATE TABLE `vendors_photo_format` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `photo_format_id` bigint(20) NOT NULL,
 `vendor_id` bigint(20) NOT NULL,
@@ -155,7 +155,7 @@ CONSTRAINT `photographers_photo_format_id_fk` FOREIGN KEY (`photo_format_id`) RE
 CONSTRAINT `vendor_id_fk` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `photographers` (`id`, `photo_format_id`, `vendor_id`) VALUES
+INSERT INTO vendors_photo_format (`id`, `photo_format_id`, `vendor_id`) VALUES
 (2,	1,	2),
 (3,	4,	2);
 
