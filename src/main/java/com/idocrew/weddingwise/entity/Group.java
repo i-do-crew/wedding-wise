@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "principle_groups")
+@Table(name = "principal_groups")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
