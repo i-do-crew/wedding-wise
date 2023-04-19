@@ -19,6 +19,6 @@ public class VendorCategory {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "vendorCategory")
     private List<Vendor> vendors;
 }

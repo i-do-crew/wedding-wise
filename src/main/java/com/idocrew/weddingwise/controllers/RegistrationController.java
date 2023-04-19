@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
-    private final CategoryRepository categoryRepository;
+    private final VendorCategoryRepository vendorCategoryRepository;
     private final MusicGenreRepository musicGenreRepository;
     private final UserRegistrationService userRegistrationService;
     private final PhotoFormatRepository photoFormatRepository;
