@@ -1,3 +1,30 @@
 main{
     background-color: #FFE5D2;
 }
+
+#loginimage{
+    object-fit: cover;
+    width:600px;
+}
+
+.card{
+    border: 1px solid #212727;
+    background-color: #FFFAF7;
+    border-radius: 0;
+}
+
+#loginBtn{
+    background-color: #212727;
+    color: white;
+}
+
+.fontTitle{
+    padding-top: 150px;
+}
+
+#signupClient, #signupVendor {
+    color:#212727;
+}
+a:hover{
+    color:#E19B6E !important;
+}
