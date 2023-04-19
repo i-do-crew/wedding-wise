@@ -45,15 +45,15 @@ public class RegistrationController {
                 .build();
         model.addAttribute("options", states);
         model.addAttribute("vendorComposite", new VendorComposite());
-        model.addAttribute("vendorCategories", categoryRepository.findAll());
+        model.addAttribute("vendorCategories", vendorCategoryRepository.findAll());
         model.addAttribute("musicGenres", musicGenreRepository.findAll());
         model.addAttribute("photoFormats", photoFormatRepository.findAll());
         model.addAttribute("musicTypes", musicTypeRepository.findAll());
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
-    public String vendorRegistrationPost(@ModelAttribute Vendor vendor){
-        userRegistrationService.register(vendor);
+    public String vendorRegistrationPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
+        userRegistrationService.register(vendorComposite);
         return "redirect:/verification";
     }
     @GetMapping("/verification")

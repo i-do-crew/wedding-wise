@@ -49,17 +49,26 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     @Override
     @Transactional
-    public void register(Vendor vendor) {
-        if(checkIfUserExist(vendor.getUser().getEmail())){
+    public void register(VendorComposite vendorComposite) {
+        Vendor vendor = vendorComposite.getVendor();
+        User user = vendor.getUser();
+        VendorCategory vendorCategory = vendorComposite.getVendorCategory();
+        vendorCategory.getVendors().add(vendor);
+        Venue venue = vendorComposite.getVenue();
+        PhotoFormat photoFormat = vendorComposite.getPhotoFormat();
+        MusicType musicType = vendorComposite.getMusicType();
+        MusicGenre musicGenre = vendorComposite.getMusicGenre();
+
+        if(checkIfUserExist(user.getEmail())){
             throw new DuplicateKeyException("User already exists for this email");
         }
         User userEntity = new User();
         Vendor vendorEntity = new Vendor();
-        BeanUtils.copyProperties(vendor.getUser(), userEntity);
+        BeanUtils.copyProperties(user, userEntity);
         BeanUtils.copyProperties(vendor, vendorEntity);
-        String hash = passwordEncoder.encode(vendor.getUser().getPassword());
+        String hash = passwordEncoder.encode(user.getPassword());
         userEntity.setPassword(hash);
-        userEntity.setUsername(vendor.getUser().getEmail());
+        userEntity.setUsername(user.getEmail());
         addUserGroup(userEntity, "VENDOR");
         userEntity = userRepository.save(userEntity);
         vendorEntity.setUser(userEntity);
