@@ -3,6 +3,9 @@ main{
     background-color: #E19B6E;
 }
 
+#mainCard{
+    background-color: #FFFAF7;
+}
 .col{
     padding-left:100px;
     padding-right:100px;

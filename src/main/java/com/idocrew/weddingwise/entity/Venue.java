@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -18,7 +20,10 @@ public class Venue {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name="address", columnDefinition="varchar(50)", nullable = false)
+    @Column(name="title", columnDefinition="varchar(50)")
+    private String title;
+
+    @Column(name="address", columnDefinition="varchar(50)")
     private String address;
 
     @Column(name="city", columnDefinition="varchar(25)", nullable = false)
@@ -32,9 +37,6 @@ public class Venue {
 
     @Column(name="capacity", columnDefinition="int", nullable = false)
     private int capacity;
-
-    @Column(name="title", columnDefinition="varchar(50)", nullable = false)
-    private String title;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="vendor_id", referencedColumnName="id", columnDefinition = "bigint(20)", nullable = false)

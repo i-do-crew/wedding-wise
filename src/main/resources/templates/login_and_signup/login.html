@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/fragments :: head}" >
+<head  >
+    <th:block th:replace="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Client Login</title>
+    <link th:rel="stylesheet" href="/css/login_and_signup/login.css">
 </head>
 <body>
 <!--NAVBAR-->
@@ -12,30 +14,39 @@
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
-<div class="card mx-5 mt-5 mb-5">
-    <div class="row">
-        <div class="col">
-            <img id="loginimage" src="/img/flowers.jpg">
-        </div>
-        <div class="col text-center px-3 pt-5">
-            <h1>CREATE YOUR DREAM WEDDING ONE CLICK AT A TIME</h1>
-            <form th:action="@{/login}" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label"></label>
-                    <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter your Email">
+<main>
+    <div class="container p-3">
+        <div class="card mx-5 mt-5 mb-5">
+            <div class="row">
+                <div class="col">
+                    <img id="loginimage" src="/img/login_register.jpg">
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label"></label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter your Password">
+                <div class="col text-center ">
+                    <h1 class="fontTitle pe-3">CREATE YOUR DREAM WEDDING, ONE CLICK AT A TIME</h1>
+                    <form th:action="@{/login}" method="post" class="pe-3">
+                        <div class="mb-3">
+                            <label for="username" class="form-label"></label>
+                            <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter your Email">
+                        </div>
+                        <div class="mb-3 pb-2">
+                            <label for="password" class="form-label"></label>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Enter your Password">
+                        </div>
+                        <div class="d-grid gap-2 pb-2">
+                            <button type="submit" class="btn" id="loginBtn">Login</button>
+                        </div>
+                        <div class="pb-2">
+                            <a  href="/client/registration" class="font" id="signupClient">Sign-up as Client</a>
+                        </div>
+                        <div class="pb-2">
+                            <a  href="/vendor/registration" class="font" id="signupVendor">Sign-up as Vendor</a>
+                        </div>
+                    </form>
                 </div>
-                <span class="pb-3">
-                    <button type="submit" class="btn btn-primary">Login</button>
-<!--                    <a href="/"><button type="submit" class="btn btn-secondary">Sign-up</button></a>-->
-                </span>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</main>
 
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
