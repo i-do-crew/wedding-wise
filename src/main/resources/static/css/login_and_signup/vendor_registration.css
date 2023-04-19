@@ -1,17 +1,28 @@
 main{
     background-color: #FFE5D2;
+    /*background: url("/static/img/vendor_register.jpg") no-repeat;*/
+    /*object-fit: cover;*/
+    /*height:100vh;*/
+    /*width:100vw;*/
 }
 
-#loginimage{
+#imgContainer{
+    position:sticky;
+}
+#registerImage{
     object-fit: cover;
-    width:650px;
-    max-height: 100%;
+    width:700px;
+    height:700px;
+    border-radius: 50%;
+    border: 5px solid #FFFAF7;
+    /*position: sticky;*/
 }
 
 .card{
     border: 1px solid #212727;
     background-color: #FFFAF7;
     border-radius: 0;
+
 }
 
 #verifyBtn{
