@@ -12,14 +12,14 @@
     width:50px;
 }
 
-.image{
-    height:300px;
-}
+/*.image{*/
+/*    height:300px;*/
+/*}*/
 
-#businessProfileImg{
-    height:250px;
-    width:250px;
-}
+/*#businessProfileImg{*/
+/*    height:250px;*/
+/*    width:250px;*/
+/*}*/
 
 /*BACKGROUNDS*/
 #navbar, #footer{
@@ -44,8 +44,71 @@
     background-color: #FFE5D2;
 }
 
-.profileImg{
-    border-radius: 50%;
-    height: 200px;
-    width:200px;
+#customerProfileImg{
+    border-radius: 45%;
+    object-fit: cover;
+    /*padding-left: 20px;*/
+    /*margin:20px;*/
+}
+.editIcon{
+    flex:auto;
+    justify-content: flex-end;
+}
+#lastname{
+    text-align: center;
+    font-family: 'Luxurious Roman', cursive;
+}
+#budgetBg{
+    background-color: #FFFAF7;
+    border-radius: 90%;
+    margin:10px;
+    text-align: center;
+    padding: 30px;
+}
+#dateBg {
+    background-color: #FFFAF7;
+    border-radius: 90%;
+    margin:10px;
+    text-align: center;
+    padding-top:10px;
+
+}
+#guestBg{
+    background-color: #FFFAF7;
+    border-radius: 90%;
+    margin:10px;
+    text-align: center;
+    padding: 30px;
+
+}
+#bottomBg{
+    /*background-color: #FFFAF7;*/
+    /*border-radius: 20%;*/
+    margin:10px;
+    text-align: left;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 50px;
+}
+.font{
+    font-family: 'Nunito Sans', sans-serif;
+}
+font:hover{
+    color: #E19B6E;
+}
+ul{
+    list-style-type: circle;
+}
+
+/*VENDOR SIDEBAR*/
+#offcanvasSideBarVendor{
+    background-color: #FFE5D2;
+}
+#businessProfileImg{
+    border-radius: 45%;
+    object-fit: cover;
+
+}
+.fontTitle {
+    font-family: 'Luxurious Roman', cursive;
 }

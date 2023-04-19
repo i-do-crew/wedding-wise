@@ -67,35 +67,37 @@
 <div th:fragment="sidebarCustomer" class="sidebar">
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideBarCustomer" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header ">
-            <div class="row">
-                <button type="button" class="btn-close ps-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="row d-flex justify-content-end">
+                <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
         </div>
         <div class="offcanvas-body">
-            <div class="">
-                <img src="/img/flowers.jpg" alt="picture" class="profileImg">
-                <i class="fa-solid fa-pencil"></i>
+            <div class="row">
+                <img src="/img/flowers.jpg" alt="picture" id="customerProfileImg">
+                <a><i class="fa-solid fa-pencil d-flex justify-content-end"></i></a>
             </div>
-            <div class="row pb-4">
+            <div class="row pb-4" id="lastname">
                 <h3>Lastname-Lastname</h3>
             </div>
-            <div class="row pb-4 pt-5">
-                <a href="/budget_tracker">Budget: $$$$</a>
+            <div class="row pb-4" id="budgetBg">
+                <a href="/budget_tracker" class="text-decoration-none text-dark font" >Budget: $$$$</a>
             </div>
-            <div class="row pb-4">
+            <div class="row pb-4 font" id="dateBg">
                 <h6>Wedding Date:</h6>
                 <h6>00/00/0000</h6>
             </div>
-            <div class="row pb-4">
-                <a href="/guest_listManager">Guest Count: 0000</a>
+            <div class="row pb-4" id="guestBg">
+                <a href="/guest_listManager" class="text-decoration-none text-dark font">Guest Count: 0000</a>
             </div>
-            <div class="position-absolute bottom-0">
-                <div class="row pb-4 pt-5">
-                    <a href="/ideaboard">Idea Board</a>
-                </div>
-                <div class="row pb-4 ">
-                    <a href="/likedVendors">Liked Vendors</a>
-                </div>
+            <div class="position-absolute bottom-0 px-1" id="bottomBg">
+                <ul>
+                    <li class="row pb-2">
+                        <a href="/ideaboard" class="text-decoration-none text-dark font">Idea Board</a>
+                    </li>
+                    <li class="row pb-2">
+                        <a href="/likedVendors" class="text-decoration-none text-dark font">Liked Vendors</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -110,28 +112,28 @@
             </div>
         </div>
         <div class="offcanvas-body">
-            <div class="">
-                <img src="/img/flowers.jpg" alt="picture" class="profileImg">
-                <i class="fa-solid fa-pencil"></i>
+            <div class="row pb-4">
+                <img src="/img/flowers.jpg" alt="picture" id="businessProfileImg">
+                <a class="text-decoration-none text-dark"><i class="fa-solid fa-pencil d-flex justify-content-end"></i></a>
             </div>
             <div class="row pb-4">
-                <h3>Business Name</h3>
-                <p>vendor@vendor.com</p>
-                <p>000-000-0000</p>
-                <p>000 Vendor St</p>
+                <h3 class="fontTitle">Business Name</h3>
+                <p class="font">vendor@vendor.com</p>
+                <p class="font">000-000-0000</p>
+                <p class="font">000 Vendor St</p>
             </div>
             <div class="position-absolute bottom-0">
                 <div class="row pb-4 pt-5">
-                    <a href="https://facebook.com" class="text-decoration-none text-dark"><i class="fa-brands fa-facebook"></i> facebookusername</a>
+                    <a href="https://facebook.com" class="text-decoration-none text-dark font"><i class="fa-brands fa-facebook"></i> facebookusername</a>
                 </div>
                 <div class="row pb-4">
-                    <a href="https://instagram.com" class="text-decoration-none text-dark"><i class="fa-brands fa-instagram"></i> instagramusername</a>
+                    <a href="https://instagram.com" class="text-decoration-none text-dark font"><i class="fa-brands fa-instagram"></i> instagramusername</a>
                 </div>
                 <div class="row pb-4">
-                    <a href="https://twitter.com" class="text-decoration-none text-dark"><i class="fa-brands fa-twitter"></i> twitterusername</a>
+                    <a href="https://twitter.com" class="text-decoration-none text-dark font"><i class="fa-brands fa-twitter"></i> twitterusername</a>
                 </div>
                 <div class="row pb-4 ">
-                    <a href="https://linkedin" class="text-decoration-none text-dark"><i class="fa-brands fa-linkedin"></i> linkedinusername</a>
+                    <a href="https://linkedin" class="text-decoration-none text-dark font"><i class="fa-brands fa-linkedin"></i> linkedinusername</a>
                 </div>
             </div>
         </div>

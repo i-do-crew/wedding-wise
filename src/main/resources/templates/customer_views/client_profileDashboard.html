@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/fragments :: head}" >
+<head>
+    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Client's Profile</title>
+<!--    <link rel="stylesheet" href="/css/client_views/profile_dashboard.css"/>-->
+    <link th:rel="stylesheet" href="/css/client_views/profile_dashboard.css"/>
 </head>
-<body>
+<body id="body">
 <!--NAVBAR-->
 <nav th:insert="~{fragments/fragments :: navbar}"></nav>
 <!--CUSTOMER SIDEBAR-->
@@ -13,67 +16,78 @@
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <div class="container-fluid">
-    <div style="text-align: center">
-        <h1>Welcome to the
-            Lastname-Lastname
-            wedding profile</h1>
-    </div>
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Edit Profile</button>
-    <div class="container-sm">
-<hr>
-        <a href="/vendors/categories/1"><h4>Venue</h4></a>
-        <a href="/vendors/individual/1"><img class="card-img-top" style="height: 150px; width: 150px;"  src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-<hr>
-        <a href="/vendors/categories/2"><h4>Photographer</h4></a>
-        <a href="/vendors/individual/2"><img class="card-img-top" style="height: 150px; width: 150px;"  src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <hr>
-        <a href="/vendors/categories/3"><h4>Florist</h4></a>
-        <a href="/vendors/individual/3"><img class="card-img-top" style="height: 150px; width: 150px;"  src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <hr>
-        <a href="/vendors/categories/4"><h4>Caterer</h4></a>
-        <a href="/vendors/individual/4"><img class="card-img-top" style="height: 150px; width: 150px;"  src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <hr>
-        <a href="/vendors/categories/5"><h4>Cake and Dessert</h4></a>
-        <a href="/vendors/individual/5"><img class="card-img-top" style="height: 150px; width: 150px;"  src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-<hr>
-        <a href="/vendors/categories/6"><h4>Bar and Beverage</h4></a>
-        <a href="/vendors/individual/6"><img class="card-img-top" style="height: 150px; width: 150px;"  src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-<hr>
-        <a href="/vendors/categories/7"><h4>Band/DJ</h4></a>
-        <a href="/vendors/individual/7"><img class="card-img-top" style="height: 150px; width: 150px;"  src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <hr>
+    <div class="card" id="cardBody">
+        <div class="h1" style="text-align: center">
+            <h1 class="title">Welcome to the
+                Lastname-Lastname
+                wedding profile</h1>
+        </div>
+        <div class="container-sm">
+            <hr>
+            <a href="/vendors/categories/1"><h4 class="labels">Venue</h4></a>
+            <a href="/vendors/individual/1"><img class="card-img-top" style="height: 150px; width: 150px;"
+                                                 src="/img/venue_clientProfile.jpg"></a>
+            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <hr>
+            <a href="/vendors/categories/2"><h4 class="labels">Photographer</h4></a>
+            <a href="/vendors/individual/2"><img class="card-img-top" style="height: 150px; width: 150px;"
+                                                 src="/img/photo_clientProfile.jpg"></a>
+            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <hr>
+            <a href="/vendors/categories/3"><h4 class="labels">Florist</h4></a>
+            <a href="/vendors/individual/3"><img class="card-img-top" style="height: 150px; width: 150px;"
+                                                 src="/img/florists_clientPage.jpg"></a>
+            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <hr>
+            <a href="/vendors/categories/4"><h4 class="labels">Caterer</h4></a>
+            <a href="/vendors/individual/4"><img class="card-img-top" style="height: 150px; width: 150px;"
+                                                 src="/img/cater_clientProfile.jpg"></a>
+            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <hr>
+            <a href="/vendors/categories/5"><h4 class="labels">Cake and Dessert</h4></a>
+            <a href="/vendors/individual/5"><img class="card-img-top" style="height: 150px; width: 150px;"
+                                                 src="/img/cake_clientProfile.jpg"></a>
+            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <hr>
+            <a href="/vendors/categories/6"><h4 class="labels">Bar and Beverage</h4></a>
+            <a href="/vendors/individual/6"><img class="card-img-top" style="height: 150px; width: 150px;"
+                                                 src="/img/bar_clientProfile.webp"></a>
+            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <hr>
+            <a href="/vendors/categories/7"><h4 class="labels">Band/DJ</h4></a>
+            <a href="/vendors/individual/7"><img class="card-img-top" style="height: 150px; width: 150px;"
+                                                 src="/img/dj_clientProfile.jpg"></a>
+            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <hr>
 
-    </div>
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit your profile</h4>
-                </div>
-                <div class="modal-body">
+        </div>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal" id="editBtn">Edit
+            Profile
+        </button>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit your profile</h4>
+                    </div>
+                    <div class="modal-body">
 
-                    <input type="text" placeholder="Enter your first name">
-                    <input type="text" placeholder="Enter your last name">
-                    <input type="text" placeholder="Enter your partners first name">
-                    <input type="text" placeholder="Enter your partners last name">
-                    <input type="text" placeholder="Enter the date of your wedding">
-                    <input type="text" placeholder="Enter your budget range">
-                    <input type="text" placeholder="Enter your city">
-                    <input type="text" placeholder="Enter your state">
-                    <input type="text" placeholder="Enter your guest count">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                        <input type="text" placeholder="Enter your first name">
+                        <input type="text" placeholder="Enter your last name">
+                        <input type="text" placeholder="Enter your partners first name">
+                        <input type="text" placeholder="Enter your partners last name">
+                        <input type="text" placeholder="Enter the date of your wedding">
+                        <input type="text" placeholder="Enter your budget range">
+                        <input type="text" placeholder="Enter your city">
+                        <input type="text" placeholder="Enter your state">
+                        <input type="text" placeholder="Enter your guest count">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
