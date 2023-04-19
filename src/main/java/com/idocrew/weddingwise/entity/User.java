@@ -77,13 +77,13 @@ public class User {
     private boolean loginDisabled = false;
 
     @Column(name="account_non_expired", columnDefinition = "bit", nullable = false)
-    private boolean accountNonExpired = false;
+    private boolean accountNonExpired = true;
 
     @Column(name="account_non_locked", columnDefinition = "bit", nullable = false)
-    private boolean accountNonLocked = false;
+    private boolean accountNonLocked = true;
 
     @Column(name="credentials_non_expired", columnDefinition = "bit", nullable = false)
-    private boolean credentialsNonExpired = false;
+    private boolean credentialsNonExpired = true;
 
     @OneToMany(mappedBy = "user")
     private Set<Vendor> vendors = new LinkedHashSet<>();
@@ -91,7 +91,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Customer> customers = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<UserGroup> userGroups = new LinkedHashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @JoinTable(
+            name = "user_groups",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false))
+    private Set<PrincipalGroup> userGroups;
 
 }

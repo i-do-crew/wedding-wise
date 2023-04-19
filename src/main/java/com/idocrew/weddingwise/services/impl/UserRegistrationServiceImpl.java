@@ -87,9 +87,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     private void addUserGroup(User userEntity, String code){
         PrincipalGroup principalGroup =  principalGroupRepository.findByCode(code);
-        UserGroup userGroup = new UserGroup();
-        userGroup.setGroup(principalGroup);
-        userGroup.setUser(userEntity);
-        userEntity.setUserGroups(Set.of(userGroup));
+        userEntity.setUserGroups(Set.of(principalGroup));
     }
 }

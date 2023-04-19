@@ -19,10 +19,10 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<UserGroup> userGroups = this.getUserGroups();
+        Set<PrincipalGroup> userGroups = this.getUserGroups();
         List<String> list = new ArrayList<>();
-        for (UserGroup userGroup : userGroups) {
-            list.add("ROLE_" + userGroup.getGroup().getCode());
+        for (PrincipalGroup principalGroup : userGroups) {
+            list.add("ROLE_" + principalGroup.getCode());
         }
         String roles = StringUtils.join(list, ',');
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);

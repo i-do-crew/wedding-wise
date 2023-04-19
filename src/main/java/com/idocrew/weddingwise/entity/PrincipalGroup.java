@@ -30,4 +30,7 @@ public class PrincipalGroup {
 
     @OneToMany(mappedBy = "group")
     private Set<UserGroup> userGroups = new LinkedHashSet<>();
+
+    @ManyToMany(mappedBy ="userGroups", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    private Set<User> users = new LinkedHashSet<>();
 }
