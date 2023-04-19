@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Table(name="vendor_categories")
 @Entity
-public class Category {
+public class VendorCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,6 +19,6 @@ public class Category {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "vendorCategory")
     private List<Vendor> vendors;
 }
