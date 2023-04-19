@@ -75,17 +75,6 @@
                     <label for="pLastName" class="form-label"></label>
                     <input th:field="*{vendor.user.lastName}" type="text" name="pLastName" class="form-control" id="pLastName" placeholder="Enter your Business Phone Number">
                 </div>
-                <div class="col-auto">
-                    <label for="city" class="form-label"></label>
-                    <input th:field="*{vendor.user.city}" type="text" name="city" class="form-control" id="city"
-                           placeholder="Enter your City">
-                </div>
-                <div class="col-auto mt-1">
-                    <select th:field="*{vendor.user.state}" class="form-select">
-                        <option th:value="xx">Select your State...</option>
-                        <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
-                    </select>
-                </div>
                 <div class="col-auto mt-1">
                         <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select">
                             <option th:value="xx" selected>Select your category...</option>
@@ -95,10 +84,10 @@
                 <div class="mb-3 d-none" id="venueCapacity">
                     <label for="venueAddress" class="form-label"></label>
                     <input th:field="*{venue.address}" type="text" name="address" class="form-control" id="venueAddress" placeholder="Enter your venue address">
-                    <label for="city" class="form-label"></label>
-                    <input th:field="*{venue.city}" type="text" name="city" class="form-control" id="venueCity" placeholder="Enter your venue city">
                     <label for="venueCity" class="form-label"></label>
-                    <select th:field="*{venue.state}" class="form-select">
+                    <input th:field="*{venue.city}" type="text" name="city" class="form-control" id="venueCity" placeholder="Enter your venue city">
+                    <label for="venueState" class="form-label"></label>
+                    <select th:field="*{venue.state}" id="venueState" class="form-select">
                         <option th:value="xx">Select your State...</option>
                         <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
                     </select>
