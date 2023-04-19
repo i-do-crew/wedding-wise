@@ -22,14 +22,12 @@ public class Vendor {
     private String businessName;
     @ManyToOne
     @JoinColumn(name="category_id", columnDefinition="bigint(20)")
-    private VendorCategory vendorCategory;
+    private Category category;
     @Column(name="about", columnDefinition="longtext")
     private String about;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
     private User user;
-    @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<VendorPackage> vendorPackages;
-    @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    private List<Venue> venues;
 }
