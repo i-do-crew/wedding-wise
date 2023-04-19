@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
+<head th:fragment="head">
+
+<th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <title>Budget Tracker Info</title>
     <link th:rel="stylesheet" href="/css/learn_more/budgetTracker_learnMore.css"/>
 </head>
@@ -13,12 +14,13 @@
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
-<div class="container rounded p-3" id="budgetCard">
-    <div class="card">
-        <div class="row">
+<div class="container rounded" id="budgetCard">
+    <h1 class="card-title">Budget Tracker</h1>
+    <div class="row">
         <span class="col">
-            <h1 class="text-center">Budget Tracker</h1>
+            <div class="container" id="text">
             <p id="p">With Wedding Wise, you can easily set and track your wedding budget to ensure that you stay on track financially. The app will automatically calculate your expenses and help you stay within your budget.</p>
+            </div>
             <span class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
@@ -27,18 +29,15 @@
             </span>
         </span>
             <span class="col">
-            <img src="http://via.placeholder.com/640x360" alt="picture">
+            <img src="/img/money.jpg" class="image">
         </span>
             <div>
                 <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false" id="button">
                     Sign-Up Here
                 </button>
-            </div>
-        </div>
     </div>
 </div>
-
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
