@@ -1,11 +1,15 @@
 package com.idocrew.weddingwise.services.impl;
 
+import com.idocrew.weddingwise.context.AccountVerificationEmailContext;
 import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.repositories.*;
 import com.idocrew.weddingwise.services.EmailService;
+import com.idocrew.weddingwise.services.SecureTokenService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
-import lombok.AllArgsConstructor;
+import jakarta.mail.MessagingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
+@RequiredArgsConstructor
 @Service("userService")
-@AllArgsConstructor
 public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     private final UserRepository userRepository;
@@ -23,8 +27,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final PrincipalGroupRepository principalGroupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
-    private final UserGroupRepository userGroupRepository;
-
+    private final SecureTokenService secureTokenService;
+    private final SecureTokenRepository secureTokenRepository;
+    @Value("${site.base.url.https}")
+    private String baseURL;
     @Override
     @Transactional
     public void register(Customer customer) throws DuplicateKeyException {
@@ -41,8 +47,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         addUserGroup(userEntity, "CUSTOMER");
         userEntity = userRepository.save(userEntity);
         custEntity.setUser(userEntity);
-        custEntity = customerRepository.save(custEntity);
-        //sendRegistrationConfirmationEmail(customer.getUser());
+        customerRepository.save(custEntity);
+        sendRegistrationConfirmationEmail(userEntity);
     }
 
     @Override
@@ -78,11 +84,17 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void sendRegistrationConfirmationEmail(User userEntity) {
-        emailService.sendWelcomeEmail(
-            userEntity,
-            "Welcome, [%s]".formatted(userEntity.getFirstName()),
-            "You have been registered"
-        );
+        SecureToken secureToken = secureTokenService.createSecureToken(userEntity);
+
+        AccountVerificationEmailContext emailContext = new AccountVerificationEmailContext();
+        emailContext.init(userEntity);
+        emailContext.setToken(secureToken.getToken());
+        emailContext.buildVerificationUrl(baseURL, secureToken.getToken());
+        try {
+            emailService.sendVerificationEmail(emailContext);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addUserGroup(User userEntity, String code){

@@ -86,6 +86,9 @@ public class User {
     private boolean credentialsNonExpired = true;
 
     @OneToMany(mappedBy = "user")
+    private Set<SecureToken> tokens;
+
+    @OneToMany(mappedBy = "user")
     private Set<Vendor> vendors = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
