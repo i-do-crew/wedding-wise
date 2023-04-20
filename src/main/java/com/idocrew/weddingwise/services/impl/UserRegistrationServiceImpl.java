@@ -44,8 +44,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         addUserGroup(userEntity, "CUSTOMER");
         userEntity = userRepository.save(userEntity);
         custEntity.setUser(userEntity);
-        custEntity = customerRepository.save(custEntity);
-        //sendRegistrationConfirmationEmail(customer.getUser());
+        customerRepository.save(custEntity);
+        //sendRegistrationConfirmationEmail(userEntity);
     }
 
     @Override
