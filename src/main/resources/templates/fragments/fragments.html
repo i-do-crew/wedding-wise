@@ -77,19 +77,18 @@
                 <a><i class="fa-solid fa-pencil d-flex justify-content-end"></i></a>
             </div>
             <div class="row pb-1" id="lastname">
-<!--                <span th:text="${user.lastName}"></span>-<span th:text="${customer.partnerLName}"></span>-->
-                <h3>LastName-LastName</h3>
+                <h3><span th:text="${user} ? ${user.lastName}"></span>-<span th:text="${customer} ? ${customer.partnerLName}"></span></h3>
             </div>
             <div class="row  font" id="dateBg">
-                <h6 id="date">Wedding Date: 00/00/0000</h6>
+                <h6 id="date">Wedding Date: <span th:text="${customer} ? ${customer.weddingDt}"></span></h6>
             </div>
             <div class="position-absolute bottom-0 px-1" id="bottomBg">
                 <ul>
                     <li class="row pb-4">
-                        <a href="/budget_tracker" class="text-decoration-none text-dark font" id="budget">Budget: $$$$</a>
+                        <a href="/budget_tracker" class="text-decoration-none text-dark font" id="budget">Budget: $<span th:text="${customer} ? ${customer.budget}"></span></a>
                     </li>
                     <li class="row pb-4">
-                        <a href="/guest_listManager" class="text-decoration-none text-dark font" id="guest">Guest Count: 0000</a>
+                        <a href="/guest_listManager" class="text-decoration-none text-dark font" id="guest">Guest Count: <span th:text="${customer} ? ${customer.guestCount}"></span></a>
                     </li>
                     <li class="row pb-4">
                         <a href="/ideaboard" class="text-decoration-none text-dark font" id="ideas">Idea Board</a>
