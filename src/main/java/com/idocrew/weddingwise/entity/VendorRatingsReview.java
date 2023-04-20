@@ -7,16 +7,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "vendor_ratings_reviews",
-       schema = "weddingwise",
-       indexes = {
-       @Index(name = "vendor_id", columnList = "vendor_id"),
-       @Index(name = "customer_id", columnList = "customer_id")})
+@Table(name = "vendor_ratings_reviews", schema = "weddingwise",
+    indexes = {
+        @Index(name = "vendor_id", columnList = "vendor_id"),
+        @Index(name = "customer_id", columnList = "customer_id")})
 public class VendorRatingsReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     @Column(name = "rating", nullable = false)
     private Integer rating;

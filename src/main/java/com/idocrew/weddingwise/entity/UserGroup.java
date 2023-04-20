@@ -8,13 +8,12 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "user_groups", schema = "weddingwise", indexes = {
-        @Index(name = "FKkoltqj26iiurcy32oela79g2k", columnList = "group_id")
-})
+    @Index(name = "FKkoltqj26iiurcy32oela79g2k", columnList = "group_id")})
 public class UserGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

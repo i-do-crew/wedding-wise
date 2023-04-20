@@ -14,10 +14,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "users", schema = "weddingwise", indexes = {
+@Table(name = "users", schema = "weddingwise",
+    indexes = {
         @Index(name = "email", columnList = "email", unique = true),
-        @Index(name = "username", columnList = "username", unique = true)
-})
+        @Index(name = "username", columnList = "username", unique = true)})
 public class User {
 
     public User (User copy) {

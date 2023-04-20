@@ -7,14 +7,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "idea_board",
-    schema = "weddingwise",
+@Table(name = "idea_board", schema = "weddingwise",
     indexes = {@Index(name = "customer_id", columnList = "customer_id")})
 public class IdeaBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     @Column(name = "filepath", nullable = false, length = 100)
     private String filepath;
