@@ -18,7 +18,7 @@ main{
 .businessProfileImg{
     object-fit: cover;
     border: 1px solid #212727;
-padding:0;
+    padding:0;
     width: 60%;
     height: 300px;
     /*border-radius: 15%;*/
