@@ -95,7 +95,7 @@
                                         </div>
                                         <div class=" d-none" id="musicGenre">
                                             <label for="musicType" class="form-label"></label>
-                                            <select th:field="*{musicType}" id="musicType" class="form-select">
+                                            <select th:field="*{djsAndLiveBandsCategory}" id="musicType" class="form-select">
                                                 <option th:value="xx" selected>Select the type of musical group...</option>
                                                 <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.title}"></option>
                                             </select>
@@ -105,8 +105,8 @@
                                                 <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>
                                             </select>
                                         </div>
+                                        <button type="submit" id="verifyBtn" class="btn btn-secondary mb-3">Sign Up</button>
                                     </form>
-                                    <button type="submit" id="verifyBtn" class="btn btn-secondary mb-3">Sign Up</button>
                                 </div>
         <!--                    </div>-->
             </div>
