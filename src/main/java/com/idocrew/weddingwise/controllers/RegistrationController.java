@@ -18,7 +18,7 @@ public class RegistrationController {
     private final MusicGenreRepository musicGenreRepository;
     private final UserRegistrationService userRegistrationService;
     private final PhotoFormatRepository photoFormatRepository;
-    private final MusicTypeRepository musicTypeRepository;
+    private final DjsAndLiveBandsCategoryRepository djsAndLiveBandsCategoryRepository;
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
 
@@ -48,7 +48,7 @@ public class RegistrationController {
         model.addAttribute("vendorCategories", vendorCategoryRepository.findAll());
         model.addAttribute("musicGenres", musicGenreRepository.findAll());
         model.addAttribute("photoFormats", photoFormatRepository.findAll());
-        model.addAttribute("musicTypes", musicTypeRepository.findAll());
+        model.addAttribute("musicTypes", djsAndLiveBandsCategoryRepository.findAll());
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
