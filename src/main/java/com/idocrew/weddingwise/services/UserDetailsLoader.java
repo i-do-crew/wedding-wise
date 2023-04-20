@@ -19,13 +19,9 @@ public class UserDetailsLoader implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = users.findByUsername(username);
-
         if (user == null) {
             throw new UsernameNotFoundException("No user found for " + username);
         }
-
-        //TODO: Uncomment once verification processing is complete
-        //user.setLoginDisabled(!user.isAccountVerified());
 
         return new UserWithRoles(user);
     }
