@@ -1,10 +1,7 @@
 package com.idocrew.weddingwise.services.impl;
 
 import com.idocrew.weddingwise.entity.*;
-import com.idocrew.weddingwise.repositories.CustomerRepository;
-import com.idocrew.weddingwise.repositories.PrincipalGroupRepository;
-import com.idocrew.weddingwise.repositories.UserRepository;
-import com.idocrew.weddingwise.repositories.VendorRepository;
+import com.idocrew.weddingwise.repositories.*;
 import com.idocrew.weddingwise.services.EmailService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import lombok.AllArgsConstructor;
@@ -26,6 +23,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final PrincipalGroupRepository principalGroupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final VendorCategoryRepository vendorCategoryRepository;
+    private final VenueRepository venueRepository;
+    private final DjsAndLiveBandsCategoryRepository djsAndLiveBandsCategoryRepository;
+    private final MusicGenreRepository musicGenreRepository;
 
     @Override
     @Transactional
@@ -52,6 +53,15 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     public void register(VendorComposite vendorComposite) {
         Vendor vendor = vendorComposite.getVendor();
         User user = vendor.getUser();
+        VendorCategory vendorCategory = vendorComposite.getVendorCategory();
+        vendorCategory.getVendors().add(vendor);
+        Venue venue = vendorComposite.getVenue();
+        PhotoFormat photoFormat = vendorComposite.getPhotoFormat();
+        VendorsPhotoFormat vendorsPhotoFormat = new VendorsPhotoFormat();
+        vendorsPhotoFormat.setPhotoFormat(photoFormat);
+        DjsAndLiveBandsCategory djsAndLiveBandsCategory = vendorComposite.getDjsAndLiveBandsCategory();
+        MusicGenre musicGenre = vendorComposite.getMusicGenre();
+
         if(checkIfUserExist(user.getEmail())){
             throw new DuplicateKeyException("User already exists for this email");
         }
@@ -65,7 +75,21 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         addUserGroup(userEntity, "VENDOR");
         userEntity = userRepository.save(userEntity);
         vendorEntity.setUser(userEntity);
-        vendorRepository.save(vendorEntity);
+
+        vendorEntity.getVendorsPhotoFormats().add(vendorsPhotoFormat);
+
+        vendorEntity = vendorRepository.save(vendorEntity);
+
+        vendorCategory.getVendors().add(vendorEntity);
+        vendorCategoryRepository.save(vendorCategory);
+
+        venue.setVendor(vendorEntity);
+        venueRepository.save(venue);
+
+        djsAndLiveBandsCategoryRepository.save(djsAndLiveBandsCategory);
+        musicGenreRepository.save(musicGenre);
+
+        //sendRegistrationConfirmationEmail(vendorEntity.getUser());
     }
 
     private boolean checkIfUserExist(String email) {
