@@ -1,5 +1,6 @@
 package com.idocrew.weddingwise.services.impl;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     protected Log logger = LogFactory.getLog(this.getClass());
 
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {

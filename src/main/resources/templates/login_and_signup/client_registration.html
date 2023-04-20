@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/fragments :: head}">
+<head >
+    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Client Registration</title>
+    <link th:rel="stylesheet" href="/css/login_and_signup/customer_registration.css">
 </head>
 <body>
 <!--NAVBAR-->
@@ -10,86 +12,85 @@
 <!--SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 
-<div class="card mx-5 mt-5 mb-5">
-    <div class="row">
-        <div class="col">
-            <img id="loginimage" src="/img/flowers.jpg">
-        </div>
-        <div class="col text-center px-3 pt-5">
-            <h1>CREATE YOUR DREAM WEDDING ONE CLICK AT A TIME</h1>
-
-            <form
-                    th:action="@{/client/registration}"
-                    method="POST"
-                    th:object="${customer}">
-                <div class="mb-3">
-                    <label for="email" class="form-label"></label>
-                    <input th:field="*{user.email}" type="text" name="email" class="form-control" id="email"
-                           placeholder="Enter your Email">
+<main>
+    <div class="container p-5">
+        <div class="card ">
+            <div class="row">
+                <div class="col">
+                    <img id="registerImage" src="/img/login_register.jpg">
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label"></label>
-                    <input th:field="*{user.password}" type="text" name="password" class="form-control" id="password"
-                           placeholder="Select a password">
+                <div class="col text-center px-3 pt-5">
+                    <h1 class="fontTitle">CREATE YOUR DREAM WEDDING ONE CLICK AT A TIME</h1>
+                    <form th:action="@{/client/registration}" method="POST" th:object="${customer}" class="pe-3">
+                        <div class="mb-3">
+                            <label for="email" class="form-label"></label>
+                            <input th:field="*{user.email}" type="text" name="email" class="form-control" id="email"
+                                   placeholder="Enter your Email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label"></label>
+                            <input th:field="*{user.password}" type="text" name="password" class="form-control" id="password"
+                                   placeholder="Select a password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cPassword" class="form-label"></label>
+                            <input type="text" name="cPassword" class="form-control" id="cPassword"
+                                   placeholder="Confirm your password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label"></label>
+                            <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
+                                   placeholder="Enter your First Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label"></label>
+                            <input th:field="*{user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
+                                   placeholder="Enter your Last Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="partnerFName" class="form-label"></label>
+                            <input th:field="*{partnerFName}" type="text" name="partnerFName" class="form-control" id="partnerFName"
+                                   placeholder="Enter your Partners First Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="partnerLName" class="form-label"></label>
+                            <input th:field="*{partnerLName}" type="text" name="partnerLName" class="form-control" id="partnerLName"
+                                   placeholder="Enter your Partners Last Name">
+                        </div>
+                        <div class="row g-3 d-flex align-items-center">
+                            <div class="col-auto">
+                                <label for="city" class="form-label"></label>
+                                <input th:field="*{user.city}" type="text" name="city" class="form-control" id="city"
+                                       placeholder="Enter your City">
+                            </div>
+                            <div class="col-auto pt-4">
+                                <select th:field="*{user.state}" class="form-select ">
+                                    <option th:value="xx">Select your State...</option>
+                                    <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label"></label>
+                            <input th:field="*{weddingDt}" type="date" name="date" class="form-control" id="date" placeholder="Enter your Wedding Date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="budget" class="form-label"></label>
+                            <input th:field="*{budget}" type="text" name="budget" class="form-control" id="budget"
+                                   placeholder="Enter your Budget Range">
+                        </div>
+                        <div class="mb-3">
+                            <label for="guestCount" class="form-label"></label>
+                            <input th:field="*{guestCount}" type="text" name="guestCount" class="form-control" id="guestCount"
+                                   placeholder="Enter your Estimated Guest Count">
+                        </div>
+                        <button type="submit" id="verifyBtn" class="p-2 font">Sign Up</button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="cPassword" class="form-label"></label>
-                    <input type="text" name="cPassword" class="form-control" id="cPassword"
-                           placeholder="Confirm your password">
-                </div>
-                <div class="mb-3">
-                    <label for="firstName" class="form-label"></label>
-                    <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
-                           placeholder="Enter your First Name">
-                </div>
-                <div class="mb-3">
-                    <label for="lastName" class="form-label"></label>
-                    <input th:field="*{user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
-                           placeholder="Enter your Last Name">
-                </div>
-                <div class="mb-3">
-                    <label for="partnerFName" class="form-label"></label>
-                    <input th:field="*{partnerFName}" type="text" name="partnerFName" class="form-control" id="partnerFName"
-                           placeholder="Enter your Partners First Name">
-                </div>
-                <div class="mb-3">
-                    <label for="partnerLName" class="form-label"></label>
-                    <input th:field="*{partnerLName}" type="text" name="partnerLName" class="form-control" id="partnerLName"
-                           placeholder="Enter your Partners Last Name">
-                </div>
-                <div class="row g-3 d-flex align-items-center">
-                    <div class="col-auto">
-                        <label for="city" class="form-label"></label>
-                        <input th:field="*{user.city}" type="text" name="city" class="form-control" id="city"
-                               placeholder="Enter your City">
-                    </div>
-                    <div class="col-auto mt-1">
-                        <select th:field="*{user.state}" class="form-select">
-                            <option th:value="xx">Select your State...</option>
-                            <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="date" class="form-label"></label>
-                    <input th:field="*{weddingDt}" type="date" name="date" class="form-control" id="date" placeholder="Enter your Wedding Date">
-                </div>
-                <div class="mb-3">
-                    <label for="budget" class="form-label"></label>
-                    <input th:field="*{budget}" type="text" name="budget" class="form-control" id="budget"
-                           placeholder="Enter your Budget Range">
-                </div>
-                <div class="mb-3">
-                    <label for="guestCount" class="form-label"></label>
-                    <input th:field="*{guestCount}" type="text" name="guestCount" class="form-control" id="guestCount"
-                           placeholder="Enter your Estimated Guest Count">
-                </div>
-                <button type="submit" id="verifyBtn" class="btn btn-secondary mb-3">Sign Up</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-
+</main>
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
