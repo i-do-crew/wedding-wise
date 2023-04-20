@@ -7,14 +7,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "guest_lists",
-       schema = "weddingwise",
-       indexes = {@Index(name = "customer_id", columnList = "customer_id")})
+@Table(name = "guest_lists", schema = "weddingwise",
+    indexes = {@Index(name = "customer_id", columnList = "customer_id")})
 public class GuestList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     @Column(name = "fname", nullable = false, length = 50)
     private String fname;

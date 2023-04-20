@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "secure_tokens")
+@Table(name = "secure_tokens", schema = "weddingwise")
 public class SecureToken{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(unique = true)
     private String token;

@@ -21,7 +21,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
     @Column(name="budget", columnDefinition="int(11)")
     private int budget;
     @Column(name="guest_count", columnDefinition="int(11)")

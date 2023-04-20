@@ -10,8 +10,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="vendor_categories")
 @Entity
+@Table(name="vendor_categories", schema = "weddingwise")
 public class VendorCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -19,7 +19,7 @@ public class PhotoFormat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     @Column(name = "title", length = 50)
     private String title;

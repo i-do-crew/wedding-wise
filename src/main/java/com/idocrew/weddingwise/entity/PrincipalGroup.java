@@ -17,7 +17,7 @@ public class PrincipalGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     @Column(name = "code", nullable = false, length = 20)
     private String code;

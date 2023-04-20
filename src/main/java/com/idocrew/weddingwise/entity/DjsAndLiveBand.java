@@ -10,14 +10,13 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "djs_and_live_bands", schema = "weddingwise", indexes = {
-        @Index(name = "vendor_id", columnList = "vendor_id")
-})
+@Table(name = "djs_and_live_bands", schema = "weddingwise",
+    indexes = {@Index(name = "vendor_id", columnList = "vendor_id")})
 public class DjsAndLiveBand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dalb_category_id", nullable = false)
