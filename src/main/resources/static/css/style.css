@@ -59,29 +59,29 @@
     text-align: center;
     font-family: 'Luxurious Roman', cursive;
 }
-#budgetBg{
-    background-color: #FFFAF7;
-    border-radius: 90%;
-    margin:10px;
-    text-align: center;
-    padding: 30px;
-}
+/*#budgetBg{*/
+/*    background-color: #FFFAF7;*/
+/*    border-radius: 90%;*/
+/*    margin:10px;*/
+/*    text-align: center;*/
+/*    padding: 30px;*/
+/*}*/
 #dateBg {
-    background-color: #FFFAF7;
-    border-radius: 90%;
-    margin:10px;
+    /*background-color: #FFFAF7;*/
+    /*border-radius: 90%;*/
+    /*margin:10px;*/
     text-align: center;
     padding-top:10px;
 
 }
-#guestBg{
-    background-color: #FFFAF7;
-    border-radius: 90%;
-    margin:10px;
-    text-align: center;
-    padding: 30px;
+/*#guestBg{*/
+/*    background-color: #FFFAF7;*/
+/*    border-radius: 90%;*/
+/*    margin:10px;*/
+/*    text-align: center;*/
+/*    padding: 30px;*/
 
-}
+/*}*/
 #bottomBg{
     /*background-color: #FFFAF7;*/
     /*border-radius: 20%;*/
