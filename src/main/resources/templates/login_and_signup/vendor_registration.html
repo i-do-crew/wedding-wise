@@ -63,18 +63,6 @@
                     <label for="businessName" class="form-label"></label>
                     <input th:field="*{vendor.businessName}" type="text" name="businessName" class="form-control" id="businessName" placeholder="Enter your Business Name">
                 </div>
-                <div class="mb-3">
-                    <label for="businessEmail" class="form-label"></label>
-                    <input th:field="*{vendor.user.email}" type="text" name="businessEmail" class="form-control" id="businessEmail" placeholder="Enter your Business Email">
-                </div>
-                <div class="mb-3">
-                    <label for="pFirstName" class="form-label"></label>
-                    <input th:field="*{vendor.user.firstName}" type="text" name="firstName" class="form-control" id="pFirstName" placeholder="Enter your Business Address">
-                </div>
-                <div class="mb-3">
-                    <label for="pLastName" class="form-label"></label>
-                    <input th:field="*{vendor.user.lastName}" type="text" name="pLastName" class="form-control" id="pLastName" placeholder="Enter your Business Phone Number">
-                </div>
                 <div class="col-auto mt-1">
                         <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select">
                             <option th:value="xx" selected>Select your category...</option>
