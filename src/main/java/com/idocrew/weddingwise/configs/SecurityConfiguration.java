@@ -1,6 +1,8 @@
 package com.idocrew.weddingwise.configs;
 
 
+import com.idocrew.weddingwise.repositories.CustomerRepository;
+import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.impl.MySimpleUrlAuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

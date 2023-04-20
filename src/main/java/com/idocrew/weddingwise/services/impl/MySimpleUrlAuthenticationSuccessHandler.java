@@ -1,11 +1,18 @@
 package com.idocrew.weddingwise.services.impl;
 
+import com.idocrew.weddingwise.entity.Customer;
+import com.idocrew.weddingwise.entity.User;
+import com.idocrew.weddingwise.entity.Vendor;
+import com.idocrew.weddingwise.repositories.CustomerRepository;
+import com.idocrew.weddingwise.repositories.VendorRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -23,7 +30,11 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     protected Log logger = LogFactory.getLog(this.getClass());
 
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    @Autowired
+    private CustomerRepository customerRepository;
 
+    @Autowired
+    private VendorRepository vendorRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
