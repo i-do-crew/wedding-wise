@@ -53,7 +53,8 @@
                                    placeholder="Enter your City">
                         </div>
                         <div class="col-auto pt-4">
-                            <select th:field="*{vendor.user.state}" class="form-select">
+                            <label for="vendor-user-state"></label>
+                            <select th:field="*{vendor.user.state}" id="vendor-user-state" class="form-select">
                                 <option th:value="xx">Select your State...</option>
                                 <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
                             </select>
