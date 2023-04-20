@@ -1,15 +1,14 @@
 package com.idocrew.weddingwise.services.impl;
 
-import com.idocrew.weddingwise.context.AccountVerificationEmailContext;
 import com.idocrew.weddingwise.entity.*;
-import com.idocrew.weddingwise.repositories.*;
+import com.idocrew.weddingwise.repositories.CustomerRepository;
+import com.idocrew.weddingwise.repositories.PrincipalGroupRepository;
+import com.idocrew.weddingwise.repositories.UserRepository;
+import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.EmailService;
-import com.idocrew.weddingwise.services.SecureTokenService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
-import jakarta.mail.MessagingException;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,10 +26,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final PrincipalGroupRepository principalGroupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
-    private final SecureTokenService secureTokenService;
-    private final SecureTokenRepository secureTokenRepository;
-    @Value("${site.base.url.https}")
-    private String baseURL;
+
     @Override
     @Transactional
     public void register(Customer customer) throws DuplicateKeyException {
@@ -47,8 +43,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         addUserGroup(userEntity, "CUSTOMER");
         userEntity = userRepository.save(userEntity);
         custEntity.setUser(userEntity);
-        customerRepository.save(custEntity);
-        sendRegistrationConfirmationEmail(userEntity);
+        custEntity = customerRepository.save(custEntity);
+        //sendRegistrationConfirmationEmail(customer.getUser());
     }
 
     @Override
@@ -56,13 +52,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     public void register(VendorComposite vendorComposite) {
         Vendor vendor = vendorComposite.getVendor();
         User user = vendor.getUser();
-        VendorCategory vendorCategory = vendorComposite.getVendorCategory();
-        vendorCategory.getVendors().add(vendor);
-        Venue venue = vendorComposite.getVenue();
-        PhotoFormat photoFormat = vendorComposite.getPhotoFormat();
-        DjsAndLiveBandsCategory djsAndLiveBandsCategory = vendorComposite.getDjsAndLiveBandsCategory();
-        MusicGenre musicGenre = vendorComposite.getMusicGenre();
-
         if(checkIfUserExist(user.getEmail())){
             throw new DuplicateKeyException("User already exists for this email");
         }
@@ -76,7 +65,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         addUserGroup(userEntity, "VENDOR");
         userEntity = userRepository.save(userEntity);
         vendorEntity.setUser(userEntity);
-        vendorEntity = vendorRepository.save(vendorEntity);
+        vendorRepository.save(vendorEntity);
     }
 
     private boolean checkIfUserExist(String email) {
@@ -84,21 +73,15 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void sendRegistrationConfirmationEmail(User userEntity) {
-        SecureToken secureToken = secureTokenService.createSecureToken(userEntity);
-
-        AccountVerificationEmailContext emailContext = new AccountVerificationEmailContext();
-        emailContext.init(userEntity);
-        emailContext.setToken(secureToken.getToken());
-        emailContext.buildVerificationUrl(baseURL, secureToken.getToken());
-        try {
-            emailService.sendVerificationEmail(emailContext);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+        emailService.sendWelcomeEmail(
+            userEntity,
+            "Welcome, [%s]".formatted(userEntity.getFirstName()),
+            "You have been registered"
+        );
     }
 
     private void addUserGroup(User userEntity, String code){
-        PrincipalGroup principalGroup =  principalGroupRepository.findByCode(code);
-        userEntity.setUserGroups(Set.of(principalGroup));
+        PrincipalGroup group = principalGroupRepository.findByCode(code);
+        userEntity.setUserGroups(Set.of(group));
     }
 }
