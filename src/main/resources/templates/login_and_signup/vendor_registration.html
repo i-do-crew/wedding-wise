@@ -24,27 +24,27 @@
                     <div class="">
                         <label for="email" class="form-label"></label>
                         <input th:field="*{vendor.user.email}" type="text" name="email" class="form-control" id="email"
-                               placeholder="Enter your Email">
+                               placeholder="Enter your Email" th:required>
                     </div>
                     <div class="">
                         <label for="password" class="form-label"></label>
-                        <input th:field="*{vendor.user.password}" type="text" name="password" class="form-control" id="password"
-                               placeholder="Select a password">
+                        <input th:field="*{vendor.user.password}" type="password" name="password" class="form-control" id="password"
+                               placeholder="Select a password" th:required>
                     </div>
                     <div class="">
                         <label for="cPassword" class="form-label"></label>
-                        <input type="text" name="cPassword" class="form-control" id="cPassword"
-                               placeholder="Confirm your password">
+                        <input type="password" name="cPassword" class="form-control" id="cPassword"
+                               placeholder="Confirm your password" th:required>
                     </div>
                     <div class="">
                         <label for="firstName" class="form-label"></label>
                         <input th:field="*{vendor.user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
-                               placeholder="Enter your First Name">
+                               placeholder="Enter your First Name" th:required>
                     </div>
                     <div class="">
                         <label for="lastName" class="form-label"></label>
                         <input th:field="*{vendor.user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
-                               placeholder="Enter your Last Name">
+                               placeholder="Enter your Last Name" th:required>
                     </div>
                     <div class="row g-3 d-flex align-items-center">
                         <div class="col-auto">
