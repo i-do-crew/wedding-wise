@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/fragments :: head}" >
-  <meta charset="UTF-8">
-  <title>Categories of Vendors </title>
+<head>
+    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
+    <meta charset="UTF-8">
+    <title>Categories of Vendors </title>
+    <link th:rel="stylesheet" href="/css/client_views/each_vendorCategories.css"/>
 </head>
 
-<body>
+<body class="body">
 <!--NAVBAR-->
 <nav th:insert="~{fragments/fragments :: navbar}"></nav>
 <!--CUSTOMER SIDEBAR-->
@@ -27,7 +29,7 @@
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col">
-                    <img class="" src="http://via.placeholder.com/150x150" alt="Vendor Name">
+                    <img class="card-img-top" id="img" src="/img/vendor_categories/weddingMusic.jpg/" alt="Vendor Name">
                 </div>
                 <div class="col">
                     <h5 th:if="${id == 1}" class="">Rancho La Mission</h5>

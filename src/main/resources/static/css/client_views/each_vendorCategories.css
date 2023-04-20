@@ -1,0 +1,45 @@
+.labels {
+    font-family: "Luxurious Roman";
+    text-underline-position: under;
+    text-align: center;
+}
+
+.body {
+    background-color: #FFE5D2;
+}
+
+.card-body {
+    background-color: #FFE5D2;
+    width: 500px;
+    height: 176px;
+    display: flex;
+    align-content: center;
+}
+
+#btn{
+    color: #FFFAF7;
+}
+
+#img{
+    flex: 1;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    width: 200px;
+    height: 150px;
+    border: 1px solid #212727;
+}
+
+#info-card{
+    border-radius: 15%;
+}
+#mainCard{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#info-card{
+
+}
+
+
