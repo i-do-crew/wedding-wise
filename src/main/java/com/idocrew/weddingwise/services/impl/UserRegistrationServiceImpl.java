@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final UserRepository userRepository;
     private final VendorRepository vendorRepository;
     private final CustomerRepository customerRepository;
-    private final PrincipalGroupRepository principalGroupRepository;
+    private final UserGroupRepository principalGroupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
     private final SecureTokenService secureTokenService;
@@ -60,7 +61,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         vendorCategory.getVendors().add(vendor);
         Venue venue = vendorComposite.getVenue();
         PhotoFormat photoFormat = vendorComposite.getPhotoFormat();
-        DjsAndLiveBandsCategory djsAndLiveBandsCategory = vendorComposite.getDjsAndLiveBandsCategory();
+        MusicType djsAndLiveBandsCategory = vendorComposite.getMusicType();
         MusicGenre musicGenre = vendorComposite.getMusicGenre();
 
         if(checkIfUserExist(user.getEmail())){
@@ -98,7 +99,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void addUserGroup(User userEntity, String code){
-        PrincipalGroup principalGroup =  principalGroupRepository.findByCode(code);
-        userEntity.setUserGroups(Set.of(principalGroup));
+        Group principalGroup =  principalGroupRepository.findByCode(code);
+        userEntity.setUserGroups(List.of(principalGroup));
     }
 }

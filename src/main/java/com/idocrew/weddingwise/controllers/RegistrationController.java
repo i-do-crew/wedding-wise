@@ -52,7 +52,7 @@ public class RegistrationController {
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
-    public String vendorRegistrationPost(@ModelAttribute Vendor vendor){
+    public String vendorRegistrationPost(@ModelAttribute("vendorComposite") VendorComposite vendor){
         userRegistrationService.register(vendor);
         return "redirect:/verification";
     }
