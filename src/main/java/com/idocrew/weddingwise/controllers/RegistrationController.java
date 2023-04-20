@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
-    private final VendorCategoryRepository vendorCategoryRepository;
+    private final CategoryRepository categoryRepository;
     private final MusicGenreRepository musicGenreRepository;
     private final UserRegistrationService userRegistrationService;
     private final PhotoFormatRepository photoFormatRepository;
-    private final DjsAndLiveBandsCategoryRepository djsAndLiveBandsCategoryRepository;
+    private final MusicTypeRepository musicTypeRepository;
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
 
@@ -39,21 +39,21 @@ public class RegistrationController {
                 .vendor(new Vendor())
                 .musicGenre(new MusicGenre())
                 .photoFormat(new PhotoFormat())
-                .djsAndLiveBandsCategory(new DjsAndLiveBandsCategory())
+                .musicType(new MusicType())
                 .venue(new Venue())
                 .vendorCategory(new VendorCategory())
                 .build();
         model.addAttribute("options", states);
         model.addAttribute("vendorComposite", new VendorComposite());
-        model.addAttribute("vendorCategories", vendorCategoryRepository.findAll());
+        model.addAttribute("vendorCategories", categoryRepository.findAll());
         model.addAttribute("musicGenres", musicGenreRepository.findAll());
         model.addAttribute("photoFormats", photoFormatRepository.findAll());
-        model.addAttribute("musicTypes", djsAndLiveBandsCategoryRepository.findAll());
+        model.addAttribute("musicTypes", musicTypeRepository.findAll());
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
-    public String vendorRegistrationPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
-        userRegistrationService.register(vendorComposite);
+    public String vendorRegistrationPost(@ModelAttribute Vendor vendor){
+        userRegistrationService.register(vendor);
         return "redirect:/verification";
     }
     @GetMapping("/verification")
