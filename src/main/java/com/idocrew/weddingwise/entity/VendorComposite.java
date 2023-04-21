@@ -2,6 +2,8 @@ package com.idocrew.weddingwise.entity;
 
 import lombok.*;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -13,4 +15,7 @@ public class VendorComposite {
     private Set<MusicGenre> musicGenres;
     private PhotoFormat photoFormat;
     private DjsAndLiveBandsCategory djsAndLiveBandsCategory;
+    public User getUser(){
+        return vendor.getUser();
+    }
 }
