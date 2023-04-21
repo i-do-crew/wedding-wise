@@ -36,9 +36,6 @@ public class Vendor {
     private User user;
 
     @OneToMany(mappedBy = "vendor")
-    private Set<VendorsMusicGenre> vendorsMusicGenres = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "vendor")
     private Set<VendorService> vendorServices = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "vendor")
