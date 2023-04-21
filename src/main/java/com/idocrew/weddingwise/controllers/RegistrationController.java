@@ -1,6 +1,7 @@
 package com.idocrew.weddingwise.controllers;
 
-import com.idocrew.weddingwise.entity.*;
+import com.idocrew.weddingwise.entity.Customer;
+import com.idocrew.weddingwise.entity.VendorComposite;
 import com.idocrew.weddingwise.repositories.DjsAndLiveBandsCategoryRepository;
 import com.idocrew.weddingwise.repositories.MusicGenreRepository;
 import com.idocrew.weddingwise.repositories.PhotoFormatRepository;
@@ -13,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.HashSet;
 
 @Controller
 @RequiredArgsConstructor
