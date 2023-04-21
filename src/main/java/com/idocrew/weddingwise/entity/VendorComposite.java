@@ -8,7 +8,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
 public class VendorComposite {
     private Vendor vendor;
     private Venue venue;

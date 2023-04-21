@@ -1,7 +1,10 @@
 package com.idocrew.weddingwise.controllers;
 
 import com.idocrew.weddingwise.entity.*;
-import com.idocrew.weddingwise.repositories.*;
+import com.idocrew.weddingwise.repositories.DjsAndLiveBandsCategoryRepository;
+import com.idocrew.weddingwise.repositories.MusicGenreRepository;
+import com.idocrew.weddingwise.repositories.PhotoFormatRepository;
+import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,13 +40,6 @@ public class RegistrationController {
     }
     @GetMapping("/vendor/registration")
     public String vendorRegistration(Model model){
-        VendorComposite vendorComposite = VendorComposite.builder()
-                .vendor(new Vendor())
-                .musicGenres(new HashSet<>())
-                .photoFormat(new PhotoFormat())
-                .djsAndLiveBandsCategory(new DjsAndLiveBandsCategory())
-                .venue(new Venue())
-                .build();
         model.addAttribute("options", states);
         model.addAttribute("vendorComposite", new VendorComposite());
         model.addAttribute("vendorCategories", vendorCategoryRepository.findAll());
