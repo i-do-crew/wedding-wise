@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service("userService")
 @AllArgsConstructor
@@ -23,73 +24,93 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final PrincipalGroupRepository principalGroupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
-    private final VendorCategoryRepository vendorCategoryRepository;
     private final VenueRepository venueRepository;
-    private final DjsAndLiveBandsCategoryRepository djsAndLiveBandsCategoryRepository;
-    private final MusicGenreRepository musicGenreRepository;
+    private final DjsAndLiveBandsRepository djsAndLiveBandsRepository;
+    private final DjsAndLiveBandsMusicGenreRepository djsAndLiveBandsMusicGenreRepository;
+    private final VendorsPhotoFormatRepository vendorsPhotoFormatRepository;
 
     @Override
     @Transactional
     public void register(Customer customer) throws DuplicateKeyException {
         if(checkIfUserExist(customer.getUser().getEmail())){
-            throw new DuplicateKeyException("User already exists for this email");
+            throw new DuplicateKeyException("Customer already exists for this email");
         }
-        User userEntity = new User();
-        Customer custEntity = new Customer();
-        BeanUtils.copyProperties(customer.getUser(), userEntity);
-        BeanUtils.copyProperties(customer, custEntity);
-        String hash = passwordEncoder.encode(customer.getUser().getPassword());
-        userEntity.setPassword(hash);
-        userEntity.setUsername(customer.getUser().getEmail());
-        addUserGroup(userEntity, "CUSTOMER");
-        userEntity = userRepository.save(userEntity);
-        custEntity.setUser(userEntity);
-        customerRepository.save(custEntity);
+        User userEntity = saveUser(customer.getUser(), "CUSTOMER");
+        saveCustomer(customer, userEntity);
         //sendRegistrationConfirmationEmail(userEntity);
+    }
+
+    private void saveCustomer(Customer customer, User userEntity) {
+        customer.setUser(userEntity);
+        customerRepository.save(customer);
     }
 
     @Override
     @Transactional
     public void register(VendorComposite vendorComposite) {
-        Vendor vendor = vendorComposite.getVendor();
-        User user = vendor.getUser();
-        VendorCategory vendorCategory = vendorComposite.getVendorCategory();
-        vendorCategory.getVendors().add(vendor);
-        Venue venue = vendorComposite.getVenue();
-        PhotoFormat photoFormat = vendorComposite.getPhotoFormat();
-        VendorsPhotoFormat vendorsPhotoFormat = new VendorsPhotoFormat();
-        vendorsPhotoFormat.setPhotoFormat(photoFormat);
-        DjsAndLiveBandsCategory djsAndLiveBandsCategory = vendorComposite.getDjsAndLiveBandsCategory();
-        MusicGenre musicGenre = vendorComposite.getMusicGenre();
-
-        if(checkIfUserExist(user.getEmail())){
-            throw new DuplicateKeyException("User already exists for this email");
+        if(checkIfUserExist(vendorComposite.getUser().getEmail())){
+            throw new DuplicateKeyException("Vendor already exists for this email");
         }
-        User userEntity = new User();
+
+        User userEntity = saveUser(vendorComposite.getUser(), "VENDOR");
+        vendorComposite.getVendor().setUser(userEntity);
+        Vendor vendorEntity = saveVendor(vendorComposite.getVendor());
+
+        switch (vendorEntity.getVendorCategory().getTitle()) {
+            case "Venues" -> saveVenue(vendorEntity, vendorComposite);
+            case "Photographers" -> savePhotographer(vendorEntity, vendorComposite.getPhotoFormat());
+            case "Bands and DJs" -> {
+                DjsAndLiveBand djOrLiveBand = saveDjOrBand(vendorEntity, vendorComposite.getDjsAndLiveBandsCategory());
+                saveDjOrBandMusicGenres(djOrLiveBand, vendorComposite.getMusicGenres());
+            }
+            default -> {
+            }
+        }
+        //sendRegistrationConfirmationEmail(userEntity);
+    }
+
+    private DjsAndLiveBand saveDjOrBand(Vendor vendorEntity, DjsAndLiveBandsCategory category) {
+        DjsAndLiveBand djOrLiveBand = new DjsAndLiveBand(vendorEntity, category);
+        return djsAndLiveBandsRepository.save(djOrLiveBand);
+    }
+
+    private void saveDjOrBandMusicGenres(DjsAndLiveBand djsOrLiveBand, Set<MusicGenre> musicGenres) {
+        Set<DjsAndLiveBandsMusicGenre> set = musicGenres
+                .stream()
+                .map(musicGenre -> new DjsAndLiveBandsMusicGenre(djsOrLiveBand, musicGenre))
+                .collect(Collectors.toSet());
+        djsAndLiveBandsMusicGenreRepository.saveAll(set);
+    }
+
+    private void savePhotographer(Vendor vendorEntity, PhotoFormat photoFormat) {
+        VendorsPhotoFormat vendorsPhotoFormatEntity = new VendorsPhotoFormat();
+        vendorsPhotoFormatEntity.setVendor(vendorEntity);
+        vendorsPhotoFormatEntity.setPhotoFormat(photoFormat);
+        vendorsPhotoFormatRepository.save(vendorsPhotoFormatEntity);
+    }
+
+    private void saveVenue(Vendor vendorEntity, VendorComposite vendorComposite) {
+        Venue venueEntity = new Venue();
+        BeanUtils.copyProperties(vendorComposite.getVenue(), venueEntity);
+        venueEntity.setVendor(vendorEntity);
+        venueRepository.save(venueEntity);
+    }
+
+    private Vendor saveVendor(Vendor vendor) {
         Vendor vendorEntity = new Vendor();
-        BeanUtils.copyProperties(user, userEntity);
         BeanUtils.copyProperties(vendor, vendorEntity);
+        return vendorRepository.save(vendorEntity);
+    }
+
+    private User saveUser(User user, String code) {
+        User userEntity = new User();
+        BeanUtils.copyProperties(user, userEntity);
         String hash = passwordEncoder.encode(user.getPassword());
         userEntity.setPassword(hash);
         userEntity.setUsername(user.getEmail());
-        addUserGroup(userEntity, "VENDOR");
+        userEntity.setUserGroups(getUserGroupAsSet(code));
         userEntity = userRepository.save(userEntity);
-        vendorEntity.setUser(userEntity);
-
-        vendorEntity.getVendorsPhotoFormats().add(vendorsPhotoFormat);
-
-        vendorEntity = vendorRepository.save(vendorEntity);
-
-        vendorCategory.getVendors().add(vendorEntity);
-        vendorCategoryRepository.save(vendorCategory);
-
-        venue.setVendor(vendorEntity);
-        venueRepository.save(venue);
-
-        djsAndLiveBandsCategoryRepository.save(djsAndLiveBandsCategory);
-        musicGenreRepository.save(musicGenre);
-
-        //sendRegistrationConfirmationEmail(vendorEntity.getUser());
+        return userEntity;
     }
 
     private boolean checkIfUserExist(String email) {
@@ -104,8 +125,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         );
     }
 
-    private void addUserGroup(User userEntity, String code){
-        PrincipalGroup group = principalGroupRepository.findByCode(code);
-        userEntity.setUserGroups(Set.of(group));
+    private Set<PrincipalGroup> getUserGroupAsSet(String role){
+        return Set.of(principalGroupRepository.findByCode(role));
     }
 }
