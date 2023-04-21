@@ -1,7 +1,7 @@
 package com.idocrew.weddingwise.configs;
 
 
-import com.idocrew.weddingwise.services.impl.MySimpleUrlAuthenticationSuccessHandler;
+import com.idocrew.weddingwise.services.impl.AuthenticationSuccessHandlerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,7 +29,7 @@ public class SecurityConfiguration {
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
-        return new MySimpleUrlAuthenticationSuccessHandler();
+        return new AuthenticationSuccessHandlerImpl();
     }
 
     @Bean

@@ -3,14 +3,15 @@ package com.idocrew.weddingwise.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="vendor_categories")
 @Entity
+@Table(name="vendor_categories", schema = "weddingwise")
 public class VendorCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +20,6 @@ public class VendorCategory {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "vendorCategory")
-    private List<Vendor> vendors;
+    @OneToMany(mappedBy = "vendorCategory")
+    private Set<Vendor> vendors = new LinkedHashSet<>();
 }

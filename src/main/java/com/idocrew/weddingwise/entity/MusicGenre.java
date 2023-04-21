@@ -3,27 +3,24 @@ package com.idocrew.weddingwise.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="music_genres")
 @Entity
+@Table(name = "music_genres", schema = "weddingwise")
 public class MusicGenre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name="title", columnDefinition="varchar(50)")
+    @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    @ManyToMany
-    @JoinTable(
-        name="vendors_music_genres",
-        joinColumns = @JoinColumn(name = "id"),
-        inverseJoinColumns = @JoinColumn(name = "vendor_id")
-    )
-    private Set<Vendor> vendors;
+    @OneToMany(mappedBy = "musicGenre")
+    private Set<DjsAndLiveBandsMusicGenre> djsAndLiveBandsMusicGenres = new LinkedHashSet<>();
 }

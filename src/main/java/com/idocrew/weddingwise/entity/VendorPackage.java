@@ -10,11 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="vendor_packages")
 @Entity
+@Table(name = "vendor_packages", schema = "weddingwise")
 public class VendorPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
     @Column(name="title", columnDefinition="varchar(50)")
@@ -23,7 +24,7 @@ public class VendorPackage {
     @Column(name="description", columnDefinition="varchar(1000)")
     private String description;
 
-    @ManyToOne(optional = false, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "vendor_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "vendor_id", nullable = false, referencedColumnName = "id", columnDefinition = "bigint(20)")
     private Vendor vendor;
 }
