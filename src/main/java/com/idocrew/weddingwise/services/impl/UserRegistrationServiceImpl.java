@@ -1,7 +1,5 @@
 package com.idocrew.weddingwise.services.impl;
 
-import com.idocrew.weddingwise.entity.*;
-import com.idocrew.weddingwise.repositories.*;
 import com.idocrew.weddingwise.context.AccountVerificationEmailContext;
 import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.repositories.*;
@@ -9,7 +7,6 @@ import com.idocrew.weddingwise.services.EmailService;
 import com.idocrew.weddingwise.services.SecureTokenService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import jakarta.mail.MessagingException;
-import lombok.RequiredArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +32,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final DjsAndLiveBandsRepository djsAndLiveBandsRepository;
     private final DjsAndLiveBandsMusicGenreRepository djsAndLiveBandsMusicGenreRepository;
     private final VendorsPhotoFormatRepository vendorsPhotoFormatRepository;
+    private final SecureTokenService secureTokenService;
+    @Value("${site.base.url.https}")
+    private String baseURL;
 
     @Override
     @Transactional
@@ -45,7 +45,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         User userEntity = saveUser(customer.getUser(), "CUSTOMER");
         customer.setUser(userEntity);
         saveCustomer(customer);
-        //sendRegistrationConfirmationEmail(userEntity);
+        sendRegistrationConfirmationEmail(userEntity);
     }
 
     private void saveCustomer(Customer customer) {
@@ -73,7 +73,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             default -> {
             }
         }
-        //sendRegistrationConfirmationEmail(userEntity);
+        sendRegistrationConfirmationEmail(userEntity);
     }
 
     private DjsAndLiveBand saveDjOrBand(Vendor vendorEntity, DjsAndLiveBandsCategory category) {
