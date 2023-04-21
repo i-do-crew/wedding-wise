@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CategoryRepository extends JpaRepository<VendorCategory, Long> {
+public interface VendorCategoryRepository extends JpaRepository<VendorCategory, Long> {
     VendorCategory findById(long id);
     List<VendorCategory> findAll();
 }

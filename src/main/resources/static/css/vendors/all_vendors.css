@@ -1,5 +1,5 @@
 main{
-    background-color: #E19B6E;
+    background-color: #FFE5D2;
 }
 
 .fontTitle{
@@ -11,6 +11,7 @@ main{
 .btn{
     background-color: #212727;
     color:white;
+    border-radius: 0;
     padding-right:5px;
 }
 .btn:hover{
@@ -19,13 +20,14 @@ main{
 
 #venuesImg, #photographersImg, #floristsImg, #musiciansImg, #caterersImg, #bakeriesImg, #barsImg{
     height:270px;
-    width:270px;
-    border-radius: 15%;
+    width:264px;
+    border-radius: 0;
     object-fit: cover;
+    border: 1px solid #212727;
 }
 
 .card{
-    border-radius: 30px;
-    border:none;
+    border-radius: 0;
+    border: 1px solid #212727;
     background-color: #FFFAF7;
 }

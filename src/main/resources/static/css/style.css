@@ -45,10 +45,11 @@
 }
 
 #customerProfileImg{
-    border-radius: 45%;
+    border-radius: 50%;
     object-fit: cover;
-    /*padding-left: 20px;*/
-    /*margin:20px;*/
+    height:250px;
+    width:300px;
+    margin-left: 20px;
 }
 .editIcon{
     flex:auto;
@@ -58,29 +59,29 @@
     text-align: center;
     font-family: 'Luxurious Roman', cursive;
 }
-#budgetBg{
-    background-color: #FFFAF7;
-    border-radius: 90%;
-    margin:10px;
-    text-align: center;
-    padding: 30px;
-}
+/*#budgetBg{*/
+/*    background-color: #FFFAF7;*/
+/*    border-radius: 90%;*/
+/*    margin:10px;*/
+/*    text-align: center;*/
+/*    padding: 30px;*/
+/*}*/
 #dateBg {
-    background-color: #FFFAF7;
-    border-radius: 90%;
-    margin:10px;
+    /*background-color: #FFFAF7;*/
+    /*border-radius: 90%;*/
+    /*margin:10px;*/
     text-align: center;
     padding-top:10px;
 
 }
-#guestBg{
-    background-color: #FFFAF7;
-    border-radius: 90%;
-    margin:10px;
-    text-align: center;
-    padding: 30px;
+/*#guestBg{*/
+/*    background-color: #FFFAF7;*/
+/*    border-radius: 90%;*/
+/*    margin:10px;*/
+/*    text-align: center;*/
+/*    padding: 30px;*/
 
-}
+/*}*/
 #bottomBg{
     /*background-color: #FFFAF7;*/
     /*border-radius: 20%;*/
@@ -93,9 +94,10 @@
 .font{
     font-family: 'Nunito Sans', sans-serif;
 }
-font:hover{
-    color: #E19B6E;
-}
+/*a:hover {*/
+/*    color: #E19B6E;*/
+/*}*/
+
 ul{
     list-style-type: circle;
 }
@@ -105,8 +107,11 @@ ul{
     background-color: #FFE5D2;
 }
 #businessProfileImg{
-    border-radius: 45%;
+    border-radius: 50%;
+    width:300px;
+    height:250px;
     object-fit: cover;
+    margin-left: 20px;
 
 }
 .fontTitle {

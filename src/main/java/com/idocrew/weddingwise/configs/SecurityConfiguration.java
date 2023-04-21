@@ -1,7 +1,7 @@
 package com.idocrew.weddingwise.configs;
 
 
-import com.idocrew.weddingwise.services.impl.MySimpleUrlAuthenticationSuccessHandler;
+import com.idocrew.weddingwise.services.impl.AuthenticationSuccessHandlerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,7 +29,7 @@ public class SecurityConfiguration {
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
-        return new MySimpleUrlAuthenticationSuccessHandler();
+        return new AuthenticationSuccessHandlerImpl();
     }
 
     @Bean
@@ -49,7 +49,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(request -> request
                 .requestMatchers("/profile","/clients/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker", "/ideaboard", "/vendor/profile")
                 .authenticated()
-                .requestMatchers("/","/aboutus","/vendors","/info/budget", "/info/guests", "/info/ideas", "/info/vendors","/client/registration", "/vendor/registration", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
+                .requestMatchers("/","/aboutus","/vendors","/info/**", "/client/registration", "/vendor/registration", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
                 .permitAll()
             );
         return http.build();

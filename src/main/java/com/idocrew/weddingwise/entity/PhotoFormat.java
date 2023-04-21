@@ -6,27 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="photo_format")
 @Entity
+@Table(name = "photo_format", schema = "weddingwise")
 public class PhotoFormat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name="title", columnDefinition="varchar(50)")
+    @Column(name = "title", length = 50)
     private String title;
 
-    @ManyToMany
-    @JoinTable(
-            name="vendors_photo_format",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "vendor_id")
-    )
-    private Set<Vendor> vendors;
+    @OneToMany(mappedBy = "photoFormat")
+    private Set<VendorsPhotoFormat> vendorsPhotoFormats = new LinkedHashSet<>();
+
 }
