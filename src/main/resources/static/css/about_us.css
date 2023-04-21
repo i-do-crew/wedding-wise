@@ -1,10 +1,12 @@
 /*BODY*/
 main{
-    background-color: #E19B6E;
+    background-color: #FFE5D2;
 }
 
 #mainCard{
     background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;
 }
 .col{
     padding-left:100px;
@@ -20,8 +22,8 @@ main{
 }
 
 .card{
-    border:none;
-    border-radius: 30px;
+    /*border:none;*/
+    /*border-radius: 30px;*/
 }
 
 #micahCol, #billieCol {
@@ -41,19 +43,21 @@ main{
 #micahpic,#billiepic {
     width: 400px;
     height: 400px;
-    border-radius: 30px;
+    border-radius: 0;
     object-fit: cover;
     margin-top:50px;
     margin-bottom: 50px;
+    border: 1px solid #212727;
     /*margin-right: 100px;*/
 }
 #andreapic, #claytonpic {
     width: 400px;
     height: 400px;
-    border-radius: 30px;
+    border-radius: 0;
     object-fit: cover;
     margin-top:50px;
     margin-bottom: 50px;
+    border: 1px solid #212727;
 /*    margin-left: 200px;*/
 }
 
