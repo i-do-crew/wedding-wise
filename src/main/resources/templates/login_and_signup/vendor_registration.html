@@ -102,9 +102,9 @@
                                     <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.title}"></option>
                                 </select>
                                 <label for="genre" class="form-label"></label>
-                                <select th:field="*{musicGenre}" id="genre" class="form-select mb-3">
-                                    <option th:value="xx" selected>Select your genre(s)...</option>
-                                    <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.title}"></option>
+                                <select th:field="*{musicGenres}" id="genre" class="form-select mb-3" multiple="multiple">
+                                    <option th:value="0" selected>Select your genre(s)...</option>
+                                    <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.id}"></option>
                                 </select>
                             </div>
                     <button type="submit" id="verifyBtn" class="btn btn-secondary mb-3">Sign Up</button>

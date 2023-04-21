@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashSet;
+
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
@@ -37,11 +39,10 @@ public class RegistrationController {
     public String vendorRegistration(Model model){
         VendorComposite vendorComposite = VendorComposite.builder()
                 .vendor(new Vendor())
-                .musicGenre(new MusicGenre())
+                .musicGenres(new HashSet<>())
                 .photoFormat(new PhotoFormat())
                 .djsAndLiveBandsCategory(new DjsAndLiveBandsCategory())
                 .venue(new Venue())
-                .vendorCategory(new VendorCategory())
                 .build();
         model.addAttribute("options", states);
         model.addAttribute("vendorComposite", new VendorComposite());

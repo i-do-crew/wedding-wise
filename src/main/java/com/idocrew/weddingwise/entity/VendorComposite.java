@@ -10,8 +10,7 @@ import lombok.*;
 public class VendorComposite {
     private Vendor vendor;
     private Venue venue;
-    private VendorCategory vendorCategory;
-    private MusicGenre musicGenre;
+    private Set<MusicGenre> musicGenres;
     private PhotoFormat photoFormat;
     private DjsAndLiveBandsCategory djsAndLiveBandsCategory;
 }
