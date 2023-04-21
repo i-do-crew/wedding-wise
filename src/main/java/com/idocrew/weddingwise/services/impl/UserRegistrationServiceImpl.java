@@ -36,12 +36,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             throw new DuplicateKeyException("Customer already exists for this email");
         }
         User userEntity = saveUser(customer.getUser(), "CUSTOMER");
-        saveCustomer(customer, userEntity);
+        customer.setUser(userEntity);
+        saveCustomer(customer);
         //sendRegistrationConfirmationEmail(userEntity);
     }
 
-    private void saveCustomer(Customer customer, User userEntity) {
-        customer.setUser(userEntity);
+    private void saveCustomer(Customer customer) {
         customerRepository.save(customer);
     }
 
