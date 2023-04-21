@@ -2,11 +2,13 @@ package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -14,6 +16,12 @@ import java.util.Set;
     @Index(name = "vendor_id", columnList = "vendor_id")
 })
 public class DjsAndLiveBand {
+
+    public DjsAndLiveBand(Vendor vendor, DjsAndLiveBandsCategory dalbCategory) {
+        this.vendor = vendor;
+        this.dalbCategory = dalbCategory;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

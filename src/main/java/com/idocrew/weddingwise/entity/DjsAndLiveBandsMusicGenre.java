@@ -2,8 +2,10 @@ package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -12,6 +14,12 @@ import lombok.Setter;
         @Index(name = "music_genre_id", columnList = "music_genre_id"),
         @Index(name = "dj_or_live_band_id", columnList = "dj_or_live_band_id")})
 public class DjsAndLiveBandsMusicGenre {
+
+    public DjsAndLiveBandsMusicGenre(DjsAndLiveBand djOrLiveBand, MusicGenre musicGenre) {
+        this.djOrLiveBand = djOrLiveBand;
+        this.musicGenre = musicGenre;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
