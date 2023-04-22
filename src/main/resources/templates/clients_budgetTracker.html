@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/fragments :: head}">
+<head >
+    <th:block th:replace="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Categories of Vendors</title>
+    <link th:rel="stylesheet" href="/css/client_views/budget_tracker.css">
 </head>
 
 <body>
@@ -12,58 +14,142 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
-<h1 style="text-align: center">Your Budget</h1>
 
-<!--  Budget Modal-->
-<button id="budgetBtn">Check Budget</button>
-<div id="modalBtn" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Budget Information</h2>
-        <p>Name: business name
-            Cost: $0000</p>
-        <p>Name: business name
-            Cost: $0000</p>
-        <p>Name: business name
-        Cost: $0000</p>
+<main>
+    <div class="container p-4">
+        <div class="card p-3 ">
+            <h1 class="text-center fontTitle">Your Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$0000</button></h1>
+            <hr>
+            <div class="row vendor ">
+                <a href="/vendors/categories/1" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Venues</h4></a>
+                <div class="col">
+                    <a href="/vendors/individual/1"><img class="image" src="/img/venue_clientProfile.jpg" alt="Vendor Img"></a>
+                </div>
+                <div class="col font">
+                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
+                    <p>Cost: $000</p>
+                </div>
+                <div class="col ps-3">
+                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+            </div>
+            <hr>
+            <div class="row vendor ">
+                <a href="/vendors/categories/2" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Photographers</h4></a>
+                <div class="col">
+                    <a href="/vendors/individual/2"><img class="image"  src="/img/photo_clientProfile.jpg" alt="Vendor Img"></a>
+                </div>
+                <div class="col font">
+                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
+                    <p>Cost: $000</p>
+                </div>
+                <div class="col ps-3">
+                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+            </div>
+            <hr>
+            <div class="row vendor ">
+                <a href="/vendors/categories/3" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Florists</h4></a>
+                <div class="col">
+                    <a href="/vendors/individual/3"><img class="image"  src="/img/florists_clientPage.jpg" alt="Vendor Img"></a>
+                </div>
+                <div class="col font">
+                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
+                    <p>Cost: $000</p>
+                </div>
+                <div class="col ps-3">
+                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+            </div>
+            <hr>
+            <div class="row vendor ">
+                <a href="/vendors/categories/4" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Caterers</h4></a>
+                <div class="col">
+                    <a href="/vendors/individual/4"><img class="image"  src="/img/cater_clientProfile.jpg" alt="Vendor Img"></a>
+                </div>
+                <div class="col font">
+                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
+                    <p>Cost: $000</p>
+                </div>
+                <div class="col ps-3">
+                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+            </div>
+            <hr>
+            <div class="row vendor ">
+                <a href="/vendors/categories/5" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Bakeries</h4></a>
+                <div class="col">
+                    <a href="/vendors/individual/5"><img class="image"  src="/img/cake_clientProfile.jpg" alt="Vendor Img"></a>
+                </div>
+                <div class="col font">
+                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
+                    <p>Cost: $000</p>
+                </div>
+                <div class="col ps-3">
+                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+            </div>
+            <hr>
+            <div class="row vendor ">
+                <a href="/vendors/categories/6" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Bars and Beverages</h4></a>
+                <div class="col">
+                    <a href="/vendors/individual/6"><img class="image" src="/img/bar_clientProfile.webp" alt="Vendor Img"></a>
+                </div>
+                <div class="col font">
+                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
+                    <p>Cost: $000</p>
+                </div>
+                <div class="col ps-3">
+                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+            </div>
+            <hr>
+            <div class="row vendor ">
+                <a href="/vendors/categories/7" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Bands/DJs</h4></a>
+                <div class="col">
+                    <a href="/vendors/individual/7"><img class="image"  src="/img/dj_clientProfile.jpg" alt="Vendor Img"></a>
+                </div>
+                <div class="col font">
+                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
+                    <p>Cost: $000</p>
+                </div>
+                <div class="col ps-3">
+                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Itemized Budget Modal-->
+
+    <div id="modalBtn" class="modal fade" role="dialog">
+        <div class="container p-4">
+        <div class="modal-dialog">
+            <div class="modal-content card p-4">
+                <div class="modal-header  ">
+                    <h2 class="modal-title fontTitle text-center">Budget Information</h2>
+                </div>
+                <div class="modal-body ">
+                    <p class="font">Business Name: name</p>
+                    <p class="font">Cost: $0000</p>
+                    <p class="font">Business Name: name</p>
+                    <p class="font">Cost: $0000</p>
+                    <p class="font">Business Name: name</p>
+                    <p class="font">Cost: $0000</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="closeBtn" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="container-sm">
-    <hr>
-    <a href=""><h4>Venue</h4></a>
-    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-    <p>Business Name:</p>
-    <p>Cost:</p>
-    <i class="fa-solid fa-check"></i>
-
-    <hr>
-    <a href=""><h4>Photographer</h4></a>
-    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-    <p>Business Name:</p>
-    <p>Cost:</p>
-    <hr>
-    <a href=""><h4>Band/DJ</h4></a>
-    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-    <p>Business Name:</p>
-    <p>Cost:</p>
-
-    <hr>
-    <a href=""><h4>Florist</h4></a>
-    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-    <p>Business Name:</p>
-    <p>Cost:</p>
-
-    <hr>
-    <a href=""><h4>Caterer</h4></a>
-    <a href=""><img class="card-img-top" style="height: 150px; width: 150px;" src="http://via.placeholder.com/150x150" alt="Vendor Img"></a>
-    <p>Business Name:</p>
-    <p>Cost:</p>
-</div>
-
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--JAVASCRIPT-->
+<script type="text/javascript" src="/static/budgetModal.js"></script>
 </body>
 </html>
