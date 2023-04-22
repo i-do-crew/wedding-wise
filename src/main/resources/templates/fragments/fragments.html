@@ -119,10 +119,9 @@
                 <a class="text-decoration-none text-dark"><i class="fa-solid fa-pencil d-flex justify-content-end"></i></a>
             </div>
             <div class="row pb-4">
-                <h3 class="fontTitle">Business Name</h3>
-                <p class="font">vendor@vendor.com</p>
-                <p class="font">000-000-0000</p>
-                <p class="font">000 Vendor St</p>
+                <h3 class="fontTitle"><span th:text="${vendor} ? ${vendor.businessName}"></span></h3>
+                <p class="font"><span th:text="${user} ? ${user.email}"></span></p>
+                <p class="font"><span th:text="${user} ? ${user.city}"></span>, <span th:text="${user} ? ${user.state}"></span></p>
             </div>
             <div class="position-absolute bottom-0">
                 <div class="row pb-4 pt-5">

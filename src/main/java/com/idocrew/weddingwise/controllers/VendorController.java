@@ -1,9 +1,13 @@
 package com.idocrew.weddingwise.controllers;
 
+import com.idocrew.weddingwise.entity.Customer;
+import com.idocrew.weddingwise.entity.User;
 import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.repositories.CategoryRepository;
+import com.idocrew.weddingwise.repositories.UserRepository;
 import com.idocrew.weddingwise.repositories.VendorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +20,7 @@ import java.util.List;
 public class VendorController {
 
     private final VendorRepository vendorRepository;
+    private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id, Model model) {
@@ -38,7 +43,11 @@ public class VendorController {
         return "vendors/all_vendorCategories";
     }
     @GetMapping("/vendor/profile")
-    public String vendorProfile() {
+    public String vendorProfile(@CurrentSecurityContext(expression="authentication?.name") String username, Model model) {
+        User user = userRepository.findByUsername(username);
+        Vendor vendor = vendorRepository.findVendorByUser(user);
+        model.addAttribute("user", user);
+        model.addAttribute("vendor", vendor);
         return "vendor_views/vendor_profile";
     }
     @GetMapping("/likedVendors")
