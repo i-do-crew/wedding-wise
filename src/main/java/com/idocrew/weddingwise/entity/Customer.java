@@ -22,8 +22,6 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private long id;
-    @Column(name="budget", columnDefinition="int(11)")
-    private int budget;
     @Column(name="guest_count", columnDefinition="int(11)")
     private int guestCount;
     @Column(name="partner_fname", columnDefinition="varchar(50)", nullable = false)
@@ -32,6 +30,8 @@ public class Customer {
     private String partnerLName;
     @Column(name="wedding_dt", columnDefinition="date")
     private LocalDate weddingDt;
+    @OneToOne
+    private Budget budget;
     @OneToMany(mappedBy = "customer")
     private Set<GuestList> guestLists = new LinkedHashSet<>();
     @OneToMany(mappedBy = "customer")
