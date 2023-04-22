@@ -1,7 +1,11 @@
 package com.idocrew.weddingwise.controllers;
 
-import com.idocrew.weddingwise.entity.*;
-import com.idocrew.weddingwise.repositories.*;
+import com.idocrew.weddingwise.entity.Customer;
+import com.idocrew.weddingwise.entity.VendorComposite;
+import com.idocrew.weddingwise.repositories.DjsAndLiveBandsCategoryRepository;
+import com.idocrew.weddingwise.repositories.MusicGenreRepository;
+import com.idocrew.weddingwise.repositories.PhotoFormatRepository;
+import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
 import com.idocrew.weddingwise.services.UserRegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,11 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
-    private final CategoryRepository categoryRepository;
+    private final VendorCategoryRepository vendorCategoryRepository;
     private final MusicGenreRepository musicGenreRepository;
     private final UserRegistrationService userRegistrationService;
     private final PhotoFormatRepository photoFormatRepository;
-    private final MusicTypeRepository musicTypeRepository;
+    private final DjsAndLiveBandsCategoryRepository djsAndLiveBandsCategoryRepository;
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
 
@@ -35,25 +39,17 @@ public class RegistrationController {
     }
     @GetMapping("/vendor/registration")
     public String vendorRegistration(Model model){
-        VendorComposite vendorComposite = VendorComposite.builder()
-                .vendor(new Vendor())
-                .musicGenre(new MusicGenre())
-                .photoFormat(new PhotoFormat())
-                .musicType(new MusicType())
-                .venue(new Venue())
-                .vendorCategory(new VendorCategory())
-                .build();
         model.addAttribute("options", states);
         model.addAttribute("vendorComposite", new VendorComposite());
-        model.addAttribute("vendorCategories", categoryRepository.findAll());
+        model.addAttribute("vendorCategories", vendorCategoryRepository.findAll());
         model.addAttribute("musicGenres", musicGenreRepository.findAll());
         model.addAttribute("photoFormats", photoFormatRepository.findAll());
-        model.addAttribute("musicTypes", musicTypeRepository.findAll());
+        model.addAttribute("musicTypes", djsAndLiveBandsCategoryRepository.findAll());
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
-    public String vendorRegistrationPost(@ModelAttribute Vendor vendor){
-        userRegistrationService.register(vendor);
+    public String vendorRegistrationPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
+        userRegistrationService.register(vendorComposite);
         return "redirect:/verification";
     }
     @GetMapping("/verification")
