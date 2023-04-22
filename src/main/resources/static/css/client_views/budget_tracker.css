@@ -38,3 +38,11 @@ main{
 .vendorTitle:hover{
     color: #E19B6E;
 }
+#budgetBtn{
+    border:none !important;
+    background-color: #FFFAF7 !important;
+}
+
+#closeBtn:hover, #budgetBtn:hover{
+    color: #E19B6E !important;
+}

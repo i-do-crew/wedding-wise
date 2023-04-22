@@ -117,3 +117,6 @@ ul{
 .fontTitle {
     font-family: 'Luxurious Roman', cursive;
 }
+#editVendorProfileModalBtn:hover{
+    color: #E19B6E;
+}
