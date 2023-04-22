@@ -1,0 +1,40 @@
+main{
+    background-color: #FFE5D2;
+
+}
+.card{
+    background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;}
+
+.image{
+    height: 150px;
+    width: 150px;
+    border-radius: 0;
+    /*border: 1px solid #212727;*/
+    object-fit: cover;
+}
+.image:hover{
+    background-color: #E19B6E;
+    opacity: .3;
+}
+.vendor{
+    flex:auto;
+    justify-content: space-between !important;
+    align-items: center;
+    padding-left:150px !important;
+}
+
+#budgetModalBtn{
+    border:none !important;
+    background-color: #FFFAF7 !important;
+
+}
+.budgetBtn{
+    border:none;
+    background: #FFFAF7;
+}
+
+.vendorTitle:hover{
+    color: #E19B6E;
+}

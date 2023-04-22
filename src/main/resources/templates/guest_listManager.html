@@ -12,63 +12,69 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
-<h1 style="text-align: center">Your Guests</h1>
-<div class="container" id="border">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card" style="border: black; width: 20rem;">
-                <div class="card-body">
-                    <h5 class="card-title" style="text-align: center">RSVP'd: 0000</h5>
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+
+<main>
+    <div class="container p-4">
+        <h1 class="text-center">Your Guests</h1>
+        <div class="card" id="border">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" style="border: black; width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center">RSVP'd: 0000</h5>
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="borderTwo">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" style="border: black; width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center">Regretfully Declined: 0000</h5>
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="borderThree">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" style="border: black; width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center">Invited: 0000</h5>
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                            <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
+
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                            <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
+
+                            <hr>
+                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
+                            <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container" id="borderTwo">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card" style="border: black; width: 20rem;">
-                <div class="card-body">
-                    <h5 class="card-title" style="text-align: center">Regretfully Declined: 0000</h5>
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container" id="borderThree">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card" style="border: black; width: 20rem;">
-                <div class="card-body">
-                    <h5 class="card-title" style="text-align: center">Invited: 0000</h5>
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
-
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
-
-                    <hr>
-                    <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
+</main>
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -92,13 +98,12 @@
 
         </div>
     </div>
-</div>
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 <!--JAVASCRIPT-->
-<script type="text/javascript" src="/static/guest_listModal.js">
-    <script src="https://kit.fontawesome.com/a88297ca40.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/guest_listModal.js"></script>
+<!--    <script src="https://kit.fontawesome.com/a88297ca40.js" crossorigin="anonymous"></script>-->
 </body>
 </html>
