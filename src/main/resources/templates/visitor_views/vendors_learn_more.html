@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/fragments :: head}" >
+<head >
+    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:rel="stylesheet" href="/css/learn_more/vendors_learnMore.css"/>
@@ -14,26 +15,32 @@
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
-<div class="container p-3">
-  <div class="card row">
-        <span class="col">
-            <h1 class="text-center">Vendors</h1>
-            <p>Wedding Wise's vendor directory includes a list of vendors for couples to choose from. Whether you're looking for a photographer, florist, caterer, musician, or other kinds of vendors, you can find it all in Wedding Wise.</p>
-            <span class="dropdown ">
-                <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="button">
-                    Sign-Up Here
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
-                    <li><a class="dropdown-item" href="/vendor/registration">Sign-up as Vendor</a></li>
-                </ul>
-            </span>
-        </span>
-    <span class="col">
-            <img src="http://via.placeholder.com/640x360" alt="picture">
-        </span>
-  </div>
-</div>
+<main>
+    <div class="container p-4">
+        <div class="card" id="vendorCard">
+            <h1 class="card-title text-center fontTitle pt-3">Vendors</h1>
+            <div class="row">
+                <div class="col pt-5" id="vendorCol">
+                    <div class="pb-5" id="text">
+                        <p class="font">Wedding Wise's vendor directory includes a list of vendors for couples to choose from. Whether you're looking for a photographer, florist, caterer, musician, or other kinds of vendors, you can find it all in Wedding Wise.</p>
+                    </div>
+                    <div class="dropdown ">
+                        <button class="dropdown-toggle btn btn-secondary font" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="button">
+                            Sign-Up Here
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item font" href="/client/registration">Sign-up as Client</a></li>
+                            <li><a class="dropdown-item font" href="/vendor/registration">Sign-up as Vendor</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col pt-5" id="vendorColImg">
+                    <img src="/img/venue_clientProfile.jpg" class="image" alt="picture">
+                </div>
+          </div>
+        </div>
+    </div>
+</main>
 
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
