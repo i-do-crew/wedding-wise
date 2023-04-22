@@ -1,7 +1,9 @@
 package com.idocrew.weddingwise.controllers;
 
+import com.idocrew.weddingwise.entity.Budget;
 import com.idocrew.weddingwise.entity.Customer;
 import com.idocrew.weddingwise.entity.User;
+import com.idocrew.weddingwise.repositories.BudgetRepository;
 import com.idocrew.weddingwise.repositories.CustomerRepository;
 import com.idocrew.weddingwise.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ public class CustomerController {
 
     private final UserRepository userRepository;
     private final CustomerRepository customerRepository;
+    private final BudgetRepository budgetRepository;
     @GetMapping("/ideaboard")
     public String ideaBoard(){
         return "customer_views/idea_board";
@@ -27,8 +30,10 @@ public class CustomerController {
     public String clientProfile(@CurrentSecurityContext(expression="authentication?.name") String username, Model model){
         User user = userRepository.findByUsername(username);
         Customer customer = customerRepository.findCustomerByUser(user);
+        Budget budget = budgetRepository.findBudgetByCustomer(customer);
         model.addAttribute("user", user);
         model.addAttribute("customer", customer);
+        model.addAttribute("budget", budget);
         return "customer_views/client_profileDashboard";
     }
     @GetMapping("/guest_listManager")

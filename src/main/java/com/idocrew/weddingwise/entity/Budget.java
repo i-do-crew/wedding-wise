@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -19,5 +22,6 @@ public class Budget {
     @OneToOne(mappedBy = "budget")
     private Customer customer;
 
-
+    @OneToMany(mappedBy = "budget")
+    private Set<Vendor> vendors = new LinkedHashSet<>();
 }

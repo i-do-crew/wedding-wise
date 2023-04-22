@@ -88,7 +88,7 @@
             <div class="position-absolute bottom-0 px-1" id="bottomBg">
                 <ul>
                     <li class="row pb-4">
-                        <a href="/budget_tracker" class="text-decoration-none text-dark font" id="budget">Budget: $<span th:text="${customer} ? ${customer.budget}"></span></a>
+                        <a href="/budget_tracker" class="text-decoration-none text-dark font" id="budget">Budget: $<span th:text="${customer} ? ${customer.budget.amount}"></span></a>
                     </li>
                     <li class="row pb-4">
                         <a href="/guest_listManager" class="text-decoration-none text-dark font" id="guest">Guest Count: <span th:text="${customer} ? ${customer.guestCount}"></span></a>

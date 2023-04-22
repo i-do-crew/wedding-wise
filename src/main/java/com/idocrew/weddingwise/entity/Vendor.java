@@ -56,4 +56,8 @@ public class Vendor {
     @OneToMany(mappedBy = "vendor")
     private Set<CustomerVendor> customerVendors = new LinkedHashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "budget_id", referencedColumnName = "id", columnDefinition = "bigint(20)")
+    private Budget budget;
+
 }
