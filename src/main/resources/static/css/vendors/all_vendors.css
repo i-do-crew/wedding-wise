@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 main{
     background-color: #FFE5D2;
 }
@@ -5,22 +8,25 @@ main{
 .fontTitle{
     text-align: center;
 }
-#venues, #photographers, #florists, #musicians, #caterers, #bakeries, #bars{
-    width: 18rem;
+#venues, #photographers, #florists, #caterers, #bakeries, #bars, #musicians{
+    /*width: 18rem;*/
+    padding: 50px;
+    width:264px;
+    height:270px;
 }
-.btn{
+.vendorBtn{
     background-color: #212727;
     color:white;
     border-radius: 0;
     padding-right:5px;
 }
-.btn:hover{
+.vendorBtn:hover{
     background-color: #E19B6E;
 }
 
 #venuesImg, #photographersImg, #floristsImg, #musiciansImg, #caterersImg, #bakeriesImg, #barsImg{
-    height:270px;
-    width:264px;
+    height: 100%;
+    width: 100%;
     border-radius: 0;
     object-fit: cover;
     border: 1px solid #212727;
@@ -30,4 +36,11 @@ main{
     border-radius: 0;
     border: 1px solid #212727;
     background-color: #FFFAF7;
+}
+
+.vendorBtn{
+    width:100%;
+    margin: 0 auto;
+    /*flex:auto;*/
+    /*justify-content:center;*/
 }

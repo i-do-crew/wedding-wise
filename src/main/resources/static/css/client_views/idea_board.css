@@ -1,0 +1,29 @@
+main{
+    background-color: #FFE5D2;
+
+}
+.card{
+    background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;}
+
+.card-body {
+    /*height: 100vh;*/
+    padding:0;
+}
+.image{
+    width: 340px;
+    object-fit: cover;
+    margin:5px;
+    border-radius: 0;
+    border: 1px solid #212727;
+}
+#ideaBoardAddBtn{
+    /*border-radius: 0;*/
+    border: none;
+    background-color: #212727;
+    color:white;
+}
+#ideaBoardAddBtn:hover, #addBtn:hover, #closeBtn:hover{
+    background-color: #E19B6E;
+}

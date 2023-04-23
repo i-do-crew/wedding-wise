@@ -1,3 +1,12 @@
+/*FIXING MARGIN LINE*/
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 /*IMAGES*/
 #loginimage{
@@ -59,29 +68,12 @@
     text-align: center;
     font-family: 'Luxurious Roman', cursive;
 }
-/*#budgetBg{*/
-/*    background-color: #FFFAF7;*/
-/*    border-radius: 90%;*/
-/*    margin:10px;*/
-/*    text-align: center;*/
-/*    padding: 30px;*/
-/*}*/
+
 #dateBg {
-    /*background-color: #FFFAF7;*/
-    /*border-radius: 90%;*/
-    /*margin:10px;*/
     text-align: center;
     padding-top:10px;
 
 }
-/*#guestBg{*/
-/*    background-color: #FFFAF7;*/
-/*    border-radius: 90%;*/
-/*    margin:10px;*/
-/*    text-align: center;*/
-/*    padding: 30px;*/
-
-/*}*/
 #bottomBg{
     /*background-color: #FFFAF7;*/
     /*border-radius: 20%;*/
@@ -94,13 +86,12 @@
 .font{
     font-family: 'Nunito Sans', sans-serif;
 }
-/*a:hover {*/
-/*    color: #E19B6E;*/
-/*}*/
 
 ul{
     list-style-type: circle;
 }
+
+
 
 /*VENDOR SIDEBAR*/
 #offcanvasSideBarVendor{
