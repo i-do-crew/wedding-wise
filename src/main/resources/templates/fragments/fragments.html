@@ -188,6 +188,49 @@
     </div>
 </footer>
 
+<!-- Client Edit Profile Modal -->
+<div th:fragment="profileModal" id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
+            </div>
+            <div class="modal-body ">
+                <div>
+                    <input type="text" placeholder="Enter your first name" class="font mb-1">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter your last name" class="font mb-1">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter your partners first name" class="font mb-1">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter your partners last name" class="font mb-1">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter the date of your wedding" class="font mb-1">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter your budget range" class="font mb-1">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter your city" class="font mb-1">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter your state" class="font mb-1">
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter your guest count" class="font mb-1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--BOOTSTRAP-->
 <div th:fragment="bootstrapJs">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

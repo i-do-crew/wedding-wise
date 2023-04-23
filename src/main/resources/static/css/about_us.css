@@ -76,12 +76,12 @@ main{
     font-size: 18px;
 }
 
-/*LINES*/
-hr{
-    border: 3px solid #212727;
-    border-radius: 5px;
-    padding-left: 50px;
-    padding-right: 50px;
-}
+/*!*LINES*!*/
+/*hr{*/
+/*    border: 3px solid #212727;*/
+/*    border-radius: 5px;*/
+/*    padding-left: 50px;*/
+/*    padding-right: 50px;*/
+/*}*/
 
 

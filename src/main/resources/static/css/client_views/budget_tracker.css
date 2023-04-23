@@ -36,7 +36,7 @@ main{
 }
 
 .vendorTitle:hover{
-    color: #E19B6E;
+    color: #E19B6E !important;
 }
 #budgetBtn{
     border:none !important;

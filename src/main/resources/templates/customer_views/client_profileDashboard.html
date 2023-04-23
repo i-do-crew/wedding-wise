@@ -13,6 +13,9 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
+
 
 <main>
     <div class="container p-4">
@@ -110,48 +113,7 @@
         </div>
     </div>
 </main>
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title text-center">Edit your profile</h4>
-                    </div>
-                    <div class="modal-body ">
-                        <div>
-                        <input type="text" placeholder="Enter your first name">
-                        </div>
-                        <div>
-                        <input type="text" placeholder="Enter your last name">
-                        </div>
-                        <div>
-                        <input type="text" placeholder="Enter your partners first name">
-                        </div>
-                        <div>
-                        <input type="text" placeholder="Enter your partners last name">
-                        </div>
-                        <div>
-                        <input type="text" placeholder="Enter the date of your wedding">
-                        </div>
-                        <div>
-                        <input type="text" placeholder="Enter your budget range">
-                        </div>
-                        <div>
-                        <input type="text" placeholder="Enter your city">
-                        </div>
-                        <div>
-                        <input type="text" placeholder="Enter your state">
-                        </div>
-                        <div>
-                        <input type="text" placeholder="Enter your guest count">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
 
 <!--FOOTER-->
