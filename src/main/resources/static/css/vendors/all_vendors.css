@@ -14,13 +14,13 @@ main{
     width:264px;
     height:270px;
 }
-.btn{
+.vendorBtn{
     background-color: #212727;
     color:white;
     border-radius: 0;
     padding-right:5px;
 }
-.btn:hover{
+.vendorBtn:hover{
     background-color: #E19B6E;
 }
 
