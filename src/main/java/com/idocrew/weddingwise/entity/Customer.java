@@ -23,9 +23,9 @@ public class Customer {
     @Column(name = "id", nullable = false)
     private long id;
     @Column(name="budget", columnDefinition="int(11)")
-    private int budget;
+    private Integer budget = null;
     @Column(name="guest_count", columnDefinition="int(11)")
-    private int guestCount;
+    private Integer guestCount = null;
     @Column(name="partner_fname", columnDefinition="varchar(50)", nullable = false)
     private String partnerFName;
     @Column(name="partner_lname", columnDefinition="varchar(50)", nullable = false)
