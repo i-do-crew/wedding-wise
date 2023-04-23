@@ -46,43 +46,43 @@ public class User {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name="username", columnDefinition="varchar(50)", nullable = false)
+    @Column(name = "username", columnDefinition = "varchar(50)", nullable = false)
     private String username;
 
-    @Column(name="email", columnDefinition="varchar(50)", nullable = false)
+    @Column(name = "email", columnDefinition = "varchar(50)", nullable = false)
     private String email;
 
-    @Column(name="password", columnDefinition="varchar(100)", nullable = false)
+    @Column(name = "password", columnDefinition = "varchar(100)", nullable = false)
     private String password;
 
-    @Column(name="first_name", columnDefinition="varchar(25) not null", nullable = false)
+    @Column(name = "first_name", columnDefinition = "varchar(25) not null", nullable = false)
     private String firstName;
 
-    @Column(name="last_name", columnDefinition="varchar(25) not null", nullable = false)
+    @Column(name = "last_name", columnDefinition = "varchar(25) not null", nullable = false)
     private String lastName;
 
-    @Column(name="city", columnDefinition="varchar(25)", nullable = false)
+    @Column(name = "city", columnDefinition = "varchar(25)", nullable = false)
     private String city;
 
-    @Column(name="state", columnDefinition="varchar(25)", nullable = false)
+    @Column(name = "state", columnDefinition = "varchar(25)", nullable = false)
     private String state;
 
-    @Column(name="account_verified", columnDefinition = "bit", nullable = false)
+    @Column(name = "account_verified", columnDefinition = "bit", nullable = false)
     private boolean accountVerified = false;
 
-    @Column(name="failed_login_attempts", columnDefinition = "int 11", nullable = false)
+    @Column(name = "failed_login_attempts", columnDefinition = "int 11", nullable = false)
     private int failedLoginAttempts;
 
-    @Column(name="login_disabled", columnDefinition = "bit", nullable = false)
+    @Column(name = "login_disabled", columnDefinition = "bit", nullable = false)
     private boolean loginDisabled = false;
 
-    @Column(name="account_non_expired", columnDefinition = "bit", nullable = false)
+    @Column(name = "account_non_expired", columnDefinition = "bit", nullable = false)
     private boolean accountNonExpired = true;
 
-    @Column(name="account_non_locked", columnDefinition = "bit", nullable = false)
+    @Column(name = "account_non_locked", columnDefinition = "bit", nullable = false)
     private boolean accountNonLocked = true;
 
-    @Column(name="credentials_non_expired", columnDefinition = "bit", nullable = false)
+    @Column(name = "credentials_non_expired", columnDefinition = "bit", nullable = false)
     private boolean credentialsNonExpired = true;
 
     @OneToMany(mappedBy = "user")
@@ -99,6 +99,9 @@ public class User {
             name = "user_groups",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false))
-    private Set<PrincipalGroup> userGroups;
+    private Set<PrincipalGroup> userGroups = new LinkedHashSet<>();
 
+    public void addGroup(PrincipalGroup group) {
+        userGroups.add(group);
+    }
 }
