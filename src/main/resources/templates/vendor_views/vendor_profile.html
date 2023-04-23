@@ -74,35 +74,37 @@
 </main>
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-<!--                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>-->
-                    <h4 class="modal-title">Edit your profile</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="d-grid g-2">
-                        <input type="text" placeholder="Enter your business name" class="mb-4">
+        <div class="container p-4">
+            <div class="modal-dialog">
+                <div class="modal-content card p-4">
+                    <div class="modal-header">
+    <!--                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>-->
+                        <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
                     </div>
-                    <div class="d-grid g-2">
-                        <input type="text" placeholder="Enter your business email" class="mb-4">
+                    <div class="modal-body">
+                        <div class="d-grid g-2 mb-1">
+                            <input type="text" placeholder="Enter your business name" class="mb-4 font">
+                        </div>
+                        <div class="d-grid g-2 mb-1">
+                            <input type="text" placeholder="Enter your business email" class="mb-4 font">
+                        </div>
+                        <div class="d-grid g-2 mb-1">
+                            <input type="text" placeholder="Enter your business address" class="mb-4 font">
+                        </div>
+                        <div class="d-grid g-2 mb-1">
+                            <input type="text" placeholder="Enter your business phone number" class="mb-4 font">
+                        </div>
+                        <div class="d-grid g-2 mb-1">
+                            <input type="text" placeholder="Enter your business capacity -if venue" class="mb-4 font">
+                        </div>
+                        <div class="d-grid g-2 mb-1">
+                            <input type="text" placeholder="Enter your budget range" class="mb-4 font">
+                        </div>
                     </div>
-                    <div class="d-grid g-2">
-                        <input type="text" placeholder="Enter your business address" class="mb-4">
-                    </div>
-                    <div class="d-grid g-2">
-                        <input type="text" placeholder="Enter your business phone number" class="mb-4">
-                    </div>
-                    <div class="d-grid g-2">
-                        <input type="text" placeholder="Enter your business capacity -if venue vendorCategory" class="mb-4">
-                    </div>
-                    <div class="d-grid g-2">
-                        <input type="text" placeholder="Enter your budget range" class="mb-4">
-                    </div>
-                </div>
-                <div class="modal-footer">
+                    <div class="modal-footer">
 
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                        <button id="closeBtn" type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>

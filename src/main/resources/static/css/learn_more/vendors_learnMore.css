@@ -1,41 +1,59 @@
-#body {
-    background-color: #e19b6e;
+main{
+    background-color: #FFE5D2;
+
 }
 
-#budgetCard {
-    background-color: #fffaf7;
-    margin-top: 50px;
-    width: auto;
+#vendorCard {
+    background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;
+    height:100vh;
+    /*width:100vw;*/
 }
 
-#card {
-    background-color: #fffaf7;
-}
-
+/*#card {*/
+/*    background-color: #FFFAF7;*/
+/*    border-radius: 0;*/
+/*    border: 1px solid #212727;*/
+/*}*/
 #text {
     text-align: left;
+    padding-top:150px;
+
 }
 
-#p {
-    margin: 0;
-    margin-top: 100px;
-    font-family: "Nunito Sans";
-    font-size: 20px;
-}
+/*#p {*/
+/*    margin: 0;*/
+/*    margin-top: 100px;*/
+/*    !*font-family: "Nunito Sans";*!*/
+/*    font-size: 20px;*/
+/*}*/
 
 .card-title {
-    font-family: "Luxurious Roman";
-    text-align: center;
+    /*font-family: "Luxurious Roman";*/
+    /*text-align: center;*/
 }
 
 .image {
-    width: 350px;
-    height: 500px;
-    margin-top: 50px;
-    margin-right: 20px;
+    /*width: 250px;*/
+    /*height: 250px;*/
+    object-fit: cover;
+    width:550px;
+    height: 600px;
+    /*margin:20px;*/
+    border-radius: 0;
+    border: 1px solid #212727;
 }
 
 #button {
     background-color: #212727;
 }
 
+#vendorCol{
+    padding-left:70px;
+}
+
+#vendorColImg{
+    /*width:250px;*/
+    /*height:250px;*/
+}
