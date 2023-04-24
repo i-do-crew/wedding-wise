@@ -20,10 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
@@ -53,7 +50,7 @@ public class RegistrationController {
     @PostMapping("/client/registration")
     public String clientRegistrationPost(@ModelAttribute Customer customer){
         userRegistrationService.register(customer);
-        return REDIRECT_VERIFICATION;
+        return REDIRECT_LOGIN;
     }
     @GetMapping("/vendor/registration")
     public String vendorRegistration(Model model){
@@ -68,7 +65,7 @@ public class RegistrationController {
     @PostMapping("/vendor/registration")
     public String vendorRegistrationPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
         userRegistrationService.register(vendorComposite);
-        return REDIRECT_VERIFICATION;
+        return "login_and_signup/email_verification";
     }
     @GetMapping("register/verify")
     public String emailVerification(@RequestParam(required = false) String token, final Model model, RedirectAttributes redirAttr) throws ServletException, IOException {
@@ -84,8 +81,5 @@ public class RegistrationController {
         }
         return REDIRECT_LOGIN;
     }
-    @GetMapping("/verification")
-    public String verification(){
-        return "login_and_signup/email_verification";
-    }
+
 }
