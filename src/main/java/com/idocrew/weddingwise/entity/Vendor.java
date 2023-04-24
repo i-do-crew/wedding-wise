@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -55,5 +56,8 @@ public class Vendor {
 
     @OneToMany(mappedBy = "vendor")
     private Set<CustomerVendor> customerVendors = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "vendor")
+    private List<BudgetEntry> budgetEntries;
 
 }

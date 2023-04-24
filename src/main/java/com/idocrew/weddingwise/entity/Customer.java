@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -32,6 +33,8 @@ public class Customer {
     private String partnerLName;
     @Column(name="wedding_dt", columnDefinition="date")
     private LocalDate weddingDt;
+    @OneToMany(mappedBy = "customer")
+    private List<BudgetEntry> budgetEntries;
     @OneToMany(mappedBy = "customer")
     private Set<GuestList> guestLists = new LinkedHashSet<>();
     @OneToMany(mappedBy = "customer")
