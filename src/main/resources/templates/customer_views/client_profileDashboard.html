@@ -18,7 +18,7 @@
     <div class="container p-4">
         <div class="card" id="cardBody">
             <div class="text-center pt-4" >
-                <h1 class="fontTitle">Welcome to the <span th:text="${user.lastName}"></span>-<span th:text="${customer.partnerLName}"></span> dashboard!</h1>
+                <h1 class="fontTitle">Welcome to the <span th:text="${session.user.lastName}"></span>-<span th:text="${session.customer.partnerLName}"></span> dashboard!</h1>
             </div>
             <div class="container p-4 ">
                 <hr>

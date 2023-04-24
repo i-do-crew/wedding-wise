@@ -1,11 +1,14 @@
 package com.idocrew.weddingwise.repositories;
 
-import com.idocrew.weddingwise.entity.Budget;
+import com.idocrew.weddingwise.entity.BudgetEntry;
 import com.idocrew.weddingwise.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BudgetRepository  extends JpaRepository<Budget, Long> {
-    Budget findById(long id);
+import java.util.List;
 
-    Budget findBudgetByCustomer(Customer customer);
+public interface BudgetRepository  extends JpaRepository<BudgetEntry, Long> {
+    BudgetEntry findById(long id);
+
+    List<BudgetEntry> findAllByCustomer(Customer customer);
+
 }
