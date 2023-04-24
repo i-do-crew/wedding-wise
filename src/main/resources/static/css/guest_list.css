@@ -1,6 +1,23 @@
 main{
     background-color: #FFE5D2;
+}
 
+#mainCard{
+    background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;
+}
+
+#border {
+    position: relative;
+    flex:auto;
+    text-align: center;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    width: 350px;
+    height: 200px;
+    top: 50%;
+    left: 40%;
 }
 .card{
     background-color: #FFFAF7;
@@ -22,48 +39,4 @@ main{
 .btn:hover{
    color: #E19B6E;
 }
-
-
-
-/*#border {*/
-/*    position: relative;*/
-/*    flex:auto;*/
-/*    text-align: center;*/
-/*    border: 1px solid black;*/
-/*    margin-bottom: 10px;*/
-/*    width: 350px;*/
-/*    height: 200px;*/
-/*    top: 50%;*/
-/*    left: 40%;*/
-/*}*/
-
-/*#borderTwo {*/
-/*    position: relative;*/
-/*    flex:auto;*/
-/*    text-align: center;*/
-/*    border: 1px solid black;*/
-/*    margin-bottom: 10px;*/
-/*    width: 350px;*/
-/*    height: 200px;*/
-/*    top: 50%;*/
-/*    left: 40%;*/
-/*}*/
-
-/*#borderThree {*/
-/*    position: relative;*/
-/*    flex:auto;*/
-/*    text-align: center;*/
-/*    border: 1px solid black;*/
-/*    margin-bottom: 10px;*/
-/*    width: 350px;*/
-/*    height: 200px;*/
-/*    top: 50%;*/
-/*    left: 40%;*/
-/*    display: flex;*/
-/*}*/
-
-/*#myModal {*/
-/*    display: none;*/
-/*}*/
-
 
