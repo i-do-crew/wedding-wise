@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/fragments :: head}" >
-  <meta charset="UTF-8">
-  <title>Each Vendor Category</title>
+<head>
+    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
+    <meta charset="UTF-8">
+    <title>Categories of Vendors </title>
+    <link th:rel="stylesheet" href="/css/client_views/each_vendorCategories.css"/>
 </head>
 
-<body>
+<body class="body">
 <!--NAVBAR-->
 <nav th:insert="~{fragments/fragments :: navbar}"></nav>
 <!--CUSTOMER SIDEBAR-->
@@ -15,9 +17,9 @@
 <!--EDIT PROFILE MODAL-->
 <div th:insert="~{fragments/fragments :: profileModal}"></div>
 
-<main>
-    <div class="container p-4">
-        <div class="card">
+<main style="background-color: #FFE5D2; padding:50px;">
+    <div class="container p-5 border border-dark vh-100" style="background-color: #FFFAF7;">
+        <div class="container-fluid" id="mainCard">
             <div class="text-center">
                 <h1 th:if="${id == 1}" class="fontTitle" th:text="Venues"></h1>
                 <h1 th:if="${id == 2}" class="fontTitle" th:text="Photographers"></h1>
@@ -27,32 +29,69 @@
                 <h1 th:if="${id == 6}" class="fontTitle" th:text="Bar and Beverage"></h1>
                 <h1 th:if="${id == 7}" class="fontTitle" th:text="Bands and DJs"></h1>
             </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col">
-                    <img class="" src="http://via.placeholder.com/150x150" alt="Vendor Name">
+            <div class="flex-column d-flex justify-content-evenly align-items-center">
+
+
+                <div class="card mb-3" style="max-width: 900px; background-color: #FFE5D2">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="/img/vendor_categories/weddingMusic.jpg/" class="img-fluid rounded-start"
+                                 alt="Vendor Name">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 th:if="${id == 1}" class="card-title">Rancho La Mission</h5>
+                                <h5 th:if="${id == 2}" class="card-title">Evelyn Photography</h5>
+                                <h5 th:if="${id == 3}" class="card-title">Greg Reese Events</h5>
+                                <h5 th:if="${id == 4}" class="card-title">Scratch Kitchen</h5>
+                                <h5 th:if="${id == 5}" class="card-title">Tasty Swirls Company</h5>
+                                <h5 th:if="${id == 6}" class="card-title">Barmasters Texas</h5>
+                                <h5 th:if="${id == 7}" class="card-title">DJMusic Entertainment LLC</h5>
+                                <p class="card-text">Vendor's information.</p>
+<!--                                star ratings-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+
+                                <a th:if="${id == 1}" class="" href="/vendors/individual/1"><button class="btn btn-outline-dark">Book This Vendor</button></a>
+                                <a th:if="${id == 2}" class="" href="/vendors/individual/2"><button class="btn btn-outline-dark">Book This Vendor</button></a>
+                                <a th:if="${id == 3}" class="" href="/vendors/individual/3"><button class="btn btn-outline-dark">Book This Vendor</button></a>
+                                <a th:if="${id == 4}" class="" href="/vendors/individual/4"><button class="btn btn-outline-dark">Book This Vendor</button></a>
+                                <a th:if="${id == 5}" class="" href="/vendors/individual/5"><button class="btn btn-outline-dark">Book This Vendor</button></a>
+                                <a th:if="${id == 6}" class="" href="/vendors/individual/6"><button class="btn btn-outline-dark">Book This Vendor</button></a>
+                                <a th:if="${id == 7}" class="" href="/vendors/individual/7"><button class="btn btn-outline-dark">Book This Vendor</button></a>
+                                <!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col">
-                    <h5 th:if="${id == 1}" class="">Rancho La Mission</h5>
-                    <h5 th:if="${id == 2}" class="">Evelyn Photography</h5>
-                    <h5 th:if="${id == 3}" class="">Greg Reese Events</h5>
-                    <h5 th:if="${id == 4}" class="">Scratch Kitchen</h5>
-                    <h5 th:if="${id == 5}" class="">Tasty Swirls Company</h5>
-                    <h5 th:if="${id == 6}" class="">Barmasters Texas</h5>
-                    <h5 th:if="${id == 7}" class="">DJMusic Entertainment LLC</h5>
-                    <p class="">Vendor's information.</p>
-                    <a th:if="${id == 1}" class="" href="/vendors/individual/1">Book This Vendor</a>
-                    <a th:if="${id == 2}" class="" href="/vendors/individual/2">Book This Vendor</a>
-                    <a th:if="${id == 3}" class="" href="/vendors/individual/3">Book This Vendor</a>
-                    <a th:if="${id == 4}" class="" href="/vendors/individual/4">Book This Vendor</a>
-                    <a th:if="${id == 5}" class="" href="/vendors/individual/5">Book This Vendor</a>
-                    <a th:if="${id == 6}" class="" href="/vendors/individual/6">Book This Vendor</a>
-                    <a th:if="${id == 7}" class="" href="/vendors/individual/7">Book This Vendor</a>
-                </div>
+
+
+
             </div>
         </div>
     </div>
 </main>
-
+<!--                    <img class="card-img-top" id="img" src="/img/vendor_categories/weddingMusic.jpg/" alt="Vendor Name">-->
+<!--                    <div style="text-align: center">-->
+<!--                        <h5 th:if="${id == 1}" class="">Rancho La Mission</h5>-->
+<!--                        <h5 th:if="${id == 2}" class="">Evelyn Photography</h5>-->
+<!--                        <h5 th:if="${id == 3}" class="">Greg Reese Events</h5>-->
+<!--                        <h5 th:if="${id == 4}" class="">Scratch Kitchen</h5>-->
+<!--                        <h5 th:if="${id == 5}" class="">Tasty Swirls Company</h5>-->
+<!--                        <h5 th:if="${id == 6}" class="">Barmasters Texas</h5>-->
+<!--                        <h5 th:if="${id == 7}" class="">DJMusic Entertainment LLC</h5>-->
+<!--                        <p class="">Vendor's information.</p>-->
+<!--                        <a th:if="${id == 1}" class="" href="/vendors/individual/1">Book This Vendor</a>-->
+<!--                        <a th:if="${id == 2}" class="" href="/vendors/individual/2">Book This Vendor</a>-->
+<!--                        <a th:if="${id == 3}" class="" href="/vendors/individual/3">Book This Vendor</a>-->
+<!--                        <a th:if="${id == 4}" class="" href="/vendors/individual/4">Book This Vendor</a>-->
+<!--                        <a th:if="${id == 5}" class="" href="/vendors/individual/5">Book This Vendor</a>-->
+<!--                        <a th:if="${id == 6}" class="" href="/vendors/individual/6">Book This Vendor</a>-->
+<!--                        <a th:if="${id == 7}" class="" href="/vendors/individual/7">Book This Vendor</a>-->
+<!--                    </div>-->
 
 
 <!--FOOTER-->
