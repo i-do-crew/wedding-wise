@@ -12,9 +12,9 @@
     font-family: "Luxurious Roman";
 }
 
-hr{
-    width: 50%;
-}
+/*hr{*/
+/*    width: 50%;*/
+/*}*/
 
 main{
     background-color: #FFE5D2;
@@ -29,4 +29,8 @@ main{
 .col{
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+img{
+    object-fit: cover;
 }

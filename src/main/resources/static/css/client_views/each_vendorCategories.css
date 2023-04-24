@@ -1,6 +1,14 @@
-*{box-sizing: border-box; padding: 0px;
-margin: 0px;
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
 }
+
+/*.card{*/
+/*    border-radius: 0;*/
+/*    border: 1px solid #212727;*/
+/*    background-color: #FFFAF7;*/
+/*}*/
 
 /*.labels {*/
 /*    font-family: "Luxurious Roman";*/

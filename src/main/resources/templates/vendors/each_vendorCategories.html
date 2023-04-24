@@ -15,8 +15,8 @@
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
-<main style="background-color: #FFE5D2">
-    <div class="container p-4 border border-dark vh-100" style="background-color: #FFFAF7">
+<main style="background-color: #FFE5D2; padding:50px;">
+    <div class="container p-5 border border-dark vh-100" style="background-color: #FFFAF7;">
         <div class="container-fluid" id="mainCard">
             <div class="text-center">
                 <h1 th:if="${id == 1}" class="fontTitle" th:text="Venues"></h1>
@@ -46,6 +46,13 @@
                                 <h5 th:if="${id == 6}" class="card-title">Barmasters Texas</h5>
                                 <h5 th:if="${id == 7}" class="card-title">DJMusic Entertainment LLC</h5>
                                 <p class="card-text">Vendor's information.</p>
+<!--                                star ratings-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
+
                                 <a th:if="${id == 1}" class="" href="/vendors/individual/1"><button class="btn btn-outline-dark">Book This Vendor</button></a>
                                 <a th:if="${id == 2}" class="" href="/vendors/individual/2"><button class="btn btn-outline-dark">Book This Vendor</button></a>
                                 <a th:if="${id == 3}" class="" href="/vendors/individual/3"><button class="btn btn-outline-dark">Book This Vendor</button></a>
