@@ -40,8 +40,8 @@
                     <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarVendor">Profile</a>
                 </li>
                 <li class="nav-item  me-2">
-                    <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard"> Client Dashboard</a>
-                    <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile"> Vendor Dashboard</a>
+                    <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard">Dashboard</a>
+                    <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile">Dashboard</a>
                 </li>
                 <li class="nav-item me-2" sec:authorize="!isAuthenticated()">
                     <a class="nav-link" href="/login">Login</a>
