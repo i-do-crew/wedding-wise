@@ -24,7 +24,7 @@
                     <form th:action="@{/client/registration}" method="POST" th:object="${customer}" class="pe-3">
                         <div class="mb-1">
                             <label for="email" class="form-label"></label>
-                            <input th:field="*{user.email}" type="text" name="email" class="form-control" id="email"
+                            <input th:field="*{user.email}" type="email" name="email" class="form-control" id="email"
                                    placeholder="Enter your Email">
                         </div>
                         <div class="mb-1">

@@ -45,7 +45,7 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return !super.isLoginDisabled();
+        return super.isAccountVerified() && !super.isLoginDisabled();
     }
 }
 
