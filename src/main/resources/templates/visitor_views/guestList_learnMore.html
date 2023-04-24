@@ -3,7 +3,7 @@
 <head>
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
-    <title>Visitor Guest List Manager</title>
+    <title>Guest List Manager Info</title>
     <link th:rel="stylesheet" href="/css/learn_more/guestList_learnMore.css"/>
 
 </head>
@@ -14,10 +14,12 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
 
 <main>
     <div class="container p-4" >
-        <div class="card" id="budgetCard">
+        <div class="card" id="guestCard">
             <h1 class="card-title text-center fontTitle pt-3">Guest List Manager</h1>
             <div class="row">
                 <div class="col pt-5 " id="guestCol">

@@ -1,21 +1,31 @@
 package com.idocrew.weddingwise.services.impl;
 
+import com.idocrew.weddingwise.context.AccountVerificationEmailContext;
 import com.idocrew.weddingwise.entity.*;
+    import com.idocrew.weddingwise.exception.InvalidTokenException;
 import com.idocrew.weddingwise.repositories.*;
 import com.idocrew.weddingwise.services.EmailService;
+import com.idocrew.weddingwise.services.SecureTokenService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
-import lombok.AllArgsConstructor;
+import jakarta.mail.MessagingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.idocrew.weddingwise.enums.UserType.CUSTOMER;
+import static com.idocrew.weddingwise.enums.UserType.VENDOR;
+
+@RequiredArgsConstructor
 @Service("userService")
-@AllArgsConstructor
 public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     private final UserRepository userRepository;
@@ -28,6 +38,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final DjsAndLiveBandsRepository djsAndLiveBandsRepository;
     private final DjsAndLiveBandsMusicGenreRepository djsAndLiveBandsMusicGenreRepository;
     private final VendorsPhotoFormatRepository vendorsPhotoFormatRepository;
+    private final SecureTokenService secureTokenService;
+    @Value("${site.base.url.https}")
+    private String baseURL;
 
     @Override
     @Transactional
@@ -35,10 +48,13 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         if(checkIfUserExist(customer.getUser().getEmail())){
             throw new DuplicateKeyException("Customer already exists for this email");
         }
-        User userEntity = saveUser(customer.getUser(), "CUSTOMER");
-        customer.setUser(userEntity);
-        saveCustomer(customer);
-        //sendRegistrationConfirmationEmail(userEntity);
+
+        User userEntity = saveUser(customer.getUser(), CUSTOMER.getCode());
+        Customer customerEntity = new Customer();
+        BeanUtils.copyProperties(customer, customerEntity);
+        customerEntity.setUser(userEntity);
+        saveCustomer(customerEntity);
+        sendRegistrationConfirmationEmail(userEntity);
     }
 
     private void saveCustomer(Customer customer) {
@@ -52,9 +68,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             throw new DuplicateKeyException("Vendor already exists for this email");
         }
 
-        User userEntity = saveUser(vendorComposite.getUser(), "VENDOR");
-        vendorComposite.getVendor().setUser(userEntity);
-        Vendor vendorEntity = saveVendor(vendorComposite.getVendor());
+        User userEntity = saveUser(vendorComposite.getUser(), VENDOR.getCode());
+        Vendor vendorEntity = new Vendor();
+        BeanUtils.copyProperties(vendorComposite.getVendor(), vendorEntity);
+        vendorEntity.setUser(userEntity);
+        vendorEntity = saveVendor(vendorEntity);
 
         switch (vendorEntity.getVendorCategory().getTitle()) {
             case "Venues" -> saveVenue(vendorEntity, vendorComposite);
@@ -66,7 +84,25 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             default -> {
             }
         }
-        //sendRegistrationConfirmationEmail(userEntity);
+        sendRegistrationConfirmationEmail(userEntity);
+    }
+
+    @Override
+    public boolean verifyUser(String token) throws InvalidTokenException {
+        SecureToken secureToken = secureTokenService.findByToken(token);
+        if(Objects.isNull(secureToken) || !StringUtils.equals(token, secureToken.getToken()) || secureToken.isExpired()){
+            throw new InvalidTokenException("Token is not valid");
+        }
+        User userEntity = userRepository.findById(secureToken.getUser().getId());
+        if(Objects.isNull(userEntity)){
+            return false;
+        }
+        userEntity.setAccountVerified(true);
+        userRepository.save(userEntity); // let's same user details
+
+        // we don't need invalid password now
+        secureTokenService.removeToken(secureToken);
+        return true;
     }
 
     private DjsAndLiveBand saveDjOrBand(Vendor vendorEntity, DjsAndLiveBandsCategory category) {
@@ -108,7 +144,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         String hash = passwordEncoder.encode(user.getPassword());
         userEntity.setPassword(hash);
         userEntity.setUsername(user.getEmail());
-        userEntity.setUserGroups(getUserGroupAsSet(code));
+        userEntity.addGroup(getUserGroup(code));
         userEntity = userRepository.save(userEntity);
         return userEntity;
     }
@@ -118,14 +154,20 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void sendRegistrationConfirmationEmail(User userEntity) {
-        emailService.sendWelcomeEmail(
-            userEntity,
-            "Welcome, [%s]".formatted(userEntity.getFirstName()),
-            "You have been registered"
-        );
+        SecureToken secureToken = secureTokenService.createSecureToken(userEntity);
+
+        AccountVerificationEmailContext emailContext = new AccountVerificationEmailContext();
+        emailContext.init(userEntity);
+        emailContext.setToken(secureToken.getToken());
+        emailContext.buildVerificationUrl(baseURL, secureToken.getToken());
+        try {
+            emailService.sendVerificationEmail(emailContext);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
-    private Set<PrincipalGroup> getUserGroupAsSet(String role){
-        return Set.of(principalGroupRepository.findByCode(role));
+    private PrincipalGroup getUserGroup(String role){
+        return principalGroupRepository.findByCode(role);
     }
 }

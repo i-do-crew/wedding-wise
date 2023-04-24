@@ -40,8 +40,8 @@
                     <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarVendor">Profile</a>
                 </li>
                 <li class="nav-item  me-2">
-                    <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard"> Client Dashboard</a>
-                    <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile"> Vendor Dashboard</a>
+                    <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard">Dashboard</a>
+                    <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile">Dashboard</a>
                 </li>
                 <li class="nav-item me-2" sec:authorize="!isAuthenticated()">
                     <a class="nav-link" href="/login">Login</a>
@@ -116,7 +116,7 @@
         <div class="offcanvas-body">
             <div class="row pb-4">
                 <img src="/img/rings.jpg" alt="picture" id="businessProfileImg">
-                <a class="text-decoration-none text-dark"><i class="fa-solid fa-pencil d-flex justify-content-end"></i></a>
+                <button id="editVendorProfileModalBtn" type="button" class="btn font d-flex justify-content-end" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
             </div>
             <div class="row pb-4">
                 <h3 class="fontTitle">Business Name</h3>
@@ -187,6 +187,49 @@
         </div>
     </div>
 </footer>
+
+<!-- Client Edit Profile Modal -->
+<div th:fragment="profileModal" id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
+            </div>
+            <div class="modal-body ">
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter your first name" class="font mb-1">
+                </div>
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter your last name" class="font mb-1">
+                </div>
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter your partners first name" class="font mb-1">
+                </div>
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter your partners last name" class="font mb-1">
+                </div>
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter the date of your wedding" class="font mb-1">
+                </div>
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter your budget range" class="font mb-1">
+                </div>
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter your city" class="font mb-1">
+                </div>
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter your state" class="font mb-1">
+                </div>
+                <div class="d-grid g-2 ">
+                    <input type="text" placeholder="Enter your guest count" class="font mb-1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--BOOTSTRAP-->
 <div th:fragment="bootstrapJs">

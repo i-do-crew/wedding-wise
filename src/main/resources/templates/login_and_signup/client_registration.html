@@ -22,42 +22,42 @@
                 <div class="col text-center px-3 pt-5">
                     <h1 class="fontTitle">CREATE YOUR DREAM WEDDING ONE CLICK AT A TIME</h1>
                     <form th:action="@{/client/registration}" method="POST" th:object="${customer}" class="pe-3">
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="email" class="form-label"></label>
                             <input th:field="*{user.email}" type="text" name="email" class="form-control" id="email"
                                    placeholder="Enter your Email">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="password" class="form-label"></label>
-                            <input th:field="*{user.password}" type="text" name="password" class="form-control" id="password"
+                            <input th:field="*{user.password}" type="password" name="password" class="form-control" id="password"
                                    placeholder="Select a password">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="cPassword" class="form-label"></label>
-                            <input type="text" name="cPassword" class="form-control" id="cPassword"
+                            <input type="password" name="cPassword" class="form-control" id="cPassword"
                                    placeholder="Confirm your password">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="firstName" class="form-label"></label>
                             <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
                                    placeholder="Enter your First Name">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="lastName" class="form-label"></label>
                             <input th:field="*{user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
                                    placeholder="Enter your Last Name">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="partnerFName" class="form-label"></label>
                             <input th:field="*{partnerFName}" type="text" name="partnerFName" class="form-control" id="partnerFName"
                                    placeholder="Enter your Partners First Name">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="partnerLName" class="form-label"></label>
                             <input th:field="*{partnerLName}" type="text" name="partnerLName" class="form-control" id="partnerLName"
                                    placeholder="Enter your Partners Last Name">
                         </div>
-                        <div class="row g-3 d-flex align-items-center">
+                        <div class="row g-1 d-flex align-items-center">
                             <div class="col-auto">
                                 <label for="city" class="form-label"></label>
                                 <input th:field="*{user.city}" type="text" name="city" class="form-control" id="city"
@@ -70,21 +70,21 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="date" class="form-label"></label>
                             <input th:field="*{weddingDt}" type="date" name="date" class="form-control" id="date" placeholder="Enter your Wedding Date">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="budget" class="form-label"></label>
                             <input th:field="*{budget}" type="text" name="budget" class="form-control" id="budget"
                                    placeholder="Enter your Budget Range">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="guestCount" class="form-label"></label>
                             <input th:field="*{guestCount}" type="text" name="guestCount" class="form-control" id="guestCount"
                                    placeholder="Enter your Estimated Guest Count">
                         </div>
-                        <button type="submit" id="verifyBtn" class="p-2 font">Sign Up</button>
+                        <button type="submit" id="verifyBtn" class="mt-4 p-2 font">Sign Up</button>
                     </form>
                 </div>
             </div>

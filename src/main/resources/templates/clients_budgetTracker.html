@@ -3,7 +3,7 @@
 <head >
     <th:block th:replace="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
-    <title>Categories of Vendors</title>
+    <title>Budget Tracker</title>
     <link th:rel="stylesheet" href="/css/client_views/budget_tracker.css">
 </head>
 
@@ -14,6 +14,8 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
 
 <main>
     <div class="container p-4">
@@ -30,7 +32,7 @@
                     <p>Cost: $000</p>
                 </div>
                 <div class="col ps-3">
-                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
                 </div>
             </div>
             <hr>
@@ -44,7 +46,7 @@
                     <p>Cost: $000</p>
                 </div>
                 <div class="col ps-3">
-                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
                 </div>
             </div>
             <hr>
@@ -58,7 +60,7 @@
                     <p>Cost: $000</p>
                 </div>
                 <div class="col ps-3">
-                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
                 </div>
             </div>
             <hr>
@@ -72,7 +74,7 @@
                     <p>Cost: $000</p>
                 </div>
                 <div class="col ps-3">
-                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
                 </div>
             </div>
             <hr>
@@ -86,7 +88,7 @@
                     <p>Cost: $000</p>
                 </div>
                 <div class="col ps-3">
-                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
                 </div>
             </div>
             <hr>
@@ -100,7 +102,7 @@
                     <p>Cost: $000</p>
                 </div>
                 <div class="col ps-3">
-                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
                 </div>
             </div>
             <hr>
@@ -114,7 +116,7 @@
                     <p>Cost: $000</p>
                 </div>
                 <div class="col ps-3">
-                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>
+<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
                 </div>
             </div>
         </div>
@@ -125,26 +127,32 @@
 
     <div id="modalBtn" class="modal fade" role="dialog">
         <div class="container p-4">
-        <div class="modal-dialog">
-            <div class="modal-content card p-4">
-                <div class="modal-header  ">
-                    <h2 class="modal-title fontTitle text-center">Budget Information</h2>
-                </div>
-                <div class="modal-body ">
-                    <p class="font">Business Name: name</p>
-                    <p class="font">Cost: $0000</p>
-                    <p class="font">Business Name: name</p>
-                    <p class="font">Cost: $0000</p>
-                    <p class="font">Business Name: name</p>
-                    <p class="font">Cost: $0000</p>
-                </div>
-                <div class="modal-footer">
-                    <button id="closeBtn" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Close</button>
+            <div class="modal-dialog">
+                <div class="modal-content card p-4">
+                    <div class="modal-header  ">
+                        <h2 class="modal-title fontTitle text-center">Itemized Budget</h2>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="d-grid g-2 mb-3">
+                            <input class="font mb-1" type="text" placeholder="Business Name:">
+                            <input class="font mb-1" type="text" placeholder="Cost: ">
+                        </div>
+                        <div class="d-grid g-2 mb-3">
+                            <input class="font mb-1" type="text" placeholder="Business Name:">
+                            <input class="font" type="text" placeholder="Cost: ">
+                        </div>
+                        <div class="d-grid g-2 mb-3">
+                            <input class="font mb-1" type="text" placeholder="Business Name:">
+                            <input class="font mb-1" type="text" placeholder="Cost: ">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="closeBtn" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
