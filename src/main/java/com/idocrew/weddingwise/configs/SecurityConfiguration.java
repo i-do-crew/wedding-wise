@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .successHandler(myAuthenticationSuccessHandler())
+                .failureUrl("/login-error")
                 .permitAll() // Anyone can go to the login page
             .and()
             .logout()

@@ -24,7 +24,7 @@
                     <form th:action="@{/vendor/registration}" method="POST" th:object="${vendorComposite}">
                         <div class="">
                             <label for="email" class="form-label"></label>
-                            <input th:field="*{vendor.user.email}" type="text" name="email" class="form-control" id="email"
+                            <input th:field="*{vendor.user.email}" type="email" name="email" class="form-control" id="email"
                                    placeholder="Enter your Email" th:required>
                         </div>
                         <div class="">
