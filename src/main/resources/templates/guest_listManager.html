@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/fragments :: head}">
+<head >
+    <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/static/css/guest_list.css"/>
+    <title>Guest List Manager</title>
+    <link rel="stylesheet" href="/css/guest_list.css"/>
 </head>
 <body>
 <!--NAVBAR-->
@@ -17,95 +18,95 @@
 
 <main>
     <div class="container p-4">
-        <h1 class="text-center">Your Guests</h1>
-        <div class="card" id="border">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card" style="border: black; width: 20rem;">
-                        <div class="card-body">
-                            <h5 class="card-title" style="text-align: center">RSVP'd: 0000</h5>
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                        </div>
-                    </div>
+        <div class="card p-5">
+            <h1 class="text-center fontTitle">Your Guests: 0000</h1>
+            <div class="card p-5 m-5" id="card1">
+                <div class="card-title text-center">
+                    <h3 class="fontTitle">RSVP'd: 0000</h3>
+                </div>
+                <hr>
+                <div class="card-body text-center">
+                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
+                    <hr>
+                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
+                    <hr>
+                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
                 </div>
             </div>
-        </div>
-        <div class="container" id="borderTwo">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card" style="border: black; width: 20rem;">
-                        <div class="card-body">
-                            <h5 class="card-title" style="text-align: center">Regretfully Declined: 0000</h5>
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                        </div>
-                    </div>
+            <div class="card p-5 m-5" id="card2">
+                <div class="card-title text-center">
+                    <h3 class="fontTitle" >Regretfully Declined: 0000</h3>
+                    <hr>
+                </div>
+                <div class="card-body text-center">
+                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
+                    <hr>
+                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
+                    <hr>
+                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
                 </div>
             </div>
-        </div>
-
-        <div class="container" id="borderThree">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card" style="border: black; width: 20rem;">
-                        <div class="card-body">
-                            <h5 class="card-title" style="text-align: center">Invited: 0000</h5>
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                            <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
-
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                            <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
-
-                            <hr>
-                            <p class="card-text" style="text-align: center">Guest Name-party number-email-address</p>
-                            <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
-                        </div>
+            <div class="card p-5 m-5 " id="card3">
+                <div class="card-title text-center">
+                    <h3 class="fontTitle" >Invited: 0000</h3>
+                </div>
+                <hr>
+                <div class="card-body text-center ">
+                    <div class="d-flex align-items-center justify-content-around">
+                        <button type="button" class="btn font editModalBtn" data-bs-toggle="modal" data-bs-target="#editGuestModal"><i class="fa-solid fa-pencil"></i></button>
+                        <p class="card-text font">Guest Name-party number-email address-phone number-street address</p>
+                        <button type="button" class="btn font"><i class="fa-regular fa-circle-check"></i></button>
+                        <button type="button" class="btn font"><i class="fa-regular fa-circle-xmark"></i></button>
+                    </div>
+                    <hr>
+                    <div class="d-flex align-items-center justify-content-around">
+                        <button type="button" class="btn font editModalBtn" data-bs-toggle="modal" data-bs-target="#editGuestModal"><i class="fa-solid fa-pencil"></i></button>
+                        <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
+                        <button type="button" class="btn font"><i class="fa-regular fa-circle-check"></i></button>
+                        <button type="button" class="btn font"><i class="fa-regular fa-circle-xmark"></i></button>
+                    </div>
+                    <hr>
+                    <div class="d-flex align-items-center justify-content-around">
+                        <button type="button" class="btn font editModalBtn" data-bs-toggle="modal" data-bs-target="#editGuestModal"><i class="fa-solid fa-pencil"></i></button>
+                        <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
+                        <button type="button" class="btn font"><i class="fa-regular fa-circle-check"></i></button>
+                        <button type="button" class="btn font"><i class="fa-regular fa-circle-xmark"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit a Guest</h4>
-                </div>
-                <div class="modal-body">
-                    <input type="text" id="Name1" name="Guest Name">
-                    <input type="text" id="Name2" name="Guest Name">
-                    <input type="text" id="Name3" name="Guest Name">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+    <!--EDIT GUEST MODAL -->
+    <div id="editGuestModal" class="modal fade" role="dialog">
+        <div class="container p-4">
+            <div class="modal-dialog">
+                <div class="modal-content card">
+                    <div class="modal-header">
+                        <h4 class="modal-title fontTitle text-center">Edit a Guest</h4>
+                    </div>
+                    <div class="modal-body text-center ">
+                        <div class="d-grid g-2 mb-3">
+                            <input type="text" class="editGuestText mb-1" placeholder="Guest Name:">
+                            <input type="text" class="editGuestText mb-1" placeholder="Party Number:">
+                            <input type="text" class="editGuestText mb-1" placeholder="Email Address:">
+                            <input type="text" class="editGuestText mb-1" placeholder="Phone Number:">
+                            <input type="text" class="editGuestText mb-1" placeholder="Street Address:">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="closeBtn" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-dismiss="editGuestModal">Close</button>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
+
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 <!--JAVASCRIPT-->
 <script type="text/javascript" src="/static/guest_listModal.js"></script>
-<!--    <script src="https://kit.fontawesome.com/a88297ca40.js" crossorigin="anonymous"></script>-->
 </body>
 </html>

@@ -1,42 +1,69 @@
-#border {
-    position: relative;
-    flex:auto;
-    text-align: center;
-    border: 1px solid black;
-    margin-bottom: 10px;
-    width: 350px;
-    height: 200px;
-    top: 50%;
-    left: 40%;
+main{
+    background-color: #FFE5D2;
+
+}
+.card{
+    background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;
 }
 
-#borderTwo {
-    position: relative;
-    flex:auto;
-    text-align: center;
-    border: 1px solid black;
-    margin-bottom: 10px;
-    width: 350px;
-    height: 200px;
-    top: 50%;
-    left: 40%;
+.modal-content{
+    border-radius: 0 !important;
 }
 
-#borderThree {
-    position: relative;
-    flex:auto;
-    text-align: center;
-    border: 1px solid black;
-    margin-bottom: 10px;
-    width: 350px;
-    height: 200px;
-    top: 50%;
-    left: 40%;
-    display: flex;
+#card1, #card2, #card3{
+    background-color: #FFE5D2 !important;
 }
 
-#myModal {
-    display: none;
+.editGuestText{
+    width:100%;
 }
+.btn:hover{
+   color: #E19B6E;
+}
+
+
+
+/*#border {*/
+/*    position: relative;*/
+/*    flex:auto;*/
+/*    text-align: center;*/
+/*    border: 1px solid black;*/
+/*    margin-bottom: 10px;*/
+/*    width: 350px;*/
+/*    height: 200px;*/
+/*    top: 50%;*/
+/*    left: 40%;*/
+/*}*/
+
+/*#borderTwo {*/
+/*    position: relative;*/
+/*    flex:auto;*/
+/*    text-align: center;*/
+/*    border: 1px solid black;*/
+/*    margin-bottom: 10px;*/
+/*    width: 350px;*/
+/*    height: 200px;*/
+/*    top: 50%;*/
+/*    left: 40%;*/
+/*}*/
+
+/*#borderThree {*/
+/*    position: relative;*/
+/*    flex:auto;*/
+/*    text-align: center;*/
+/*    border: 1px solid black;*/
+/*    margin-bottom: 10px;*/
+/*    width: 350px;*/
+/*    height: 200px;*/
+/*    top: 50%;*/
+/*    left: 40%;*/
+/*    display: flex;*/
+/*}*/
+
+/*#myModal {*/
+/*    display: none;*/
+/*}*/
 
 
