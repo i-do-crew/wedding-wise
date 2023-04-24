@@ -3,7 +3,8 @@
 <head>
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
-    <title>Wedding Wise Landing Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1 ">
+    <title>Wedding Wise</title>
     <link th:rel="stylesheet" href="/css/index.css">
 </head>
 <body>
@@ -26,52 +27,62 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
 
 <main>
     <div class="container-fluid">
-        <div class="row d-flex justify-content-between" id="vendorRow">
-            <div class="col " id="vendorCol">
-                <b>Vendors</b>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
+        <div class="row " id="vendorRow">
+            <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center" id="vendorCol">
+                <div class="vendorSection">
+                    <b>Vendors</b>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
 
-                <a href="/info/vendors"><button class="btn btn-outline-secondary">Learn More</button></a>
+                    <a href="/info/vendors"><button class="btn btn-outline-secondary">Learn More</button></a>
+                </div>
             </div>
-            <div class="col " id="vendorColImg">
+            <div class="col-6 " id="vendorColImg">
                 <img src="/img/home_page/vendor_home_page.jpg" alt="vendor img" id="vendorImg">
             </div>
         </div>
-        <div class="row d-flex justify-content-between" id="budgetRow">
-            <div class="col " id="budgetColImg">
+        <div class="row " id="budgetRow">
+            <div class="col-6 " id="budgetColImg">
                 <img src="/img/home_page/budget_home_page.jpg" alt="" id="budgetImg">
             </div>
-            <div class="col" id="budgetCol">
-                <b>Budget Tracker</b>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-                <a href="/info/budget"><button class="btn btn-outline-secondary" >Learn More</button></a>
+            <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center" id="budgetCol">
+                <div class="vendorSection">
+                    <b>Budget Tracker</b>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
+                    <a href="/info/budget"><button class="btn btn-outline-secondary" >Learn More</button></a>
+                </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-between" id="guestRow">
-            <div class="col" id="guestCol">
-                <b>Guest List Manager</b>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-                <a href="/info/guests"><button class="btn btn-outline-secondary">Learn More</button></a>
+        <div class="row " id="guestRow">
+            <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center" id="guestCol">
+                <div class="vendorSection">
+                    <b>Guest List Manager</b>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
+                    <a href="/info/guests"><button class="btn btn-outline-secondary">Learn More</button></a>
+                </div>
             </div>
-            <div class="col " id="guestColImg">
+            <div class="col-6 " id="guestColImg">
                 <img src="/img/home_page/guest_home_page.jpg" alt="" id="guestImg">
             </div>
         </div>
-        <div class="row d-flex justify-content-between" id="ideaRow">
-            <div class="col " id="ideaColImg">
+        <div class="row " id="ideaRow">
+            <div class="col-6 " id="ideaColImg">
                 <img src="/img/home_page/idea_home_page.jpg" alt="" id="ideaImg">
             </div>
-            <div class="col" id="ideaCol">
-                <b>Idea Board</b>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
-                <a href="/info/ideas"><button class="btn btn-outline-secondary">Learn More</button></a>
+            <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center" id="ideaCol">
+                <div class="vendorSection">
+                    <b>Idea Board</b>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Aliquam architecto doloremque magnam molestiae, odio quidem?</p>
+                    <a href="/info/ideas"><button class="btn btn-outline-secondary">Learn More</button></a>
+                </div>
             </div>
         </div>
     </div>

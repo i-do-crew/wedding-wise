@@ -3,7 +3,7 @@
 <head>
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
-    <title>Visitor Guest List Manager</title>
+    <title>Guest List Manager Info</title>
     <link th:rel="stylesheet" href="/css/learn_more/guestList_learnMore.css"/>
 
 </head>
@@ -14,31 +14,36 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
 
-<div class="container rounded" id="budgetCard">
-    <h1 class="card-title text-center">Guest List Manager</h1>
-    <div class="row">
-        <span class="col">
-                        <div class="container" id="text">
-            <p>Keep track of your wedding guests and their RSVPs with Wedding Wise's guest list manager. You can also use this feature to communicate with your guests and send out invitations via group email.</p>
-                        </div>
-            <span class="dropdown">
-                <button class="dropdown-toggle btn btn-secondary " type="button" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" id="button">
-                    Sign-Up Here
-                </button>
-                <ul class=" dropdown-menu">
-                    <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
-                    <li><a class="dropdown-item" href="/vendor/registration">Sign-up as Vendor</a></li>
-                </ul>
-            </span>
-        </span>
-        <span class="col">
-            <img src="http://via.placeholder.com/640x360" alt="picture">
-        </span>
+<main>
+    <div class="container p-4" >
+        <div class="card" id="guestCard">
+            <h1 class="card-title text-center fontTitle pt-3">Guest List Manager</h1>
+            <div class="row">
+                <div class="col pt-5 " id="guestCol">
+                    <div class="pb-5" id="text">
+                        <p class="font">Keep track of your wedding guests and their RSVPs with Wedding Wise's guest list manager. You can also use this feature to communicate with your guests and send out invitations via group email.</p>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle btn btn-secondary font" type="button" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" id="button">
+                            Sign-Up Here
+                        </button>
+                        <ul class=" dropdown-menu">
+                            <li><a class="dropdown-item font" href="/client/registration">Sign-up as Client</a></li>
+                            <li><a class="dropdown-item font" href="/vendor/registration">Sign-up as Vendor</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col pt-5" id="guestColImg">
+                    <img src="/img/guest_learn_more.jpg" class="image" alt="picture">
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
+</main>
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->

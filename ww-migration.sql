@@ -11,22 +11,47 @@ DROP DATABASE IF EXISTS `weddingwise`;
 CREATE DATABASE `weddingwise` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `weddingwise`;
 
+DROP TABLE IF EXISTS `budget_planner`;
+CREATE TABLE `budget_planner` (
+`id` bigint(20) NOT NULL AUTO_INCREMENT,
+`user_id` bigint(20) NOT NULL,
+`vendor_id` bigint(20) NOT NULL,
+`amount` decimal(19,2) NOT NULL,
+PRIMARY KEY (`id`),
+KEY `budget_vendor_id_fk` (`user_id`),
+KEY `budget_planner_id_index` (`id`),
+CONSTRAINT `budget_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+CONSTRAINT `budget_vendor_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `budget` int(11) DEFAULT NULL,
 `guest_count` int(11) DEFAULT NULL,
-`city_state` varchar(25) NOT NULL,
 `partner_fname` varchar(50) NOT NULL,
 `partner_lname` varchar(50) NOT NULL,
 `user_id` bigint(20) NOT NULL,
+`wedding_dt` date DEFAULT NULL,
 PRIMARY KEY (`id`),
 KEY `foreign_key_name` (`user_id`),
 CONSTRAINT `foreign_key_name` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `customers` (`id`, `budget`, `guest_count`, `city_state`, `partner_fname`, `partner_lname`, `user_id`) VALUES
-(1,	7600,	75,	'San Antonio, TX',	'Damian',	'Brooks',	12);
+INSERT INTO `customers` (`id`, `budget`, `guest_count`, `partner_fname`, `partner_lname`, `user_id`, `wedding_dt`) VALUES
+(1,	7600,	75,	'Damian',	'Brooks',	12,	'2024-06-22'),
+(11,	2,	3,	'newr',	'girl',	24,	'2023-04-26'),
+(12,	4,	5,	'francis',	'common',	25,	'2023-04-26'),
+(13,	20000,	250,	'kimberly',	'hart',	26,	'2024-06-24'),
+(14,	20000,	250,	'bonnie',	'prosser',	27,	'2024-10-26'),
+(15,	10,	10,	'bonnie',	'parker',	28,	'2024-11-19'),
+(16,	10,	10,	'Jane',	'Doe',	30,	'2024-07-04'),
+(17,	10,	10,	'Beyonce',	'Knowles',	31,	'2025-06-28'),
+(18,	10,	10,	'Cher',	'Sarkisian',	32,	'2023-05-26'),
+(19,	10,	10,	'Rita',	'Wilson',	33,	'2023-04-21'),
+(25,	10,	10,	'katie',	'holmes',	39,	'2023-07-29'),
+(26,	10,	10,	'Angelia',	'Jolie',	40,	'2023-07-29');
 
 DROP TABLE IF EXISTS `customer_vendors`;
 CREATE TABLE `customer_vendors` (
@@ -143,22 +168,6 @@ INSERT INTO `music_genres` (`id`, `title`) VALUES
 (14,	'80s/90s Pop'),
 (15,	'Electronic/Dance');
 
-DROP TABLE IF EXISTS `photographers`;
-CREATE TABLE `photographers` (
-`id` bigint(20) NOT NULL AUTO_INCREMENT,
-`photo_format_id` bigint(20) NOT NULL,
-`vendor_id` bigint(20) NOT NULL,
-PRIMARY KEY (`id`),
-KEY `vendor_id_fk` (`vendor_id`),
-KEY `photographers_photo_format_id_fk` (`photo_format_id`),
-CONSTRAINT `photographers_photo_format_id_fk` FOREIGN KEY (`photo_format_id`) REFERENCES `photo_format` (`id`),
-CONSTRAINT `vendor_id_fk` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-INSERT INTO `photographers` (`id`, `photo_format_id`, `vendor_id`) VALUES
-(2,	1,	2),
-(3,	4,	2);
-
 DROP TABLE IF EXISTS `photo_format`;
 CREATE TABLE `photo_format` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -169,11 +178,10 @@ PRIMARY KEY (`id`)
 INSERT INTO `photo_format` (`id`, `title`) VALUES
 (1,	'Digital'),
 (2,	'Film'),
-(3,	'Both'),
-(4,	'Hybrid');
+(3,	'Both');
 
-DROP TABLE IF EXISTS `principle_groups`;
-CREATE TABLE `principle_groups` (
+DROP TABLE IF EXISTS `principal_groups`;
+CREATE TABLE `principal_groups` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `code` varchar(20) NOT NULL,
 `group` varchar(20) NOT NULL,
@@ -181,9 +189,26 @@ CREATE TABLE `principle_groups` (
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `principle_groups` (`id`, `code`, `group`, `description`) VALUES
+INSERT INTO `principal_groups` (`id`, `code`, `group`, `description`) VALUES
 (1,	'ADMIN',	'Admin Group',	'Admin Group Authority'),
-(2,	'CUSTOMER',	'Customer Group',	'Customer Group Authority');
+(2,	'CUSTOMER',	'Customer Group',	'Customer Group Authority'),
+(3,	'VENDOR',	'Vendor Group',	'Vendor Group Authority');
+
+DROP TABLE IF EXISTS `secure_tokens`;
+CREATE TABLE `secure_tokens` (
+`id` bigint(20) NOT NULL AUTO_INCREMENT,
+`token` varchar(25) DEFAULT NULL,
+`created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+`expires_at` datetime DEFAULT current_timestamp(),
+`user_id` bigint(20) NOT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `token` (`token`),
+KEY `secure_tokens_users_id_fk` (`user_id`),
+CONSTRAINT `secure_tokens_users_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `secure_tokens` (`id`, `token`, `created_at`, `expires_at`, `user_id`) VALUES
+(3,	'S1vMPF-tyfHITpa3w_50',	'2023-04-20 07:56:02',	'2023-04-20 15:56:02',	39);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -191,33 +216,46 @@ CREATE TABLE `users` (
 `email` varchar(50) NOT NULL,
 `username` varchar(50) NOT NULL,
 `password` varchar(100) NOT NULL,
-`role_id` int(10) unsigned DEFAULT 1,
 `first_name` varchar(25) NOT NULL,
 `last_name` varchar(25) NOT NULL,
 `account_verified` bit(1) NOT NULL DEFAULT b'0',
 `failed_login_attempts` int(11) NOT NULL DEFAULT 0,
 `login_disabled` bit(1) NOT NULL DEFAULT b'0',
-`account_non_expired` bit(1) NOT NULL DEFAULT b'0',
-`account_non_locked` bit(1) NOT NULL DEFAULT b'0',
-`credentials_non_expired` bit(1) NOT NULL DEFAULT b'0',
+`account_non_expired` bit(1) NOT NULL DEFAULT b'1',
+`account_non_locked` bit(1) NOT NULL DEFAULT b'1',
+`credentials_non_expired` bit(1) NOT NULL DEFAULT b'1',
+`city` varchar(25) NOT NULL,
+`state` varchar(25) NOT NULL,
 PRIMARY KEY (`id`),
 UNIQUE KEY `email` (`email`),
 UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `role_id`, `first_name`, `last_name`, `account_verified`, `failed_login_attempts`, `login_disabled`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`) VALUES
-(1,	'micah@email.com',	'micah@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'micah',	'larson',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(2,	'andrea@email.com',	'andrea@email',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'andrea',	'varnado',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(3,	'billie@email.com',	'billie@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'billie',	'dorries',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(4,	'clayton@email.com',	'clayton@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'clayton',	'priestley',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(5,	'raul@email.com',	'raul@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'Raul',	'Hernandez',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(6,	'evelyn@email.com',	'aliyah@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'Evelyn',	'Garcia',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(7,	'mario@email.com',	'maria@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'Mario',	'Ruiz',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(8,	'greg@email.com',	'greg@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'Greg',	'Reese',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(9,	'tommy@email.com',	'tommy@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'Tommy',	'Scratch',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(10,	'desareye@email',	'desareye@email',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'Desareye',	'Gonzales',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(11,	'jenna@email.com',	'jenna@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'Jenna',	'Barbee',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0),
-(12,	'chrisit@email.com',	'chrisit@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	1,	'Christina',	'Anton',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0,	CONV('0', 2, 10) + 0);
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `last_name`, `account_verified`, `failed_login_attempts`, `login_disabled`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`, `city`, `state`) VALUES
+(1,	'micah@email.com',	'micah@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'micah',	'larson',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(2,	'andrea@email.com',	'andrea@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'andrea',	'varnado',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(3,	'billie@email.com',	'billie@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'billie',	'dorries',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(4,	'clayton@email.com',	'clayton@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'clayton',	'priestley',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(5,	'raul@email.com',	'raul@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'Raul',	'Hernandez',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'Santa Cruz',	'CA'),
+(6,	'evelyn@email.com',	'aliyah@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'Evelyn',	'Garcia',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(7,	'mario@email.com',	'maria@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'Mario',	'Ruiz',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(8,	'greg@email.com',	'greg@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'Greg',	'Reese',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(9,	'tommy@email.com',	'tommy@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'Tommy',	'Scratch',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(10,	'desareye@email',	'desareye@email',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'Desareye',	'Gonzales',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(11,	'jenna@email.com',	'jenna@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'Jenna',	'Barbee',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(12,	'christie@email.com',	'christie@email.com',	'$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu',	'Christina',	'Anton',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(24,	'newGuy@email.com',	'newGuy@email.com',	'$2a$10$asWtWFrSzQlVnoL2j4O/vO/2QwES7nDkJayZvzUMwU8d18.0veRqW',	'new',	'guy',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(25,	'AnotherNewGuy@email.com',	'AnotherNewGuy@email.com',	'$2a$10$aPDOrnn8WSiqAR.qrPC7peIBNRdCTBkSWOG40demjWRf0g7RDjVNy',	'frank',	'furter',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'',	''),
+(26,	'tommy.o@email.com',	'tommy.o@email.com',	'$2a$10$4zVsbRkLed01wTZL1sdxPuQSzVD8FBGgv.AlihI7Hpd2SRfaMk/Vq',	'tommy',	'oliver',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'orange grove',	'CO'),
+(27,	'carl.elder@email.com',	'carl.elder@email.com',	'$2a$10$o9NRTC0rrkMH2RdmDBciju1ucLQzz.AvWbKQgkn21X.gKDtRcbqau',	'carl',	'elder',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'san antonio',	'TX'),
+(28,	'clyde@email.com',	'clyde@email.com',	'$2a$10$AlS6.zE7ASLu4zkOBCleXu94.f29KxkoesqAGdUpbbFOzBHlqCmVq',	'clyde',	'barrow',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'rowena',	'TX'),
+(30,	'joe.schmoe@email.com',	'joe.schmoe@email.com',	'$2a$10$lltY6plUV5BzAc4xfcZUUONoy49Y8DJYAaqcSzzf8PhtzGYtMR32.',	'Joe',	'Schmoe',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'Brookhaven',	'MS'),
+(31,	'hov@email.com',	'hov@email.com',	'$2a$10$/Tbp3wcfusX7cpJPmW4T3esIypBm0OJ0X6BVeNgOSveuexWIPwMe6',	'Sean',	'Carter',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'New York',	'NY'),
+(32,	'sonny@email.com',	'sonny@email.com',	'$2a$10$gZxw29AvuCyL4eeUeRjk7O4izak.9UX/4iBe6tFasgkeI5v7BUwxK',	'Salvatore',	'Bono',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'Los Angels',	'CO'),
+(33,	'tom.hanks@email.com',	'tom.hanks@email.com',	'$2a$10$Lsnx5bydIF1eVLt/TFSvaOzxahN8jXYjBr4tQaaSqmQ1DLc0O6XZu',	'Tom',	'Hanks',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'Los Angeles',	'CA'),
+(39,	'tom.cruise@email',	'tom.cruise@email',	'$2a$10$Tn5lZCmx0PWzXhZZL1xfreRI0yymPb5Mm548b4ZnQ5xBvEgAmo9t2',	'tom',	'cruise',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'Los Angels',	'CA'),
+(40,	'brad.pitt@email.com',	'brad.pitt@email.com',	'$2a$10$isbliWKHxKoIaZ8AQlK4Ku89eI2adRnmjbwwMeY8pkVvwPwIZMiw.',	'Brad',	'Pitt',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'los angeles',	'CA'),
+(42,	'molly.florist@email.com',	'molly.florist@email.com',	'$2a$10$yiu0cpThUUkt960bLMT7F.vjrZnbi57PdCLXON00OkqjD01xim9eO',	'molly',	'florist',	CONV('0', 2, 10) + 0,	0,	CONV('0', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	CONV('1', 2, 10) + 0,	'san antonio',	'TX');
 
 DROP TABLE IF EXISTS `user_groups`;
 CREATE TABLE `user_groups` (
@@ -225,9 +263,9 @@ CREATE TABLE `user_groups` (
 `user_id` bigint(20) DEFAULT NULL,
 `group_id` bigint(20) DEFAULT NULL,
 PRIMARY KEY (`id`),
-KEY `user_groups_group_id_fk` (`group_id`),
 KEY `user_groups_user_id_fk` (`user_id`),
-CONSTRAINT `user_groups_group_id_fk` FOREIGN KEY (`group_id`) REFERENCES `principle_groups` (`id`),
+KEY `FKkoltqj26iiurcy32oela79g2k` (`group_id`),
+CONSTRAINT `user_groups_group_id_fk` FOREIGN KEY (`group_id`) REFERENCES `principal_groups` (`id`),
 CONSTRAINT `user_groups_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -236,27 +274,31 @@ INSERT INTO `user_groups` (`id`, `user_id`, `group_id`) VALUES
 (2,	2,	1),
 (3,	3,	1),
 (4,	4,	1),
-(5,	5,	2),
-(6,	6,	2),
-(7,	7,	2),
-(8,	8,	2),
-(9,	9,	2),
-(10,	10,	2),
-(11,	11,	2),
-(12,	12,	2);
+(5,	5,	3),
+(6,	6,	3),
+(7,	7,	3),
+(8,	8,	3),
+(9,	9,	3),
+(10,	10,	3),
+(11,	11,	3),
+(12,	12,	2),
+(21,	4,	2),
+(22,	24,	2),
+(23,	25,	2),
+(24,	31,	2),
+(25,	32,	2),
+(26,	33,	2),
+(27,	39,	2),
+(28,	40,	2),
+(30,	42,	3);
 
 DROP TABLE IF EXISTS `vendors`;
 CREATE TABLE `vendors` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
-`title` varchar(50) DEFAULT NULL,
+`business_name` varchar(50) DEFAULT NULL,
 `category_id` bigint(20) NOT NULL,
-`street_address` varchar(50) NOT NULL,
-`city` varchar(25) NOT NULL,
-`state` varchar(10) NOT NULL,
-`zip` varchar(10) NOT NULL,
 `about` longtext DEFAULT NULL,
 `user_id` bigint(20) DEFAULT NULL,
-`city_state` varchar(25) DEFAULT NULL,
 PRIMARY KEY (`id`),
 KEY `categories_id_fk` (`category_id`),
 KEY `vendors_users_id_fk` (`user_id`),
@@ -264,14 +306,30 @@ CONSTRAINT `categories_id_fk` FOREIGN KEY (`category_id`) REFERENCES `vendor_cat
 CONSTRAINT `vendors_users_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `vendors` (`id`, `title`, `category_id`, `street_address`, `city`, `state`, `zip`, `about`, `user_id`, `city_state`) VALUES
-(1,	'Rancho La Mission',	1,	'14047 Henze Rd',	'San Antonio',	'TX',	'78223',	'Welcome to Rancho la Mission. We have two venues to choose from – the outdoor venue and the indoor venue, aka “The Barn”. To start the outdoor venue gives you an open-air feel with a rustic winter wonderland filled with lots of tree lights. Plenty of outdoor space for any outdoor event. If you prefer a indoor venue, than The Barn is a perfect, country theme for your ceremony and reception or any event. We are honored to host your event and look forward to start planning your BIG day!\n',	5,	NULL),
-(2,	'Evelyn Photography',	2,	'N/A',	'San Antonio',	'TX',	'99999',	'Evelyn here, I\'m the one behind the camera, I could spend the whole day talking about myself, but here are a few things you should know about me. As a single mother of two girls, I am the most dedicated and passionate person when it comes to being your photographer. Spanish is my first language since I\'m 100% Mexican! While I was born and raised in a small border town called Piedras Negras, my heart belongs to San Antonio. I have lived here for 16 years, so I am practically half and half.\n\nPhotography is not just a hobby for me. It is a way of expression, passion, and art. Every photograph has a story to tell, and there is no better way to remember you or your loved ones than through a photograph. So don\'t hesitate to chat, tell me all about your special moment, and I\'ll be there!',	6,	NULL),
-(3,	'DJMusic Entertainment LLC',	7,	'N/A',	'San Antonio',	'TX',	'99999',	'At DJMusic Entertainment, we bring our client\'s vision to life with an Exceptional and Unique, Entertainment and Wedding Planning Experience. Our main goal and passion are to go beyond our clients’ expectations. We believe that small details can make a big difference.\n\nWe are passionate about weddings, our team is always an extraordinary duo of DJ and Timeline Assistant who will make sure the Ceremony and Reception run smooth and on time. We help our brides with educational materials.',	7,	NULL),
-(4,	'Greg Reese Events',	3,	'N/A',	'San Antonio',	'TX',	'99999',	'For over two decade Greg Reese designed events for others like Events Destination Weddings Galas. His passion and desire to set out on his own and to create his own identity. In other words, he had a vision of creating a company unlike any other in South Texas. He knew that with his creative ideas, eye for luxury and knowledge of the industry, there would be tremendous opportunities for his new startup.\n\nBecause Greg Reese Events team sets us apart. We’re a group of professionals that share a passion for what we do, as well as a commitment to make your event everything you’ve imagined and beyond. Today Greg Reese plans and designs elegant and spectacular weddings, corporate and destination weddings, We take great pride in creating one-of-a-kind events that truly represent the clients’ style and personality. Greg creates more than just a party, we create an event that tells the complete story of the couple.',	8,	NULL),
-(5,	'Scratch Kitchen',	4,	'N/A',	'San Antonio',	'TX',	'99999',	'We are a family-owned bakery, restaurant, and catering company that offers delicious desserts and fine food in San Antonio\'s Alta Vista neighborhood. We are the perfect caterer for brunch weddings, garden weddings, or any wedding where a delicious family-style meal or buffet meal is preferred over a formal sit-down dinner. We also love to cater bridal showers, baby showers, birthday celebrations, and all other parties and meetings!\n\nOwner Becky Medellin serves as the company\'s catering manager, ensuring that couples have her full attention and her eye on all the details. From the menu tasting to the big night, our top priority is delighting the bride and groom!',	9,	NULL),
-(6,	'Tasty Swirls Company',	5,	'N/A',	'San Antonio',	'TX',	'99999',	'My name is Desareye and I am the owner of Tasty Swirls Company. I’ve always had a creative side and loved desserts so I wanted to start a business that would combine both. Most importantly share it with you! Cotton Candy has always been a favorite as it is so fluffy, fun and just melts in your mouth making you want more! I wanted our cotton candy to be a little different than your normal pink and blue cotton candy so I decided why not make it with unique flavors. I started to think of what flavors I would do and decided hmm these would taste even better with toppings! We can’t wait to be apart of your event!\n\nTasty Swirls company is known for making the Cotton candy with organic raw cane sugar, natural flavors, and no artificial dyes. We add toppings to our cotton candy which include sprinkles, tajín, sour patch kids, chocolate drizzle and so much more! We have the cart as a blank canvas to help customers design it how they want. Also we can cater to any event whether it be a wedding, baby shower, birthday party, corporate event or public event. I honestly enjoy seeing people of any age get excited when they see their cotton candy getting made and when they take their first bite. Their face just lights up!',	10,	NULL),
-(7,	'Barmasters Texas',	6,	'N/A',	'San Antonio',	'TX',	'99999',	'BarMasters Texas is a full service bartending and bar planning company based in the San Antonio & Austin areas. We serve at weddings and other special events such as banquets, corporate parties, private events, graduation parties, birthday celebrations, bridal showers, and more. We work closely with you to create the perfect bar for your event! We look forward to the opportunity to serve you at your special event.\n\nWe provide full bartending and planning packages, bartenders by the hour, nonalcoholic options, consultations and more! We work closely with you to create the bar that fits any budget, theme, color scheme, season, etc! We are committed to giving brides and grooms a high quality bar at a reasonable price.',	11,	NULL);
+INSERT INTO `vendors` (`id`, `business_name`, `category_id`, `about`, `user_id`) VALUES
+(1,	'Rancho La Mission',	1,	'Welcome to Rancho la Mission. We have two venues to choose from – the outdoor venue and the indoor venue, aka “The Barn”. To start the outdoor venue gives you an open-air feel with a rustic winter wonderland filled with lots of tree lights. Plenty of outdoor space for any outdoor event. If you prefer a indoor venue, than The Barn is a perfect, country theme for your ceremony and reception or any event. We are honored to host your event and look forward to start planning your BIG day!\n',	5),
+(2,	'Evelyn Photography',	2,	'Evelyn here, I\'m the one behind the camera, I could spend the whole day talking about myself, but here are a few things you should know about me. As a single mother of two girls, I am the most dedicated and passionate person when it comes to being your photographer. Spanish is my first language since I\'m 100% Mexican! While I was born and raised in a small border town called Piedras Negras, my heart belongs to San Antonio. I have lived here for 16 years, so I am practically half and half.\n\nPhotography is not just a hobby for me. It is a way of expression, passion, and art. Every photograph has a story to tell, and there is no better way to remember you or your loved ones than through a photograph. So don\'t hesitate to chat, tell me all about your special moment, and I\'ll be there!',	6),
+(3,	'DJMusic Entertainment LLC',	7,	'At DJMusic Entertainment, we bring our client\'s vision to life with an Exceptional and Unique, Entertainment and Wedding Planning Experience. Our main goal and passion are to go beyond our clients’ expectations. We believe that small details can make a big difference.\n\nWe are passionate about weddings, our team is always an extraordinary duo of DJ and Timeline Assistant who will make sure the Ceremony and Reception run smooth and on time. We help our brides with educational materials.',	7),
+(4,	'Greg Reese Events',	3,	'For over two decade Greg Reese designed events for others like Events Destination Weddings Galas. His passion and desire to set out on his own and to create his own identity. In other words, he had a vision of creating a company unlike any other in South Texas. He knew that with his creative ideas, eye for luxury and knowledge of the industry, there would be tremendous opportunities for his new startup.\n\nBecause Greg Reese Events team sets us apart. We’re a group of professionals that share a passion for what we do, as well as a commitment to make your event everything you’ve imagined and beyond. Today Greg Reese plans and designs elegant and spectacular weddings, corporate and destination weddings, We take great pride in creating one-of-a-kind events that truly represent the clients’ style and personality. Greg creates more than just a party, we create an event that tells the complete story of the couple.',	8),
+(5,	'Scratch Kitchen',	4,	'We are a family-owned bakery, restaurant, and catering company that offers delicious desserts and fine food in San Antonio\'s Alta Vista neighborhood. We are the perfect caterer for brunch weddings, garden weddings, or any wedding where a delicious family-style meal or buffet meal is preferred over a formal sit-down dinner. We also love to cater bridal showers, baby showers, birthday celebrations, and all other parties and meetings!\n\nOwner Becky Medellin serves as the company\'s catering manager, ensuring that couples have her full attention and her eye on all the details. From the menu tasting to the big night, our top priority is delighting the bride and groom!',	9),
+(6,	'Tasty Swirls Company',	5,	'My name is Desareye and I am the owner of Tasty Swirls Company. I’ve always had a creative side and loved desserts so I wanted to start a business that would combine both. Most importantly share it with you! Cotton Candy has always been a favorite as it is so fluffy, fun and just melts in your mouth making you want more! I wanted our cotton candy to be a little different than your normal pink and blue cotton candy so I decided why not make it with unique flavors. I started to think of what flavors I would do and decided hmm these would taste even better with toppings! We can’t wait to be apart of your event!\n\nTasty Swirls company is known for making the Cotton candy with organic raw cane sugar, natural flavors, and no artificial dyes. We add toppings to our cotton candy which include sprinkles, tajín, sour patch kids, chocolate drizzle and so much more! We have the cart as a blank canvas to help customers design it how they want. Also we can cater to any event whether it be a wedding, baby shower, birthday party, corporate event or public event. I honestly enjoy seeing people of any age get excited when they see their cotton candy getting made and when they take their first bite. Their face just lights up!',	10),
+(7,	'Barmasters Texas',	6,	'BarMasters Texas is a full service bartending and bar planning company based in the San Antonio & Austin areas. We serve at weddings and other special events such as banquets, corporate parties, private events, graduation parties, birthday celebrations, bridal showers, and more. We work closely with you to create the perfect bar for your event! We look forward to the opportunity to serve you at your special event.\n\nWe provide full bartending and planning packages, bartenders by the hour, nonalcoholic options, consultations and more! We work closely with you to create the bar that fits any budget, theme, color scheme, season, etc! We are committed to giving brides and grooms a high quality bar at a reasonable price.',	11),
+(9,	'molly florist',	3,	NULL,	42);
+
+DROP TABLE IF EXISTS `vendors_photo_format`;
+CREATE TABLE `vendors_photo_format` (
+`id` bigint(20) NOT NULL AUTO_INCREMENT,
+`photo_format_id` bigint(20) NOT NULL,
+`vendor_id` bigint(20) NOT NULL,
+PRIMARY KEY (`id`),
+KEY `vendor_id_fk` (`vendor_id`),
+KEY `photographers_photo_format_id_fk` (`photo_format_id`),
+CONSTRAINT `photographers_photo_format_id_fk` FOREIGN KEY (`photo_format_id`) REFERENCES `photo_format` (`id`),
+CONSTRAINT `vendor_id_fk` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `vendors_photo_format` (`id`, `photo_format_id`, `vendor_id`) VALUES
+(2,	1,	2);
 
 DROP TABLE IF EXISTS `vendor_categories`;
 CREATE TABLE `vendor_categories` (
@@ -296,7 +354,7 @@ CREATE TABLE `vendor_packages` (
 `description` varchar(1000) NOT NULL,
 `vendor_id` bigint(20) NOT NULL,
 PRIMARY KEY (`id`),
-KEY `vendor_id` (`vendor_id`),
+KEY `FK90b5gv68mhjdadte5sfdwfah` (`vendor_id`),
 CONSTRAINT `vendor_packages_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -408,4 +466,20 @@ INSERT INTO `vendor_services` (`id`, `title`, `vendor_id`) VALUES
 (78,	'Tastings',	6),
 (79,	'Rental coordination - directly invoice couple',	7);
 
--- 2023-04-13 05:10:22
+DROP TABLE IF EXISTS `venues`;
+CREATE TABLE `venues` (
+`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+`vendor_id` bigint(20) NOT NULL,
+`capacity` int(11) NOT NULL,
+`address` varchar(50) NOT NULL,
+`city` varchar(25) NOT NULL,
+`state` varchar(25) NOT NULL,
+`zip` varchar(5) NOT NULL,
+`title` varchar(50) NOT NULL,
+PRIMARY KEY (`id`),
+KEY `venue_address_vendors_id_fk` (`vendor_id`),
+CONSTRAINT `venue_address_vendors_id_fk` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- 2023-04-21 05:01:27

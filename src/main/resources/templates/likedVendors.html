@@ -3,9 +3,8 @@
 <head>
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
-    <title>Categories of Vendors</title>
     <link th:rel="stylesheet" href="/css/client_views/liked_vendors.css">
-
+    <title>Liked Vendors </title>
 </head>
 
 <body>
@@ -16,6 +15,8 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
 
 
 <main>
@@ -26,7 +27,7 @@
 <!--            VENUES-->
             <hr style="margin: auto">
             <div class="row" id="venues" style="text-align: center">
-                <a href="/vendors/categories/1"><h4 class="title-text">Venues</h4></a>
+                <a href="/vendors/categories/1" style="text-decoration: none"><h4 class="title-text">Venues</h4></a>
                 <div class="row" id="venueRow">
                     <div class="col" id="venueCol">
                         <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
@@ -57,7 +58,7 @@
 <!--            PHOTOGRAPHERS-->
             <hr style="margin: auto">
             <div class="row" id="photographers" style="text-align: center">
-                <a href="/vendors/categories/2"><h4 class="title-text">Photographers</h4></a>
+                <a href="/vendors/categories/2" style="text-decoration: none"><h4 class="title-text">Photographers</h4></a>
                 <div class="col">
                     <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
                                     src="/img/liked_vendors/photographer.jpg" alt="Vendor Img"></a>
@@ -68,7 +69,7 @@
                 </div>
                 <div class="col">
                     <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
-                                    src="/img/liked_vendors/photographer.jpg" alt="Vendor Img"></a>
+                                    src="/img/liked_vendors/photoTwo.jpg" alt="Vendor Img"></a>
                     <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <i class="fa-solid fa-check"></i>
                     <i class="fa-regular fa-heart"></i>
@@ -76,7 +77,7 @@
                 </div>
                 <div class="col">
                     <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
-                                    src="/img/liked_vendors/photographer.jpg" alt="Vendor Img"></a>
+                                    src="/img/liked_vendors/photoThree.jpg" alt="Vendor Img"></a>
                     <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <i class="fa-solid fa-check"></i>
                     <i class="fa-regular fa-heart"></i>
@@ -85,7 +86,7 @@
 <!--                FLORISTS-->
                 <hr style="margin: auto">
                 <div class="row" id="florists" style="text-align: center">
-                    <a href="/vendors/categories/3"><h4 class="title-text">Florists</h4></a>
+                    <a href="/vendors/categories/3" style="text-decoration: none"><h4 class="title-text">Florists</h4></a>
                     <div class="col">
                         <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
                                         src="/img/liked_vendors/floristOne.jpg" alt="Vendor Img"></a>
@@ -113,7 +114,7 @@
 <!--CATERERS-->
                     <hr style="margin: auto">
                     <div class="row" id="caterers" style="text-align: center">
-                        <a href="/vendors/categories/4"><h4 class="title-text">Caterers</h4></a>
+                        <a href="/vendors/categories/4" style="text-decoration: none"><h4 class="title-text">Caterers</h4></a>
                         <div class="col">
                             <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
                                             src="/img/liked_vendors/chefOne.jpg" alt="Vendor Img"></a>
@@ -141,7 +142,7 @@
 <!--CAKES AND DESSERTS-->
                         <hr style="margin: auto">
                         <div class="row" id="desserts" style="text-align: center">
-                            <a href="/vendors/categories/5"><h4 class="title-text">Cakes and Desserts</h4></a>
+                            <a href="/vendors/categories/5" style="text-decoration: none"><h4 class="title-text">Cakes and Desserts</h4></a>
                             <div class="col">
                                 <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
                                                 src="/img/liked_vendors/donuts.jpg" alt="Vendor Img"></a>
@@ -169,7 +170,7 @@
 <!--BARS & BEVS-->
                             <hr style="margin: auto">
                             <div class="row" id="bars" style="text-align: center">
-                                <a href="/vendors/categories/6"><h4 class="title-text">Bars and Beverages</h4></a>
+                                <a href="/vendors/categories/6" style="text-decoration: none"><h4 class="title-text">Bars and Beverages</h4></a>
                                 <div class="col">
                                     <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
                                                     src="/img/liked_vendors/bartender.jpg" alt="Vendor Img"></a>
@@ -197,7 +198,7 @@
 <!--BANDS/DJs-->
                                 <hr style="margin: auto">
                                 <div class="row" id="bands" style="text-align: center">
-                                    <a href="/vendors/categories/7"><h4 class="title-text">Bands/DJs</h4></a>
+                                    <a href="/vendors/categories/7" style="text-decoration: none"><h4 class="title-text">Bands/DJs</h4></a>
                                     <div class="col">
                                         <a href=""><img class="card-img-top" style="height: 150px; width: 150px"
                                                         src="/img/liked_vendors/liveband.jpg" alt="Vendor Img"></a>
@@ -225,6 +226,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 </main>
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>

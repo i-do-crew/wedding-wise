@@ -1,72 +1,152 @@
 package com.idocrew.weddingwise.services.impl;
 
-import com.idocrew.weddingwise.entity.Customer;
-import com.idocrew.weddingwise.entity.Group;
-import com.idocrew.weddingwise.entity.User;
-import com.idocrew.weddingwise.entity.Vendor;
-import com.idocrew.weddingwise.repositories.CustomerRepository;
-import com.idocrew.weddingwise.repositories.UserGroupRepository;
-import com.idocrew.weddingwise.repositories.UserRepository;
-import com.idocrew.weddingwise.repositories.VendorRepository;
+import com.idocrew.weddingwise.context.AccountVerificationEmailContext;
+import com.idocrew.weddingwise.entity.*;
+    import com.idocrew.weddingwise.exception.InvalidTokenException;
+import com.idocrew.weddingwise.repositories.*;
 import com.idocrew.weddingwise.services.EmailService;
+import com.idocrew.weddingwise.services.SecureTokenService;
 import com.idocrew.weddingwise.services.UserRegistrationService;
-import lombok.AllArgsConstructor;
+import jakarta.mail.MessagingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import static com.idocrew.weddingwise.enums.UserType.CUSTOMER;
+import static com.idocrew.weddingwise.enums.UserType.VENDOR;
+
+@RequiredArgsConstructor
 @Service("userService")
-@AllArgsConstructor
 public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     private final UserRepository userRepository;
     private final VendorRepository vendorRepository;
     private final CustomerRepository customerRepository;
-    private final UserGroupRepository groupRepository;
+    private final PrincipalGroupRepository principalGroupRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final VenueRepository venueRepository;
+    private final DjsAndLiveBandsRepository djsAndLiveBandsRepository;
+    private final DjsAndLiveBandsMusicGenreRepository djsAndLiveBandsMusicGenreRepository;
+    private final VendorsPhotoFormatRepository vendorsPhotoFormatRepository;
+    private final SecureTokenService secureTokenService;
+    @Value("${site.base.url.https}")
+    private String baseURL;
 
     @Override
     @Transactional
     public void register(Customer customer) throws DuplicateKeyException {
         if(checkIfUserExist(customer.getUser().getEmail())){
-            throw new DuplicateKeyException("User already exists for this email");
+            throw new DuplicateKeyException("Customer already exists for this email");
         }
-        User userEntity = new User();
-        Customer custEntity = new Customer();
-        BeanUtils.copyProperties(customer.getUser(), userEntity);
-        BeanUtils.copyProperties(customer, custEntity);
-        String hash = passwordEncoder.encode(customer.getUser().getPassword());
-        userEntity.setPassword(hash);
-        userEntity.setUsername(customer.getUser().getEmail());
-        addUserGroup(userEntity, "CUSTOMER");
-        userEntity = userRepository.save(userEntity);
-        custEntity.setUser(userEntity);
-        custEntity = customerRepository.save(custEntity);
-        //sendRegistrationConfirmationEmail(customer.getUser());
+
+        User userEntity = saveUser(customer.getUser(), CUSTOMER.getCode());
+        Customer customerEntity = new Customer();
+        BeanUtils.copyProperties(customer, customerEntity);
+        customerEntity.setUser(userEntity);
+        saveCustomer(customerEntity);
+        sendRegistrationConfirmationEmail(userEntity);
+    }
+
+    private void saveCustomer(Customer customer) {
+        customerRepository.save(customer);
     }
 
     @Override
     @Transactional
-    public void register(Vendor vendor) {
-        if(checkIfUserExist(vendor.getUser().getEmail())){
-            throw new DuplicateKeyException("User already exists for this email");
+    public void register(VendorComposite vendorComposite) {
+        if(checkIfUserExist(vendorComposite.getUser().getEmail())){
+            throw new DuplicateKeyException("Vendor already exists for this email");
         }
-        User userEntity = new User();
+
+        User userEntity = saveUser(vendorComposite.getUser(), VENDOR.getCode());
         Vendor vendorEntity = new Vendor();
-        BeanUtils.copyProperties(vendor.getUser(), userEntity);
-        BeanUtils.copyProperties(vendor, vendorEntity);
-        String hash = passwordEncoder.encode(vendor.getUser().getPassword());
-        userEntity.setPassword(hash);
-        userEntity.setUsername(vendor.getUser().getEmail());
-        addUserGroup(userEntity, "VENDOR");
-        userEntity = userRepository.save(userEntity);
+        BeanUtils.copyProperties(vendorComposite.getVendor(), vendorEntity);
         vendorEntity.setUser(userEntity);
-        vendorEntity = vendorRepository.save(vendorEntity);
+        vendorEntity = saveVendor(vendorEntity);
+
+        switch (vendorEntity.getVendorCategory().getTitle()) {
+            case "Venues" -> saveVenue(vendorEntity, vendorComposite);
+            case "Photographers" -> savePhotographer(vendorEntity, vendorComposite.getPhotoFormat());
+            case "Bands and DJs" -> {
+                DjsAndLiveBand djOrLiveBand = saveDjOrBand(vendorEntity, vendorComposite.getDjsAndLiveBandsCategory());
+                saveDjOrBandMusicGenres(djOrLiveBand, vendorComposite.getMusicGenres());
+            }
+            default -> {
+            }
+        }
+        sendRegistrationConfirmationEmail(userEntity);
+    }
+
+    @Override
+    public boolean verifyUser(String token) throws InvalidTokenException {
+        SecureToken secureToken = secureTokenService.findByToken(token);
+        if(Objects.isNull(secureToken) || !StringUtils.equals(token, secureToken.getToken()) || secureToken.isExpired()){
+            throw new InvalidTokenException("Token is not valid");
+        }
+        User userEntity = userRepository.findById(secureToken.getUser().getId());
+        if(Objects.isNull(userEntity)){
+            return false;
+        }
+        userEntity.setAccountVerified(true);
+        userRepository.save(userEntity); // let's same user details
+
+        // we don't need invalid password now
+        secureTokenService.removeToken(secureToken);
+        return true;
+    }
+
+    private DjsAndLiveBand saveDjOrBand(Vendor vendorEntity, DjsAndLiveBandsCategory category) {
+        DjsAndLiveBand djOrLiveBand = new DjsAndLiveBand(vendorEntity, category);
+        return djsAndLiveBandsRepository.save(djOrLiveBand);
+    }
+
+    private void saveDjOrBandMusicGenres(DjsAndLiveBand djsOrLiveBand, Set<MusicGenre> musicGenres) {
+        Set<DjsAndLiveBandsMusicGenre> set = musicGenres
+                .stream()
+                .map(musicGenre -> new DjsAndLiveBandsMusicGenre(djsOrLiveBand, musicGenre))
+                .collect(Collectors.toSet());
+        djsAndLiveBandsMusicGenreRepository.saveAll(set);
+    }
+
+    private void savePhotographer(Vendor vendorEntity, PhotoFormat photoFormat) {
+        VendorsPhotoFormat vendorsPhotoFormatEntity = new VendorsPhotoFormat();
+        vendorsPhotoFormatEntity.setVendor(vendorEntity);
+        vendorsPhotoFormatEntity.setPhotoFormat(photoFormat);
+        vendorsPhotoFormatRepository.save(vendorsPhotoFormatEntity);
+    }
+
+    private void saveVenue(Vendor vendorEntity, VendorComposite vendorComposite) {
+        Venue venueEntity = new Venue();
+        BeanUtils.copyProperties(vendorComposite.getVenue(), venueEntity);
+        venueEntity.setVendor(vendorEntity);
+        venueRepository.save(venueEntity);
+    }
+
+    private Vendor saveVendor(Vendor vendor) {
+        Vendor vendorEntity = new Vendor();
+        BeanUtils.copyProperties(vendor, vendorEntity);
+        return vendorRepository.save(vendorEntity);
+    }
+
+    private User saveUser(User user, String code) {
+        User userEntity = new User();
+        BeanUtils.copyProperties(user, userEntity);
+        String hash = passwordEncoder.encode(user.getPassword());
+        userEntity.setPassword(hash);
+        userEntity.setUsername(user.getEmail());
+        userEntity.addGroup(getUserGroup(code));
+        userEntity = userRepository.save(userEntity);
+        return userEntity;
     }
 
     private boolean checkIfUserExist(String email) {
@@ -74,15 +154,20 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void sendRegistrationConfirmationEmail(User userEntity) {
-        emailService.sendWelcomeEmail(
-            userEntity,
-            "Welcome, [%s]".formatted(userEntity.getFirstName()),
-            "You have been registered"
-        );
+        SecureToken secureToken = secureTokenService.createSecureToken(userEntity);
+
+        AccountVerificationEmailContext emailContext = new AccountVerificationEmailContext();
+        emailContext.init(userEntity);
+        emailContext.setToken(secureToken.getToken());
+        emailContext.buildVerificationUrl(baseURL, secureToken.getToken());
+        try {
+            emailService.sendVerificationEmail(emailContext);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void addUserGroup(User userEntity, String code){
-        Group group = groupRepository.findByCode(code);
-        userEntity.setUserGroups(List.of(group));
+    private PrincipalGroup getUserGroup(String role){
+        return principalGroupRepository.findByCode(role);
     }
 }

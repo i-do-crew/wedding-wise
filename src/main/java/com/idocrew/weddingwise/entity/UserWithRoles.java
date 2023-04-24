@@ -4,10 +4,12 @@ import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class UserWithRoles extends User implements UserDetails {
 
@@ -17,10 +19,10 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<Group> groups = this.getUserGroups();
+        Set<PrincipalGroup> userGroups = this.getUserGroups();
         List<String> list = new ArrayList<>();
-        for (Group group : groups) {
-            list.add("ROLE_" + group.getCode());
+        for (PrincipalGroup principalGroup : userGroups) {
+            list.add("ROLE_" + principalGroup.getCode());
         }
         String roles = StringUtils.join(list, ',');
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);

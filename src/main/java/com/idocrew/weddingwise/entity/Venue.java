@@ -12,12 +12,12 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="venues")
 @Entity
+@Table(name = "venues", schema = "weddingwise")
 public class Venue {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
     @Column(name="title", columnDefinition="varchar(50)")
@@ -26,19 +26,19 @@ public class Venue {
     @Column(name="address", columnDefinition="varchar(50)")
     private String address;
 
-    @Column(name="city", columnDefinition="varchar(25)")
+    @Column(name="city", columnDefinition="varchar(25)", nullable = false)
     private String city;
 
-    @Column(name="state", columnDefinition="varchar(25)")
+    @Column(name="state", columnDefinition="varchar(25)", nullable = false)
     private String state;
 
-    @Column(name="zip", columnDefinition="varchar(5)")
+    @Column(name="zip", columnDefinition="varchar(5)", nullable = false)
     private String zip;
 
-    @Column(name="capacity", columnDefinition="varchar(50)")
+    @Column(name="capacity", columnDefinition="int", nullable = false)
     private int capacity;
 
-    @ManyToOne
-    @JoinColumn(name="vendor_id", referencedColumnName="id", columnDefinition = "bigint(20)")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="vendor_id", referencedColumnName="id", columnDefinition = "bigint(20)", nullable = false)
     private Vendor vendor;
 }

@@ -19,34 +19,24 @@ main{
     top: 50%;
     left: 40%;
 }
-
-#borderTwo {
-    position: relative;
-    flex:auto;
-    text-align: center;
-    border: 1px solid black;
-    margin-bottom: 10px;
-    width: 350px;
-    height: 200px;
-    top: 50%;
-    left: 40%;
+.card{
+    background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;
 }
 
-#borderThree {
-    position: relative;
-    flex:auto;
-    text-align: center;
-    border: 1px solid black;
-    margin-bottom: 10px;
-    width: 350px;
-    height: 200px;
-    top: 50%;
-    left: 40%;
-    display: flex;
+.modal-content{
+    border-radius: 0 !important;
 }
 
-#myModal {
-    display: none;
+#card1, #card2, #card3{
+    background-color: #FFE5D2 !important;
 }
 
+.editGuestText{
+    width:100%;
+}
+.btn:hover{
+   color: #E19B6E;
+}
 
