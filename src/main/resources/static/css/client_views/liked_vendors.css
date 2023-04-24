@@ -12,6 +12,10 @@
     font-family: "Luxurious Roman";
 }
 
+hr{
+    width: 50%;
+}
+
 main{
     background-color: #FFE5D2;
 }
