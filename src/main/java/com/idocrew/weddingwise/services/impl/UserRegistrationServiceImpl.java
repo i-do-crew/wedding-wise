@@ -98,6 +98,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             return false;
         }
         userEntity.setAccountVerified(true);
+        userEntity.setLoginDisabled(false);
         userRepository.save(userEntity); // let's same user details
 
         // we don't need invalid password now

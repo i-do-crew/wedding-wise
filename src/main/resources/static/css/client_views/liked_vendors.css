@@ -1,0 +1,38 @@
+.text-center{
+    font-family: "Luxurious Roman";
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.p{
+    font-family: nunito;
+}
+
+.title-text{
+    font-family: "Luxurious Roman";
+    color: black;
+    text-decoration: none;
+}
+
+/*hr{*/
+/*    width: 50%;*/
+/*}*/
+
+main{
+    background-color: #FFE5D2;
+}
+
+#mainCard{
+    background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;
+}
+
+.col{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+img{
+    object-fit: cover;
+}
