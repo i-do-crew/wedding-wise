@@ -40,7 +40,7 @@ main{
     justify-content: center;
     margin: 0 200px 0 150px;
 }
-#rateBtn{
+#individualVendorRateBtn{
     width:20% !important;
     background-color: #212727 !important;
     color: white;
@@ -48,4 +48,8 @@ main{
     justify-content: center;
     /*align-items: center;*/
 
+}
+
+#individualVendorRateBtn:hover, #rateBtn:hover, #closeBtn:hover{
+    background-color: #E19B6E !important;
 }

@@ -1,6 +1,5 @@
-
-let modal = document.getElementById("editGuestModal");
-let btn = document.getElementsByClassName("editModalBtn");
+let modal = document.getElementById("rateVendorModalBtn");
+let btn = document.getElementById("individualVendorRateBtn");
 let closeBtn = document.getElementById("closeBtn");
 
 btn.onclick = function() {
@@ -15,11 +14,3 @@ window.onclick = function(event) {
 closeBtn.onclick = function()  {
     modal.hide();
 }
-
-
-
-// $(document).ready(function(){
-//     $("#modal").click(function(){
-//         $("#myModal").modal();
-//     });
-// });

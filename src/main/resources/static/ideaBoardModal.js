@@ -1,6 +1,6 @@
 
-let modal = document.getElementById("editGuestModal");
-let btn = document.getElementsByClassName("editModalBtn");
+let modal = document.getElementById("imageModalBtn");
+let btn = document.getElementById("ideaBoardAddBtn");
 let closeBtn = document.getElementById("closeBtn");
 
 btn.onclick = function() {
@@ -15,11 +15,3 @@ window.onclick = function(event) {
 closeBtn.onclick = function()  {
     modal.hide();
 }
-
-
-
-// $(document).ready(function(){
-//     $("#modal").click(function(){
-//         $("#myModal").modal();
-//     });
-// });

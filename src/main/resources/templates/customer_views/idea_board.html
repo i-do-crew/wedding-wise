@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/fragments :: head}" >
+<head >
+    <th:block th:insert="~{fragments/fragments :: head}" ></th:block>
     <meta charset="UTF-8">
     <title>Idea Board</title>
+    <link th:rel="stylesheet" href="/css/client_views/idea_board.css">
 </head>
 <body>
 <!--NAVBAR-->
@@ -11,21 +13,50 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
 
-<div class="container mt-3 mb-3">
-    <div class="card">
-        <div class="card-header">
-            <h1 class="text-center">Your Ideas</h1>
+<main>
+    <div class="container p-4">
+        <div class="card p-3">
+
+                <h1 class="fontTitle text-center">Your Ideas</h1>
+            <div class="d-flex justify-content-end">
+                <button id="ideaBoardAddBtn" type="button" data-bs-toggle="modal" data-bs-target="#imageModalBtn" class="btn">Add image to your idea board?</button>
+            </div>
+            <hr>
+            <div class="card-body text-center d-flex flex-wrap justify-content-center ">
+                <img src="/img/ideaBoardPlaceholders/chairs_1.jpg" alt="pic" class="image">
+                <img src="/img/ideaBoardPlaceholders/dining_1.jpg" alt="pic" class="image">
+                <img src="/img/ideaBoardPlaceholders/cake_pic_1.jpg" alt="pic" class="image">
+                <img src="/img/ideaBoardPlaceholders/bride_1.jpg" alt="pic" class="image">
+                <img src="/img/ideaBoardPlaceholders/rings_1.jpg" alt="pic" class="image">
+                <img src="/img/ideaBoardPlaceholders/shoes_1.jpg" alt="pic" class="image">
+                <img src="/img/ideaBoardPlaceholders/cake_pic_2.jpg" alt="pic" class="image">
+                <img src="/img/ideaBoardPlaceholders/bride_2.jpg" alt="pic" class="image">
+            </div>
         </div>
-        <div class="card-body text-center">
-            <img src="" alt="pic">
-            <img src="" alt="pic">
-            <img src="" alt="pic">
-            <img src="" alt="pic">
-            <img src="" alt="pic">
-            <img src="" alt="pic">
-            <img src="" alt="pic">
-            <img src="" alt="pic">
+    </div>
+</main>
+
+<!--Add image modal-->
+<div id="imageModalBtn" class="modal fade" role="dialog">
+    <div class="container p-4">
+        <div class="modal-dialog">
+            <div class="modal-content card p-4">
+                <div class="modal-header  ">
+                    <h2 class="modal-title fontTitle text-center">Add an Image</h2>
+                </div>
+                <div class="modal-body ">
+                    <div class="d-grid g-2 mb-3">
+                        <input class="font mb-1" type="text" placeholder="Add image:">
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button id="addBtn" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-dismiss="imageModalBtn">Add Image</button>
+                    <button id="closeBtn" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-dismiss="imageModalBtn">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -34,5 +65,7 @@
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--JAVASCRIPT-->
+<script type="text/javascript" src="/static/ideaBoardModal.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head >
     <th:block th:replace="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
-    <title>Categories of Vendors</title>
+    <title>Budget Tracker</title>
     <link th:rel="stylesheet" href="/css/client_views/budget_tracker.css">
 </head>
 
@@ -14,11 +14,13 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
 
 <main>
     <div class="container p-4">
         <div class="card p-3 ">
-            <h1 class="text-center fontTitle">Your Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$0000</button></h1>
+            <h1 class="text-center fontTitle">Your Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$<span th:text="${customer} ? ${customer.budget}"></span></button></h1>
             <hr>
             <div class="row vendor ">
                 <a href="/vendors/categories/1" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Venues</h4></a>
@@ -149,8 +151,8 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-</div>
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->

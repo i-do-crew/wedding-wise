@@ -51,5 +51,4 @@ public class GuestList {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
-
 }

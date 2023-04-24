@@ -13,6 +13,8 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
+<!--EDIT PROFILE MODAL-->
+<div th:insert="~{fragments/fragments :: profileModal}"></div>
 
 <main>
 <div class="container p-4">
@@ -86,37 +88,43 @@
       </div>
     </div>
     <!-- Button trigger modal -->
-    <button type="button" class="btn d-grid g-3" id="rateBtn" data-bs-toggle="modal" data-bs-target="#modalCenter">Rate this Vendor</button>
+      <button type="button" class="btn d-grid g-3" id="individualVendorRateBtn" data-bs-toggle="modal" data-bs-target="#rateVendorModalBtn">Rate this Vendor</button>
+    </div>
+  </div>
+</main>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalVendor" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle"
-         aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalVendorEdit">Modal title</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+<!--RATE THIS VENDOR MODAL-->
+<!--Add image modal-->
+<div id="rateVendorModalBtn" class="modal fade" role="dialog">
+  <div class="container p-4">
+    <div class="modal-dialog">
+      <div class="modal-content card p-4">
+        <div class="modal-header  ">
+          <h2 class="modal-title fontTitle text-center">Rate a Vendor</h2>
+        </div>
+        <div class="modal-body ">
+          <div class="d-grid g-2 mb-3">
+            <input class="font mb-1" type="text" placeholder="Name of Vendor:">
+            <input class="font mb-1" type="text" placeholder="Services Provided:">
+            <input class="font mb-1" type="text" placeholder="Rating out of 5 stars:">
+            <input class="font mb-1" type="text" placeholder="Price tier from 1-4 dollar signs:">
+            <input class="font mb-1" type="text" placeholder="Any other comments:">
           </div>
-          <div class="modal-body">
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+          <button id="rateBtn" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-dismiss="rateVendorModalBtn">Rate This Vendor</button>
+          <button id="closeBtn" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-dismiss="rateVendorModalBtn">Close</button>
         </div>
       </div>
     </div>
-
   </div>
 </div>
-</main>
 
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--JAVASCRIPT-->
+<script type="text/javascript" src="/static/individualVendorsRateModal.js"></script>
 </body>
 </html>
