@@ -39,6 +39,7 @@ public class RegistrationController {
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
     private static final String REDIRECT_LOGIN = "redirect:/login";
+    public static final String REDIRECT_VERIFICATION = "redirect:/verification";
     private UserRegistrationService registrationService;
     private MessageSource messageSource;
     private AuthenticationSuccessHandler authenticationSuccessHandler;
@@ -52,7 +53,7 @@ public class RegistrationController {
     @PostMapping("/client/registration")
     public String clientRegistrationPost(@ModelAttribute Customer customer){
         userRegistrationService.register(customer);
-        return "redirect:/verification";
+        return REDIRECT_VERIFICATION;
     }
     @GetMapping("/vendor/registration")
     public String vendorRegistration(Model model){
@@ -67,7 +68,7 @@ public class RegistrationController {
     @PostMapping("/vendor/registration")
     public String vendorRegistrationPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
         userRegistrationService.register(vendorComposite);
-        return "redirect:/verification";
+        return REDIRECT_VERIFICATION;
     }
     @GetMapping("register/verify")
     public String emailVerification(@RequestParam(required = false) String token, final Model model, RedirectAttributes redirAttr) throws ServletException, IOException {
@@ -82,5 +83,9 @@ public class RegistrationController {
             return REDIRECT_LOGIN;
         }
         return REDIRECT_LOGIN;
+    }
+    @GetMapping("/verification")
+    public String verification(){
+        return "login_and_signup/email_verification";
     }
 }

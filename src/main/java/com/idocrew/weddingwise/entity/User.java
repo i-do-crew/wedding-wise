@@ -74,7 +74,7 @@ public class User {
     private int failedLoginAttempts;
 
     @Column(name = "login_disabled", columnDefinition = "bit", nullable = false)
-    private boolean loginDisabled = false;
+    private boolean loginDisabled = true;
 
     @Column(name = "account_non_expired", columnDefinition = "bit", nullable = false)
     private boolean accountNonExpired = true;
