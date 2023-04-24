@@ -27,10 +27,21 @@
       <h1 th:if="${vid == 5}" class="text-center fontTitle">Tasty Swirls Company</h1>
       <h1 th:if="${vid == 6}" class="text-center fontTitle">Barmasters Texas</h1>
       <h1 th:if="${vid == 7}" class="text-center fontTitle">DJMusic Entertainment LLC</h1>
-      <div id="vendorContact" class="font">
-        <p>vendor@vendor.com</p>
-        <p>000-000-0000</p>
-        <p>000 Vendor St</p>
+      <div class="row">
+        <div class="d-flex justify-content-start" id="likedBtns">
+          <div class="justify-content-between">
+            <button type="button" class="btn font"><i class="fa-solid fa-check"></i></button>
+            <button type="button" class="btn font"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div id="vendorContact" class="font">
+          <p>vendor@vendor.com</p>
+          <p>000-000-0000</p>
+          <p>000 Vendor St</p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-start mb-3">
+        <button type="button" class="btn font  " id="bookBtn">Book This Vendor</button>
       </div>
       <img th:if="${vid == 1}" src="/img/vendors/venues.jpg" alt="picture" class="businessProfileImg">
       <img th:if="${vid == 2}" src="/img/vendors/photographers.jpg" alt="picture" class="businessProfileImg">
