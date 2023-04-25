@@ -31,6 +31,9 @@ public class VendorController {
 //                vendorRepository.findByCategory(categoryRepository.findById(id)));
         model.addAttribute("vendors", vendorRepository.findAll());
         model.addAttribute("id",id);
+        model.addAttribute("category", vendorCategoryRepository.findById(id));
+
+
         //TODO: replace this view with one that shows all vendors in a category
         return "vendors/each_vendorCategories";
     }

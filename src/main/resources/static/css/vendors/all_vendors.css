@@ -8,7 +8,7 @@ main{
 .fontTitle{
     text-align: center;
 }
-#venues, #photographers, #florists, #caterers, #bakeries, #bars, #musicians{
+.vendor{
     /*width: 18rem;*/
     padding: 50px;
     width:264px;
@@ -24,7 +24,7 @@ main{
     background-color: #E19B6E;
 }
 
-#venuesImg, #photographersImg, #floristsImg, #musiciansImg, #caterersImg, #bakeriesImg, #barsImg{
+.vendorImg{
     height: 100%;
     width: 100%;
     border-radius: 0;
