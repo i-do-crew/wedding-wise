@@ -67,6 +67,7 @@
                             <label for="businessName" class="form-label"></label>
                             <input th:field="*{vendor.businessName}" type="text" name="businessName" class="form-control" id="businessName" placeholder="Enter your Business Name">
                         </div>
+                        <div class="font-style">
                         <div class="col-auto">
                             <label for="vendorCategory"></label>
                             <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select mb-3">
@@ -110,6 +111,7 @@
                                         <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.id}"></option>
                                     </select>
                                 </div>
+                        </div>
                         <button type="submit" id="verifyBtn" class="btn btn-secondary mb-3">Sign Up</button>
                     </form>
                 </div>

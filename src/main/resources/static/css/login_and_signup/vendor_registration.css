@@ -32,3 +32,11 @@ main{
 #registerCol{
     padding-top: 100px;
 }
+
+.form-control{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+#verifyBtn{
+    font-family: 'Nunito Sans', sans-serif;
+}
