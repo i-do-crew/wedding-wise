@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequiredArgsConstructor
 public class VendorController {
 
-    private final UserRepository userRepository;
+//    private final UserRepository userRepository;
     private final VendorUtility vendorUtility;
     private final VendorCategoryService vendorCategoryService;
     private final UserService userService;
@@ -52,6 +52,10 @@ public class VendorController {
     @GetMapping("/vendors")
     public String vendorCategories(Model model){
         model.addAttribute("vendorCategories", vendorCategoryService.findAll());
+//        List<Vendor> vendors = vendorRepository.findAll();
+//        VendorCategory vendorCategory = vendorCategoryService.findById(id);
+
+//        model.addAttribute("vendors", vendorUtility.findByCategory(vendorCategory));
         return "vendors/all_vendorCategories";
     }
     @GetMapping("/vendor/profile")
