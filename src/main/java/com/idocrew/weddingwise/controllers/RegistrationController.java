@@ -58,7 +58,7 @@ public class RegistrationController {
     @PostMapping("/vendor/registration")
     public String vendorRegistrationPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
         userRegistrationService.register(vendorComposite);
-        return "login_and_signup/email_verification";
+        return REDIRECT_LOGIN;
     }
     @GetMapping("register/verify")
     public String emailVerification(@RequestParam(required = false) String token, RedirectAttributes redirAttr) {
