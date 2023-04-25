@@ -4,13 +4,11 @@ import com.idocrew.weddingwise.entity.Customer;
 import com.idocrew.weddingwise.entity.VendorComposite;
 import com.idocrew.weddingwise.exception.InvalidTokenException;
 import com.idocrew.weddingwise.services.*;
-import jakarta.servlet.ServletException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
@@ -58,7 +54,7 @@ public class RegistrationController {
     @PostMapping("/vendor/registration")
     public String vendorRegistrationPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
         userRegistrationService.register(vendorComposite);
-        return "login_and_signup/email_verification";
+        return REDIRECT_LOGIN;
     }
     @GetMapping("register/verify")
     public String emailVerification(@RequestParam(required = false) String token, RedirectAttributes redirAttr) {
