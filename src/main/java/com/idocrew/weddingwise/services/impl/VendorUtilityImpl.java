@@ -1,5 +1,6 @@
 package com.idocrew.weddingwise.services.impl;
 
+import com.idocrew.weddingwise.entity.User;
 import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.entity.VendorCategory;
 import com.idocrew.weddingwise.repositories.VendorRepository;
@@ -43,6 +44,11 @@ public class VendorUtilityImpl implements VendorUtility {
     @Override
     public Vendor saveVendor(Vendor vendor) {
         return vendorRepository.save(vendor);
+    }
+
+    @Override
+    public Vendor findVendorByUser(User user) {
+        return vendorRepository.findVendorByUser(user);
     }
 
     @Override
