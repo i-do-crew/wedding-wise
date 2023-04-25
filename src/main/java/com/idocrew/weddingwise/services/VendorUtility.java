@@ -2,7 +2,6 @@ package com.idocrew.weddingwise.services;
 
 import com.idocrew.weddingwise.entity.Vendor;
 
-import java.util.Collection;
 import java.util.List;
 
 

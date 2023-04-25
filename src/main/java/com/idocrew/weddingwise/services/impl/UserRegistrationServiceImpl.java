@@ -2,17 +2,17 @@ package com.idocrew.weddingwise.services.impl;
 
 import com.idocrew.weddingwise.context.AccountVerificationEmailContext;
 import com.idocrew.weddingwise.entity.*;
-    import com.idocrew.weddingwise.exception.InvalidTokenException;
+import com.idocrew.weddingwise.exception.InvalidTokenException;
 import com.idocrew.weddingwise.services.*;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 import java.util.Set;

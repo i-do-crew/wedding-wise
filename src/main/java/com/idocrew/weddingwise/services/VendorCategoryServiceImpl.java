@@ -1,6 +1,5 @@
 package com.idocrew.weddingwise.services;
 
-import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.entity.VendorCategory;
 import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
 import lombok.AllArgsConstructor;

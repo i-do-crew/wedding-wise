@@ -1,7 +1,6 @@
 package com.idocrew.weddingwise.controllers;
 
 import com.idocrew.weddingwise.entity.Customer;
-import com.idocrew.weddingwise.entity.DjsAndLiveBandsCategory;
 import com.idocrew.weddingwise.entity.VendorComposite;
 import com.idocrew.weddingwise.exception.InvalidTokenException;
 import com.idocrew.weddingwise.services.*;
@@ -33,10 +32,7 @@ public class RegistrationController {
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
     private static final String REDIRECT_LOGIN = "redirect:/login";
-    public static final String REDIRECT_VERIFICATION = "redirect:/verification";
-    private UserRegistrationService registrationService;
-    private MessageSource messageSource;
-    private AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final MessageSource messageSource;
 
     @GetMapping("/client/registration")
     public String clientRegistration(Model model) {
@@ -65,15 +61,15 @@ public class RegistrationController {
         return "login_and_signup/email_verification";
     }
     @GetMapping("register/verify")
-    public String emailVerification(@RequestParam(required = false) String token, final Model model, RedirectAttributes redirAttr) throws ServletException, IOException {
+    public String emailVerification(@RequestParam(required = false) String token, RedirectAttributes redirAttr) {
         if(StringUtils.isEmpty(token)){
-            redirAttr.addFlashAttribute("tokenError", messageSource.getMessage("user.registration.verification.missing.token", null,LocaleContextHolder.getLocale()));
+            redirAttr.addFlashAttribute("tokenError", messageSource.getMessage("user.registration.verification.missing.token", null, LocaleContextHolder.getLocale()));
             return REDIRECT_LOGIN;
             }
         try {
             userRegistrationService.verifyUser(token);
         } catch (InvalidTokenException e) {
-            redirAttr.addFlashAttribute("tokenError", messageSource.getMessage("user.registration.verification.invalid.token", null,LocaleContextHolder.getLocale()));
+            redirAttr.addFlashAttribute("tokenError", messageSource.getMessage("user.registration.verification.invalid.token", null, LocaleContextHolder.getLocale()));
             return REDIRECT_LOGIN;
         }
         return REDIRECT_LOGIN;
