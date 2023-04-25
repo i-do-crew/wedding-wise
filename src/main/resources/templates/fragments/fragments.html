@@ -135,10 +135,9 @@
                         data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
             </div>
             <div class="row pb-4">
-                <h3 class="fontTitle">Business Name</h3>
-                <p class="font">vendor@vendor.com</p>
-                <p class="font">000-000-0000</p>
-                <p class="font">000 Vendor St</p>
+                <h3 class="fontTitle"><span th:text="${session.vendor} ? ${session.vendor.businessName}"></span></h3>
+                <p class="font"><span th:text="${session.user} ? ${session.user.email}"></span></p>
+                <p class="font"><span th:text="${session.user} ? ${session.user.city}"></span>, <span th:text="${session.user} ? ${session.user.state}"></span></p>
             </div>
             <div class="position-absolute bottom-0">
                 <div class="row pb-4 pt-5">

@@ -1,5 +1,6 @@
 package com.idocrew.weddingwise.services;
 
+import com.idocrew.weddingwise.entity.User;
 import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.entity.VendorCategory;
 
@@ -14,4 +15,6 @@ public interface VendorUtility {
     Vendor createVendor(Vendor vendor);
     void deleteVendor(Vendor vendor);
     Vendor saveVendor(Vendor vendorEntity);
+    Vendor findVendorByUser(User user);
+
 }
