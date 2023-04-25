@@ -15,18 +15,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VendorController {
 
+
     private final VendorRepository vendorRepository;
     private final VendorCategoryRepository vendorCategoryRepository;
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id, Model model) {
 //        model.addAttribute("vendor", vendorRepository.findById(id));
         model.addAttribute("vid",id);
+//        model.addAttribute("users", );
         return "vendors/individual_vendor";
     }
     @GetMapping("/vendors/categories/{id}")
     public String vendorCategory(@PathVariable long id, Model model){
 //        model.addAttribute("vendors",
 //                vendorRepository.findByCategory(categoryRepository.findById(id)));
+        model.addAttribute("vendors", vendorRepository.findAll());
         model.addAttribute("id",id);
         //TODO: replace this view with one that shows all vendors in a category
         return "vendors/each_vendorCategories";
@@ -34,7 +37,9 @@ public class VendorController {
     @GetMapping("/vendors")
     public String vendorCategories(Model model){
         List<Vendor> vendors = vendorRepository.findAll();
+
         model.addAttribute("vendors",vendors);
+        model.addAttribute("categories", vendorCategoryRepository.findAll());
         return "vendors/all_vendorCategories";
     }
     @GetMapping("/vendor/profile")
