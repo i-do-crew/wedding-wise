@@ -63,9 +63,5 @@ public class VendorController {
         refactorThisMethod(username, model, request);
         return "vendor_views/vendor_profile";
     }
-    @GetMapping("/likedVendors")
-    public String likedVendors() {
-        return "/likedVendors";
-    }
 
 }
