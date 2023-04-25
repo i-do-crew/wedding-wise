@@ -20,14 +20,8 @@
 <main style="background-color: #FFE5D2; padding:50px;">
     <div class="container p-5 border border-dark vh-100" style="background-color: #FFFAF7;">
         <div class="container-fluid" id="mainCard">
-            <div class="text-center">
-                <h1 th:if="${id == 1}" class="fontTitle" th:text="Venues"></h1>
-                <h1 th:if="${id == 2}" class="fontTitle" th:text="Photographers"></h1>
-                <h1 th:if="${id == 3}" class="fontTitle" th:text="Florists"></h1>
-                <h1 th:if="${id == 4}" class="fontTitle" th:text="Caterers"></h1>
-                <h1 th:if="${id == 5}" class="fontTitle" th:text="Cakes and Desserts"></h1>
-                <h1 th:if="${id == 6}" class="fontTitle" th:text="Bar and Beverage"></h1>
-                <h1 th:if="${id == 7}" class="fontTitle" th:text="Bands and DJs"></h1>
+            <div th:each="category: ${categories}" class="text-center ">
+                <h1 class="fontTitle" th:text="${category.title}"></h1>
             </div>
             <div class="flex-column d-flex justify-content-evenly align-items-center">
 
@@ -35,8 +29,7 @@
                 <div class="card mb-3" style="max-width: 900px; background-color: #FFE5D2">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="/img/vendor_categories/weddingMusic.jpg/" class="img-fluid rounded-start"
-                                 alt="Vendor Name">
+                            <img th:if="${id == 7}" src="/img/vendor_categories/weddingMusic.jpg/" class="img-fluid rounded-start" alt="Vendor Name">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -55,13 +48,13 @@
 <!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
 <!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
 
-                                <a th:if="${id == 1}" class="" href="/vendors/individual/1"><button class="btn btn-outline-dark">Book This Vendor</button></a>
-                                <a th:if="${id == 2}" class="" href="/vendors/individual/2"><button class="btn btn-outline-dark">Book This Vendor</button></a>
-                                <a th:if="${id == 3}" class="" href="/vendors/individual/3"><button class="btn btn-outline-dark">Book This Vendor</button></a>
-                                <a th:if="${id == 4}" class="" href="/vendors/individual/4"><button class="btn btn-outline-dark">Book This Vendor</button></a>
-                                <a th:if="${id == 5}" class="" href="/vendors/individual/5"><button class="btn btn-outline-dark">Book This Vendor</button></a>
-                                <a th:if="${id == 6}" class="" href="/vendors/individual/6"><button class="btn btn-outline-dark">Book This Vendor</button></a>
-                                <a th:if="${id == 7}" class="" href="/vendors/individual/7"><button class="btn btn-outline-dark">Book This Vendor</button></a>
+                                <a th:if="${id == 1}" class="" href="/vendors/individual/1"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
+                                <a th:if="${id == 2}" class="" href="/vendors/individual/2"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
+                                <a th:if="${id == 3}" class="" href="/vendors/individual/3"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
+                                <a th:if="${id == 4}" class="" href="/vendors/individual/4"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
+                                <a th:if="${id == 5}" class="" href="/vendors/individual/5"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
+                                <a th:if="${id == 6}" class="" href="/vendors/individual/6"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
+                                <a th:if="${id == 7}" class="" href="/vendors/individual/7"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
                                 <!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
                             </div>
                         </div>
@@ -74,6 +67,19 @@
         </div>
     </div>
 </main>
+
+<!--Dynamically generated html in progress-->
+<!--<div th:each="vendor: ${vendors}" class="card-body">-->
+<!--    <h5 th:text="${vendor.businessName}" class="card-title"></h5>-->
+<!--    &lt;!&ndash;                                <h5 th:if="${id == 2}" class="card-title">Evelyn Photography</h5>&ndash;&gt;-->
+<!--    &lt;!&ndash;                                <h5 th:if="${id == 3}" class="card-title">Greg Reese Events</h5>&ndash;&gt;-->
+<!--    &lt;!&ndash;                                <h5 th:if="${id == 4}" class="card-title">Scratch Kitchen</h5>&ndash;&gt;-->
+<!--    &lt;!&ndash;                                <h5 th:if="${id == 5}" class="card-title">Tasty Swirls Company</h5>&ndash;&gt;-->
+<!--    &lt;!&ndash;                                <h5 th:if="${id == 6}" class="card-title">Barmasters Texas</h5>&ndash;&gt;-->
+<!--    &lt;!&ndash;                                <h5 th:if="${id == 7}" class="card-title">DJMusic Entertainment LLC</h5>&ndash;&gt;-->
+<!--    <p th:text="${vendor.about}" class="card-text"></p>-->
+
+
 <!--                    <img class="card-img-top" id="img" src="/img/vendor_categories/weddingMusic.jpg/" alt="Vendor Name">-->
 <!--                    <div style="text-align: center">-->
 <!--                        <h5 th:if="${id == 1}" class="">Rancho La Mission</h5>-->
