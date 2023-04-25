@@ -2,20 +2,17 @@ package com.idocrew.weddingwise.services.impl;
 
 import com.idocrew.weddingwise.context.AccountVerificationEmailContext;
 import com.idocrew.weddingwise.entity.*;
-    import com.idocrew.weddingwise.exception.InvalidTokenException;
-import com.idocrew.weddingwise.repositories.*;
-import com.idocrew.weddingwise.services.EmailService;
-import com.idocrew.weddingwise.services.SecureTokenService;
-import com.idocrew.weddingwise.services.UserRegistrationService;
+import com.idocrew.weddingwise.exception.InvalidTokenException;
+import com.idocrew.weddingwise.services.*;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 import java.util.Set;
@@ -25,20 +22,20 @@ import static com.idocrew.weddingwise.enums.UserType.CUSTOMER;
 import static com.idocrew.weddingwise.enums.UserType.VENDOR;
 
 @RequiredArgsConstructor
-@Service("userService")
+@Service("userRegistrationService")
 public class UserRegistrationServiceImpl implements UserRegistrationService {
 
-    private final UserRepository userRepository;
-    private final VendorRepository vendorRepository;
-    private final CustomerRepository customerRepository;
-    private final PrincipalGroupRepository principalGroupRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final VendorUtility vendorUtility;
+    private final CustomerService customerService;
+    private final DjsAndLiveBandsService djsAndLiveBandsService;
+    private final DjsAndLiveBandsMusicGenreService djsAndLiveBandsMusicGenreService;
     private final EmailService emailService;
-    private final VenueRepository venueRepository;
-    private final DjsAndLiveBandsRepository djsAndLiveBandsRepository;
-    private final DjsAndLiveBandsMusicGenreRepository djsAndLiveBandsMusicGenreRepository;
-    private final VendorsPhotoFormatRepository vendorsPhotoFormatRepository;
+    private final PrincipalGroupService principalGroupService;
+    private final VendorPhotoFormatService vendorPhotoFormatService;
+    private final VenueService venueService;
     private final SecureTokenService secureTokenService;
+    private final PasswordEncoder passwordEncoder;
     @Value("${site.base.url.https}")
     private String baseURL;
 
@@ -58,7 +55,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void saveCustomer(Customer customer) {
-        customerRepository.save(customer);
+        customerService.saveCustomer(customer);
     }
 
     @Override
@@ -93,13 +90,13 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         if(Objects.isNull(secureToken) || !StringUtils.equals(token, secureToken.getToken()) || secureToken.isExpired()){
             throw new InvalidTokenException("Token is not valid");
         }
-        User userEntity = userRepository.findById(secureToken.getUser().getId());
+        User userEntity = userService.findUserById(secureToken.getUser().getId());
         if(Objects.isNull(userEntity)){
             return false;
         }
         userEntity.setAccountVerified(true);
         userEntity.setLoginDisabled(false);
-        userRepository.save(userEntity); // let's same user details
+        userService.saveUser(userEntity); // let's save user details
 
         // we don't need invalid password now
         secureTokenService.removeToken(secureToken);
@@ -108,7 +105,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     private DjsAndLiveBand saveDjOrBand(Vendor vendorEntity, DjsAndLiveBandsCategory category) {
         DjsAndLiveBand djOrLiveBand = new DjsAndLiveBand(vendorEntity, category);
-        return djsAndLiveBandsRepository.save(djOrLiveBand);
+        return djsAndLiveBandsService.saveDjsAndLiveBands(djOrLiveBand);
     }
 
     private void saveDjOrBandMusicGenres(DjsAndLiveBand djsOrLiveBand, Set<MusicGenre> musicGenres) {
@@ -116,27 +113,27 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
                 .stream()
                 .map(musicGenre -> new DjsAndLiveBandsMusicGenre(djsOrLiveBand, musicGenre))
                 .collect(Collectors.toSet());
-        djsAndLiveBandsMusicGenreRepository.saveAll(set);
+        djsAndLiveBandsMusicGenreService.saveAllDjsAndLiveBandsMusicGenres(set);
     }
 
     private void savePhotographer(Vendor vendorEntity, PhotoFormat photoFormat) {
-        VendorsPhotoFormat vendorsPhotoFormatEntity = new VendorsPhotoFormat();
-        vendorsPhotoFormatEntity.setVendor(vendorEntity);
-        vendorsPhotoFormatEntity.setPhotoFormat(photoFormat);
-        vendorsPhotoFormatRepository.save(vendorsPhotoFormatEntity);
+        VendorPhotoFormat vendorPhotoFormatEntity = new VendorPhotoFormat();
+        vendorPhotoFormatEntity.setVendor(vendorEntity);
+        vendorPhotoFormatEntity.setPhotoFormat(photoFormat);
+        vendorPhotoFormatService.saveVendorPhotoFormat(vendorPhotoFormatEntity);
     }
 
     private void saveVenue(Vendor vendorEntity, VendorComposite vendorComposite) {
         Venue venueEntity = new Venue();
         BeanUtils.copyProperties(vendorComposite.getVenue(), venueEntity);
         venueEntity.setVendor(vendorEntity);
-        venueRepository.save(venueEntity);
+        venueService.saveVenue(venueEntity);
     }
 
     private Vendor saveVendor(Vendor vendor) {
         Vendor vendorEntity = new Vendor();
         BeanUtils.copyProperties(vendor, vendorEntity);
-        return vendorRepository.save(vendorEntity);
+        return vendorUtility.saveVendor(vendorEntity);
     }
 
     private User saveUser(User user, String code) {
@@ -146,12 +143,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         userEntity.setPassword(hash);
         userEntity.setUsername(user.getEmail());
         userEntity.addGroup(getUserGroup(code));
-        userEntity = userRepository.save(userEntity);
+        userEntity = userService.saveUser(userEntity);
         return userEntity;
     }
 
-    private boolean checkIfUserExist(String email) {
-        return userRepository.findByEmail(email) != null;
+    private boolean checkIfUserExist(String userName) {
+        return userService.findByUsername(userName) != null;
     }
 
     private void sendRegistrationConfirmationEmail(User userEntity) {
@@ -169,6 +166,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private PrincipalGroup getUserGroup(String role){
-        return principalGroupRepository.findByCode(role);
+        return principalGroupService.findByCode(role);
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
@@ -26,49 +26,47 @@
                     <div id="venues" >
                         <img class="card-img-top" src="/img/vendors/venues.jpg" alt="Card image cap" id="venuesImg">
                         <div class="vendorBtnDiv">
-                            <a href="/vendors/categories/1" class="vendorBtn btn d-grid gap-3">Venues</a>
+                            <a href="/vendors/categories/1" class="vendorBtn btn d-grid gap-3" th:text="${vendorCategories['0'].title}"></a>
                         </div>
                     </div>
-                    <br>
                     <div id="photographers" >
-                        <img class="card-img-top" src="/img/vendors/photographers.jpg" alt="Card image cap" id="photographersImg" >
+                        <img class="card-img-top" src="/img/vendors/photographers.jpg" alt="Card image cap" id="photographersImg">
                         <div class="vendorBtnDiv">
-                            <a href="/vendors/categories/2" class="vendorBtn btn d-grid gap-2">Photographers</a>
+                            <a href="/vendors/categories/2" class="vendorBtn btn d-grid gap-2" th:text="${vendorCategories['1'].title}"></a>
                         </div>
                     </div>
-                    <br>
                     <div id="florists" >
                         <img class="card-img-top" src="/img/vendors/florists.jpg" alt="Card image cap" id="floristsImg">
                         <div class="vendorBtnDiv">
-                            <a href="/vendors/categories/3" class="vendorBtn btn d-grid gap-">Florists</a>
+                            <a href="/vendors/categories/3" class="vendorBtn btn d-grid gap-" th:text="${vendorCategories['2'].title}"></a>
                         </div>
                     </div>
                     <br>
                     <div id="caterers" >
                         <img class="card-img-top" src="/img/vendors/caterers.jpg" alt="Card image cap" id="caterersImg">
                         <div class="vendorBtnDiv">
-                            <a href="/vendors/categories/4" class="vendorBtn btn d-grid gap-2">Caterers</a>
+                            <a href="/vendors/categories/4" class="vendorBtn btn d-grid gap-2" th:text="${vendorCategories['3'].title}"></a>
                         </div>
                     </div>
                     <br>
                     <div id="bakeries" >
                         <img class="card-img-top" src="/img/vendors/bakeries.jpg" alt="Card image cap" id="bakeriesImg">
                         <div class="vendorBtnDiv">
-                            <a href="/vendors/categories/5" class="vendorBtn btn d-grid gap-2">Cake and Desserts</a>
+                            <a href="/vendors/categories/5" class="vendorBtn btn d-grid gap-2" th:text="${vendorCategories['4'].title}"></a>
                         </div>
                     </div>
                     <br>
                     <div id="bars" >
                         <img class="card-img-top" src="/img/vendors/bars.jpg" alt="Card image cap" id="barsImg">
                         <div class="vendorBtnDiv">
-                            <a href="/vendors/categories/6" class="vendorBtn btn d-grid gap-2">Bar and Beverage</a>
+                            <a href="/vendors/categories/6" class="vendorBtn btn d-grid gap-2" th:text="${vendorCategories['5'].title}"></a>
                         </div>
                     </div>
                     <br>
                     <div id="musicians" >
                         <img class="card-img-top" src="/img/vendors/musicians.jpg" alt="Card image cap" id="musiciansImg">
                         <div class="vendorBtnDiv">
-                            <a href="/vendors/categories/7" class="vendorBtn btn d-grid gap-2">Bands and Djs</a>
+                            <a href="/vendors/categories/7" class="vendorBtn btn d-grid gap-2" th:text="${vendorCategories['6'].title}">\</a>
                         </div>
                     </div>
                     <br>

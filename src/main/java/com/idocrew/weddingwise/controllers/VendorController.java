@@ -1,14 +1,11 @@
 package com.idocrew.weddingwise.controllers;
 
-import com.idocrew.weddingwise.entity.BudgetEntry;
-import com.idocrew.weddingwise.entity.Customer;
 import com.idocrew.weddingwise.entity.User;
 import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.repositories.UserRepository;
 import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
 import com.idocrew.weddingwise.repositories.VendorRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
@@ -25,6 +22,9 @@ public class VendorController {
     private final VendorRepository vendorRepository;
     private final VendorCategoryRepository vendorCategoryRepository;
     private final UserRepository userRepository;
+    private final VendorUtility vendorUtility;
+    private final VendorCategoryService vendorCategoryService;
+    private final UserService userService;
 
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         User user = userRepository.findByUsername(username);
@@ -41,16 +41,17 @@ public class VendorController {
         return "vendors/individual_vendor";
     }
     @GetMapping("/vendors/categories/{id}")
-    public String vendorCategory(@PathVariable long id, @CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
+    public String vendorCategory(@PathVariable long id, Model model){
         model.addAttribute("id",id);
-        model.addAttribute("category", vendorCategoryRepository.findById(id));
+        VendorCategory vendorCategory = vendorCategoryService.findById(id);
+        model.addAttribute("vendorCategory", vendorCategory);
+        model.addAttribute("vendors", vendorUtility.findByCategory(vendorCategory));
         refactorThisMethod(username, model, request);
         return "vendors/each_vendorCategories";
     }
     @GetMapping("/vendors")
     public String vendorCategories(Model model){
-        List<Vendor> vendors = vendorRepository.findAll();
-        model.addAttribute("vendors",vendors);
+        model.addAttribute("vendorCategories", vendorCategoryService.findAll());
         return "vendors/all_vendorCategories";
     }
     @GetMapping("/vendor/profile")
