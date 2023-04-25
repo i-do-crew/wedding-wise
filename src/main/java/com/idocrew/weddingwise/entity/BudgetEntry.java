@@ -3,11 +3,13 @@ package com.idocrew.weddingwise.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Scope;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
+@Scope("session")
 @Entity
 @Table(name="budget_entries", schema="weddingwise")
 public class BudgetEntry {

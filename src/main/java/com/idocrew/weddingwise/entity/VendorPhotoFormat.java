@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "vendors_photo_format", schema = "weddingwise")
-public class VendorsPhotoFormat {
+public class VendorPhotoFormat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

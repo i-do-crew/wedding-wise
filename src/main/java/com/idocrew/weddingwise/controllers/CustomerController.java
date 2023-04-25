@@ -3,9 +3,9 @@ package com.idocrew.weddingwise.controllers;
 import com.idocrew.weddingwise.entity.BudgetEntry;
 import com.idocrew.weddingwise.entity.Customer;
 import com.idocrew.weddingwise.entity.User;
-import com.idocrew.weddingwise.repositories.BudgetRepository;
-import com.idocrew.weddingwise.repositories.CustomerRepository;
-import com.idocrew.weddingwise.repositories.UserRepository;
+import com.idocrew.weddingwise.services.BudgetEntryService;
+import com.idocrew.weddingwise.services.CustomerService;
+import com.idocrew.weddingwise.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
@@ -21,22 +21,19 @@ import java.util.List;
 @SessionAttributes({"user","customer","budget"})
 public class CustomerController {
 
-    private final UserRepository userRepository;
-    private final CustomerRepository customerRepository;
-    private final BudgetRepository budgetRepository;
+    private final UserService userService;
+    private final CustomerService customerService;
+    private final BudgetEntryService budgetEntryService;
 
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
-        User user = userRepository.findByUsername(username);
-        Customer customer = customerRepository.findCustomerByUser(user);
-        List<BudgetEntry> budget = budgetRepository.findAllByCustomer(customer);
+        User user = userService.findByUsername(username);
+        Customer customer = customerService.findCustomerByUser(user);
+        List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
         
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("customer", customer);
         request.getSession().setAttribute("budget", budget);
-        
-//        model.addAttribute("user", user);
-//        model.addAttribute("customer", customer);
-//        model.addAttribute("budget", budget);
+
     }
     @GetMapping("/ideaboard")
     public String ideaBoard(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
