@@ -1,6 +1,7 @@
 package com.idocrew.weddingwise.services.impl;
 
 import com.idocrew.weddingwise.entity.Vendor;
+import com.idocrew.weddingwise.entity.VendorCategory;
 import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.VendorUtility;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,11 @@ public class VendorUtilityImpl implements VendorUtility {
     @Override
     public List<Vendor> findAll() {
         return vendorRepository.findAll();
+    }
+
+    @Override
+    public List<Vendor> findByCategory(VendorCategory category) {
+        return vendorRepository.findByVendorCategory(category);
     }
 
     @Override

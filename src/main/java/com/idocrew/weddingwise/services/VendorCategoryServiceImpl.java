@@ -11,6 +11,17 @@ import java.util.Collection;
 @Service("vendorCategoryService")
 class VendorCategoryServiceImpl implements VendorCategoryService {
     private final VendorCategoryRepository vendorCategoryRepository;
+
+    @Override
+    public VendorCategory findById(long id) {
+        return vendorCategoryRepository.getReferenceById(id);
+    }
+
+    @Override
+    public VendorCategory findByTitle(String title) {
+        return vendorCategoryRepository.findByTitle(title);
+    }
+
     @Override
     public Collection<VendorCategory> findAll() {
         return vendorCategoryRepository.findAll();

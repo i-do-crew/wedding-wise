@@ -4,4 +4,5 @@ import com.idocrew.weddingwise.entity.VendorCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VendorCategoryRepository extends JpaRepository<VendorCategory, Long> {
+    VendorCategory findByTitle(String title);
 }
