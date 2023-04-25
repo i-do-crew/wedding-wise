@@ -126,7 +126,7 @@
 <!--Conditional attribute display-->
 <script>
     $('#vendorCategory').on('change', function() {
-        let vendorCategoryVal = $('#vendorCategory').val();
+        let vendorCategoryVal = $('#vendorCategory').textContent();
         let venueCapacity = $('#venueCapacity');
         let musicGenre = $('#musicGenre');
         let VendorPhotoFormat = $('#VendorPhotoFormat');
