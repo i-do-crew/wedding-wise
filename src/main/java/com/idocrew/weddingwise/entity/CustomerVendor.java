@@ -17,11 +17,11 @@ public class CustomerVendor {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name = "favorited")
-    private Boolean favorited;
+    @Column(name = "liked")
+    private Boolean liked;
 
-    @Column(name = "amount_quoted", nullable = false)
-    private Integer amountQuoted;
+    @Column(name = "selected")
+    private Boolean selected;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)

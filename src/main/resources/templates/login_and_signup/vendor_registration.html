@@ -128,11 +128,10 @@
 <!--Conditional attribute display-->
 <script>
     $('#vendorCategory').on('change', function() {
-        let vendorCategoryVal = $('#vendorCategory').val();
+        let vendorCategoryVal = $("#vendorCategory option:selected").text();
         let venueCapacity = $('#venueCapacity');
         let musicGenre = $('#musicGenre');
         let VendorPhotoFormat = $('#VendorPhotoFormat');
-        console.log(vendorCategoryVal)
 
         venueCapacity.addClass('d-none');
         musicGenre.addClass('d-none');
