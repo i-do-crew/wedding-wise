@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface DjsAndLiveBandsCategoryRepository extends JpaRepository<DjsAndLiveBandsCategory, Long> {
     DjsAndLiveBandsCategory findByTitle(String title);
-    DjsAndLiveBandsCategory findById(long id);
-    List<DjsAndLiveBandsCategory> findAll();
 }

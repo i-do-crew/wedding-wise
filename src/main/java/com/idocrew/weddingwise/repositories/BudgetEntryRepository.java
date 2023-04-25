@@ -6,8 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface BudgetRepository  extends JpaRepository<BudgetEntry, Long> {
-    BudgetEntry findById(long id);
+public interface BudgetEntryRepository extends JpaRepository<BudgetEntry, Long> {
 
     List<BudgetEntry> findAllByCustomer(Customer customer);
 

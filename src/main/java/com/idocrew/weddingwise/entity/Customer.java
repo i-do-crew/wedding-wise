@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -15,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@Scope("session")
 @Entity
 @Table(name="customers", schema = "weddingwise")
 public class Customer {

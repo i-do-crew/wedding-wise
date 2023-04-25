@@ -2,7 +2,7 @@ package com.idocrew.weddingwise.controllers;
 
 import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
-import com.idocrew.weddingwise.repositories.VendorRepository;
+import com.idocrew.weddingwise.services.VendorUtility;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VendorController {
 
-    private final VendorRepository vendorRepository;
+    private final VendorUtility vendorUtility;
     private final VendorCategoryRepository vendorCategoryRepository;
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id, Model model) {
@@ -33,7 +33,7 @@ public class VendorController {
     }
     @GetMapping("/vendors")
     public String vendorCategories(Model model){
-        List<Vendor> vendors = vendorRepository.findAll();
+        List<Vendor> vendors = vendorUtility.findAll();
         model.addAttribute("vendors",vendors);
         return "vendors/all_vendorCategories";
     }
