@@ -53,14 +53,17 @@
     }
 
     #hero {
-        background: url("../img/home_page/hero_background.jpg");
-        height: 100vh;
+        background: url("../img/home_page/hero_background.jpg") no-repeat;
+        background-size: cover;
+        /*object-fit: cover !important;*/
+        object-position: 75% 50% !important;
+        height: 50vh;
     }
 
     #hero-text {
         text-align: center;
         position: absolute;
-        top: 50%;
+        top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
 
@@ -72,7 +75,7 @@
 
     #hero-text-background {
         background-color: #FFFAF7;
-        opacity: 90%;
+        opacity: 85%;
         border-radius: 50px;
         padding: 50px;
     }
