@@ -18,72 +18,30 @@
 <div th:insert="~{fragments/fragments :: profileModal}"></div>
 
 <main style="background-color: #FFE5D2; padding:50px;">
-    <div class="container p-5 border border-dark vh-100" style="background-color: #FFFAF7;">
+    <div class="container p-5 border border-dark " style="background-color: #FFFAF7;">
         <div class="container-fluid" id="mainCard">
             <div class="text-center" >
                 <h1 class="fontTitle" th:text="${vendorCategory.title}"></h1>
             </div>
             <div class="flex-column d-flex justify-content-evenly align-items-center">
-                <div class="card mb-3" style="max-width: 900px; background-color: #FFE5D2">
+                <div th:each="vendor: ${vendors}" class="card mb-3" style="max-width: 900px; background-color: #FFE5D2">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="/img/vendor_categories/weddingMusic.jpg/" class="img-fluid rounded-start" alt="Vendor Name">
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body" th:each="venue: ${vendors}">
+                            <div class="card-body" >
                                 <h5 class="card-title" th:text="${vendor.businessName}"></h5>
-<!--                                <h5 th:if="${id == 2}" class="card-title">Evelyn Photography</h5>-->
-<!--                                <h5 th:if="${id == 3}" class="card-title">Greg Reese Events</h5>-->
-<!--                                <h5 th:if="${id == 4}" class="card-title">Scratch Kitchen</h5>-->
-<!--                                <h5 th:if="${id == 5}" class="card-title">Tasty Swirls Company</h5>-->
-<!--                                <h5 th:if="${id == 6}" class="card-title">Barmasters Texas</h5>-->
-<!--                                <h5 th:if="${id == 7}" class="card-title">DJMusic Entertainment LLC</h5>-->
                                 <p class="card-text" th:text="${vendor.about}"></p>
-<!--                                star ratings-->
-<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
-<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
-<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
-<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
-<!--                                <i class="fa-sharp fa-regular fa-star"></i>-->
-
-                                <a th:if="${id == 1}" class="" href="/vendors/individual/1"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
-                                <a th:if="${id == 2}" class="" href="/vendors/individual/2"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
-                                <a th:if="${id == 3}" class="" href="/vendors/individual/3"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
-                                <a th:if="${id == 4}" class="" href="/vendors/individual/4"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
-                                <a th:if="${id == 5}" class="" href="/vendors/individual/5"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
-                                <a th:if="${id == 6}" class="" href="/vendors/individual/6"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
-                                <a th:if="${id == 7}" class="" href="/vendors/individual/7"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
-                                <!--                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+                                <a class="" th:href="@{/vendors/individual/{id}(id=${vendor.id})}"><button class="btn btn-outline-dark">Contact This Vendor</button></a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
 </main>
-<!--                    <img class="card-img-top" id="img" src="/img/vendor_categories/weddingMusic.jpg/" alt="Vendor Name">-->
-<!--                    <div style="text-align: center">-->
-<!--                        <h5 th:if="${id == 1}" class="">Rancho La Mission</h5>-->
-<!--                        <h5 th:if="${id == 2}" class="">Evelyn Photography</h5>-->
-<!--                        <h5 th:if="${id == 3}" class="">Greg Reese Events</h5>-->
-<!--                        <h5 th:if="${id == 4}" class="">Scratch Kitchen</h5>-->
-<!--                        <h5 th:if="${id == 5}" class="">Tasty Swirls Company</h5>-->
-<!--                        <h5 th:if="${id == 6}" class="">Barmasters Texas</h5>-->
-<!--                        <h5 th:if="${id == 7}" class="">DJMusic Entertainment LLC</h5>-->
-<!--                        <p class="">Vendor's information.</p>-->
-<!--                        <a th:if="${id == 1}" class="" href="/vendors/individual/1">Book This Vendor</a>-->
-<!--                        <a th:if="${id == 2}" class="" href="/vendors/individual/2">Book This Vendor</a>-->
-<!--                        <a th:if="${id == 3}" class="" href="/vendors/individual/3">Book This Vendor</a>-->
-<!--                        <a th:if="${id == 4}" class="" href="/vendors/individual/4">Book This Vendor</a>-->
-<!--                        <a th:if="${id == 5}" class="" href="/vendors/individual/5">Book This Vendor</a>-->
-<!--                        <a th:if="${id == 6}" class="" href="/vendors/individual/6">Book This Vendor</a>-->
-<!--                        <a th:if="${id == 7}" class="" href="/vendors/individual/7">Book This Vendor</a>-->
-<!--                    </div>-->
-
 
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>

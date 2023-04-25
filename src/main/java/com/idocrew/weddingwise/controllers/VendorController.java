@@ -52,10 +52,10 @@ public class VendorController {
     @GetMapping("/vendors")
     public String vendorCategories(Model model){
         model.addAttribute("vendorCategories", vendorCategoryService.findAll());
-        List<Vendor> vendors = vendorRepository.findAll();
+//        List<Vendor> vendors = vendorRepository.findAll();
+//        VendorCategory vendorCategory = vendorCategoryService.findById(id);
 
-        model.addAttribute("vendors",vendors);
-        model.addAttribute("categories", vendorCategoryRepository.findAll());
+//        model.addAttribute("vendors", vendorUtility.findByCategory(vendorCategory));
         return "vendors/all_vendorCategories";
     }
     @GetMapping("/vendor/profile")
