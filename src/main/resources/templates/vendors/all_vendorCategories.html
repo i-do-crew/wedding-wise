@@ -23,10 +23,10 @@
             <h1 class="fontTitle mb-1 mt-5">Vendor Categories</h1>
             <div class="card-body flex-wrap d-flex  justify-content-center">
                 <div class="row ms-5 me-5 mb-5">
-                    <div th:each="category: ${categories}" class="vendor">
-                        <img class="vendorImg card-img-top" th:src="@{'/img/vendors/' + ${#strings.replace(category.title,' ','-')} + '.jpg'}" alt="Card image cap">
+                    <div th:each="vendorCategory: ${categories}" class="vendor">
+                        <img class="vendorImg card-img-top" th:src="@{'/img/vendors/' + ${#strings.replace(vendorCategory.title,' ','-')} + '.jpg'}" alt="Card image cap">
                         <div class="vendorBtnDiv">
-                            <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="vendorBtn btn d-grid gap-3" th:text="${category.title}"></a>
+                            <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="vendorBtn btn d-grid gap-3" th:text="${vendorCategory.title}"></a>
                         </div>
                     </div>
                 </div>

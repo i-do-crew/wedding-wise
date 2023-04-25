@@ -25,6 +25,6 @@ public class PhotoFormat {
     private String title;
 
     @OneToMany(mappedBy = "photoFormat")
-    private Set<VendorsPhotoFormat> vendorsPhotoFormats = new LinkedHashSet<>();
+    private Set<VendorPhotoFormat> vendorsPhotoFormats = new LinkedHashSet<>();
 
 }

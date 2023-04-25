@@ -40,7 +40,7 @@ public class Vendor {
     private Set<VendorService> vendorServices = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "vendor")
-    private Set<VendorsPhotoFormat> vendorsPhotoFormats = new LinkedHashSet<>();
+    private Set<VendorPhotoFormat> vendorsPhotoFormats = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "vendor")
     private Set<Venue> venues = new LinkedHashSet<>();

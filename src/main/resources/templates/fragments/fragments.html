@@ -43,7 +43,7 @@
                     <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard">Dashboard</a>
                     <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile">Dashboard</a>
                 </li>
-                <li class="nav-item me-2" sec:authorize="!isAuthenticated()">
+                <li class="nav-item me-2" sec:authorize="isAnonymous()">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
                 <li class="nav-item me-2" sec:authorize="isAuthenticated()">
@@ -51,11 +51,11 @@
                         <input class="nav-link" type="submit" value="Logout"/>
                     </form>
                 </li>
-                <li class="nav-item dropstart">
+                <li class="nav-item dropstart" sec:authorize="isAnonymous()">
                     <button id="sign-up-btn" class="dropdown-toggle btn text-light" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Sign-Up
                     </button>
-                    <ul class="dropdown-menu" sec:authorize="!isAuthenticated()">
+                    <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/client/registration">Sign-up as Client</a></li>
                         <li><a class="dropdown-item" href="/vendor/registration">Sign-up as Vendor</a></li>
                     </ul>
@@ -119,10 +119,9 @@
                 <button id="editVendorProfileModalBtn" type="button" class="btn font d-flex justify-content-end" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pencil"></i></button>
             </div>
             <div class="row pb-4">
-                <h3 class="fontTitle">Business Name</h3>
-                <p class="font">vendor@vendor.com</p>
-                <p class="font">000-000-0000</p>
-                <p class="font">000 Vendor St</p>
+                <h3 class="fontTitle"><span th:text="${session.vendor} ? ${session.vendor.businessName}"></span></h3>
+                <p class="font"><span th:text="${session.user} ? ${session.user.email}"></span></p>
+                <p class="font"><span th:text="${session.user} ? ${session.user.city}"></span>, <span th:text="${session.user} ? ${session.user.state}"></span></p>
             </div>
             <div class="position-absolute bottom-0">
                 <div class="row pb-4 pt-5">
