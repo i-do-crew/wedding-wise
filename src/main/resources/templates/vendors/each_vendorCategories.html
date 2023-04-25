@@ -21,17 +21,9 @@
     <div class="container p-5 border border-dark vh-100" style="background-color: #FFFAF7;">
         <div class="container-fluid" id="mainCard">
             <div class="text-center">
-                <h1 th:if="${id == 1}" class="fontTitle" th:text="Venues"></h1>
-                <h1 th:if="${id == 2}" class="fontTitle" th:text="Photographers"></h1>
-                <h1 th:if="${id == 3}" class="fontTitle" th:text="Florists"></h1>
-                <h1 th:if="${id == 4}" class="fontTitle" th:text="Caterers"></h1>
-                <h1 th:if="${id == 5}" class="fontTitle" th:text="Cakes and Desserts"></h1>
-                <h1 th:if="${id == 6}" class="fontTitle" th:text="Bar and Beverage"></h1>
-                <h1 th:if="${id == 7}" class="fontTitle" th:text="Bands and DJs"></h1>
+                <h1 th:text="${category.title}"></h1>
             </div>
             <div class="flex-column d-flex justify-content-evenly align-items-center">
-
-
                 <div class="card mb-3" style="max-width: 900px; background-color: #FFE5D2">
                     <div class="row g-0">
                         <div class="col-md-4">

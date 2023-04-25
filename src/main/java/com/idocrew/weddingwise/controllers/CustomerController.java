@@ -33,10 +33,7 @@ public class CustomerController {
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("customer", customer);
         request.getSession().setAttribute("budget", budget);
-        
-//        model.addAttribute("user", user);
-//        model.addAttribute("customer", customer);
-//        model.addAttribute("budget", budget);
+
     }
     @GetMapping("/ideaboard")
     public String ideaBoard(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
