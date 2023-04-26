@@ -15,9 +15,9 @@ import java.util.Set;
 @Table(name = "djs_and_live_bands", schema = "weddingwise", indexes = {
     @Index(name = "vendor_id", columnList = "vendor_id")
 })
-public class DjsAndLiveBand {
+public class MusicVendor {
 
-    public DjsAndLiveBand(Vendor vendor, DjsAndLiveBandsCategory dalbCategory) {
+    public MusicVendor(Vendor vendor, MusicVendorCategory dalbCategory) {
         this.vendor = vendor;
         this.dalbCategory = dalbCategory;
     }
@@ -29,13 +29,13 @@ public class DjsAndLiveBand {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dalb_category_id", nullable = false)
-    private DjsAndLiveBandsCategory dalbCategory;
+    private MusicVendorCategory dalbCategory;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vendor_id", nullable = false)
     private Vendor vendor;
 
-    @OneToMany(mappedBy = "djOrLiveBand")
-    private Set<DjsAndLiveBandsMusicGenre> djsAndLiveBandsMusicGenres = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "musicVendor")
+    private Set<MusicVendorGenre> musicVendorGenres = new LinkedHashSet<>();
 
 }

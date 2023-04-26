@@ -49,7 +49,7 @@ public class Vendor {
     private Set<VendorRatingsReview> vendorRatingsReviews = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "vendor")
-    private Set<DjsAndLiveBand> djsAndLiveBands = new LinkedHashSet<>();
+    private Set<MusicVendor> musicVendors = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "vendor")
     private Set<VendorPackage> vendorPackages = new LinkedHashSet<>();

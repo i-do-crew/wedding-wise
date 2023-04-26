@@ -16,7 +16,7 @@ public class VendorComposite {
     private Venue venue;
     private Set<MusicGenre> musicGenres;
     private PhotoFormat photoFormat;
-    private DjsAndLiveBandsCategory djsAndLiveBandsCategory;
+    private MusicVendorCategory musicVendorCategory;
     public User getUser(){
         return vendor.getUser();
     }
