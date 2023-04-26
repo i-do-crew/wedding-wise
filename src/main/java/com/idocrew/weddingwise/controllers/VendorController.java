@@ -10,11 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -43,26 +41,31 @@ public class VendorController {
         Vendor vendor = vendorUtility.findVendorByUser(user);
         VendorComposite vendorComposite = new VendorComposite();
         vendorComposite.setVendor(vendor);
-        MusicVendor djOrLiveBand = musicVendorService.findByVendor(vendor);
         switch(vendor.getVendorCategory().getTitle()) {
-            case "Venues" -> vendorComposite.setVenue(venueService.findByVendor(vendor).get(0));
+            case "Venues" -> {
+                List<Venue> venues = venueService.findByVendor(vendor);
+                if (!venues.isEmpty()) {
+                    vendorComposite.setVenue(venues.get(0));
+                }
+            }
             case "Photographers" -> vendorComposite.setPhotoFormat(vendorPhotoFormatService.findByVendor(vendor));
             case "Bands and DJs" -> {
-                vendorComposite.setMusicVendorCategory(musicVendorCategoryService.findByVendor(vendor));
+                MusicVendor musicVendor = musicVendorService.findByVendor(vendor);
+                vendorComposite.setMusicVendorCategory(musicVendor.getMusicVendorCategory());
                 Set<MusicGenre> genres = musicVendorGenreService
-                        .findDjsAndLiveBandsMusicGenreByDjOrLiveBand(djOrLiveBand)
+                        .findMusicVendorMusicGenreByMusicVendor(musicVendor)
                         .stream()
-                        .map(djGenre -> djGenre.getMusicGenre())
+                        .map(MusicVendorGenre::getMusicGenre)
                         .collect(Collectors.toSet());
                 vendorComposite.setMusicGenres(genres);
             }
             default -> {
             }
         }
-
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("vendor", vendor);
         request.getSession().setAttribute("vendorComposite", vendorComposite);
+        model.addAttribute("vendorComposite", vendorComposite);
     }
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id,@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request) {
@@ -95,8 +98,6 @@ public class VendorController {
     @GetMapping("/vendor/profile")
     public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
-        User user = userService.findByUsername(username);
-        Vendor vendor = vendorUtility.findVendorByUser(user);
         return "vendor_views/vendor_profile";
     }
     @GetMapping("/vendor/profile/edit")
@@ -111,24 +112,24 @@ public class VendorController {
         return "vendor_views/vendor_profile";
     }
     @PostMapping("/vendor/profile/edit")
-    public String vendorProfileEditPost(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request,@ModelAttribute("vendorComposite") VendorComposite vendorComposite) {
+    public String vendorProfileEditPost(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request,@SessionAttribute("vendorComposite") VendorComposite vendorComposite) {
 //        refactorThisMethod(username, model, request);
 //        vendor object tied to the form that you save
         userRegistrationService.register(vendorComposite);
         return "vendor_views/vendor_profile";
     }
 
-    private MusicVendor saveDjOrBand(Vendor vendorEntity, MusicVendorCategory category) {
-        MusicVendor djOrLiveBand = new MusicVendor(vendorEntity, category);
-        return musicVendorService.saveDjsAndLiveBands(djOrLiveBand);
+    private MusicVendor saveMusicVendor(Vendor vendorEntity, MusicVendorCategory category) {
+        MusicVendor musicVendor = new MusicVendor(vendorEntity, category);
+        return musicVendorService.saveMusicVendor(musicVendor);
     }
 
-    private void saveDjOrBandMusicGenres(MusicVendor djsOrLiveBand, Set<MusicGenre> musicGenres) {
+    private void saveMusicVendorMusicGenres(MusicVendor musicVendor, Set<MusicGenre> musicGenres) {
         Set<MusicVendorGenre> set = musicGenres
                 .stream()
-                .map(musicGenre -> new MusicVendorGenre(djsOrLiveBand, musicGenre))
+                .map(musicGenre -> new MusicVendorGenre(musicVendor, musicGenre))
                 .collect(Collectors.toSet());
-        musicVendorGenreService.saveAllDjsAndLiveBandsMusicGenres(set);
+        musicVendorGenreService.saveAllMusicVendorMusicGenres(set);
     }
 
     private void savePhotographer(Vendor vendorEntity, PhotoFormat photoFormat) {

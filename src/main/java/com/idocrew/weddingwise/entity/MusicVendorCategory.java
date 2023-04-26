@@ -23,6 +23,6 @@ public class MusicVendorCategory {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @OneToMany(mappedBy = "dalbCategory")
+    @OneToMany(mappedBy = "musicVendorCategory")
     private Set<MusicVendor> musicVendors = new LinkedHashSet<>();
 }

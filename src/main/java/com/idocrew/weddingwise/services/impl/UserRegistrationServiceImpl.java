@@ -75,8 +75,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             case "Venues" -> saveVenue(vendorEntity, vendorComposite);
             case "Photographers" -> savePhotographer(vendorEntity, vendorComposite.getPhotoFormat());
             case "Bands and DJs" -> {
-                MusicVendor djOrLiveBand = saveDjOrBand(vendorEntity, vendorComposite.getMusicVendorCategory());
-                saveDjOrBandMusicGenres(djOrLiveBand, vendorComposite.getMusicGenres());
+                MusicVendor musicVendor = saveMusicVendor(vendorEntity, vendorComposite.getMusicVendorCategory());
+                saveMusicVendorMusicGenres(musicVendor, vendorComposite.getMusicGenres());
             }
             default -> {
             }
@@ -103,17 +103,17 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         return true;
     }
 
-    private MusicVendor saveDjOrBand(Vendor vendorEntity, MusicVendorCategory category) {
-        MusicVendor djOrLiveBand = new MusicVendor(vendorEntity, category);
-        return musicVendorService.saveDjsAndLiveBands(djOrLiveBand);
+    private MusicVendor saveMusicVendor(Vendor vendorEntity, MusicVendorCategory category) {
+        MusicVendor musicVendor = new MusicVendor(vendorEntity, category);
+        return musicVendorService.saveMusicVendor(musicVendor);
     }
 
-    private void saveDjOrBandMusicGenres(MusicVendor djsOrLiveBand, Set<MusicGenre> musicGenres) {
+    private void saveMusicVendorMusicGenres(MusicVendor musicVendor, Set<MusicGenre> musicGenres) {
         Set<MusicVendorGenre> set = musicGenres
                 .stream()
-                .map(musicGenre -> new MusicVendorGenre(djsOrLiveBand, musicGenre))
+                .map(musicGenre -> new MusicVendorGenre(musicVendor, musicGenre))
                 .collect(Collectors.toSet());
-        musicVendorGenreService.saveAllDjsAndLiveBandsMusicGenres(set);
+        musicVendorGenreService.saveAllMusicVendorMusicGenres(set);
     }
 
     private void savePhotographer(Vendor vendorEntity, PhotoFormat photoFormat) {

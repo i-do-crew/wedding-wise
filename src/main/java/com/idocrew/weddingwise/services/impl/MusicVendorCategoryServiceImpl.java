@@ -11,16 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @AllArgsConstructor
-@Service("djsAndLiveBandsCategoryService")
+@Service("musicVendorCategoryService")
 class MusicVendorCategoryServiceImpl implements MusicVendorCategoryService {
     private final MusicVendorCategoryRepository musicVendorCategoryRepository;
     @Override
     public Collection<MusicVendorCategory> findAll() {
         return musicVendorCategoryRepository.findAll();
-    }
-
-    @Override
-    public MusicVendorCategory findByVendor(MusicVendor musicVendor) {
-        return musicVendorCategoryRepository.findMusicVendorCategoryByMusicVendor(musicVendor);
     }
 }

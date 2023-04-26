@@ -11,21 +11,21 @@ import java.util.Collection;
 import java.util.Set;
 
 @RequiredArgsConstructor
-@Service("djsAndLiveBandsMusicGenreService")
+@Service("musicVendorMusicGenreService")
 public class MusicVendorVendorGenreServiceImpl implements MusicVendorGenreService {
     private final MusicVendorGenreRepository musicVendorGenreRepository;
     @Override
-    public MusicVendorGenre saveDjsAndLiveBandsMusicGenre(MusicVendorGenre musicVendorGenre) {
+    public MusicVendorGenre saveMusicVendorMusicGenre(MusicVendorGenre musicVendorGenre) {
         return musicVendorGenreRepository.save(musicVendorGenre);
     }
 
     @Override
-    public void saveAllDjsAndLiveBandsMusicGenres(Collection<MusicVendorGenre> musicVendorGenres) {
+    public void saveAllMusicVendorMusicGenres(Collection<MusicVendorGenre> musicVendorGenres) {
         musicVendorGenreRepository.saveAll(musicVendorGenres);
     }
 
     @Override
-    public Set<MusicVendorGenre> findDjsAndLiveBandsMusicGenreByDjOrLiveBand(MusicVendor musicVendor) {
+    public Set<MusicVendorGenre> findMusicVendorMusicGenreByMusicVendor(MusicVendor musicVendor) {
         return musicVendorGenreRepository.findMusicVendorGenreByMusicVendor(musicVendor);
     }
 }

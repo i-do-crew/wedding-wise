@@ -8,11 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Service("djsAndLiveBandsService")
+@Service("musicVendorService")
 public class MusicVendorServiceImpl implements MusicVendorService {
     private final MusicVendorRepository musicVendorRepository;
     @Override
-    public MusicVendor saveDjsAndLiveBands(MusicVendor musicVendor) {
+    public MusicVendor saveMusicVendor(MusicVendor musicVendor) {
         return musicVendorRepository.save(musicVendor);
     }
 

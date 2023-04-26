@@ -5,5 +5,4 @@ import com.idocrew.weddingwise.entity.MusicVendorCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MusicVendorCategoryRepository extends JpaRepository<MusicVendorCategory, Long> {
-    MusicVendorCategory findMusicVendorCategoryByMusicVendor(MusicVendor musicVendor);
 }

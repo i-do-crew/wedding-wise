@@ -17,9 +17,9 @@ import java.util.Set;
 })
 public class MusicVendor {
 
-    public MusicVendor(Vendor vendor, MusicVendorCategory dalbCategory) {
+    public MusicVendor(Vendor vendor, MusicVendorCategory musicVendorCategory) {
         this.vendor = vendor;
-        this.dalbCategory = dalbCategory;
+        this.musicVendorCategory = musicVendorCategory;
     }
 
     @Id
@@ -29,7 +29,7 @@ public class MusicVendor {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dalb_category_id", nullable = false)
-    private MusicVendorCategory dalbCategory;
+    private MusicVendorCategory musicVendorCategory;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vendor_id", nullable = false)
