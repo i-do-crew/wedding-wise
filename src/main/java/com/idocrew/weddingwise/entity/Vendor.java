@@ -24,7 +24,7 @@ public class Vendor {
     @Column(name="business_name", columnDefinition="varchar(50)")
     private String businessName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name="category_id", columnDefinition="bigint(20)", nullable = false)
     private VendorCategory vendorCategory;
 

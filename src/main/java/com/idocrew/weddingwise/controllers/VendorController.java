@@ -39,33 +39,8 @@ public class VendorController {
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         User user = userService.findByUsername(username);
         Vendor vendor = vendorUtility.findVendorByUser(user);
-        VendorComposite vendorComposite = new VendorComposite();
-        vendorComposite.setVendor(vendor);
-        switch(vendor.getVendorCategory().getTitle()) {
-            case "Venues" -> {
-                List<Venue> venues = venueService.findByVendor(vendor);
-                if (!venues.isEmpty()) {
-                    vendorComposite.setVenue(venues.get(0));
-                }
-            }
-            case "Photographers" -> vendorComposite.setPhotoFormat(vendorPhotoFormatService.findByVendor(vendor));
-            case "Bands and DJs" -> {
-                MusicVendor musicVendor = musicVendorService.findByVendor(vendor);
-                vendorComposite.setMusicVendorCategory(musicVendor.getMusicVendorCategory());
-                Set<MusicGenre> genres = musicVendorGenreService
-                        .findMusicVendorMusicGenreByMusicVendor(musicVendor)
-                        .stream()
-                        .map(MusicVendorGenre::getMusicGenre)
-                        .collect(Collectors.toSet());
-                vendorComposite.setMusicGenres(genres);
-            }
-            default -> {
-            }
-        }
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("vendor", vendor);
-        request.getSession().setAttribute("vendorComposite", vendorComposite);
-        model.addAttribute("vendorComposite", vendorComposite);
     }
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id,@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request) {
@@ -98,6 +73,7 @@ public class VendorController {
     @GetMapping("/vendor/profile")
     public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
+        model.addAttribute("vendorComposite", new VendorComposite());
         return "vendor_views/vendor_profile";
     }
     @GetMapping("/vendor/profile/edit")
@@ -108,7 +84,31 @@ public class VendorController {
         model.addAttribute("musicGenres", musicGenreService.findAll());
         model.addAttribute("photoFormats", photoFormatService.findAll());
         model.addAttribute("musicTypes", musicVendorCategoryService.findAll());
-
+        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
+        VendorComposite vendorComposite = new VendorComposite();
+        vendorComposite.setVendor(vendor);
+        switch(vendor.getVendorCategory().getTitle()) {
+            case "Venues" -> {
+                List<Venue> venues = venueService.findByVendor(vendor);
+                if (!venues.isEmpty()) {
+                    vendorComposite.setVenue(venues.get(0));
+                }
+            }
+            case "Photographers" -> vendorComposite.setPhotoFormat(vendorPhotoFormatService.findByVendor(vendor));
+            case "Bands and DJs" -> {
+                MusicVendor musicVendor = musicVendorService.findByVendor(vendor);
+                vendorComposite.setMusicVendorCategory(musicVendor.getMusicVendorCategory());
+                Set<MusicGenre> genres = musicVendorGenreService
+                        .findMusicVendorMusicGenreByMusicVendor(musicVendor)
+                        .stream()
+                        .map(MusicVendorGenre::getMusicGenre)
+                        .collect(Collectors.toSet());
+                vendorComposite.setMusicGenres(genres);
+            }
+            default -> {
+            }
+        }
+        model.addAttribute("vendorComposite", vendorComposite);
         return "vendor_views/vendor_profile";
     }
     @PostMapping("/vendor/profile/edit")

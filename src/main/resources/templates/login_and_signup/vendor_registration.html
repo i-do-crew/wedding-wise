@@ -100,7 +100,7 @@
                                 </div>
                         <div class=" d-none" id="musicGenre">
                                     <label for="musicType" class="form-label"></label>
-                                    <select th:field="*{getMusicVendorCategory}" id="musicType" class="form-select">
+                                    <select th:field="*{musicVendorCategory}" id="musicType" class="form-select">
                                         <option th:value="0" selected>Select the type of musical group...</option>
                                         <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.id}"></option>
                                     </select>
