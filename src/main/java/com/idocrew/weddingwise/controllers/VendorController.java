@@ -38,6 +38,9 @@ public class VendorController {
 //        model.addAttribute("vendor", vendorRepository.findById(id));
         refactorThisMethod(username, model, request);
         model.addAttribute("vid",id);
+        Vendor vendor = vendorUtility.findById(id);
+        model.addAttribute("vendor",vendor);
+        model.addAttribute("user", vendor.getUser());
         return "vendors/individual_vendor";
     }
     @GetMapping("/vendors/categories/{id}")

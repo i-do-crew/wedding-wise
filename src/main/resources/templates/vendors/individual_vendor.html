@@ -20,28 +20,29 @@
     <div class="container p-4">
       <div class="card container">
         <div class="row">
-          <h1 th:if="${vid == 1}" class="text-center fontTitle">Rancho La Mission</h1>
-          <h1 th:if="${vid == 2}" class="text-center fontTitle">Evelyn Photography</h1>
-          <h1 th:if="${vid == 3}" class="text-center fontTitle">Greg Reese Events</h1>
-          <h1 th:if="${vid == 4}" class="text-center fontTitle">Scratch Kitchen</h1>
-          <h1 th:if="${vid == 5}" class="text-center fontTitle">Tasty Swirls Company</h1>
-          <h1 th:if="${vid == 6}" class="text-center fontTitle">Barmasters Texas</h1>
-          <h1 th:if="${vid == 7}" class="text-center fontTitle">DJMusic Entertainment LLC</h1>
+          <h1 th:text="${vendor.businessName}" class="text-center fontTitle"></h1>
+<!--          <h1 th:if="${vid == 2}" class="text-center fontTitle">Evelyn Photography</h1>-->
+<!--          <h1 th:if="${vid == 3}" class="text-center fontTitle">Greg Reese Events</h1>-->
+<!--          <h1 th:if="${vid == 4}" class="text-center fontTitle">Scratch Kitchen</h1>-->
+<!--          <h1 th:if="${vid == 5}" class="text-center fontTitle">Tasty Swirls Company</h1>-->
+<!--          <h1 th:if="${vid == 6}" class="text-center fontTitle">Barmasters Texas</h1>-->
+<!--          <h1 th:if="${vid == 7}" class="text-center fontTitle">DJMusic Entertainment LLC</h1>-->
           <div class="row">
-            <div class="d-flex justify-content-start m-0" id="likedBtns">
+            <div class="col d-flex justify-content-start m-0" id="likedBtns">
               <div class="justify-content-between">
                 <button type="button" class="btn font"><i class="fa-solid fa-check"></i></button>
                 <button type="button" class="btn font"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
-            <div id="vendorContact" class="font">
+            <div id="vendorContact" class="col font">
     <!--          TODO: dynamically generate the vendor email-->
-              <p>vendor@vendor.com</p>
+              <p th:text="${user.email}"></p>
               <p>000-000-0000</p>
               <p>000 Vendor St</p>
               <button type="button" class="btn font ms-1 mb-3" id="bookBtn">Contact This Vendor</button>
             </div>
           </div>
+            <p class="text-center px-5 font" th:text="${vendor.about}"></p>
           <img th:if="${vid == 1}" src="/img/vendors/Venues.jpg" alt="picture" class="businessProfileImg">
           <img th:if="${vid == 2}" src="/img/vendors/Photographers.jpg" alt="picture" class="businessProfileImg">
           <img th:if="${vid == 3}" src="/img/vendors/Florists.jpg" alt="picture" class="businessProfileImg">
@@ -49,14 +50,14 @@
           <img th:if="${vid == 5}" src="/img/vendors/Cakes-and-Dessert.jpg" alt="picture" class="businessProfileImg">
           <img th:if="${vid == 6}" src="/img/vendors/Bar-and-Beverage.jpg" alt="picture" class="businessProfileImg">
           <img th:if="${vid == 7}" src="/img/vendors/Bands-and-DJs.jpg" alt="picture" class="businessProfileImg">
-          <p class="text-center p-4 font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aut cumque deserunt et repellat sit.</p>
+
         </div>
-        <hr class="mt-2 mb-3"/>
-          <img th:if="${vid == 1}"  alt="map" id="businessMap" src="https://via.placeholder.com/150x150" class="businessProfileImg">
+        <hr class="mt-4 mb-4"/>
+          <img th:if="${vid == 1}"  alt="map" id="businessMap" src="https://via.placeholder.com/150x150" class="businessProfileImg ">
         <div class="row">
           <div class="mt-3 mb-3 font">
             <h2>Image Gallery</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+<!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
           </div>
         </div>
         <div class="row mb-3 ps-5">
