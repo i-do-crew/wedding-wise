@@ -1,6 +1,11 @@
-![bridesmaids](/Users/andreavarnado/IdeaProjects/wedding-wise/src/main/resources/static/img/home_page/hero_background.jpg)
+
+<div align="center">
+  <img src="/Users/andreavarnado/IdeaProjects/wedding-wise/src/main/resources/static/img/home_page/hero_background.jpg" width="700" height="350">
+
 
 # Wedding-Wise
+
+</div>
 
 Wedding Wise is a web-based application designed to help couples plan their dream wedding on a budget. With features like Budget Tracking, Vendor Rating, Vendor Directories, Idea Board, Guest List Manager, Google Maps API, and Email Services, Wedding Wise is the perfect tool for any couple planning their big day!
 
