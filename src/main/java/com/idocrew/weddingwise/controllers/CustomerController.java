@@ -8,9 +8,9 @@ import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,6 +25,8 @@ public class CustomerController {
     private final BudgetEntryService budgetEntryService;
     private final CustomerVendorService customerVendorService;
     private final VendorCategoryService vendorCategoryService;
+    private final VendorUtility vendorUtility;
+
 
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         User user = userService.findByUsername(username);
@@ -32,13 +34,13 @@ public class CustomerController {
         List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
         List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
         Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
-        Set<Vendor> likedVendors = customerVendors.stream()
-                .map(customerVendor -> {return customerVendor.getVendor();})
-                .collect(Collectors.toSet());
+//        Set<Vendor> likedVendors = customerVendors.stream()
+//                .map(customerVendor -> {return customerVendor.getVendor();})
+//                .collect(Collectors.toSet());
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("customer", customer);
         request.getSession().setAttribute("budget", budget);
-        request.getSession().setAttribute("likedVendors", likedVendors);
+        request.getSession().setAttribute("customerVendors", customerVendors);
         request.getSession().setAttribute("categories", vendorCategories);
     }
     @GetMapping("/ideaboard")
@@ -64,6 +66,32 @@ public class CustomerController {
     @GetMapping("/likedVendors")
     public String likedVendors(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
+        return "/likedVendors";
+    }
+    @GetMapping("/likedVendors/add/{vendorId}")
+    public String addLikedVendor(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
+        refactorThisMethod(username, model, request);
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
+
+        if(customer.getCustomerVendors().contains(customerVendorService.findByVendor(vendor))){
+            CustomerVendor likedVendor = customerVendorService.findById(vendorId);
+            likedVendor.setLiked(true);
+            customerVendorService.save(likedVendor);
+        } else{
+            CustomerVendor likedVendor = new CustomerVendor();
+            likedVendor.setCustomer(customer);
+            likedVendor.setLiked(true);
+            customerVendorService.save(likedVendor);
+        }
+        return "/likedVendors";
+    }
+    @GetMapping("/likedVendors/remove/{vendorId}")
+    public String removeLikedVendor(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
+        refactorThisMethod(username, model, request);
+        CustomerVendor likedVendor = customerVendorService.findById(vendorId);
+        likedVendor.setLiked(false);
+        customerVendorService.save(likedVendor);
 
         return "/likedVendors";
     }
