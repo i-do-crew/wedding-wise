@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.context.annotation.Scope;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Scope("session")
 @Table(name="vendor_categories", schema = "weddingwise")
 public class VendorCategory {
     @Id
