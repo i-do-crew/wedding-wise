@@ -1,5 +1,5 @@
 <div align="center">
-<img src="/Users/andreavarnado/IdeaProjects/wedding-wise/src/main/resources/static/img/wedding_wise_logo_and_brand.png"  height="200">
+<img src="src/main/resources/static/img/wedding_wise_logo_and_brand.png"  height="200">
 
 #### Wedding Wise is a web-based application designed to help couples plan their dream wedding on a budget. With features like Budget Tracking, Vendor Rating, Vendor Directories, Idea Board, Guest List Manager, Google Maps API, and Email Services, Wedding Wise is the perfect tool for any couple planning their big day!
 </div>
