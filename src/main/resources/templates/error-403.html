@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <th:block th:insert="~{fragments/fragments :: head}"></th:block>
+  <meta charset="UTF-8">
+  <title>Error 500</title>
+  <link rel="stylesheet" href="/css/error.css">
+</head>
+<body class="body">
+
+<main>
+  <div class="card text-right">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col d-flex justify-content-end me-2">
+        <h1 class="fontTitle fa-8x">4<span><img src="/img/single_ring.png" height="200" width="200"></span>3</h1>
+      </div>
+      <div class="col">
+        <h1 class="fontTitle">Forbidden Error</h1>
+        <h2 class="font">You don't have access to this page!</h2>
+        <p class="font">Try logging in or signing up</p>
+        <a href="/" class="font"><button class="btn">Go Home</button></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!--BOOTSTRAP-->
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>

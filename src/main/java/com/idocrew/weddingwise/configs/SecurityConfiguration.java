@@ -50,7 +50,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(request -> request
                 .requestMatchers("/profile","/clients/dashboard", "/guest_listManager","/likedVendors", "/budget_tracker", "/ideaboard", "/vendor/profile")
                 .authenticated()
-                .requestMatchers("/","/aboutus","/vendors","/info/**", "/client/registration", "/vendor/registration", "/register/verify", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**")
+                .requestMatchers("/","/aboutus","/vendors","/info/**", "/client/registration", "/vendor/registration", "/register/verify", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**", "/error")
                 .permitAll()
             );
         return http.build();
