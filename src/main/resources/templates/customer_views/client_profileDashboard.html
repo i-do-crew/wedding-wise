@@ -20,8 +20,9 @@
 <main>
     <div class="container p-4">
         <div class="card" id="cardBody">
-            <div class="text-center pt-4" >
-                <h1 class="fontTitle">Welcome to the <span th:text="${session.user.lastName}"></span>-<span th:text="${session.customer.partnerLName}"></span> dashboard!</h1>
+            <div class="text-center pt-4">
+                <h1 class="fontTitle">Welcome to the <span th:text="${session.user.lastName}"></span>-<span
+                        th:text="${session.customer.partnerLName}"></span> dashboard!</h1>
             </div>
             <div class="container p-4 ">
                 <hr>
@@ -39,96 +40,112 @@
                         <hr>
                     </div>
                 </div>
+                <div class=" section row m-0 ">
+                    <div class="col vendor">
+                        <a href="/vendors/categories/1" class="text-decoration-none pb-1"><h4 class="labels ">
+                            Venue</h4></a>
+                        <a href="/vendors/individual/1"><img class="image"
+                                                             src="/img/client_profile/venue_clientProfile.jpg"
+                                                             alt="image"></a>
+                    </div>
+                    <div class="col vendor-text pt-3">
+                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <hr>
+                <div class=" section row m-0 ">
+                    <div class="col vendor">
+                        <a href="/vendors/categories/2" class="text-decoration-none pb-1"><h4 class="labels ">
+                            Photographer</h4></a>
+                        <a href="/vendors/individual/2"><img class="image"
+                                                             src="/img/client_profile/photo_clientProfile.jpg"
+                                                             alt="image"></a>
+                    </div>
 
-<!--                <div class=" section row m-0 ">-->
-<!--                    <div class="col vendor">-->
-<!--                        <a href="/vendors/categories/1" class="text-decoration-none pb-1"><h4 class="labels ">Venue</h4></a>-->
-<!--                        <a href="/vendors/individual/1"><img class="image" src="/img/client_profile/venue_clientProfile.jpg" alt="image"></a>-->
-<!--                    </div>-->
-<!--                    <div class="col vendor-text pt-3">-->
-<!--                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <hr>-->
-<!--                <div class=" section row m-0 ">-->
-<!--                    <div class="col vendor">-->
-<!--                    <a href="/vendors/categories/2" class="text-decoration-none pb-1"><h4 class="labels ">Photographer</h4></a>-->
-<!--                    <a href="/vendors/individual/2"><img class="image" src="/img/client_profile/photo_clientProfile.jpg" alt="image"></a>-->
-<!--                    </div>-->
+                    <div class="col vendor-text pt-3">
+                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <hr>
+                <div class=" section row m-0 ">
+                    <div class="col vendor">
+                        <a href="/vendors/categories/3" class="text-decoration-none pb-1"><h4 class="labels ">
+                            Florist</h4></a>
+                        <a href="/vendors/individual/3"><img class="image"
+                                                             src="/img/client_profile/florists_clientPage.jpg"
+                                                             alt="image"></a>
+                    </div>
 
-<!--                    <div class="col vendor-text pt-3">-->
-<!--                    <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                    </div>-->
+                    <div class="col vendor-text pt-3">
+                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
 
-<!--                </div>-->
-<!--                <hr>-->
-<!--                <div class=" section row m-0 ">-->
-<!--                    <div class="col vendor">-->
-<!--                    <a href="/vendors/categories/3" class="text-decoration-none pb-1"><h4 class="labels ">Florist</h4></a>-->
-<!--                    <a href="/vendors/individual/3"><img class="image" src="/img/client_profile/florists_clientPage.jpg" alt="image"></a>-->
-<!--                    </div>-->
+                </div>
+                <hr>
+                <div class=" section row m-0 ">
+                    <div class="col vendor">
+                        <a href="/vendors/categories/4" class="text-decoration-none pb-1"><h4 class="labels ">
+                            Caterer</h4></a>
+                        <a href="/vendors/individual/4"><img class="image"
+                                                             src="/img/client_profile/cater_clientProfile.jpg"
+                                                             alt="image"></a>
+                    </div>
 
-<!--                    <div class="col vendor-text pt-3">-->
-<!--                    <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                    </div>-->
+                    <div class="col vendor-text pt-3">
+                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
 
-<!--                </div>-->
-<!--                <hr>-->
-<!--                <div class=" section row m-0 ">-->
-<!--                    <div class="col vendor">-->
-<!--                    <a href="/vendors/categories/4" class="text-decoration-none pb-1"><h4 class="labels ">Caterer</h4></a>-->
-<!--                    <a href="/vendors/individual/4"><img class="image" src="/img/client_profile/cater_clientProfile.jpg" alt="image"></a>-->
-<!--                    </div>-->
+                </div>
+                <hr>
+                <div class=" section row m-0 ">
+                    <div class="col vendor">
+                        <a href="/vendors/categories/5" class="text-decoration-none pb-1"><h4 class="labels ">Cake
+                            and Dessert</h4></a>
+                        <a href="/vendors/individual/5"><img class="image"
+                                                             src="/img/client_profile/cake_clientProfile.jpg"
+                                                             alt="image"></a>
+                    </div>
 
-<!--                    <div class="col vendor-text pt-3">-->
-<!--                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                    </div>-->
+                    <div class="col vendor-text pt-3">
+                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
 
-<!--                </div>-->
-<!--                <hr>-->
-<!--                <div class=" section row m-0 ">-->
-<!--                    <div class="col vendor">-->
-<!--                    <a href="/vendors/categories/5" class="text-decoration-none pb-1"><h4 class="labels ">Cake and Dessert</h4></a>-->
-<!--                    <a href="/vendors/individual/5"><img class="image" src="/img/client_profile/cake_clientProfile.jpg" alt="image"></a>-->
-<!--                    </div>-->
+                </div>
+                <hr>
+                <div class=" section row m-0 ">
+                    <div class="col vendor">
+                        <a href="/vendors/categories/6" class="text-decoration-none pb-1"><h4 class="labels">Bar and
+                            Beverage</h4></a>
+                        <a href="/vendors/individual/6"><img class="image"
+                                                             src="/img/client_profile/bar_clientProfile.webp"
+                                                             alt="image"></a>
+                    </div>
 
-<!--                    <div class="col vendor-text pt-3">-->
-<!--                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                    </div>-->
+                    <div class="col vendor-text pt-3">
+                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
 
-<!--                </div>-->
-<!--                <hr>-->
-<!--                <div class=" section row m-0 ">-->
-<!--                    <div class="col vendor">-->
-<!--                    <a href="/vendors/categories/6" class="text-decoration-none pb-1"><h4 class="labels">Bar and Beverage</h4></a>-->
-<!--                    <a href="/vendors/individual/6"><img class="image" src="/img/client_profile/bar_clientProfile.webp" alt="image"></a>-->
-<!--                    </div>-->
+                </div>
+                <hr>
+                <div class=" section row m-0 ">
+                    <div class="col vendor">
+                        <a href="/vendors/categories/7" class="text-decoration-none pb-1"><h4 class="labels ">
+                            Band/DJ</h4></a>
+                        <a href="/vendors/individual/7"><img class="image"
+                                                             src="/img/client_profile/dj_clientProfile.jpg"
+                                                             alt="image"></a>
+                    </div>
 
-<!--                    <div class="col vendor-text pt-3">-->
-<!--                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                    </div>-->
+                    <div class="col vendor-text pt-3">
+                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
 
-<!--                </div>-->
-<!--                <hr>-->
-<!--                <div class=" section row m-0 ">-->
-<!--                    <div class="col vendor">-->
-<!--                    <a href="/vendors/categories/7" class="text-decoration-none pb-1"><h4 class="labels ">Band/DJ</h4></a>-->
-<!--                    <a href="/vendors/individual/7"><img class="image" src="/img/client_profile/dj_clientProfile.jpg" alt="image"></a>-->
-<!--                    </div>-->
-
-<!--                    <div class="col vendor-text pt-3">-->
-<!--                        <p class="font">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                    </div>-->
-
-<!--                </div>-->
-<!--                <hr>-->
-
+                </div>
+                <hr>
             </div>
-
         </div>
     </div>
 </main>
-
 
 
 <!--FOOTER-->
