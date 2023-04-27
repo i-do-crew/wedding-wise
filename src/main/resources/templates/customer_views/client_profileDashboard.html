@@ -26,6 +26,20 @@
             </div>
             <div class="container p-4 ">
                 <hr>
+                <div class="section row m-0">
+                    <div class="row vendor" th:each="category: ${session.categories}">
+                        <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="text-decoration-none pb-1"><h4 class="labels" th:text="${category.title}"></h4></a>
+                        <div th:each="customerVendor: ${session.customerVendors}">
+                            <div class="row vendor-text pt-3" th:block th:if="${customerVendor.vendor.vendorCategory.title} == ${category.title} and ${customerVendor.getSelected()} == true">
+                                <a th:href="@{/vendors/individual/{id}(id=${customerVendor.vendor.id})}"><img class="image col" src="/img/client_profile/venue_clientProfile.jpg" alt="image"></a>
+                                <div th:insert="~{fragments/fragments :: reactionButtons}"></div>
+                                <h5 class="font col" th:text="${customerVendor.vendor.businessName}"></h5>
+                                <p class="p col" th:text="${customerVendor.vendor.about}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
                 <div class=" section row m-0 ">
                     <div class="col vendor">
                         <a href="/vendors/categories/1" class="text-decoration-none pb-1"><h4 class="labels ">
@@ -128,7 +142,6 @@
 
                 </div>
                 <hr>
-
             </div>
         </div>
     </div>
