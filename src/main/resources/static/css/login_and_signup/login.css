@@ -16,6 +16,7 @@ main{
 #loginBtn{
     background-color: #212727;
     color: white;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .fontTitle{
@@ -27,4 +28,12 @@ main{
 }
 a:hover{
     color:#E19B6E !important;
+}
+
+.form-control{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.font{
+    font-family: 'Nunito Sans', sans-serif;
 }
