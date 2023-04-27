@@ -102,60 +102,32 @@
                     </div>
                     <div class="modal-body">
                         <form th:action="@{/vendor/profile/edit}" method="POST" th:object="${vendorComposite}">
-<!--                            <div class="d-grid g-2 mb-1">-->
-<!--                                <input type="text" placeholder="Enter your business name" class="mb-4 font">-->
-<!--                            </div>-->
-<!--                            <div class="d-grid g-2 mb-1">-->
-<!--                                <input type="text" placeholder="Enter your business email" class="mb-4 font">-->
-<!--                            </div>-->
-<!--                            <div class="d-grid g-2 mb-1">-->
-<!--                                <input type="text" placeholder="Enter your business address" class="mb-4 font">-->
-<!--                            </div>-->
-<!--                            <div class="d-grid g-2 mb-1">-->
-<!--                                <input type="text" placeholder="Enter your business phone number" class="mb-4 font">-->
-<!--                            </div>-->
-<!--                            <div class="d-grid g-2 mb-1">-->
-<!--                                <input type="text" placeholder="Enter your business capacity -if venue" class="mb-4 font">-->
-<!--                            </div>-->
-<!--                            <div class="d-grid g-2 mb-1">-->
-<!--                                <input type="text" placeholder="Enter your budget range" class="mb-4 font">-->
-<!--                            </div>-->
                             <div class="">
                                 <label for="email" class="form-label"></label>
-                                <input th:field="*{vendor.user.email}" type="email" name="email" class="form-control" id="email"
+                                <input th:field="*{user.email}" type="email" name="email" class="form-control" id="email"
                                        placeholder="Enter your Email" th:required>
-                            </div>
-                            <div class="">
-                                <label for="password" class="form-label"></label>
-                                <input th:field="*{vendor.user.password}" type="password" name="password" class="form-control" id="password"
-                                       placeholder="Select a password" th:required>
-                            </div>
-                            <div class="">
-                                <label for="cPassword" class="form-label"></label>
-                                <input type="password" name="cPassword" class="form-control" id="cPassword"
-                                       placeholder="Confirm your password" th:required>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="firstName" class="form-label"></label>
-                                    <input th:field="*{vendor.user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
+                                    <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
                                            placeholder="Enter your First Name" th:required>
                                 </div>
                                 <div class="col">
                                     <label for="lastName" class="form-label"></label>
-                                    <input th:field="*{vendor.user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
+                                    <input th:field="*{user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
                                            placeholder="Enter your Last Name" th:required>
                                 </div>
                             </div>
                             <div class="row g-3 d-flex align-items-center">
                                 <div class="col-auto">
                                     <label for="vendorCity" class="form-label"></label>
-                                    <input th:field="*{vendor.user.city}" type="text" name="city" class="form-control" id="vendorCity"
+                                    <input th:field="*{user.city}" type="text" name="city" class="form-control" id="vendorCity"
                                            placeholder="Enter your City">
                                 </div>
                                 <div class="col-auto ">
                                     <label for="vendor-user-state"></label>
-                                    <select th:field="*{vendor.user.state}" id="vendor-user-state" class="form-select">
+                                    <select th:field="*{user.state}" id="vendor-user-state" class="form-select">
                                         <option th:value="xx">Select your State...</option>
                                         <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
                                     </select>
@@ -208,12 +180,13 @@
                                     <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.id}"></option>
                                 </select>
                             </div>
+                            <div class="d-flex justify-content-between">
+                                <button  type="submit" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
+                                <button type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
 
-                        <button type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -253,14 +226,14 @@
                         <h4 class="modal-title text-center fontTitle">Edit the About You Section:</h4>
                     </div>
                     <div class="modal-body">
-                        <form th:method="POST">
+                        <form th:action="@{/vendor/profile/editAbout}" th:method="POST" th:object="${vendorComposite}">
                             <div class="d-grid g-2 mb-1">
-                                <input th:type="text" th:placeholder="${session.vendor.businessName}" class="mb-4 font">
-                                <input th:type="textarea" th:placeholder="${session.vendor.about}" class="mb-4 font">
+                                <input th:type="text" th:field="*{vendor.businessName}" class="mb-4 font">
+                                <input th:type="text" th:field="*{vendor.about}" class="mb-4 font">
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between">
-                                <button  type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
+                                <button  type="submit" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
                                 <button  type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
                             </div>
                         </form>
@@ -274,5 +247,34 @@
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--Conditional attribute display-->
+<script>
+    $('#vendorCategory').on('change', function() {
+        let vendorCategoryVal = $("#vendorCategory option:selected").text();
+        let venueCapacity = $('#venueCapacity');
+        let musicGenre = $('#musicGenre');
+        let VendorPhotoFormat = $('#VendorPhotoFormat');
+
+        venueCapacity.addClass('d-none');
+        musicGenre.addClass('d-none');
+        VendorPhotoFormat.addClass('d-none');
+
+        if(vendorCategoryVal === 'Venues'){
+            venueCapacity.removeClass('d-none');
+            musicGenre.addClass('d-none');
+            VendorPhotoFormat.addClass('d-none');
+        }
+        if(vendorCategoryVal === 'Bands and DJs'){
+            venueCapacity.addClass('d-none');
+            musicGenre.removeClass('d-none');
+            VendorPhotoFormat.addClass('d-none');
+        }
+        if(vendorCategoryVal === 'Photographers'){
+            venueCapacity.addClass('d-none');
+            musicGenre.addClass('d-none');
+            VendorPhotoFormat.removeClass('d-none');
+        }
+    });
+</script>
 </body>
 </html>

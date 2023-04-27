@@ -57,6 +57,7 @@ public class VendorController {
         request.getSession().setAttribute("budget", budget);
         request.getSession().setAttribute("customerVendors", customerVendors);
         request.getSession().setAttribute("categories", vendorCategories);
+        request.getSession().setAttribute("vendor", vendor);
     }
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id,@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request) {
@@ -92,7 +93,18 @@ public class VendorController {
     @GetMapping("/vendor/profile")
     public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
-        model.addAttribute("vendorComposite", new VendorComposite());
+        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
+        VendorComposite vendorComposite = new VendorComposite();
+        vendorComposite.setVendor(vendor);
+        model.addAttribute("vendorComposite", vendorComposite);
+
+        model.addAttribute("options", states);
+        model.addAttribute("vendorCategories", vendorCategoryService.findAll());
+        model.addAttribute("musicGenres", musicGenreService.findAll());
+        model.addAttribute("photoFormats", photoFormatService.findAll());
+        model.addAttribute("musicTypes", musicVendorCategoryService.findAll());
+
+//        model.addAttribute("vendor", vendor);
         return "vendor_views/vendor_profile";
     }
     @GetMapping("/vendor/profile/edit")
@@ -131,10 +143,37 @@ public class VendorController {
         return "vendor_views/vendor_profile";
     }
     @PostMapping("/vendor/profile/edit")
-    public String vendorProfileEditPost(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request,@SessionAttribute("vendorComposite") VendorComposite vendorComposite) {
+    public String vendorProfileEditPost(@SessionAttribute("vendorComposite") VendorComposite vendorComposite) {
 //        refactorThisMethod(username, model, request);
 //        vendor object tied to the form that you save
-        userRegistrationService.register(vendorComposite);
+        Vendor vendorEntity = vendorComposite.getVendor();
+        switch (vendorEntity.getVendorCategory().getTitle()) {
+            case "Venues" -> saveVenue(vendorEntity, vendorComposite);
+            case "Photographers" -> savePhotographer(vendorEntity, vendorComposite.getPhotoFormat());
+            case "Bands and DJs" -> {
+                MusicVendor musicVendor = saveMusicVendor(vendorEntity, vendorComposite.getMusicVendorCategory());
+                saveMusicVendorMusicGenres(musicVendor, vendorComposite.getMusicGenres());
+            }
+            default -> {
+            }
+        }
+        return "vendor_views/vendor_profile";
+    }
+
+    @GetMapping("/vendor/profile/editAbout")
+    public String vendorProfileEditAbout(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
+        refactorThisMethod(username, model, request);
+        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
+        VendorComposite vendorComposite = new VendorComposite();
+        vendorComposite.setVendor(vendor);
+        model.addAttribute("vendorComposite", vendorComposite);
+        return "vendor_views/vendor_profile";
+    }
+
+    @PostMapping("/vendor/profile/editAbout")
+    public String vendorProfileEditAboutPost(@SessionAttribute("vendorComposite") VendorComposite vendorComposite){
+        Vendor vendorEntity = vendorComposite.getVendor();
+        saveVendor(vendorEntity);
         return "vendor_views/vendor_profile";
     }
 
