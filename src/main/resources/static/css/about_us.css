@@ -8,6 +8,11 @@ main{
     border-radius: 0;
     border: 1px solid #212727;
 }
+.alumniBtn{
+    background-color: #212727;
+    color: white;
+}
+
 .col{
     padding-left:100px;
     padding-right:100px;
