@@ -113,3 +113,7 @@ ul{
 #editVendorProfileModalBtn:hover{
     color: #E19B6E;
 }
+
+.nav-link{
+    font-family: 'Nunito Sans', sans-serif;
+}

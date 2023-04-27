@@ -232,6 +232,13 @@
     </div>
 </div>
 
+<!--REACTION BUTTONS-->
+<div th:fragment="reactionButtons" class="reaction-buttons">
+    <i class="fa-solid fa-check"></i>
+    <a th:style="${customerVendor.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/add/{vendorId}(vendorId=${customerVendor.vendor.id})}"><i class="fa-regular fa-heart"></i></a>
+    <a th:href="@{/likedVendors/remove/{vendorId}(vendorId=${customerVendor.vendor.id})}"><i class="fa-regular fa-circle-xmark"></i></a>
+</div>
+
 <!--BOOTSTRAP-->
 <div th:fragment="bootstrapJs">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

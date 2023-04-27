@@ -4,6 +4,11 @@
     margin: 0px;
 }
 
+<<<<<<< HEAD
+.card-body{
+font-family: 'Nunito Sans', sans-serif;
+}
+=======
 img{
     height:100%;
     object-fit: cover;
@@ -63,5 +68,6 @@ img{
 /*#info-card{*/
 
 /*}*/
+>>>>>>> a3582fe1f0b3962d0e679d996b56ba96c485a02a
 
 
