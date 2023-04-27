@@ -59,6 +59,7 @@ public class VendorController {
         request.getSession().setAttribute("customerVendors", customerVendors);
         request.getSession().setAttribute("categories", vendorCategories);
         request.getSession().setAttribute("vendor", vendor);
+        request.getSession().setAttribute("vendorComposite", new VendorComposite());
     }
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id,@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request) {
@@ -94,24 +95,6 @@ public class VendorController {
     @GetMapping("/vendor/profile")
     @PreAuthorize("hasRole('VENDOR')")
     public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name")String username, Model model, HttpServletRequest request) {
-//        String username = "christie@email.com";
-        refactorThisMethod(username, model, request);
-        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
-        VendorComposite vendorComposite = new VendorComposite();
-        vendorComposite.setVendor(vendor);
-        model.addAttribute("vendorComposite", vendorComposite);
-
-        model.addAttribute("options", states);
-        model.addAttribute("vendorCategories", vendorCategoryService.findAll());
-        model.addAttribute("musicGenres", musicGenreService.findAll());
-        model.addAttribute("photoFormats", photoFormatService.findAll());
-        model.addAttribute("musicTypes", musicVendorCategoryService.findAll());
-
-//        model.addAttribute("vendor", vendor);
-        return "vendor_views/vendor_profile";
-    }
-    @GetMapping("/vendor/profile/edit")
-    public String vendorProfileEdit(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
         model.addAttribute("options", states);
         model.addAttribute("vendorCategories", vendorCategoryService.findAll());
@@ -145,11 +128,13 @@ public class VendorController {
         model.addAttribute("vendorComposite", vendorComposite);
         return "vendor_views/vendor_profile";
     }
+
     @PostMapping("/vendor/profile/edit")
-    public String vendorProfileEditPost(@SessionAttribute("vendorComposite") VendorComposite vendorComposite) {
+    public String vendorProfileEditPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite) {
 //        refactorThisMethod(username, model, request);
 //        vendor object tied to the form that you save
         Vendor vendorEntity = vendorComposite.getVendor();
+        vendorUtility.saveVendor(vendorEntity);
         switch (vendorEntity.getVendorCategory().getTitle()) {
             case "Venues" -> saveVenue(vendorEntity, vendorComposite);
             case "Photographers" -> savePhotographer(vendorEntity, vendorComposite.getPhotoFormat());
@@ -163,18 +148,18 @@ public class VendorController {
         return "vendor_views/vendor_profile";
     }
 
-    @GetMapping("/vendor/profile/editAbout")
-    public String vendorProfileEditAbout(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
-        refactorThisMethod(username, model, request);
-        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
-        VendorComposite vendorComposite = new VendorComposite();
-        vendorComposite.setVendor(vendor);
-        model.addAttribute("vendorComposite", vendorComposite);
-        return "vendor_views/vendor_profile";
-    }
+//    @GetMapping("/vendor/profile/edit/about")
+//    public String vendorProfileEditAbout(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
+//        refactorThisMethod(username, model, request);
+//        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
+//        VendorComposite vendorComposite = new VendorComposite();
+//        vendorComposite.setVendor(vendor);
+//        model.addAttribute("vendorComposite", vendorComposite);
+//        return "vendor_views/vendor_profile";
+//    }
 
-    @PostMapping("/vendor/profile/editAbout")
-    public String vendorProfileEditAboutPost(@SessionAttribute("vendorComposite") VendorComposite vendorComposite){
+    @PostMapping("/vendor/profile/edit/about")
+    public String vendorProfileEditAboutPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
         Vendor vendorEntity = vendorComposite.getVendor();
         saveVendor(vendorEntity);
         return "vendor_views/vendor_profile";
@@ -212,4 +197,5 @@ public class VendorController {
         BeanUtils.copyProperties(vendor, vendorEntity);
         return vendorUtility.saveVendor(vendorEntity);
     }
+
 }
