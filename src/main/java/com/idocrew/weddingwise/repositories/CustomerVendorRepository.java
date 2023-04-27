@@ -11,4 +11,6 @@ import java.util.Set;
 public interface CustomerVendorRepository extends JpaRepository<CustomerVendor, Long> {
     Set<CustomerVendor> findCustomerVendorByCustomer(Customer customer);
     Optional<CustomerVendor> findCustomerVendorByCustomerAndVendor(Customer customer, Vendor vendor);
+
+    Vendor findByVendor(Vendor vendor);
 }

@@ -34,9 +34,6 @@ public class CustomerController {
         List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
         List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
         Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
-//        Set<Vendor> likedVendors = customerVendors.stream()
-//                .map(customerVendor -> {return customerVendor.getVendor();})
-//                .collect(Collectors.toSet());
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("customer", customer);
         request.getSession().setAttribute("budget", budget);
@@ -72,18 +69,12 @@ public class CustomerController {
     public String addLikedVendor(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
         Customer customer = (Customer) request.getSession().getAttribute("customer");
-        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
-
-        if(customer.getCustomerVendors().contains(customerVendorService.findByVendor(vendor))){
-            CustomerVendor likedVendor = customerVendorService.findById(vendorId);
-            likedVendor.setLiked(true);
-            customerVendorService.save(likedVendor);
-        } else{
-            CustomerVendor likedVendor = new CustomerVendor();
-            likedVendor.setCustomer(customer);
-            likedVendor.setLiked(true);
-            customerVendorService.save(likedVendor);
-        }
+        Vendor vendor = vendorUtility.findById(vendorId);
+        CustomerVendor likedVendor = new CustomerVendor();
+        likedVendor.setCustomer(customer);
+        likedVendor.setVendor(vendor);
+        likedVendor.setLiked(true);
+        customerVendorService.save(likedVendor);
         return "/likedVendors";
     }
     @GetMapping("/likedVendors/remove/{vendorId}")

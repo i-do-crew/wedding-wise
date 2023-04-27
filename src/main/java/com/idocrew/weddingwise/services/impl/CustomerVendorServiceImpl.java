@@ -33,4 +33,9 @@ public class CustomerVendorServiceImpl implements CustomerVendorService {
     public Optional<CustomerVendor> findByCustomerAndVendor(Customer customer, Vendor vendor) {
         return customerVendorRepository.findCustomerVendorByCustomerAndVendor(customer, vendor);
     }
+
+    @Override
+    public Vendor findByVendor(Vendor vendor) {
+        return customerVendorRepository.findByVendor(vendor);
+    }
 }

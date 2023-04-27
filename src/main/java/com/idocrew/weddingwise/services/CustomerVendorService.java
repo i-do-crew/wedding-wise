@@ -12,4 +12,5 @@ public interface CustomerVendorService {
     CustomerVendor save(CustomerVendor customerVendor);
     CustomerVendor findById(Long id);
     Optional<CustomerVendor> findByCustomerAndVendor(Customer customer, Vendor vendor);
+    Vendor findByVendor(Vendor vendor);
 }
