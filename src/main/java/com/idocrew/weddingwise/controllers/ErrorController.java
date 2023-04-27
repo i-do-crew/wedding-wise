@@ -29,4 +29,9 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
         }
         return "error-404";
     }
+
+//    @RequestMapping("/error/accessDenied")
+//    public String accessDenied(HttpServletRequest request){
+//        return "error-403";
+//    }
 }
