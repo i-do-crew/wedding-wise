@@ -8,6 +8,7 @@ import com.idocrew.weddingwise.services.*;
 import com.idocrew.weddingwise.services.impl.VendorPhotoFormatService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
@@ -91,7 +92,9 @@ public class VendorController {
         return "vendors/all_vendorCategories";
     }
     @GetMapping("/vendor/profile")
-    public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
+    @PreAuthorize("hasRole('VENDOR')")
+    public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name")String username, Model model, HttpServletRequest request) {
+//        String username = "christie@email.com";
         refactorThisMethod(username, model, request);
         Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
         VendorComposite vendorComposite = new VendorComposite();
