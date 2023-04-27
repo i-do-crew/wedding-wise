@@ -1,20 +1,27 @@
 <div align="center">
 <img src="src/main/resources/static/img/wedding_wise_logo_and_brand.png"  height="200">
-
-#### Wedding Wise is a web-based application designed to help couples plan their dream wedding on a budget. With features like Budget Tracking, Vendor Rating, Vendor Directories, Idea Board, Guest List Manager, Google Maps API, and Email Services, Wedding Wise is the perfect tool for any couple planning their big day!
 </div>
+
+### Wedding Wise is a web-based application designed to help couples plan their dream wedding on a budget. With features like Budget Tracking, Vendor Rating, Vendor Directories, Idea Board, Guest List Manager, Google Maps API, and Email Services, Wedding Wise is the perfect tool for any couple planning their big day!
+
 
 ## Technologies Used
 
 Wedding Wise is built using the following technologies
 
-- Java
-- Springboot
-- Thymeleaf
-- Javascript
-- Css
-- Bootstrap
 - HTML
+- CSS
+- Bootstrap
+- Javascript
+- jQuery
+- Thymeleaf
+- Java
+- Spring Boot
+  - Spring Data
+  - Spring Security
+- MySQL
+- Mailtrap API
+- Google Maps API
 
 
 ## Features
@@ -41,7 +48,10 @@ Wedding Wise offers the following features:
 
 To install Wedding Wise, follow these steps:
 
-1. Clone this repository to your local machine using git clone https://github.com/i-do-crew/wedding-wise.git
+1. Clone this repository to your local machine using `git clone https://github.com/i-do-crew/wedding-wise.git`
 2. Open the project in your preferred IDE.
+3. Rename example.properties to application.properties and update with valid credentials
 3. Install any necessary dependencies using Maven.
+4. Install MySQL Ver 8
+5. Execute ww-migration.sql to build database
 4. Run the project locally using Spring Boot.
