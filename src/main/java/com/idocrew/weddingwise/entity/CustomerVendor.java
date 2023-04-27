@@ -18,10 +18,10 @@ public class CustomerVendor {
     private long id;
 
     @Column(name = "liked")
-    private Boolean liked;
+    private Boolean liked = false;
 
     @Column(name = "selected")
-    private Boolean selected;
+    private Boolean selected = false;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
