@@ -61,3 +61,7 @@ main{
 #individualVendorRateBtn:hover, #rateBtn:hover, #closeBtn:hover{
     background-color: #E19B6E !important;
 }
+
+.font{
+    font-family: nunito;
+}

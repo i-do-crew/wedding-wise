@@ -19,6 +19,7 @@ main{
     color:white;
     border-radius: 0;
     padding-right:5px;
+    font-family: nunito;
 }
 .vendorBtn:hover{
     background-color: #E19B6E;

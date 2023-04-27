@@ -18,7 +18,6 @@
 <!--EDIT PROFILE MODAL-->
 <div th:insert="~{fragments/fragments :: profileModal}"></div>
 
-<!--th:href="@{/vendors/individual/{id}(id=${vendor.id})}"-->
 <main>
     <div class="container p-3">
         <div class="card border-secondary container-fluid" id="mainCard">
@@ -28,13 +27,13 @@
 
             <div class="row vendorCard" th:each="category: ${session.categories}">
                 <a th:href="@{/vendors/categories/{id}(id=${category.id})}"><h4 class="title-text" th:text="${category.title}"></h4></a>
-                <div th:each="likedVendor: ${session.likedVendors}">
+                <div th:each="customerVendor: ${session.customerVendors}">
                     <div class="row">
-                        <div th:block th:if="${likedVendor.vendorCategory.title} == ${category.title}" class="col">
+                        <div th:block th:if="${customerVendor.vendor.vendorCategory.title} == ${category.title} and ${customerVendor.getLiked() == true}" class="col">
 <!--                            <a href=""><img class="card-img-top" src="/img/liked_vendors/venueTwo.jpg" alt="Vendor Img"></a>-->
-                            <h5 th:text="${likedVendor.businessName}"></h5>
-                            <p class="p" th:text="${likedVendor.about}"></p>
-                            <i class="fa-solid fa-check"></i>
+                            <h5 th:text="${customerVendor.vendor.businessName}"></h5>
+                            <p class="p" th:text="${customerVendor.vendor.about}"></p>
+                            <div th:insert="~{fragments/fragments :: reactionButtons}"></div>
                         </div>
                     </div>
                 </div>

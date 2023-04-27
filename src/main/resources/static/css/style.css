@@ -39,7 +39,9 @@ html, body {
     background-color: #212727;
     color: white;
 }
-
+a:hover{
+    color: #E19B6E !important;
+}
 /*FONTS*/
 .navbar-brand{
     font-family: 'Luxurious Roman', cursive;
@@ -110,4 +112,8 @@ ul{
 }
 #editVendorProfileModalBtn:hover{
     color: #E19B6E;
+}
+
+.nav-link{
+    font-family: 'Nunito Sans', sans-serif;
 }
