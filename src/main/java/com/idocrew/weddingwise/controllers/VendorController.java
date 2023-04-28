@@ -32,8 +32,9 @@ public class VendorController {
         List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
         //List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
         //Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
-        request.getSession().setAttribute("user", user);
-        request.getSession().setAttribute("vendor", user.getVendor());
+        Vendor vendor = vendorUtility.findVendorByUser(user);
+        //request.getSession().setAttribute("user", user);
+        request.getSession().setAttribute("vendor", vendor);
         //request.getSession().setAttribute("customer", customer);
         //request.getSession().setAttribute("budget", budget);
         //request.getSession().setAttribute("customerVendors", customerVendors);
@@ -84,7 +85,6 @@ public class VendorController {
     @GetMapping("/vendor/profile")
     @PreAuthorize("hasRole('VENDOR')")
     public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name")String username, Model model, HttpServletRequest request) {
-//        String username = "christie@email.com";
         refactorThisMethod(username, model, request);
         return "vendor_views/vendor_profile";
     }
