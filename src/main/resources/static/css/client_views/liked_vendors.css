@@ -36,3 +36,20 @@ main{
 img{
     object-fit: cover;
 }
+
+.card-img-top{
+    max-width: 250px;
+    margin: auto;
+    margin-left: 20px;
+}
+
+.content{
+margin-left: 320px;
+    /*align-content: center;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
