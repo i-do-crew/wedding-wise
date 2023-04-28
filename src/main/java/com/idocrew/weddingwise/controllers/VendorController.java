@@ -1,9 +1,6 @@
 package com.idocrew.weddingwise.controllers;
 
 import com.idocrew.weddingwise.entity.*;
-import com.idocrew.weddingwise.repositories.UserRepository;
-import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
-import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +34,7 @@ public class VendorController {
         Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("customer", customer);
-        request.getSession().setAttribute("budget", budget);
+        request.getSession().setAttribute("budgetEntries", budget);
         request.getSession().setAttribute("customerVendors", customerVendors);
         request.getSession().setAttribute("categories", vendorCategories);
     }

@@ -17,4 +17,14 @@ public class BudgetEntryServiceImpl implements BudgetEntryService {
     public List<BudgetEntry> findBudgetEntriesByCustomer(Customer customer) {
         return budgetEntryRepository.findAllByCustomer(customer);
     }
+
+    @Override
+    public void save(List<BudgetEntry> budgetEntries) {
+        budgetEntryRepository.saveAll(budgetEntries);
+    }
+
+    @Override
+    public void delete(BudgetEntry budgetEntry) {
+        budgetEntryRepository.delete(budgetEntry);
+    }
 }

@@ -2,9 +2,7 @@ package com.idocrew.weddingwise.controllers;
 
 import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.services.*;
-import com.nimbusds.oauth2.sdk.http.HTTPResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
@@ -12,16 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
-@SessionAttributes({"user","customer","budget"})
+@SessionAttributes({"user","customer", "budgetEntries"})
 public class CustomerController {
 
     private final UserService userService;
@@ -36,11 +33,11 @@ public class CustomerController {
         User user = userService.findByUsername(username);
         Customer customer = customerService.findCustomerByUser(user);
         List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
-        List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
+        List<BudgetEntry> budgetEntries = budgetEntryService.findBudgetEntriesByCustomer(customer);
         Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("customer", customer);
-        request.getSession().setAttribute("budget", budget);
+        request.getSession().setAttribute("budgetEntries", budgetEntries);
         request.getSession().setAttribute("customerVendors", customerVendors);
         request.getSession().setAttribute("categories", vendorCategories);
     }
@@ -62,8 +59,16 @@ public class CustomerController {
     @GetMapping("/budget_tracker")
     public String budgetTracker(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
         refactorThisMethod(username, model, request);
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        List<BudgetEntry> budgetEntries = (List<BudgetEntry>) request.getSession().getAttribute("budgetEntries");
+        BigDecimal newBalance = customer.getBudget();
+        for (int i = 0; i < budgetEntries.size(); i++) {
+            newBalance = newBalance.subtract(budgetEntries.get(i).getAmount());
+        }
+        model.addAttribute("currentBalance", newBalance);
         return "/clients_budgetTracker";
     }
+
     @GetMapping("/likedVendors/toggle/{vendorId}")
     public String toggleLikedVendors(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
         refactorThisMethod(username, model, request);
@@ -100,25 +105,47 @@ public class CustomerController {
         refactorThisMethod(username, model, request);
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Vendor vendor = vendorUtility.findById(vendorId);
+        List<BudgetEntry> budgetEntries = (List<BudgetEntry>) request.getSession().getAttribute("budgetEntries");
         Optional<CustomerVendor> opt = customerVendorService.findByCustomerAndVendor(customer, vendor);
         CustomerVendor selectedVendor = null;
+        BudgetEntry budgetEntry = createBudgetEntry(customer, vendor);
         if(opt.isPresent()) {
             selectedVendor = opt.get();
             if(!selectedVendor.getSelected()){
                 selectedVendor.setSelected(true);
+                budgetEntries.add(budgetEntry);
             } else{
                 selectedVendor.setSelected(false);
+                budgetEntries.remove(budgetEntry);
+                budgetEntryService.delete(budgetEntry);
             }
         } else {
             selectedVendor = new CustomerVendor();
             selectedVendor.setCustomer(customer);
             selectedVendor.setVendor(vendor);
             selectedVendor.setSelected(true);
+            budgetEntries.add(budgetEntry);
         }
+        budgetEntryService.save(budgetEntries);
+        budgetEntries = budgetEntryService.findBudgetEntriesByCustomer(customer);
+        request.getSession().setAttribute("budgetEntries", budgetEntries);
         customerVendorService.save(selectedVendor);
         Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
         request.getSession().setAttribute("customerVendors", customerVendors);
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
+    }
+    @GetMapping("/budget_tracker/edit/{budgetId}")
+    public String editBudgetCost(@PathVariable Long budgetId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
+
+        return ("/clients_budgetTracker");
+    }
+
+    public BudgetEntry createBudgetEntry(Customer customer, Vendor vendor){
+        BudgetEntry budgetEntry = new BudgetEntry();
+        budgetEntry.setCustomer(customer);
+        budgetEntry.setVendor(vendor);
+        budgetEntry.setAmount(BigDecimal.valueOf(0));
+        return budgetEntry;
     }
 }
