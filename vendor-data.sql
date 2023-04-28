@@ -409,7 +409,16 @@ INSERT INTO `vendor_packages` (`title`, `description`, `vendor_id`) VALUES
 ('Gold Package','This \"Gold Reception Package\" has the same features as our Silver Package plus one Enhancement.',95),
 ('Platinum Package','Our \"Platinum Reception Package\" has the same features as our Gold Package but it includes two enhancements.',95),
 ('Diamond Package','Our \"Diamond Reception Package\" has the same features as our Platinum Package but it includes 2 hours of our Photo Booth',95),
-('Enhancements','You can pick between one or two enhancements depending of you wedding package',95);
+('Enhancements','You can pick between one or two enhancements depending of you wedding package',95),
+('Bokeh Elopement Microwedding Photography','The Bokeh Photography package is perfect for an elopement or micro-wedding. Planned accordingly we can possibly squeeze in time for photos getting ready or an intimate shoot post ceremony. You will receive 100-150 photos.',51),
+('Copper Wedding Photography Package','The Copper Photography package is our most popular photo package. Most of our 2020-21 weddings have been around the 6-8 hour time frame. You will receive 400-500 photos with 100 highly edited portraits. (We don\t charge by number of guests, which we think is better for our customers)',51),
+('Copper & Birch Film//Photography Package','The Copper & Birch package has been our most popular this year. Most of our 2020-21 weddings have been around the 6-8 hour time frame. First off, we book you for a FREE engagement OR Bridal shoot. The sooner the better on this so you can create all your invitations and social posts. You will receive a 6-7 minute wedding film using live audio and video to tell your love story and 400-500 photos with 100 highly edited portraits.',51),
+('Champagne Wedding Photography Package','The Champagne Photography package is for larger weddings that last a little longer. You will receive 600 - 800 photos including 150 highly edited portraits. We will be there to capture you getting ready all the way to the moment you leave on your new journey.',51),
+('Rose Gold & Champagne Film/Photo Package','The Rose Gold & Champagne Film & Photography is for larger weddings that last a little longer. First off, we book you for a FREE engagement or Bridal shoot. (The sooner the better on this so you can create all your invitations and social posts) You will receive a 7 - 9 minute wedding film using live audio and video to tell your love story. You will also receive 3 Wedding Reel/Tik Tok videos and 600-800 photos with 150 highly edited portraits.',51),
+('Birch Wedding Film Package','The Birch film package is our most popular package. Most of our 2020-21 weddings have been around the 6-8 hour time frame. You will receive a 6-7 minute wedding film using live audio and video to tell your love story.',51),
+('Rose Gold Wedding Film Package','The Rose Gold Film packages for larger weddings that last a little longer. You will receive a 7 - 9 minute wedding film using live audio and video to tell your love story. You will also receive 3 Wedding Reel/Tik Tok videos',51),
+('Wedding Shoutout Video','Have a special section with lighting and microphones to give your guests an opportunity to share testimonies, marriage advice, fun or emotional stories, kind words, or just a nice congratulations. All your shoutouts are organized and cut into a final video. If you have booked us for your wedding film we create a cute intro with special shots from your wedding. (We try to use mostly shots here that are not in the final wedding film so we can get you nice and teary eyed again)',51);
+
 
 insert into djs_and_live_bands (vendor_id, dalb_category_id) values
 (89, 1),
@@ -481,3 +490,175 @@ insert into djs_and_live_bands_music_genres (dj_or_live_band_id, music_genre_id)
 (15,13),
 (15,18),
 (15,18);
+
+#duplicate business names
+select *
+from (select v.business_name, v.id as vendor_id, v.user_id from vendors v
+      where business_name in (select business_name from vendors group by business_name having count(*) > 1)
+     ) as v
+join users u on u.id = v.user_id
+order by business_name, vendor_id;
+
+# add vendor photo format
+insert into vendors_photo_format (vendor_id, photo_format_id) values
+(46,1),
+(47,1),
+(48,1),
+(49,3),
+(50,3),
+(51,1),
+(52,3),
+(53,3);
+
+select * from users u
+join customers c on u.id = c.user_id;
+
+INSERT INTO `users` (`email`, `username`, `password`, `first_name`, `last_name`, `city`, `state`) VALUES
+('kelly.lambert@email.com', 'kelly.lambert@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Kelly', 'Lambert', 'San Antonio', 'TX'),
+('annie.mccarty@email.com', 'annie.mccarty@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Annie', 'McCarty', 'San Antonio', 'TX'),
+('sherrie.leblanc@email.com', 'sherrie.leblanc@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Sherrie', 'Leblanc', 'San Antonio', 'TX'),
+('beatriz.maxwell@email.com', 'beatriz.maxwell@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Beatriz', 'Maxwell', 'San Antonio', 'TX'),
+('april.osborne@email.com', 'april.osborne@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'April', 'Osborne', 'San Antonio', 'TX'),
+('holly.wheeler@email.com', 'holly.wheeler@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Holly', 'Wheeler', 'San Antonio', 'TX'),
+('meghan.beck@email.com', 'meghan.beck@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Meghan', 'Beck', 'San Antonio', 'TX'),
+('marion.morse@email.com', 'marion.morse@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Marion', 'Morse', 'San Antonio', 'TX'),
+('jocelyn.cook@email.com', 'jocelyn.cook@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Jocelyn', 'Cook', 'San Antonio', 'TX'),
+('rachael.callahan@email.com', 'rachael.callahan@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Rachael', 'Callahan', 'San Antonio', 'TX'),
+('jasmine.williamson@email.com', 'jasmine.williamson@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Jasmine', 'Williamson', 'San Antonio', 'TX'),
+('irene.short@email.com', 'irene.short@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Irene', 'Short', 'San Antonio', 'TX'),
+('shari.crawford@email.com', 'shari.crawford@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Shari', 'Crawford', 'San Antonio', 'TX'),
+('janelle.larson@email.com', 'janelle.larson@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Janelle', 'Larson', 'San Antonio', 'TX'),
+('tamara.king@email.com', 'tamara.king@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Tamara', 'King', 'San Antonio', 'TX'),
+('jane.hansen@email.com', 'jane.hansen@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Jane', 'Hansen', 'San Antonio', 'TX'),
+('stefanie.coon@email.com', 'stefanie.coon@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Stefanie', 'Coon', 'San Antonio', 'TX'),
+('patty.shay@email.com', 'patty.shay@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Patty', 'Shay', 'San Antonio', 'TX'),
+('violet.moody@email.com', 'violet.moody@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Violet', 'Moody', 'San Antonio', 'TX'),
+('hilda.spence@email.com', 'hilda.spence@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Hilda', 'Spence', 'San Antonio', 'TX'),
+('kathy.mckee@email.com', 'kathy.mckee@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Kathy', 'McKee', 'San Antonio', 'TX'),
+('wanda.pitts@email.com', 'wanda.pitts@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Wanda', 'Pitts', 'San Antonio', 'TX'),
+('yvonne.washburn@email.com', 'yvonne.washburn@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Yvonne', 'Washburn', 'San Antonio', 'TX'),
+('nadine.goldstein@email.com', 'nadine.goldstein@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Nadine', 'Goldstein', 'San Antonio', 'TX'),
+('alison.petty@email.com', 'alison.petty@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Alison', 'Petty', 'San Antonio', 'TX'),
+('jeanette.cramer@email.com', 'jeanette.cramer@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Jeanette', 'Cramer', 'San Antonio', 'TX'),
+('celeste.gay@email.com', 'celeste.gay@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Celeste', 'Gay', 'San Antonio', 'TX'),
+('eileen.myers@email.com', 'eileen.myers@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Eileen', 'Myers', 'San Antonio', 'TX'),
+('lindsay.costello@email.com', 'lindsay.costello@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Lindsay', 'Costello', 'San Antonio', 'TX'),
+('guadalupe.lowery@email.com', 'guadalupe.lowery@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Guadalupe', 'Lowery', 'San Antonio', 'TX'),
+('molly.mayer@email.com', 'molly.mayer@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Molly', 'Mayer', 'San Antonio', 'TX'),
+('emma.burch@email.com', 'emma.burch@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Emma', 'Burch', 'San Antonio', 'TX'),
+('erin.dillon@email.com', 'erin.dillon@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Erin', 'Dillon', 'San Antonio', 'TX'),
+('mabel.strong@email.com', 'mabel.strong@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Mabel', 'Strong', 'San Antonio', 'TX'),
+('diane.massey@email.com', 'diane.massey@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Diane', 'Massey', 'San Antonio', 'TX'),
+('miriam.waller@email.com', 'miriam.waller@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Miriam', 'Waller', 'San Antonio', 'TX'),
+('aimee.hayes@email.com', 'aimee.hayes@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Aimee', 'Hayes', 'San Antonio', 'TX'),
+('myrtle.bonner@email.com', 'myrtle.bonner@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Myrtle', 'Bonner', 'San Antonio', 'TX'),
+('norma.swan@email.com', 'norma.swan@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Norma', 'Swan', 'San Antonio', 'TX'),
+('kristie.frederick@email.com', 'kristie.frederick@email.com', '$2a$10$GYNeIa.HSIqhpGA3tYfuxefGKJ1gCckwTyQAGXjaTs4WBjl3NKlGu', 'Kristie', 'Frederick', 'San Antonio', 'TX');
+
+INSERT INTO `user_groups` (`user_id`, `group_id`)
+SELECT u.id, 2
+from users u
+left join user_groups g on u.id = g.user_id
+where g.user_id is null;
+
+#customers who are not in the customer table yet
+select u.username, u.id
+from users u
+join user_groups g on
+u.id = g.user_id
+left join customers c on u.id = c.user_id
+where g.group_id = 2 and c.user_id is null;
+
+#MIN: 14309, MAX: 23848
+insert into customers (budget, guest_count, partner_fname, partner_lname, user_id, wedding_dt) values
+(19799, 148, 'Hubert', 'Wheeler', 153, '2023-11-12'),
+(15667, 117, 'Arthur', 'King', 154, '2024-02-08'),
+(19674, 147, 'Lorenzo', 'Drake', 155, '2024-03-29'),
+(15567, 116, 'Wesley', 'Bullock', 156, '2023-12-31'),
+(23034, 172, 'Craig', 'Wu', 157, '2023-10-11'),
+(21681, 162, 'Andre', 'Hayden', 158, '2024-03-19'),
+(21313, 159, 'Jen', 'Vaughn', 159, '2024-01-12'),
+(20596, 154, 'Leon', 'Armstrong', 160, '2023-12-01'),
+(14449, 108, 'Abraham', 'Park', 161, '2024-01-04'),
+(19120, 143, 'Bruce', 'Sweeney', 162, '2024-03-31'),
+(15080, 113, 'Harold', 'Meyer', 163, '2023-09-20'),
+(18845, 141, 'Jan', 'Curry', 164, '2024-02-13'),
+(14731, 110, 'Gregg', 'Johnson', 165, '2023-09-06'),
+(22342, 167, 'Ruben', 'Bradley', 166, '2023-09-01'),
+(23068, 173, 'Anthony', 'Singh', 167, '2023-10-08'),
+(22894, 171, 'Arnold', 'Bass', 168, '2023-10-20'),
+(16415, 123, 'Jimmy', 'McDonald', 169, '2023-11-01'),
+(14692, 110, 'Travis', 'Cantrell', 170, '2023-11-22'),
+(18856, 141, 'Francis', 'Copeland', 171, '2024-02-19'),
+(20061, 150, 'Cliff', 'Davidson', 172, '2024-03-27'),
+(21472, 161, 'Frankie', 'Clements', 173, '2023-12-19'),
+(23766, 178, 'Greg', 'Sparks', 174, '2023-12-30'),
+(14600, 109, 'Will', 'Travis', 175, '2023-10-02'),
+(21342, 160, 'Curtis', 'Witt', 176, '2024-01-23'),
+(17657, 132, 'Paul', 'Meyers', 177, '2024-01-01'),
+(18297, 137, 'Thomas', 'Dixon', 178, '2023-12-08'),
+(21104, 158, 'Randolph', 'Rodgers', 179, '2024-04-26'),
+(19095, 143, 'Al', 'Villarreal', 180, '2023-11-17'),
+(21934, 164, 'Matt', 'Anderson', 181, '2024-03-26'),
+(23168, 173, 'Emmanuel', 'McMillan', 182, '2023-11-15'),
+(23625, 177, 'Mike', 'Preston', 183, '2023-12-27'),
+(14685, 110, 'Christopher', 'Figueroa', 184, '2023-12-01'),
+(20184, 151, 'Aaron', 'McGill', 185, '2023-09-14'),
+(23402, 175, 'Damon', 'Bower', 186, '2024-02-23'),
+(21082, 158, 'Preston', 'Cooley', 187, '2023-12-13'),
+(18794, 140, 'Stanley', 'Bennett', 188, '2024-03-06'),
+(19315, 144, 'Roderick', 'Rowe', 189, '2024-04-19'),
+(14683, 110, 'Gerry', 'Roberts', 190, '2024-01-21'),
+(16036, 120, 'Jeffrey', 'Daily', 191, '2023-09-24'),
+(18330, 137, 'Dwayne', 'Goodwin', 192, '2024-03-13');
+
+# insert vendor reviews
+insert into vendor_ratings_reviews (title, description, rating, vendor_id, customer_id) values
+('110% amazing','Karen was very kind and have all of the information regarding the venue and options. She answered any/all questions very quickly. I’d do it all over again! Such a gorgeous venue and at a great price. We had our wedding on a Sunday.',5,40,30),
+('Really thought I\'d love but let down.','was overall happy with the wedding because of course it\'s supposed to be a joyous event. However I would be reluctant to refer them to a friend. The coordinator we were assigned to left the company a several months out from the wedding. We were assured that the new person taking over would take care of our needs. Flat out the ball was dropped. The coordination from that point was a disaster. We were never given a tasting even though it was built into the price. I asked multiple times. We finally were asked to come to the venue for another walk through to plan where things would go for both ceremony and reception and we would have a tasting at that meeting. Gave our availability. No response. Reached out again the next week with more availability and then they got back to us. Did not have a tasting. After that I was reaching out for over a week maybe 2 by phone and email about how many tables etc so that decor could adequately be planned. No response. I then started just contacting the venue and not the coordinator directly and was passed to someone else that said they would be taking over from there. I was then basically called and asked everything we were asked when we had last met with the coordinator at the venue (where we were wanting things etc). Clearly that meeting was pointless. This call was literally weeks before the wedding. Wedding day came and their venue set up workers were not on time and would not let my coordinator and helpers set up do to liability since their people WEREN\'T THERE YET. This was all going on while I was getting ready off site so I was in the dark until I got there. There may have been other mishaps I\'m forgetting during that set up but again I was not there. Of course I wasn\'t 100% happy with the food. UGH. Most of it was great however if we had a tasting I definitely would\'ve axed 2 of the items. Specifically the chicken and waffles. Waffle was eggo quality. We booked a year out so this can not be an issue of time.',2,41,31),
+('Look no further!','Cassia is the best! She goes above and beyond what you could ask for. She gets to know you and what you are wanting as well as giving wonderful recommendations when you ask for them. Very accommodating to your requests and professional. Cassia has been the photographer for my wedding, my sisters wedding, and family event photos. Highly recommend!',5,46,32),
+('Mr.','John was great to communicate with, very flexible and accommodating. He had set poses in mind but was also open to us doing different things.',5,47,33),
+('Excellent service','We’re so glad we hired John G photography LLC as our photographer. John was punctual, organized, friendly, and overall made us feel very comfortable. My husband and I are not very photogenic, but John made sure he could capture us at our most natural state. We wanted someone who specialized in sunset photography since our wedding was later in the day. If you’re looking for someone who can capture those sunset pictures look no further. One thing I especially loved about John’s photography is not only does he capture those candid photos, but he’s also great at coaching you to get the best poses possible. John is very talented and will most definitely make your dream pictures come true.',5,47,34),
+('Made our day','Our greatest hope for our wedding was for everything to be personal and authentic to us as a couple and John\'s presence that day/professionalism was a big part of that being possible. John was extremely flexible for two very go with the flow, figure it out when we get there people. Planning an OOT wedding at a private residence, John was great with communication and making sure we were all on the same page for the day of. John was a genuine, kind presence to have at our wedding and we would\'ve loved that energy in general, but he ALSO caught all of these sweet moments from our dearest memory.',5,47,40),
+('Amazing Photographer!','John G Photography made the photo sessions such an enjoyable experience! During the actual ceremony I never even noticed he was there, but the photos say otherwise! Absolutely perfect! He made everything feel so natural and captured it in such a way that I feel the emotions all over again every time I view the photos.',5,47,41),
+('Hire her!!','I cannot speak highly enough of Aliyah and her colleague Amani!! They were punctual, professional and friendly, they made us all feel so comfortable which is so important in photographers. My fear was feeling awkward and coming out stiff in the photos especially considering I‚Äôm not used to having all eyes on me and multiple cameras. But from the moment they arrived all those fears went away! They were amazing, the photos were beautiful. Aliyah got all of the photos on my shot list and photos I never knew I wanted!! Absolutely adore her and would recommend and hire again. You will not regret going with Aliyah!',5,52,1),
+('Aliyah is the best!','Aliyah photographed our engagement shoot and wedding in the summer of 2022. Her photos are absolutely beautiful and we love them so much!! We are truly overwhelmed by all the special moments that she captured. We were also so impressed with her turnaround time on sharing the photos, which were super easy to view and download via her online platform. But most importantly, we had so much fun working with her (and her assistant, Amani! Shout-out to Amani)! Aliyah is great to be around and made us feel totally comfortable. After our engagement shoot, it felt like she was an old friend by the time of the wedding and we were genuinely so happy to have her there. One of the best pieces of wedding advice that we have is to get a photographer that you think will mesh well with your friends and family, put you at ease with all the intense emotions of the day, and bring fun and positive energy to the party. Aliyah is all those things and more, and she has our highest recommendation.',5,52,11),
+('Love, love this team','They are easy to work with. Making every couple feel so comfortable. They really ensure that you get the best pictures possible. Highly recommend.',5,48,12),
+('Feels like friends, instead of strangers!','Ashley and Tyler are the best! We met them over the summer and did our engagement shoot with them and absolutely fell in love with their work. Ashley was also sooooo helpful in helping to make our timeline for photos. When it came to our wedding day Ashley and Tyler were right on time and made sure we got the best shots. I got some sneak peaks back on Monday night and I am absolutely in love with them and can\'t wait to get the rest back!',5,48,13),
+('Communication is On Point!!','A photographer was a huge priority in my wedding planning process! It was also the hardest for me to find! I found Ashley & Tyler on a facebook group and instantly fell in love with their website!! I almost went the route of having a friend take my photos until I read their personal story! it was literally like I was supposed to find them!! I reached out and got a reply within hours!! Ashley is the sweetest human and we facetimed for over an hour just talking about wedding stuff and how my fianc√© and I met! it was literally like being on the phone with a friend!!! she has been amazing during all the planning and planned our engagement/family session!! she was so helpful with picking out outfits since i‚Äôm so indecisive! her personality is so fun!! she really turned our awkwardness into beautiful pictures. i am looking forward for our big day coming up in april! honestly i‚Äôm more excited for it to fly by just so I can see all the awesome pictures they take!!! knowing I picked the perfect photographer just eases my stress about the big day!!‚Äô her and tyler are seriously amazing!!! I have no doubt my fianc√© and I will counting on our friendship with Ashley and Tyler after our special day!!!',4,48,14),
+('Personable & Fun!!','We took a chance on hiring Ashley and Tyler to capture the pictures for our engagement wedding photos. Since the time we met on Zoom, we knew working with them would be great! They made us feel comfortable and answered all of our questions. Fast forward to the time of our engagement session and we found out we weren‚Äôt going to be able to use the property in our original plans but Ashley reassured us that everything would workout and helped find a new location. We loved our engagement pictures! Ashley was also great about keeping in contact throughout the time leading up to the wedding and also helped with making a timeline. On our wedding day, she and Tyler were awesome. They got straight to work on capturing our special day and making everyone feel comfortable. I would definitely recommend them for any event and we will definitely plan on using them in the future.',5,48,15),
+('Amazing - they made our day','We HIGHLY recommend CiCi & Imelda to help with your wedding! They were an amazing and dedicated team as they focused on the important details for our special day. We were very fortunate and blessed that our paths crossed. We had originally reached out for a floral arrangement quote early June, and to our relief, CiCi & Imelda had a response in the inbox the next day. It was a great sign for us and our short, 3-month engagement. They included in their quote a very reasonable offer for additional services: a day of coordinator. The Bride had always wanted a day of coordinator, but thought it wasn‚Äôt in the cards. The Groom was confused by the concept and was immediately against the idea. He is now one of CiCi and Imelda‚Äôs biggest fans and more than willing to admit he lived to eat his words, with, ‚Äúfind CiCi‚Äù becoming a reliable response on our big day! As for the Bride, she felt like she had a team to work with, not just organizing the wedding day itself, but also executing her dream. She had always wanted a fairytale wedding and was afraid to allow herself to hope for one. She had to admit it was everything she envisioned and more ‚Äì so much of that was due to their efforts. Our wedding went off smoothly and without a hitch, all because of Ay, Poppy Floral and Event D√©cor. Thank you ladies, truly!',5,58,16),
+('Cosmic Cakery','Beautiful floral arrangements! I have worked with Ay Poppy many times with floral arrangements for cakes. I highly recommend them for any of your floral needs!',5,58,17),
+('Ay Poppy Floral & Event Decor','We loved working with Ay Poppy for one of our brides weddings. The floral was beautiful. The team was so easy to work with and accommodating! The bride was very happy! We hope to work future events with them.',5,58,18),
+('BarMasters is AMAZING!!!','We absolutely LOVED working with BarMasters TX! They were very professional, fun to work with, and Jenna was very knowledgable and helpful with everything. It felt good to know that we didn\'t have to worry about anything and knew our guests would have a great time. Cannot recommend BarMasters enough!',5,81,19),
+('BarMasters TX more than just bartending','I\'ve been in the wedding industry for many years now and Jenna with BarMasters TX provides a truly excellent service from start to finish. She is easy to communicate with, friendly, and knows her stuff when it comes to planning and serving your event. I have always enjoyed working with BarMasters TX and I value their professionalism.',5,81,25),
+('Amazing!!','Easy to work with and the flowers exceeded our expectations on wedding day!',5,61,26),
+('Assistant Director of Student Engagement - TAMUC','First, Bubble Tap is so much fun! Dawn created a safe and fun environment for our campus. Would highly recommend.',5,82,27),
+('HIGHLY Recommend','Dawn and her team are amazing!! I would highly recommend!! She is professional, on time, and makes the events so much fun!',5,82,30),
+('Truly the best','If you want a VIP experience hire Dawn & The Bubble Tap! Will absolutely separate your event from the rest - we love working with her!',5,82,31),
+('Cannot Recommend Enough!!!','Bubble Tap is AMAZING!! We rented the trailer for our rehearsal dinner and it was a big hit! We had so much fun, everyone was amazed champagne came from a tap! And the Champagne Room photo booth is a MUST! I cannot express how much fun it was trying to all pile into the trailer for pictures. Dawn was amazing, beyond perfect! The communication was top notch and she made sure everything went off without a hitch! I‚Äôm making events just so I can rent this again! You will not be disappointed!!',5,82,32),
+('Best Catering Ever','Oh my gosh the food is delicious! Chef D‚Äôs Catering is one of the best company‚Äôs I have had the pleasure of working with. Frank is so professional, easy to work with, and he caters to every guest. It‚Äôs very impressive how he is able to curate unique experiences for different guests each time. I love working with him!',5,64,33),
+('Wow! Thank you!','Working with Dawn with D&J\'s Margaritas was a great experience. She made every step of the process easy and fun. Our guests had a great time at the wedding and we didn\'t have to worry about a thing. Would definitely recommend them to our friends and family and use them again in the future.',5,85,34),
+('A Pleasure to Work With','I have worked with Dawn at D&J\'s Margaritas, Music & More several times and she has always been a pleasure to work with. She conducts herself professionally and communicates her needs well. Looking forward to working with Dawn again in the future.',5,85,40),
+('An amazingly talented and skilled photographer!','David is truly a professional in his field and extremely talented at his craft and you can tell how passionate he is about what he does. He has an eye for detail - his photos really stand out, from the composition to the lighting. When you work with David, you will see that he has great patience, is very kind and flexible. You won\'t feel rushed through your photos and he really takes his time to get the perfect shot - every time! As a bridal makeup artist I really enjoy working with David any chance I get because I know everything will turn out great. I really can\'t say enough about how professional David is and the quality of work that he provides, and I cannot recommend him enough to everyone!',5,50,41),
+('Gorgeous Work, Great Team!','I had the privilege of working with the De\'s Flowers team on a luxury-inspired photoshoot at a wedding venue in Fredericksburg. The product was fresh and beautifully designed, and the team was able to set up and tear down in a timely manner. Those ladies are as professional as they come, so definitely get a quote for your event before they run out of availability! 10/10 would work together with De\'s Flowers again!!',5,60,1),
+('Happy Couple','The day ran so smoothly. We were able to enjoy town with our families and be present at our wedding.',5,59,11),
+('Maternity photos','Evelyn took the time to coordinate with me and we both planned my maternity photos. She made my husband and I feel comfortable and cared for. He\'s a bit shy but she was able to get him put of his shell. Great photographer!',5,53,12),
+('Best Photographer EVER','We love working with Idea House! All the photographers are so nice and every picture comes out so amazing! I normally look so bad on camera but somehow they make me look great! I‚Äôll 100% be using them again! Can‚Äôt wait till the next time I need pictures taken!',5,51,13),
+('Amazing videography!','Idea house media really made our wedding video perfect! They captured the true beauty from the beginning to the end of our special day. The shots were very cinematic and told the perfect love story. We put so much planning and effort into our wedding and Idea house media had it all covered with extensive , high end equipment and hard working , passionate videographers who care about capturing a once in a lifetime event. We highly recommend!',5,51,14),
+('Beautiful and Magical Wedding Video','Idea House Media went above and beyond with our wedding video! They captured the best moments of the night and we‚Äôre very detailed with our video! They include so much creativity and hard work to each piece they create. They are great and fun people to work with. We couldn‚Äôt have ask for a better videographer! We‚Äôve been married for over four years, and every time we watch our wedding video, we relive the moment all over again! We are so thankful for the entire Idea House team that made our wedding very special and one to always remember!',5,51,15),
+('Amazing Photography!!! Instagram Worthy Pictures!!','My husband and I have used Idea House Media several times for couples photos which is why it was an easy choice for us to choose them to photograph our elopement/mini wedding. They were super professional and took amazing photos that my husband and I love! Everything is sent nice and organized in a folder we can access at any time. We continue to use them whenever we want updated couple/family pictures. There is consistency in the quality of their work and every photo they have taken of us is always Instagram-worthy! 10/10 highly recommend',5,51,16),
+('Party Planner','Wonderful experience, great service and very knowledgeable.',5,84,17),
+('Extremely Professional and Sharply Dressed','I highly recommend MMK Mixology Services for anyone planning a special event or occasion. We used them for our wedding reception and our expectations were beyond exceeded. They were sharply dressed and very professional, giving our wedding that extra touch of class and elegance. The drinks were the best, very creative, and properly garnished to look as good as they tasted. We couldn\'t have asked for more. Thank you MMK Mixology for making our wedding a memorable one!',5,84,18),
+('Saved my bar at my wedding','MMK was a huge lifesaver when it came to the bar at my wedding. I had no clue what I was doing and Kealie came in and helped me figure out what to serve and how much to get for my reception. Her team was extremely outgoing and kind to all of my guests and not one person had anything negative to say about the bar. I would give 10 stars if I could because without bringing in MMK, the bar at my wedding would have been a complete disaster.',5,84,19),
+('Great to work with','Working with Kealie and the MMK Team never ceases to amaze me. With the professionalism she has and the quality of customer service her and her team provide, I never turn down the opportunity to work with them. They have the best ideas for the bar that they allow my team to bring to life and their clients are never disappointed.',5,84,25),
+('Extremely helpful','Was super nervous about my bar at my wedding but MMK came in right away to help ease my mind. They were extremely helpful with figuring out how much alcohol to get for the wedding, and what kinds of alcohol. Easiest process ever. I‚Äôll be using them for other events for sure.',5,84,26),
+('Goes beyond all expectations','Working with MMK Mixology and their team made my life so much easier when it came to getting the bar together for my daughter\'s wedding. We were so stressed out and Kealie came in and was able to help me calculate how much alcohol to buy for all the guests almost perfectly. The little extra touches she gives to the bar area are super cute and her team is outgoing and kept the party going all night. She also was able to help me go over the entire wedding plan to make sure we didn\'t miss anything, and I am sure glad we did. I will be using her and her team again for my birthday party in a couple of months. I would give 10 stars if I could!',5,84,27),
+('Wedding','The owners had a fast response and answered all questions asked. So easy to work with when renting. They went above and beyond to rent even though they were going out of town. I highly recommend them. We had so many compliments on the bar and how cool it looked.',5,86,30),
+('Awesome mobile bar!','Rocking R&B provided an amazing mobile bar at our ranch wedding venue. We are adding them to our preferred vendor list for all of our weddings and events.',5,86,31),
+('Absolutely Amazing Brunch Catering','My wife Sarah and I wanted to try something a tad unorthodox to celebrate our wedding: a brunch reception. We hoped to find a great, local brunch caterer, and we discovered Scratch Kitchen. The 3 other catering companies we tried in San Antonio tasted like the bland, frozen cafeteria food you\'d find in a middle school. We were floored by every dish at Scratch Kitchen, and were surprised such fresh, homemade food could be shared with 160 guests! We got only compliments at our reception about the food, and we have only compliments for Becky and her team\'s communication, professionalism, and food quality. If you want a great brunch served to your guests or coworkers, look no further!',5,70,32),
+('Bride','INCREDIBLE caterer. The food was spectacular and had both families still talking about how good it was. Super easy to work with and quick to communicate. Excellent selection of food and treat options. Gave us all the details and information we needed super quickly. Set up and take down were so breezy. Scratch Kitchen was the perfect addition to our wedding.',5,70,33),
+('Exceedingly Exceptional!!','I am recommending The Floral Standard for countless reasons. Here are a few of my must haves: 1. The ease and simplistic interaction, not overbearing! 2. Professionalism 3. Selection and availability 4. Understanding my vision and taking it to the next level! Totally exceeding expectations. 5. Personal service. Making me feel like I am the most important person in the room! This is The Floral Standard because I only recommend excellence!',5,62,34),
+('Grace and Excellence!','I‚Äôve seen flower walls before BUT I‚Äôve never seen flower walls like this! The detailed work is impeccable and mind blowing. I love them.',5,62,40),
+('High Standards All Around','The Floral Standard offers the Most gorgeous, non-cookie cutter, high-quality silk/artificial floral walls I\'ve ever seen in my 15 years of floral design. Larissa is very passionate, loves what she does, has so much energy, and is very kind. On top of that, The Floral Standard is very professional, and thorough when it comes to scheduling and executing events. I would highly recommend this company to anyone wanting a gorgeous backdrop for their event!',5,62,41),
+('SUPERB and HIGHLY RECOMMENDED','The flower walls are so beautiful that they can be used for all Ocassions. I give this company an triple A rating and that the creator for her professionalism and care.',5,62,1);
