@@ -76,11 +76,16 @@ public class VendorController {
         customerVendor.setVendor(vendor);
         customerVendor.setCustomer(customer);
         model.addAttribute("customerVendor", customerVendor);
+        model.addAttribute("customer", customer);
         return "vendors/individual_vendor";
     }
     @GetMapping("/vendors/categories/{id}")
     public String vendorCategory(@PathVariable long id, @CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
         model.addAttribute("id",id);
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        model.addAttribute("user", user);
+        model.addAttribute("customer", customer);
         VendorCategory vendorCategory = vendorCategoryService.findById(id);
         model.addAttribute("vendorCategory", vendorCategory);
         model.addAttribute("vendors", vendorUtility.findByCategory(vendorCategory));
@@ -88,8 +93,12 @@ public class VendorController {
         return "vendors/each_vendorCategories";
     }
     @GetMapping("/vendors")
-    public String vendorCategories(Model model){
+    public String vendorCategories(Model model, HttpServletRequest request){
         model.addAttribute("vendorCategories", vendorCategoryService.findAll());
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        model.addAttribute("user", user);
+        model.addAttribute("customer", customer);
         return "vendors/all_vendorCategories";
     }
     @GetMapping("/vendor/profile")

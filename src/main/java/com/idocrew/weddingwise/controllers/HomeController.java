@@ -1,7 +1,11 @@
 package com.idocrew.weddingwise.controllers;
 
+import com.idocrew.weddingwise.entity.Customer;
+import com.idocrew.weddingwise.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RequiredArgsConstructor
@@ -10,8 +14,21 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        model.addAttribute("user", user);
+        model.addAttribute("customer", customer);
         return "index";
+    }
+
+    @GetMapping("/aboutus")
+    public String aboutUs(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        model.addAttribute("user", user);
+        model.addAttribute("customer", customer);
+        return "about_us";
     }
 
     @GetMapping("/info/budget")
@@ -32,10 +49,7 @@ public class HomeController {
     public String visitorVendors() {
         return "visitor_views/vendors_learn_more";
     }
-    @GetMapping("/aboutus")
-    public String aboutUs() {
-        return "about_us";
-    }
+
 
 
 
