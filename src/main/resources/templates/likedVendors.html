@@ -25,7 +25,7 @@
             <h1 class="text-center">Liked Vendors</h1>
             <hr>
             <div class="row vendorCard" th:each="category: ${session.categories}">
-                <a th:href="@{/vendors/categories/{id}(id=${category.id})}"><h4 class="title-text"
+                <a th:href="@{/vendors/categories/{id}(id=${category.id})}"><h4 class="title-text "
                                                                                 th:text="${category.title}"></h4></a>
                 <div th:each="customerVendor: ${session.customerVendors}">
                     <div class="row">

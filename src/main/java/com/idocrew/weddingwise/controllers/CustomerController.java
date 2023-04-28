@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -64,6 +65,12 @@ public class CustomerController {
         refactorThisMethod(username, model, request);
         return "/clients_budgetTracker";
     }
+    @PostMapping("/budget_tracker")
+    public String budgetTrackerPost() {
+
+        return "/clients_budgetTracker";
+    }
+
     @GetMapping("/likedVendors/toggle/{vendorId}")
     public String toggleLikedVendors(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
         refactorThisMethod(username, model, request);

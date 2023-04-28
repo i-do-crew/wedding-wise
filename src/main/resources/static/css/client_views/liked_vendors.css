@@ -4,14 +4,14 @@
     margin-bottom: 25px;
 }
 
-.p{
+p{
     font-family: nunito;
 }
 
 .title-text{
     font-family: "Luxurious Roman";
     color: black;
-    text-decoration: none;
+    text-decoration: none;!important;
 }
 
 /*hr{*/

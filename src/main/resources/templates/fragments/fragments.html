@@ -233,9 +233,40 @@
 </div>
 
 <!--REACTION BUTTONS-->
-<div th:fragment="reactionButtons" class="reaction-buttons">
-    <a class="vendor-heart" th:style="${customerVendor.getSelected() ? 'color:gold' : 'color:black'}" th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-solid fa-check"></i></a>
-    <a class="vendor-heart" th:style="${customerVendor.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-regular fa-heart"></i></a>
+<div th:fragment="reactionButtons (businessName)">
+    <div class="reaction-buttons">
+        <button th:style="${customerVendor.getSelected() ? 'color:gold' : 'color:black'}" class="initialBudgetCostModalBtn" type="button" data-bs-toggle="modal" data-bs-target="#initialBudgetCostModal" th:attr="data-id=${customerVendor.vendor.id}">
+            <i class="fa-solid fa-check"></i>
+        </button>
+        <a class="vendor-heart" th:style="${customerVendor.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-regular fa-heart"></i></a>
+    </div>
+<!--BUDGET TRACKER INITIAL COST MODAL-->
+    <div>
+        <div id="initialBudgetCostModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content card">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center fontTitle">Enter the cost for this Vendor:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:method="POST" th:object="${budgetEntry}">
+                            <h6 th:text="${businessName}"></h6>
+                            <label for="cost" class="form-label"></label>
+                            <input type="text" name="cost" class="form-control" id="cost" placeholder="Enter the cost:" >
+
+                            <div class="modal-footer d-flex justify-content-between">
+<!--                                <a class="vendor-selected"  th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" " >-->
+                                <form action=""></form>
+                                <button  type="submit" class="saveBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Save</button>
+<!--                                </a>-->
+                                <button type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--BOOTSTRAP-->
