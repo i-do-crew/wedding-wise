@@ -1,6 +1,6 @@
 .text-center{
     font-family: "Luxurious Roman";
-    margin-top: 25px;
+    margin-top: 30px;
     margin-bottom: 25px;
 }
 
@@ -43,13 +43,9 @@ img{
     margin-left: 20px;
 }
 
-.content{
-margin-left: 320px;
-    /*align-content: center;*/
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-
-}
+/*.content {*/
+/*    position: relative;*/
+/*    top: -50%;*/
+/*    transform: translateY(-50%);*/
+/*text-align: center;*/
+/*}*/

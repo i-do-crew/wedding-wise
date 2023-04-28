@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <th:block th:insert="~{fragments/fragments :: head}"></th:block>
+  <meta charset="UTF-8">
+  <title>Error 500</title>
+  <link rel="stylesheet" href="/css/error.css">
+</head>
+
+<body class="body">
+
+<main>
+  <div class="p-5 m-5text-right">
+    <div class="row d-flex justify-content-center align-items-center  pt-5 mt-5">
+      <div class="col d-flex justify-content-end me-4">
+        <h1 class="fontTitle fa-8x">5 <span><img class="m-0 p-0" src="/img/single_ring.png" height="180" width="180"><img class="m-0 p-0" src="/img/single_ring.png" height="180" width="180"></span></h1>
+      </div>
+      <div class="ms-2 col">
+        <h1 class="font">Server Error</h1>
+        <h2 class="font">Oops, something went wrong!</h2>
+        <p class="font">Try refreshing the page</p>
+        <a href="/"  class="font"><button class="btn">Go Home</button></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!--BOOTSTRAP-->
+<div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+</body>
+</html>

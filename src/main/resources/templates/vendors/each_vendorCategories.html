@@ -17,7 +17,7 @@
 <!--EDIT PROFILE MODAL-->
 <div th:insert="~{fragments/fragments :: profileModal}"></div>
 
-<main style="background-color: #FFE5D2; padding:50px;">
+<main>
     <div class="container p-5 border border-dark " style="background-color: #FFFAF7;">
         <div class="container-fluid" id="mainCard">
             <div class="text-center" >
@@ -33,6 +33,7 @@
                             <div class="card-body" >
                                 <h5 class="card-title" th:text="${vendor.businessName}"></h5>
                                 <p class="card-text" th:text="${vendor.about}"></p>
+                                <div th:insert="~{fragments/fragments :: reactionButtons}" class="fa-lg mb-3"></div>
                                 <a class="" th:href="@{/vendors/individual/{id}(id=${vendor.id})}"><button class="btn btn-outline-dark">Request Quote</button></a>
                             </div>
                         </div>

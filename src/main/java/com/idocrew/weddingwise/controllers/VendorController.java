@@ -7,6 +7,7 @@ import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,11 +60,22 @@ public class VendorController {
     }
     @GetMapping("/vendors/categories/{id}")
     public String vendorCategory(@PathVariable long id, @CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
+        refactorThisMethod(username, model, request);
         model.addAttribute("id",id);
         VendorCategory vendorCategory = vendorCategoryService.findById(id);
         model.addAttribute("vendorCategory", vendorCategory);
         model.addAttribute("vendors", vendorUtility.findByCategory(vendorCategory));
-        refactorThisMethod(username, model, request);
+
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        Vendor vendor = vendorUtility.findById(id);
+
+        Optional<CustomerVendor> optionalCV = customerVendorService.findByCustomerAndVendor(customer, vendor);
+        CustomerVendor customerVendor = optionalCV.orElse(new CustomerVendor());
+        customerVendor.setVendor(vendor);
+        customerVendor.setCustomer(customer);
+        request.getSession().setAttribute("customerVendor", customerVendor);
+        model.addAttribute("customerVendor", customerVendor);
+
         return "vendors/each_vendorCategories";
     }
     @GetMapping("/vendors")
@@ -72,7 +84,9 @@ public class VendorController {
         return "vendors/all_vendorCategories";
     }
     @GetMapping("/vendor/profile")
-    public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
+    @PreAuthorize("hasRole('VENDOR')")
+    public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name")String username, Model model, HttpServletRequest request) {
+//        String username = "christie@email.com";
         refactorThisMethod(username, model, request);
         return "vendor_views/vendor_profile";
     }
