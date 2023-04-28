@@ -27,3 +27,7 @@ main{
 #ideaBoardAddBtn:hover, #addBtn:hover, #closeBtn:hover{
     background-color: #E19B6E;
 }
+
+.fontTitle{
+    margin-top: 5%;
+}
