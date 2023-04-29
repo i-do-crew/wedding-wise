@@ -168,16 +168,16 @@
             </div>
             <ul class="navbar-nav list-group-horizontal me-3 ms-3">
                 <li class="nav-item me-3">
-                    <a href="https://facebook.com" class="text-decoration-none text-dark"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://facebook.com" class="text-decoration-none text-dark"><i class="fa-brands fa-facebook fa-lg"></i></a>
                 </li>
                 <li class="nav-item me-3">
-                    <a href="https://instagram.com" class="text-decoration-none text-dark"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://instagram.com" class="text-decoration-none text-dark"><i class="fa-brands fa-instagram fa-lg"></i></a>
                 </li>
                 <li class="nav-item me-3">
-                    <a href="https://twitter.com" class="text-decoration-none text-dark"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://twitter.com" class="text-decoration-none text-dark"><i class="fa-brands fa-twitter fa-lg"></i></a>
                 </li>
                 <li class="nav-item me-3">
-                    <a href="https://linkedin" class="text-decoration-none text-dark"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://linkedin" class="text-decoration-none text-dark"><i class="fa-brands fa-linkedin fa-lg"></i></a>
                 </li>
             </ul>
         </div>
@@ -234,9 +234,8 @@
 
 <!--REACTION BUTTONS-->
 <div th:fragment="reactionButtons" class="reaction-buttons">
-    <i class="fa-solid fa-check"></i>
-    <a th:style="${customerVendor.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/add/{vendorId}(vendorId=${customerVendor.vendor.id})}"><i class="fa-regular fa-heart"></i></a>
-    <a th:href="@{/likedVendors/remove/{vendorId}(vendorId=${customerVendor.vendor.id})}"><i class="fa-regular fa-circle-xmark"></i></a>
+    <a class="vendor-heart" th:style="${customerVendor.getSelected() ? 'color:gold' : 'color:black'}" th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-solid fa-check"></i></a>
+    <a class="vendor-heart" th:style="${customerVendor.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-regular fa-heart"></i></a>
 </div>
 
 <!--BOOTSTRAP-->

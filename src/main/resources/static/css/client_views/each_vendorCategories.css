@@ -8,6 +8,22 @@ img{
     height:100%;
     object-fit: cover;
 }
+
+.fontTitle{
+    margin-bottom: 5%;
+}
+
+main{
+    background-color: #FFE5D2;
+    padding: 50px;
+}
+
+/*<<<<<<< HEAD*/
+/*.card-body{*/
+/*font-family: 'Nunito Sans', sans-serif;*/
+/*}*/
+/*=======*/
+
 /*.card{*/
 /*    border-radius: 0;*/
 /*    border: 1px solid #212727;*/

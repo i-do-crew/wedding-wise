@@ -1,5 +1,10 @@
 package com.idocrew.weddingwise.controllers;
 
+import com.idocrew.weddingwise.entity.*;
+import com.idocrew.weddingwise.services.CustomerVendorService;
+import com.idocrew.weddingwise.services.UserService;
+import com.idocrew.weddingwise.services.VendorCategoryService;
+import com.idocrew.weddingwise.services.VendorUtility;
 import com.idocrew.weddingwise.repositories.UserRepository;
 import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
 import com.idocrew.weddingwise.repositories.VendorRepository;
@@ -22,7 +27,6 @@ import java.util.stream.Collectors;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
@@ -45,18 +49,20 @@ public class VendorController {
     private final BudgetEntryService budgetEntryService;
     private final CustomerVendorService customerVendorService;
 
-
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         User user = userService.findByUsername(username);
+        //Customer customer = customerService.findCustomerByUser(user);
         Vendor vendor = vendorUtility.findVendorByUser(user);
         Customer customer = customerService.findCustomerByUser(user);
         List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
-        List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
-        Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
-        request.getSession().setAttribute("user", user);
-        request.getSession().setAttribute("customer", customer);
-        request.getSession().setAttribute("budget", budget);
-        request.getSession().setAttribute("customerVendors", customerVendors);
+        //List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
+        //Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
+        Vendor vendor = vendorUtility.findVendorByUser(user);
+        //request.getSession().setAttribute("user", user);
+        request.getSession().setAttribute("vendor", vendor);
+        //request.getSession().setAttribute("customer", customer);
+        //request.getSession().setAttribute("budget", budget);
+        //request.getSession().setAttribute("customerVendors", customerVendors);
         request.getSession().setAttribute("categories", vendorCategories);
         request.getSession().setAttribute("vendor", vendor);
         request.getSession().setAttribute("vendorComposite", new VendorComposite());
@@ -80,11 +86,22 @@ public class VendorController {
     }
     @GetMapping("/vendors/categories/{id}")
     public String vendorCategory(@PathVariable long id, @CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
+        refactorThisMethod(username, model, request);
         model.addAttribute("id",id);
         VendorCategory vendorCategory = vendorCategoryService.findById(id);
         model.addAttribute("vendorCategory", vendorCategory);
         model.addAttribute("vendors", vendorUtility.findByCategory(vendorCategory));
-        refactorThisMethod(username, model, request);
+
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        Vendor vendor = vendorUtility.findById(id);
+
+        Optional<CustomerVendor> optionalCV = customerVendorService.findByCustomerAndVendor(customer, vendor);
+        CustomerVendor customerVendor = optionalCV.orElse(new CustomerVendor());
+        customerVendor.setVendor(vendor);
+        customerVendor.setCustomer(customer);
+        request.getSession().setAttribute("customerVendor", customerVendor);
+        model.addAttribute("customerVendor", customerVendor);
+
         return "vendors/each_vendorCategories";
     }
     @GetMapping("/vendors")
@@ -95,6 +112,7 @@ public class VendorController {
     @GetMapping("/vendor/profile")
     @PreAuthorize("hasRole('VENDOR')")
     public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name")String username, Model model, HttpServletRequest request) {
+//        String username = "christie@email.com";
         refactorThisMethod(username, model, request);
         model.addAttribute("options", states);
         model.addAttribute("vendorCategories", vendorCategoryService.findAll());

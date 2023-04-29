@@ -24,224 +24,232 @@
             <!-- back container -->
             <h1 class="text-center">Liked Vendors</h1>
             <hr>
-
             <div class="row vendorCard" th:each="category: ${session.categories}">
-                <a th:href="@{/vendors/categories/{id}(id=${category.id})}"><h4 class="title-text" th:text="${category.title}"></h4></a>
+                <a th:href="@{/vendors/categories/{id}(id=${category.id})}"><h4 class="title-text"
+                                                                                th:text="${category.title}"></h4></a>
                 <div th:each="customerVendor: ${session.customerVendors}">
                     <div class="row">
-                        <div th:block th:if="${customerVendor.vendor.vendorCategory.title} == ${category.title} and ${customerVendor.getLiked() == true}" class="col">
-<!--                            <a href=""><img class="card-img-top" src="/img/liked_vendors/venueTwo.jpg" alt="Vendor Img"></a>-->
-                            <h5 th:text="${customerVendor.vendor.businessName}"></h5>
-                            <p class="p" th:text="${customerVendor.vendor.about}"></p>
-                            <div th:insert="~{fragments/fragments :: reactionButtons}"></div>
+                        <div th:block th:if="${customerVendor.vendor.vendorCategory.title} == ${category.title} and ${customerVendor.getLiked() == true}">
+                        <div class="row d-flex justify-content-start ">
+                            <div class="col d-flex justify-content-center">
+                                <a href=""><img class="card-img-top" src="/img/liked_vendors/venueTwo.jpg"
+                                                alt="Vendor Img"></a>
+                            </div>
+                            <div class="col content me-5">
+                                        <h5 class="font" th:text="${customerVendor.vendor.businessName}"></h5>
+                                        <p class="font" th:text="${customerVendor.vendor.about}"></p>
+                                        <div th:insert="~{fragments/fragments :: reactionButtons}" class="fa-lg"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
 
-<!--            <div class="row" id="venues" style="text-align: center">-->
-<!--                <a href="/vendors/categories/1" style="text-decoration: none">-->
-<!--                <h4 class="title-text">Venues</h4></a>-->
-<!--                <div class="row" id="venueRow">-->
-<!--                    <div class="col" id="venueCol">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/venueTwo.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/venueThree.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/venueOne.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--&lt;!&ndash;            PHOTOGRAPHERS&ndash;&gt;-->
-<!--            <hr >-->
-<!--                <div class="row" id="vendorCard" style="text-align: center">-->
-<!--                    <a href="/vendors/categories/2" style="text-decoration: none">-->
-<!--                        <h4 class="title-text">Photographers</h4></a>-->
-<!--                    <div class="col">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/photographer.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/photoTwo.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--                        &lt;!&ndash;                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/photoThree.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--                        &lt;!&ndash;                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                </div>-->
-<!--&lt;!&ndash;                FLORISTS&ndash;&gt;-->
-<!--                <hr style="margin: auto">-->
-<!--                <div class="row" id="florists" style="text-align: center">-->
-<!--                    <a href="/vendors/categories/3" style="text-decoration: none"><h4 class="title-text">Florists</h4></a>-->
-<!--                    <div class="col">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/floristOne.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/floristTwo.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                        src="/img/liked_vendors/floristThree.jpg" alt="Vendor Img"></a>-->
-<!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                    </div>-->
-<!--&lt;!&ndash;CATERERS&ndash;&gt;-->
-<!--                    <hr style="margin: auto">-->
-<!--                    <div class="row" id="caterers" style="text-align: center">-->
-<!--                        <a href="/vendors/categories/4" style="text-decoration: none"><h4 class="title-text">Caterers</h4></a>-->
-<!--                        <div class="col">-->
-<!--                            <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                            src="/img/liked_vendors/chefOne.jpg" alt="Vendor Img"></a>-->
-<!--                            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                            <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                            <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                        </div>-->
-<!--                        <div class="col">-->
-<!--                            <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                            src="/img/liked_vendors/cater.jpg" alt="Vendor Img"></a>-->
-<!--                            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                            <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                            <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                        </div>-->
-<!--                        <div class="col">-->
-<!--                            <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                            src="/img/liked_vendors/chefTwo.jpg" alt="Vendor Img"></a>-->
-<!--                            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                            <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                            <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                        </div>-->
-<!--&lt;!&ndash;CAKES AND DESSERTS&ndash;&gt;-->
-<!--                        <hr style="margin: auto">-->
-<!--                        <div class="row" id="desserts" style="text-align: center">-->
-<!--                            <a href="/vendors/categories/5" style="text-decoration: none"><h4 class="title-text">Cakes and Desserts</h4></a>-->
-<!--                            <div class="col">-->
-<!--                                <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                src="/img/liked_vendors/donuts.jpg" alt="Vendor Img"></a>-->
-<!--                                <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                src="/img/liked_vendors/cake.jpg" alt="Vendor Img"></a>-->
-<!--                                <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                src="/img/liked_vendors/sweetTable.jpg" alt="Vendor Img"></a>-->
-<!--                                <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                            </div>-->
-<!--&lt;!&ndash;BARS & BEVS&ndash;&gt;-->
-<!--                            <hr style="margin: auto">-->
-<!--                            <div class="row" id="bars" style="text-align: center">-->
-<!--                                <a href="/vendors/categories/6" style="text-decoration: none"><h4 class="title-text">Bars and Beverages</h4></a>-->
-<!--                                <div class="col">-->
-<!--                                    <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                    src="/img/liked_vendors/bartender.jpg" alt="Vendor Img"></a>-->
-<!--                                    <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                    <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                                </div>-->
-<!--                                <div class="col">-->
-<!--                                    <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                    src="/img/liked_vendors/minibar.jpg" alt="Vendor Img"></a>-->
-<!--                                    <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                    <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                                </div>-->
-<!--                                <div class="col">-->
-<!--                                    <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                    src="/img/liked_vendors/mobile_cocktail_bar.jpg" alt="Vendor Img"></a>-->
-<!--                                    <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                    <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                                </div>-->
-<!--&lt;!&ndash;BANDS/DJs&ndash;&gt;-->
-<!--                                <hr style="margin: auto">-->
-<!--                                <div class="row" id="bands" style="text-align: center">-->
-<!--                                    <a href="/vendors/categories/7" style="text-decoration: none"><h4 class="title-text">Bands/DJs</h4></a>-->
-<!--                                    <div class="col">-->
-<!--                                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                        src="/img/liked_vendors/liveband.jpg" alt="Vendor Img"></a>-->
-<!--                                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                        <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                    <div class="col">-->
-<!--                                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                        src="/img/liked_vendors/stringBand.jpg" alt="Vendor Img"></a>-->
-<!--                                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                        <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                    <div class="col">-->
-<!--                                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
-<!--                                                        src="/img/liked_vendors/wedding-bands.jpg" alt="Vendor Img"></a>-->
-<!--                                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--                                        <i class="fa-solid fa-check"></i>-->
-<!--&lt;!&ndash;                                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+                <!--            <div class="row" id="venues" style="text-align: center">-->
+                <!--                <a href="/vendors/categories/1" style="text-decoration: none">-->
+                <!--                <h4 class="title-text">Venues</h4></a>-->
+                <!--                <div class="row" id="venueRow">-->
+                <!--                    <div class="col" id="venueCol">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/venueTwo.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--                    </div>-->
+                <!--                    <div class="col">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/venueThree.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                    <div class="col">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/venueOne.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--&lt;!&ndash;            PHOTOGRAPHERS&ndash;&gt;-->
+                <!--            <hr >-->
+                <!--                <div class="row" id="vendorCard" style="text-align: center">-->
+                <!--                    <a href="/vendors/categories/2" style="text-decoration: none">-->
+                <!--                        <h4 class="title-text">Photographers</h4></a>-->
+                <!--                    <div class="col">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/photographer.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--                    </div>-->
+                <!--                    <div class="col">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/photoTwo.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--                        &lt;!&ndash;                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                    <div class="col">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/photoThree.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--                        &lt;!&ndash;                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                </div>-->
+                <!--&lt;!&ndash;                FLORISTS&ndash;&gt;-->
+                <!--                <hr style="margin: auto">-->
+                <!--                <div class="row" id="florists" style="text-align: center">-->
+                <!--                    <a href="/vendors/categories/3" style="text-decoration: none"><h4 class="title-text">Florists</h4></a>-->
+                <!--                    <div class="col">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/floristOne.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                    <div class="col">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/floristTwo.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                    <div class="col">-->
+                <!--                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                        src="/img/liked_vendors/floristThree.jpg" alt="Vendor Img"></a>-->
+                <!--                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                        <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--&lt;!&ndash;CATERERS&ndash;&gt;-->
+                <!--                    <hr style="margin: auto">-->
+                <!--                    <div class="row" id="caterers" style="text-align: center">-->
+                <!--                        <a href="/vendors/categories/4" style="text-decoration: none"><h4 class="title-text">Caterers</h4></a>-->
+                <!--                        <div class="col">-->
+                <!--                            <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                            src="/img/liked_vendors/chefOne.jpg" alt="Vendor Img"></a>-->
+                <!--                            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                            <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                            <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                            <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                        </div>-->
+                <!--                        <div class="col">-->
+                <!--                            <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                            src="/img/liked_vendors/cater.jpg" alt="Vendor Img"></a>-->
+                <!--                            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                            <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                            <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                            <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                        </div>-->
+                <!--                        <div class="col">-->
+                <!--                            <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                            src="/img/liked_vendors/chefTwo.jpg" alt="Vendor Img"></a>-->
+                <!--                            <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                            <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                            <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                            <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                        </div>-->
+                <!--&lt;!&ndash;CAKES AND DESSERTS&ndash;&gt;-->
+                <!--                        <hr style="margin: auto">-->
+                <!--                        <div class="row" id="desserts" style="text-align: center">-->
+                <!--                            <a href="/vendors/categories/5" style="text-decoration: none"><h4 class="title-text">Cakes and Desserts</h4></a>-->
+                <!--                            <div class="col">-->
+                <!--                                <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                src="/img/liked_vendors/donuts.jpg" alt="Vendor Img"></a>-->
+                <!--                                <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                            </div>-->
+                <!--                            <div class="col">-->
+                <!--                                <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                src="/img/liked_vendors/cake.jpg" alt="Vendor Img"></a>-->
+                <!--                                <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                            </div>-->
+                <!--                            <div class="col">-->
+                <!--                                <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                src="/img/liked_vendors/sweetTable.jpg" alt="Vendor Img"></a>-->
+                <!--                                <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                            </div>-->
+                <!--&lt;!&ndash;BARS & BEVS&ndash;&gt;-->
+                <!--                            <hr style="margin: auto">-->
+                <!--                            <div class="row" id="bars" style="text-align: center">-->
+                <!--                                <a href="/vendors/categories/6" style="text-decoration: none"><h4 class="title-text">Bars and Beverages</h4></a>-->
+                <!--                                <div class="col">-->
+                <!--                                    <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                    src="/img/liked_vendors/bartender.jpg" alt="Vendor Img"></a>-->
+                <!--                                    <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                    <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                                </div>-->
+                <!--                                <div class="col">-->
+                <!--                                    <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                    src="/img/liked_vendors/minibar.jpg" alt="Vendor Img"></a>-->
+                <!--                                    <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                    <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                                </div>-->
+                <!--                                <div class="col">-->
+                <!--                                    <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                    src="/img/liked_vendors/mobile_cocktail_bar.jpg" alt="Vendor Img"></a>-->
+                <!--                                    <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                    <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                    <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                    <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                                </div>-->
+                <!--&lt;!&ndash;BANDS/DJs&ndash;&gt;-->
+                <!--                                <hr style="margin: auto">-->
+                <!--                                <div class="row" id="bands" style="text-align: center">-->
+                <!--                                    <a href="/vendors/categories/7" style="text-decoration: none"><h4 class="title-text">Bands/DJs</h4></a>-->
+                <!--                                    <div class="col">-->
+                <!--                                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                        src="/img/liked_vendors/liveband.jpg" alt="Vendor Img"></a>-->
+                <!--                                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                        <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                                    </div>-->
+                <!--                                    <div class="col">-->
+                <!--                                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                        src="/img/liked_vendors/stringBand.jpg" alt="Vendor Img"></a>-->
+                <!--                                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                        <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                                    </div>-->
+                <!--                                    <div class="col">-->
+                <!--                                        <a href=""><img class="card-img-top" style="height: 150px; width: 150px"-->
+                <!--                                                        src="/img/liked_vendors/wedding-bands.jpg" alt="Vendor Img"></a>-->
+                <!--                                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                <!--                                        <i class="fa-solid fa-check"></i>-->
+                <!--&lt;!&ndash;                                        <i class="fa-regular fa-heart"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                        <i class="fa-regular fa-circle-xmark"></i>&ndash;&gt;-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+
+            </div>
         </div>
-    </div>
 </main>
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>

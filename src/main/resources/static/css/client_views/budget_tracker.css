@@ -46,3 +46,8 @@ main{
 #closeBtn:hover, #budgetBtn:hover{
     color: #E19B6E !important;
 }
+
+.text-center{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
