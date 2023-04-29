@@ -4,15 +4,26 @@
     margin: 0px;
 }
 
-<<<<<<< HEAD
-.card-body{
-font-family: 'Nunito Sans', sans-serif;
-}
-=======
 img{
     height:100%;
     object-fit: cover;
 }
+
+.fontTitle{
+    margin-bottom: 5%;
+}
+
+main{
+    background-color: #FFE5D2;
+    padding: 50px;
+}
+
+/*<<<<<<< HEAD*/
+/*.card-body{*/
+/*font-family: 'Nunito Sans', sans-serif;*/
+/*}*/
+/*=======*/
+
 /*.card{*/
 /*    border-radius: 0;*/
 /*    border: 1px solid #212727;*/
@@ -68,6 +79,5 @@ img{
 /*#info-card{*/
 
 /*}*/
->>>>>>> a3582fe1f0b3962d0e679d996b56ba96c485a02a
 
 
