@@ -28,8 +28,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final UserService userService;
     private final VendorUtility vendorUtility;
     private final CustomerService customerService;
-    private final DjsAndLiveBandsService djsAndLiveBandsService;
-    private final DjsAndLiveBandsMusicGenreService djsAndLiveBandsMusicGenreService;
+    private final MusicVendorService musicVendorService;
+    private final MusicVendorGenreService musicVendorGenreService;
     private final EmailService emailService;
     private final PrincipalGroupService principalGroupService;
     private final VendorPhotoFormatService vendorPhotoFormatService;
@@ -75,8 +75,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             case "Venues" -> saveVenue(vendorEntity, vendorComposite);
             case "Photographers" -> savePhotographer(vendorEntity, vendorComposite.getPhotoFormat());
             case "Bands and DJs" -> {
-                DjsAndLiveBand djOrLiveBand = saveDjOrBand(vendorEntity, vendorComposite.getDjsAndLiveBandsCategory());
-                saveDjOrBandMusicGenres(djOrLiveBand, vendorComposite.getMusicGenres());
+                MusicVendor musicVendor = saveMusicVendor(vendorEntity, vendorComposite.getMusicVendorCategory());
+                saveMusicVendorMusicGenres(musicVendor, vendorComposite.getMusicGenres());
             }
             default -> {
             }
@@ -103,17 +103,17 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         return true;
     }
 
-    private DjsAndLiveBand saveDjOrBand(Vendor vendorEntity, DjsAndLiveBandsCategory category) {
-        DjsAndLiveBand djOrLiveBand = new DjsAndLiveBand(vendorEntity, category);
-        return djsAndLiveBandsService.saveDjsAndLiveBands(djOrLiveBand);
+    private MusicVendor saveMusicVendor(Vendor vendorEntity, MusicVendorCategory category) {
+        MusicVendor musicVendor = new MusicVendor(vendorEntity, category);
+        return musicVendorService.saveMusicVendor(musicVendor);
     }
 
-    private void saveDjOrBandMusicGenres(DjsAndLiveBand djsOrLiveBand, Set<MusicGenre> musicGenres) {
-        Set<DjsAndLiveBandsMusicGenre> set = musicGenres
+    private void saveMusicVendorMusicGenres(MusicVendor musicVendor, Set<MusicGenre> musicGenres) {
+        Set<MusicVendorGenre> set = musicGenres
                 .stream()
-                .map(musicGenre -> new DjsAndLiveBandsMusicGenre(djsOrLiveBand, musicGenre))
+                .map(musicGenre -> new MusicVendorGenre(musicVendor, musicGenre))
                 .collect(Collectors.toSet());
-        djsAndLiveBandsMusicGenreService.saveAllDjsAndLiveBandsMusicGenres(set);
+        musicVendorGenreService.saveAllMusicVendorMusicGenres(set);
     }
 
     private void savePhotographer(Vendor vendorEntity, PhotoFormat photoFormat) {

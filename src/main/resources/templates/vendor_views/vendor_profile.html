@@ -101,29 +101,107 @@
                         <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="d-grid g-2 mb-1">
-                            <input type="text" placeholder="Enter your business name" class="mb-4 font">
-                        </div>
-                        <div class="d-grid g-2 mb-1">
-                            <input type="text" placeholder="Enter your business email" class="mb-4 font">
-                        </div>
-                        <div class="d-grid g-2 mb-1">
-                            <input type="text" placeholder="Enter your business address" class="mb-4 font">
-                        </div>
-                        <div class="d-grid g-2 mb-1">
-                            <input type="text" placeholder="Enter your business phone number" class="mb-4 font">
-                        </div>
-                        <div class="d-grid g-2 mb-1">
-                            <input type="text" placeholder="Enter your business capacity -if venue" class="mb-4 font">
-                        </div>
-                        <div class="d-grid g-2 mb-1">
-                            <input type="text" placeholder="Enter your budget range" class="mb-4 font">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
+                        <form th:action="@{/vendor/profile/edit}" method="POST" th:object="${vendorComposite}">
+                            <div>
+                                <!--user hidden fields-->
+                                <input type="hidden" name="id" th:field="*{vendor.user.id}">
+                                <input type="hidden" name="username" th:field="*{vendor.user.username}">
+                                <input type="hidden" name="password" th:field="*{vendor.user.password}">
+                                <!--vendor hidden fields-->
+                                <input type="hidden" name="vendor-id" th:field="*{vendor.id}">
+                                <input type="hidden" name="category" th:field="*{vendor.vendorCategory.id}">
+                                <input type="hidden" name="about" th:field="*{vendor.about}">
+<!--                                <input type="hidden" name="id" th:field="*{vendor.user.id}">-->
 
-                        <button type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
+<!--                                //venue-->
+<!--                                //photographers-->
+<!--                                //bands and djs-->
+                            </div>
+                            <div class="">
+                                <label for="email" class="form-label"></label>
+                                <input th:field="*{vendor.user.email}" type="email" name="email" class="form-control" id="email"
+                                       placeholder="Enter your Email" th:required>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="firstName" class="form-label"></label>
+                                    <input th:field="*{vendor.user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
+                                           placeholder="Enter your First Name" th:required>
+                                </div>
+                                <div class="col">
+                                    <label for="lastName" class="form-label"></label>
+                                    <input th:field="*{vendor.user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
+                                           placeholder="Enter your Last Name" th:required>
+                                </div>
+                            </div>
+                            <div class="row g-3 d-flex align-items-center">
+                                <div class="col-auto">
+                                    <label for="vendorCity" class="form-label"></label>
+                                    <input th:field="*{vendor.user.city}" type="text" name="city" class="form-control" id="vendorCity"
+                                           placeholder="Enter your City">
+                                </div>
+                                <div class="col-auto ">
+                                    <label for="vendor-user-state"></label>
+                                    <select th:field="*{vendor.user.state}" id="vendor-user-state" class="form-select">
+                                        <option th:value="xx">Select your State...</option>
+                                        <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="">
+                                <label for="businessName" class="form-label"></label>
+                                <input th:field="*{vendor.businessName}" type="text" name="businessName" class="form-control" id="businessName" placeholder="Enter your Business Name">
+                            </div>
+                            <div class="col-auto">
+                                <label for="vendorCategory"></label>
+                                <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select mb-3">
+                                    <option th:value="0" selected>Select your category...</option>
+                                    <option th:each="vendorCategory : ${vendorCategories}" th:text="${vendorCategory.title}" th:value="${vendorCategory.id}"></option>
+                                </select>
+                            </div>
+                            <div class=" d-none" id="venueCapacity">
+                                <label for="venueAddress" class="form-label"></label>
+                                <input th:field="*{venue.address}" type="text" name="address" class="form-control" id="venueAddress" placeholder="Enter your venue address">
+                                <label for="venueCity" class="form-label"></label>
+                                <input th:field="*{venue.city}" type="text" name="city" class="form-control" id="venueCity" placeholder="Enter your venue city">
+                                <label for="venueState" class="form-label"></label>
+                                <select th:field="*{venue.state}" id="venueState" class="form-select mb-3">
+                                    <option th:value="xx">Select your State...</option>
+                                    <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
+                                </select>
+                                <label for="venueZip" class="form-label"></label>
+                                <input th:field="*{venue.zip}" type="text" name="venueZip" class="form-control" id="venueZip" placeholder="Enter your venue zip">
+                                <label for="venueTitle" class="form-label"></label>
+                                <input th:field="*{venue.title}" type="text" name="venueTitle" class="form-control" id="venueTitle" placeholder="Enter your venue name">
+                                <label for="capacity" class="form-label"></label>
+                                <input th:field="*{venue.capacity}" type="text" name="capacity" class="form-control mb-3" id="capacity" placeholder="Enter your venue capacity">
+                            </div>
+                            <div class=" d-none" id="VendorPhotoFormat">
+                                <label for="photoType" class="form-label"></label>
+                                <select th:field="*{photoFormat}" id="photoType" class="form-select mb-3">
+                                    <option th:value="0" selected>Select your formats available...</option>
+                                    <option th:each="format : ${photoFormats}" th:text="${format.title}" th:value="${format.id}"></option>
+                                </select>
+                            </div>
+                            <div class=" d-none" id="musicGenre">
+                                <label for="musicType" class="form-label"></label>
+                                <select th:field="*{musicVendorCategory}" id="musicType" class="form-select">
+                                    <option th:value="0" selected>Select the type of musical group...</option>
+                                    <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.id}"></option>
+                                </select>
+                                <label for="genre" class="form-label"></label>
+                                <select th:field="*{musicGenres}" id="genre" class="form-select mb-3" multiple="multiple">
+                                    <option th:value="0" selected>Select your genre(s)...</option>
+                                    <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.id}"></option>
+                                </select>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-between">
+                                <button  type="submit" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
+                                <button type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -163,14 +241,14 @@
                         <h4 class="modal-title text-center fontTitle">Edit the About You Section:</h4>
                     </div>
                     <div class="modal-body">
-                        <form th:method="POST">
+                        <form th:action="@{/vendor/profile/edit/about}" th:method="POST" th:object="${vendorComposite}">
                             <div class="d-grid g-2 mb-1">
-                                <input th:type="text" th:placeholder="${session.vendor.businessName}" class="mb-4 font">
-                                <input th:type="textarea" th:placeholder="${session.vendor.about}" class="mb-4 font">
+<!--                                <input th:type="text" th:field="*{vendor.businessName}" class="mb-4 font">-->
+                                <input th:type="textarea" th:field="*{vendor.about}" class="mb-4 font">
                             </div>
                             <hr>
-                            <div class="d-flex justify-content-between">
-                                <button  type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
+                            <div class="modal-footer d-flex justify-content-between">
+                                <button  type="submit" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
                                 <button  type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
                             </div>
                         </form>
@@ -184,5 +262,34 @@
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
+<!--Conditional attribute display-->
+<script>
+    $('#vendorCategory').on('change', function() {
+        let vendorCategoryVal = $("#vendorCategory option:selected").text();
+        let venueCapacity = $('#venueCapacity');
+        let musicGenre = $('#musicGenre');
+        let VendorPhotoFormat = $('#VendorPhotoFormat');
+
+        venueCapacity.addClass('d-none');
+        musicGenre.addClass('d-none');
+        VendorPhotoFormat.addClass('d-none');
+
+        if(vendorCategoryVal === 'Venues'){
+            venueCapacity.removeClass('d-none');
+            musicGenre.addClass('d-none');
+            VendorPhotoFormat.addClass('d-none');
+        }
+        if(vendorCategoryVal === 'Bands and DJs'){
+            venueCapacity.addClass('d-none');
+            musicGenre.removeClass('d-none');
+            VendorPhotoFormat.addClass('d-none');
+        }
+        if(vendorCategoryVal === 'Photographers'){
+            venueCapacity.addClass('d-none');
+            musicGenre.addClass('d-none');
+            VendorPhotoFormat.removeClass('d-none');
+        }
+    });
+</script>
 </body>
 </html>

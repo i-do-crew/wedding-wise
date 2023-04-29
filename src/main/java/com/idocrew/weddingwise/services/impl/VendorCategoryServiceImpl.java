@@ -1,7 +1,8 @@
-package com.idocrew.weddingwise.services;
+package com.idocrew.weddingwise.services.impl;
 
 import com.idocrew.weddingwise.entity.VendorCategory;
 import com.idocrew.weddingwise.repositories.VendorCategoryRepository;
+import com.idocrew.weddingwise.services.VendorCategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
