@@ -52,7 +52,7 @@ public class SecurityConfiguration {
                 .deleteCookies("JSESSIONID")
             .and()
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/vendor/profile", "/vendor/profile/edit", "/vendor/profile/edit/about")
+                .requestMatchers("/vendor/profile")
                 .hasRole("VENDOR")
                 .requestMatchers("/profile", "/clients/dashboard", "/guest_listManager","/likedVendors/**", "/selectedVendors/**", "/budget_tracker", "/ideaboard")
                 .hasRole("CUSTOMER")

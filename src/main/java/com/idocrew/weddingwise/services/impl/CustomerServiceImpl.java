@@ -4,6 +4,7 @@ import com.idocrew.weddingwise.entity.Customer;
 import com.idocrew.weddingwise.entity.User;
 import com.idocrew.weddingwise.repositories.CustomerRepository;
 import com.idocrew.weddingwise.services.CustomerService;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
+    private final EntityManager em;
+
     @Override
     public Customer findCustomerById(long id) {
         return customerRepository.getReferenceById(id);
@@ -18,7 +21,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findCustomerByUser(User user) {
-        return customerRepository.findCustomerByUser(user);
+        String query = String.format("select c.* from customers c where c.user_id=%d;", user.getId());
+        return (Customer) em.createNativeQuery(query, Customer.class).getSingleResult();
+        //return customerRepository.findCustomerByUser(user);
     }
 
     @Override
