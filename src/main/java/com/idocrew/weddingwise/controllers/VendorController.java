@@ -6,6 +6,7 @@ import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.services.*;
 import com.idocrew.weddingwise.services.impl.VendorPhotoFormatService;
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,19 +49,11 @@ public class VendorController {
 
 
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
-        User user = userService.findByUsername(username);
-        Vendor vendor = vendorUtility.findVendorByUser(user);
-        Customer customer = customerService.findCustomerByUser(user);
-        List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
-        List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
-        Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
-        request.getSession().setAttribute("user", user);
-        request.getSession().setAttribute("customer", customer);
-        request.getSession().setAttribute("budget", budget);
-        request.getSession().setAttribute("customerVendors", customerVendors);
-        request.getSession().setAttribute("categories", vendorCategories);
-        request.getSession().setAttribute("vendor", vendor);
-        request.getSession().setAttribute("vendorComposite", new VendorComposite());
+        //List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
+        //Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
+//        request.getSession().setAttribute("customer", customer);
+//        request.getSession().setAttribute("budget", budget);
+//        request.getSession().setAttribute("customerVendors", customerVendors);
     }
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id,@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request) {
@@ -95,15 +89,24 @@ public class VendorController {
     @GetMapping("/vendor/profile")
     @PreAuthorize("hasRole('VENDOR')")
     public String vendorProfile(@CurrentSecurityContext(expression = "authentication?.name")String username, Model model, HttpServletRequest request) {
-        refactorThisMethod(username, model, request);
+        //refactorThisMethod(username, model, request);
+        User user = userService.findByUsername(username);
+        List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
+        request.getSession().setAttribute("categories", vendorCategories);
+        request.getSession().setAttribute("user", user);
         model.addAttribute("options", states);
         model.addAttribute("vendorCategories", vendorCategoryService.findAll());
         model.addAttribute("musicGenres", musicGenreService.findAll());
         model.addAttribute("photoFormats", photoFormatService.findAll());
         model.addAttribute("musicTypes", musicVendorCategoryService.findAll());
-        Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
-        VendorComposite vendorComposite = new VendorComposite();
+        Vendor vendor = vendorUtility.findVendorByUser(user);
+        VendorComposite vendorComposite =  new VendorComposite();
+        //vendor.setUser(user);
         vendorComposite.setVendor(vendor);
+        request.getSession().setAttribute("vendor", vendor);
+        //model.addAttribute("vendorComposite", vendorComposite);
+        request.getSession().setAttribute("vendorComposite", vendorComposite);
+
         switch(vendor.getVendorCategory().getTitle()) {
             case "Venues" -> {
                 List<Venue> venues = venueService.findByVendor(vendor);
@@ -130,10 +133,23 @@ public class VendorController {
     }
 
     @PostMapping("/vendor/profile/edit")
-    public String vendorProfileEditPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite) {
+    @Transactional
+    public String vendorProfileEditPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite, HttpServletRequest request) {
 //        refactorThisMethod(username, model, request);
 //        vendor object tied to the form that you save
         Vendor vendorEntity = vendorComposite.getVendor();
+        User userTemp = vendorEntity.getUser();
+        User userEntity = (User) request.getSession().getAttribute("user");
+        userEntity.setEmail(userTemp.getEmail());
+        userEntity.setFirstName(userTemp.getFirstName());
+        userEntity.setLastName(userTemp.getLastName());
+        userEntity.setCity(userTemp.getCity());
+        userEntity.setState(userTemp.getState());
+
+        //only check for differences in fields on form
+
+
+        userService.saveUser(userEntity);
         vendorUtility.saveVendor(vendorEntity);
         switch (vendorEntity.getVendorCategory().getTitle()) {
             case "Venues" -> saveVenue(vendorEntity, vendorComposite);
@@ -167,7 +183,10 @@ public class VendorController {
 
     private MusicVendor saveMusicVendor(Vendor vendorEntity, MusicVendorCategory category) {
         MusicVendor musicVendor = new MusicVendor(vendorEntity, category);
-        return musicVendorService.saveMusicVendor(musicVendor);
+        if (musicVendor.getId() > 0) {
+            return musicVendorService.saveMusicVendor(musicVendor);
+        }
+        return null;
     }
 
     private void saveMusicVendorMusicGenres(MusicVendor musicVendor, Set<MusicGenre> musicGenres) {
@@ -175,27 +194,35 @@ public class VendorController {
                 .stream()
                 .map(musicGenre -> new MusicVendorGenre(musicVendor, musicGenre))
                 .collect(Collectors.toSet());
-        musicVendorGenreService.saveAllMusicVendorMusicGenres(set);
+        if (musicGenres != null) {
+            musicVendorGenreService.saveAllMusicVendorMusicGenres(set);
+        }
     }
 
     private void savePhotographer(Vendor vendorEntity, PhotoFormat photoFormat) {
         VendorPhotoFormat vendorPhotoFormatEntity = new VendorPhotoFormat();
         vendorPhotoFormatEntity.setVendor(vendorEntity);
         vendorPhotoFormatEntity.setPhotoFormat(photoFormat);
-        vendorPhotoFormatService.saveVendorPhotoFormat(vendorPhotoFormatEntity);
+        if (vendorPhotoFormatEntity.getId() > 0) {
+            vendorPhotoFormatService.saveVendorPhotoFormat(vendorPhotoFormatEntity);
+        }
     }
 
     private void saveVenue(Vendor vendorEntity, VendorComposite vendorComposite) {
         Venue venueEntity = new Venue();
         BeanUtils.copyProperties(vendorComposite.getVenue(), venueEntity);
         venueEntity.setVendor(vendorEntity);
-        venueService.saveVenue(venueEntity);
+        if (venueEntity.getId() > 0) {
+            venueService.saveVenue(venueEntity);
+        }
     }
 
-    private Vendor saveVendor(Vendor vendor) {
+    private void saveVendor(Vendor vendor) {
         Vendor vendorEntity = new Vendor();
         BeanUtils.copyProperties(vendor, vendorEntity);
-        return vendorUtility.saveVendor(vendorEntity);
+        if(vendorEntity.getId() > 0) {
+            vendorUtility.saveVendor(vendorEntity);
+        }
     }
 
 }
