@@ -154,7 +154,7 @@
                             </div>
                             <div class="col-auto">
                                 <label for="vendorCategory"></label>
-                                <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select mb-3" th:disabled>
+                                <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select mb-3">
                                     <option th:value="0" selected>Select your category...</option>
                                     <option th:each="vendorCategory : ${vendorCategories}" th:text="${vendorCategory.title}" th:value="${vendorCategory.id}"></option>
                                 </select>
