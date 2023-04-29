@@ -54,11 +54,6 @@ public class CustomerController {
         refactorThisMethod(username, model, request);
         return "customer_views/client_profileDashboard";
     }
-    @GetMapping("/guest_listManager")
-    public String guestListManager(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
-        refactorThisMethod(username, model, request);
-        return "/guest_listManager";
-    }
     @GetMapping("/budget_tracker")
     public String budgetTracker(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
         refactorThisMethod(username, model, request);

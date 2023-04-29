@@ -8,6 +8,7 @@ import com.idocrew.weddingwise.services.CustomerVendorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 @RequiredArgsConstructor
@@ -16,7 +17,8 @@ public class CustomerVendorServiceImpl implements CustomerVendorService {
     private final CustomerVendorRepository customerVendorRepository;
     @Override
     public Set<CustomerVendor> findByCustomer(Customer customer) {
-        return customerVendorRepository.findCustomerVendorByCustomer(customer);
+        //TODO: If you see this remind me(Clayton) to explain this to you
+        return new HashSet<>(customerVendorRepository.findCustomerVendorByCustomer(customer));
     }
 
     @Override

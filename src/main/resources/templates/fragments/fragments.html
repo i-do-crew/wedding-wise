@@ -104,7 +104,7 @@
                         <a href="/budget_tracker" class="text-decoration-none text-dark font" id="budget">Budget: $<span th:text="${session.customer} ? ${session.customer.budget}"></span></a>
                     </li>
                     <li class="row pb-4">
-                        <a href="/guest_listManager" class="text-decoration-none text-dark font" id="guest">Guest Count: <span th:text="${session.customer} ? ${session.customer.guestCount}"></span></a>
+                        <a href="/clients/guests" class="text-decoration-none text-dark font" id="guest">Guest Count: <span th:text="${session.customer} ? ${session.customer.guestCount}"></span></a>
                     </li>
                     <li class="row pb-4">
                         <a href="/ideaboard" class="text-decoration-none text-dark font" id="ideas">Idea Board</a>

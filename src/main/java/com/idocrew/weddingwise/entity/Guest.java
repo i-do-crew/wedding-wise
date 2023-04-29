@@ -9,7 +9,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "guest_lists", schema = "weddingwise",
     indexes = {@Index(name = "customer_id", columnList = "customer_id")})
-public class GuestList {
+public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
