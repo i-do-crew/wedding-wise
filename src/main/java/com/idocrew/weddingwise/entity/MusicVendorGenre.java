@@ -13,10 +13,10 @@ import lombok.Setter;
     indexes = {
         @Index(name = "music_genre_id", columnList = "music_genre_id"),
         @Index(name = "dj_or_live_band_id", columnList = "dj_or_live_band_id")})
-public class DjsAndLiveBandsMusicGenre {
+public class MusicVendorGenre {
 
-    public DjsAndLiveBandsMusicGenre(DjsAndLiveBand djOrLiveBand, MusicGenre musicGenre) {
-        this.djOrLiveBand = djOrLiveBand;
+    public MusicVendorGenre(MusicVendor musicVendor, MusicGenre musicGenre) {
+        this.musicVendor = musicVendor;
         this.musicGenre = musicGenre;
     }
 
@@ -27,7 +27,7 @@ public class DjsAndLiveBandsMusicGenre {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dj_or_live_band_id", nullable = false)
-    private DjsAndLiveBand djOrLiveBand;
+    private MusicVendor musicVendor;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "music_genre_id", nullable = false)

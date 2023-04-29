@@ -1,5 +1,6 @@
 package com.idocrew.weddingwise.services.impl;
 
+import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.entity.Venue;
 import com.idocrew.weddingwise.repositories.VenueRepository;
 import com.idocrew.weddingwise.services.VenueService;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service("VenueService")
@@ -32,5 +34,10 @@ public class VenueServiceImpl implements VenueService {
     @Override
     public void deleteVenue(Venue venue) {
         venueRepository.delete(venue);
+    }
+
+    @Override
+    public List<Venue> findByVendor(Vendor vendor) {
+        return venueRepository.findVenuesByVendor(vendor);
     }
 }

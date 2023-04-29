@@ -25,5 +25,5 @@ public class MusicGenre {
     private String title;
 
     @OneToMany(mappedBy = "musicGenre")
-    private Set<DjsAndLiveBandsMusicGenre> djsAndLiveBandsMusicGenres = new LinkedHashSet<>();
+    private Set<MusicVendorGenre> musicVendorGenres = new LinkedHashSet<>();
 }
