@@ -13,6 +13,7 @@ import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -34,28 +35,28 @@ public class GuestListController {
         model.addAttribute("guestList", guestListService.findByCustomer(customer));
         model.addAttribute("user", user);
         model.addAttribute("customer", customer);
-        return "/guest_listManager";
+        return "guest-list";
     }
 
     @PostMapping("/clients/guests/add")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public String addGuest(Model model, HttpServletRequest request){
-        System.out.println("/clients/add/guest");
-        return "/guest_listManager";
+    public String addGuest(@ModelAttribute("guest") Guest guest){
+        guestListService.save(guest);
+        return "guest-list";
     }
 
     @PostMapping("/clients/guests/update/{id}")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public String updateGuest(@PathVariable long id, Model model, HttpServletRequest request){
-        System.out.println("/clients/guest/update/{id}: " + id);
-        return "/guest_listManager";
+    public String updateGuest(@ModelAttribute("guest") Guest guest, @PathVariable long id){
+        guestListService.save(guest);
+        return "guest-list";
     }
 
     @PostMapping("/clients/guests/remove/{id}")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public String deleteGuest(@PathVariable long id, Model model, HttpServletRequest request){
-        System.out.println("/client/guest/remove/{id}: " + id);
-        return "/guest_listManager";
+    public String deleteGuest(@PathVariable long id){
+        guestListService.delete(guestListService.findById(id));
+        return "guest-list";
     }
 
 }

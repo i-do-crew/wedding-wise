@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface GuestListService {
     List<Guest> findByCustomer(Customer customer);
+    Guest findById(long id);
+    void save(Guest guest);
+    void delete(Guest guest);
 }
