@@ -9,11 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
@@ -147,5 +145,21 @@ public class CustomerController {
         request.getSession().setAttribute("customerVendors", customerVendors);
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
+    }
+    @PostMapping("/customer/profile/edit")
+    @Transactional
+    public String customerProfileEditPost(@ModelAttribute("customer") Customer customer, HttpServletRequest request, Model model) {
+        User userTemp = customer.getUser();
+        User userEntity = (User) request.getSession().getAttribute("user");
+        userEntity.setEmail(userTemp.getEmail());
+        userEntity.setFirstName(userTemp.getFirstName());
+        userEntity.setLastName(userTemp.getLastName());
+        userEntity.setCity(userTemp.getCity());
+        userEntity.setState(userTemp.getState());
+        model.addAttribute("options", states);
+        userService.saveUser(userEntity);
+        customerService.saveCustomer(customer);
+
+        return "customer_views/client_profileDashboard";
     }
 }
