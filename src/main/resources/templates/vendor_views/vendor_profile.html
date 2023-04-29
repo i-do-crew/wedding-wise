@@ -102,32 +102,47 @@
                     </div>
                     <div class="modal-body">
                         <form th:action="@{/vendor/profile/edit}" method="POST" th:object="${vendorComposite}">
+                            <div>
+                                <!--user hidden fields-->
+                                <input type="hidden" name="id" th:field="*{vendor.user.id}">
+                                <input type="hidden" name="username" th:field="*{vendor.user.username}">
+                                <input type="hidden" name="password" th:field="*{vendor.user.password}">
+                                <!--vendor hidden fields-->
+                                <input type="hidden" name="vendor-id" th:field="*{vendor.id}">
+                                <input type="hidden" name="category" th:field="*{vendor.vendorCategory.id}">
+                                <input type="hidden" name="about" th:field="*{vendor.about}">
+<!--                                <input type="hidden" name="id" th:field="*{vendor.user.id}">-->
+
+<!--                                //venue-->
+<!--                                //photographers-->
+<!--                                //bands and djs-->
+                            </div>
                             <div class="">
                                 <label for="email" class="form-label"></label>
-                                <input th:field="*{user.email}" type="email" name="email" class="form-control" id="email"
+                                <input th:field="*{vendor.user.email}" type="email" name="email" class="form-control" id="email"
                                        placeholder="Enter your Email" th:required>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="firstName" class="form-label"></label>
-                                    <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
+                                    <input th:field="*{vendor.user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
                                            placeholder="Enter your First Name" th:required>
                                 </div>
                                 <div class="col">
                                     <label for="lastName" class="form-label"></label>
-                                    <input th:field="*{user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
+                                    <input th:field="*{vendor.user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
                                            placeholder="Enter your Last Name" th:required>
                                 </div>
                             </div>
                             <div class="row g-3 d-flex align-items-center">
                                 <div class="col-auto">
                                     <label for="vendorCity" class="form-label"></label>
-                                    <input th:field="*{user.city}" type="text" name="city" class="form-control" id="vendorCity"
+                                    <input th:field="*{vendor.user.city}" type="text" name="city" class="form-control" id="vendorCity"
                                            placeholder="Enter your City">
                                 </div>
                                 <div class="col-auto ">
                                     <label for="vendor-user-state"></label>
-                                    <select th:field="*{user.state}" id="vendor-user-state" class="form-select">
+                                    <select th:field="*{vendor.user.state}" id="vendor-user-state" class="form-select">
                                         <option th:value="xx">Select your State...</option>
                                         <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
                                     </select>
@@ -139,7 +154,7 @@
                             </div>
                             <div class="col-auto">
                                 <label for="vendorCategory"></label>
-                                <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select mb-3">
+                                <select id="vendorCategory" th:field="*{vendor.vendorCategory}" class="form-select mb-3" th:disabled>
                                     <option th:value="0" selected>Select your category...</option>
                                     <option th:each="vendorCategory : ${vendorCategories}" th:text="${vendorCategory.title}" th:value="${vendorCategory.id}"></option>
                                 </select>
