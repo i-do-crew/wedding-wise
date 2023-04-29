@@ -27,7 +27,7 @@ public class GuestListController {
 
     @GetMapping("/clients/guests")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public String guestListManager(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
+    public String guestListManager(@CurrentSecurityContext(expression="authentication?.name") String username, Model model){
         System.out.println("/clients/guests");
         User user = userService.findByUsername(username);
         Customer customer = customerService.findCustomerByUser(user);
