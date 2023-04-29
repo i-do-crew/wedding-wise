@@ -6,7 +6,6 @@ import com.idocrew.weddingwise.entity.User;
 import com.idocrew.weddingwise.services.CustomerService;
 import com.idocrew.weddingwise.services.GuestListService;
 import com.idocrew.weddingwise.services.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
