@@ -10,10 +10,15 @@ main{
     margin-top: 5%;
 }
 .vendor{
-    /*width: 18rem;*/
+    width: 20rem;
+    height:22rem;
     padding: 50px;
-    width:264px;
-    height:270px;
+    /*width:264px;*/
+    /*height:270px;*/
+    transition: transform .2s;
+}
+.vendor:hover{
+    transform: scale(105%);
 }
 .vendorBtn{
     background-color: #212727;
@@ -21,9 +26,15 @@ main{
     border-radius: 0;
     padding-right:5px;
     font-family: nunito;
+    width:100%;
+    margin: 0 auto;
+    /*transition: transform .2s;*/
 }
 .vendorBtn:hover{
-    background-color: #E19B6E;
+    background-color: #212727;
+    color:white;
+    /*z-index: 1;*/
+    /*transform: scale(1.5);*/
 }
 
 .vendorImg{
@@ -38,11 +49,16 @@ main{
     border-radius: 0;
     border: 1px solid #212727;
     background-color: #FFFAF7;
+
 }
 
-.vendorBtn{
-    width:100%;
-    margin: 0 auto;
-    /*flex:auto;*/
-    /*justify-content:center;*/
+/*.vendorBtn{*/
+
+/*    !*flex:auto;*!*/
+/*    !*justify-content:center;*!*/
+/*}*/
+
+.row{
+    padding-left: 9rem;
+
 }
