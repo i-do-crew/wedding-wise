@@ -2,6 +2,7 @@ package com.idocrew.weddingwise.entity;
 
 import com.idocrew.weddingwise.enums.InviteResponseType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,15 +18,18 @@ public class Guest {
     private long id;
 
     @Column(name = "fname", nullable = false, length = 50)
+    @NotEmpty(message = "First name is required")
     private String fname;
 
     @Column(name = "lname", nullable = false, length = 50)
+    @NotEmpty(message = "Last name is required")
     private String lname;
 
     @Column(name = "plus_one", nullable = false)
     private Boolean plusOne = false;
 
     @Column(name = "email", nullable = false, length = 50)
+    @NotEmpty(message = "Email name is required")
     private String email;
 
     @Column(name = "ph_number", nullable = false, length = 20)

@@ -7,12 +7,14 @@ import com.idocrew.weddingwise.services.CustomerService;
 import com.idocrew.weddingwise.services.GuestListService;
 import com.idocrew.weddingwise.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +46,11 @@ public class GuestListController {
     }
     @PostMapping("/clients/guests/add")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public String addGuest(@ModelAttribute("guest") Guest guest, @SessionAttribute("customer") Customer customer) {
+    public String addGuest(@Valid @ModelAttribute("guest") Guest guest, @SessionAttribute("customer") Customer customer,
+                           BindingResult result) {
+        if (result.hasErrors()) {
+            return "/customer_views/guest-list";
+        }
         guest.setCustomer(customer);
         guestListService.save(guest);
         return "/customer_views/guest-list";
