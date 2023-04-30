@@ -92,16 +92,16 @@
                 <!-- Trigger the modal with a button -->
                 <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#myModal" id="editBtn"><i class="fa-solid fa-pencil d-flex justify-content-end"></i></button>
             </div>
-            <div class="row pb-1" id="lastname">
+            <div class="row pb-1 fontTitle text-center" >
                 <h3><span th:text="${session.user} ? ${session.user.lastName}"></span>-<span th:text="${session.customer} ? ${session.customer.partnerLName}"></span></h3>
             </div>
-            <div class="row  font" id="dateBg">
-                <h6 id="date">Wedding Date: <span th:text="${session.customer} ? ${session.customer.weddingDt}"></span></h6>
+            <div class="row font " id="dateBg">
+                <h6>Wedding Date: <span th:text="${session.customer} ? ${#temporals.format(session.customer.weddingDt, 'MM-dd-yyyy')}"></span></h6>
             </div>
             <div class="position-absolute bottom-0 px-1" id="bottomBg">
                 <ul>
                     <li class="row pb-4">
-                        <a href="/budget_tracker" class="text-decoration-none text-dark font" id="budget">Budget: $<span th:text="${session.customer} ? ${session.customer.budget}"></span></a>
+                        <a href="/budget_tracker" class="text-decoration-none text-dark font" >Budget: $<span th:text="${session.customer} ? ${session.customer.budget}"></span></a>
                     </li>
                     <li class="row pb-4">
                         <a href="/guest_listManager" class="text-decoration-none text-dark font" id="guest">Guest Count: <span th:text="${session.customer} ? ${session.customer.guestCount}"></span></a>
@@ -189,53 +189,10 @@
     </div>
 </footer>
 
-<!-- Client Edit Profile Modal -->
-<div th:fragment="profileModal" id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
-            </div>
-            <div class="modal-body ">
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter your first name" class="font mb-1">
-                </div>
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter your last name" class="font mb-1">
-                </div>
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter your partners first name" class="font mb-1">
-                </div>
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter your partners last name" class="font mb-1">
-                </div>
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter the date of your wedding" class="font mb-1">
-                </div>
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter your budget range" class="font mb-1">
-                </div>
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter your city" class="font mb-1">
-                </div>
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter your state" class="font mb-1">
-                </div>
-                <div class="d-grid g-2 ">
-                    <input type="text" placeholder="Enter your guest count" class="font mb-1">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--REACTION BUTTONS-->
-<div th:fragment="reactionButtons" class="reaction-buttons">
-    <a class="vendor-heart" th:style="${customerVendor.getSelected() ? 'color:gold' : 'color:black'}" th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-solid fa-check"></i></a>
-    <a class="vendor-heart" th:style="${customerVendor.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-regular fa-heart"></i></a>
+<div th:fragment="reactionButtons" class="reaction-buttons" sec:authorize="isAuthenticated()">
+    <a class="vendor-heart" th:style="${customerVendor?.getSelected() ? 'color:gold' : 'color:black'}" th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor?.vendor?.id})}" th:attr="data-id=${customerVendor?.vendor?.id}" ><i class="fa-solid fa-check"></i></a>
+    <a class="vendor-heart" th:style="${customerVendor?.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor?.vendor?.id})}" th:attr="data-id=${customerVendor?.vendor?.id}" ><i class="fa-regular fa-heart"></i></a>
 </div>
 
 <!--BOOTSTRAP-->

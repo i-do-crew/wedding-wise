@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "djs_and_live_bands_categories", schema = "weddingwise")
-public class DjsAndLiveBandsCategory {
+public class MusicVendorCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -23,6 +23,6 @@ public class DjsAndLiveBandsCategory {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @OneToMany(mappedBy = "dalbCategory")
-    private Set<DjsAndLiveBand> djsAndLiveBands = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "musicVendorCategory")
+    private Set<MusicVendor> musicVendors = new LinkedHashSet<>();
 }

@@ -117,3 +117,9 @@ ul{
 .nav-link{
     font-family: 'Nunito Sans', sans-serif;
 }
+
+/*edit customer profile modal*/
+.card{
+    background-color: #FFFAF7;
+    border-radius: 0;
+    border: 1px solid #212727;}
