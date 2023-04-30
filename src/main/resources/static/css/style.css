@@ -50,6 +50,11 @@ a:hover{
     font-family: 'Nunito Sans', sans-serif;
 }
 
+/*NAVBAR*/
+#navbar{
+    border-bottom: 1px solid #212727;
+}
+
 /*CUSTOMER SIDEBAR*/
 #offcanvasSideBarCustomer{
     background-color: #FFE5D2;
