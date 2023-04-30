@@ -125,7 +125,7 @@ public class CustomerController {
         return "/likedVendors";
     }
     @GetMapping("/selectedVendors/toggle/{vendorId}")
-    public String addSelectedVendor(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
+    public String toggleSelectedVendor(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Vendor vendor = vendorUtility.findById(vendorId);
@@ -157,6 +157,7 @@ public class CustomerController {
         Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
         request.getSession().setAttribute("customerVendors", customerVendors);
         String referer = request.getHeader("Referer");
+        model.addAttribute("selectedVendor", selectedVendor); // add selectedVendor to model
         return "redirect:" + referer;
     }
     @GetMapping("/budget_tracker/edit/{budgetId}")

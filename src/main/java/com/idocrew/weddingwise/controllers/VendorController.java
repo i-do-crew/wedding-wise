@@ -76,6 +76,13 @@ public class VendorController {
         VendorCategory vendorCategory = vendorCategoryService.findById(id);
         model.addAttribute("vendorCategory", vendorCategory);
         model.addAttribute("vendors", vendorUtility.findByCategory(vendorCategory));
+        Vendor vendor = vendorUtility.findById(id);
+        model.addAttribute("vendor",vendor);
+        Optional<CustomerVendor> optionalCV = customerVendorService.findByCustomerAndVendor(customer, vendor);
+        CustomerVendor customerVendor = optionalCV.orElse(new CustomerVendor());
+        customerVendor.setVendor(vendor);
+        customerVendor.setCustomer(customer);
+        model.addAttribute("customerVendor", customerVendor);
         refactorThisMethod(username, model, request);
         return "vendors/each_vendorCategories";
     }
