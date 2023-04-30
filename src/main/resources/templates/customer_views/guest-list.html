@@ -74,7 +74,7 @@
                                         <label for="state" class="form-label"></label>
                                         <select th:field="*{state}" id="state" class="form-select">
                                             <option th:value="xx">Select your State...</option>
-                                            <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
+                                            <option th:each="state : ${states}" th:text="${state}" th:value="${state}"></option>
                                         </select>
                                     </div>
                                     <div class="col">
@@ -111,7 +111,7 @@
             <h1 class="text-center fontTitle">Your Guests: 0000</h1>
             <div class="card p-5 m-5" id="card1">
                 <div class="card-title text-center">
-                    <h3 class="fontTitle">RSVP'd: 0000</h3>
+                    <h3 class="fontTitle">Attending: <span th:text="${attending}"></span></h3>
                 </div>
                 <hr>
                 <div class="card-body text-center">
@@ -124,7 +124,7 @@
             </div>
             <div class="card p-5 m-5" id="card2">
                 <div class="card-title text-center">
-                    <h3 class="fontTitle" >Regretfully Declined: 0000</h3>
+                    <h3 class="fontTitle" >Regretfully Declined: <span th:text="${declined}"></span></h3>
                     <hr>
                 </div>
                 <div class="card-body text-center">
@@ -137,42 +137,50 @@
             </div>
             <div class="card p-5 m-5 " id="card3">
                 <div class="card-title text-center">
-                    <h3 class="fontTitle">Invited: 0000</h3>
-                    <div class="d-flex justify-content-end">
+                    <h3 class="fontTitle">Invited: <span th:text="${invited}"></span></h3>
+                    <div class="float-end">
                         <button type="button" class="btn font addModalBtn" data-bs-toggle="modal" data-bs-target="#addGuestModal">
                             Add Guest <i class="fa-solid fa-plus"></i>
-                    </button>
+                        </button>
                     </div>
                 </div>
                 <hr>
-                <div class="card-body text-center">
-                    <hr>
+                <div class="card-body text-center mt-0 p-0">
                     <div class="d-flex align-items-center justify-content-around">
-                        <button type="button" class="btn font editModalBtn" data-bs-toggle="modal"
-                                data-bs-target="#editGuestModal">
-                            Edit <i class="fa-solid fa-pencil">
-                        </i>
-                        </button>
-                        <p class="card-text font mb-0">
-                        <table>
-                            <tr>
-                                <th>NAME</th>
-                                <th>NO.</th>
-                                <th>EMAIL</th>
-                            </tr>
-                            <tr>
-                            </tr>
+                        <table class="table table-hover card-text">
+                            <thead>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Plus One</th>
+                                <th>Phone</th>
+                                <th colspan="2"></th>
+                            </thead>
+                            <tbody class="font">
+                                <tr th:each="guest : ${guestList}">
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
+                                                data-bs-target="#editGuestModal">
+                                            Edit <i class="fa-solid fa-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td th:text="${guest.getFullName()}"></td>
+                                    <td th:text="${guest.email}"></td>
+                                    <td th:text="${guest.plusOne}"></td>
+                                    <td th:text="${guest.phNumber}"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary font">
+                                            RSVP <i class="fa-regular fa-circle-check"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary font">
+                                            Decline <i class="fa-regular fa-circle-xmark"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
-                        fname lname plus_one email
-                        </p>
-                        <button type="button" class="btn font">
-                            RSVP <i class="fa-regular fa-circle-check">
-                        </i>
-                        </button>
-                        <button type="button" class="btn font">
-                            Decline <i class="fa-regular fa-circle-xmark">
-                        </i>
-                        </button>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,9 @@ package com.idocrew.weddingwise.entity;
 
 import com.idocrew.weddingwise.enums.InviteResponseType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,9 +32,11 @@ public class Guest {
 
     @Column(name = "email", nullable = false, length = 50)
     @NotEmpty(message = "Email name is required")
+    @Email(message = "Email should be valid")
     private String email;
 
     @Column(name = "ph_number", nullable = false, length = 20)
+    @Pattern(regexp="(^$|[0-9]{10}|[0-9]{3}-[0-9]{3}-[0-9]{4})", message = "Phone number should be valid")
     private String phNumber;
 
     @Column(name = "street", nullable = false, length = 50)
@@ -48,6 +52,7 @@ public class Guest {
     private String state;
 
     @Column(name = "zip", nullable = false, length = 10)
+    @Pattern(regexp="(^$|[0-9]{5})", message = "Zip code should be valid")
     private String zip;
 
     @Column(name = "rsvp", nullable = false, length = 10)
@@ -57,8 +62,14 @@ public class Guest {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Override
-    public String toString() {
-        return String.format("Guest {%s %s}", fname, lname);
+    public boolean isAttending(){
+        return InviteResponseType.RSVP.getCode().equals(rsvp);
+    }
+
+    public boolean isDeclined(){
+        return InviteResponseType.DECLINED.getCode().equals(rsvp);
+    }
+    public String getFullName() {
+        return fname + " " + lname;
     }
 }

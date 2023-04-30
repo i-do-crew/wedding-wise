@@ -37,7 +37,22 @@ public class GuestListController {
         User user = userService.findByUsername(username);
         Customer customer = customerService.findCustomerByUser(user);
         List<Guest> guestList = guestListService.findByCustomer(customer);
-        model.addAttribute("options", states);
+        int invited = 0;
+        int attending = 0;
+        int declined = 0;
+        for (Guest guest : guestList) {
+            if (guest.isAttending()) {
+                attending++;
+            } else if (guest.isDeclined()) {
+                declined++;
+            } else {
+                invited++;
+            }
+        }
+        model.addAttribute("invited", invited);
+        model.addAttribute("attending", attending);
+        model.addAttribute("declined", declined);
+        model.addAttribute("states", states);
         model.addAttribute("guest", new Guest());
         model.addAttribute("guestList", guestList);
         model.addAttribute("user", user);
@@ -47,13 +62,13 @@ public class GuestListController {
     @PostMapping("/clients/guests/add")
     @PreAuthorize("hasRole('CUSTOMER')")
     public String addGuest(@Valid @ModelAttribute("guest") Guest guest, @SessionAttribute("customer") Customer customer,
-                           BindingResult result) {
+                           BindingResult result, Model model){
         if (result.hasErrors()) {
             return "/customer_views/guest-list";
         }
         guest.setCustomer(customer);
         guestListService.save(guest);
-        return "/customer_views/guest-list";
+        return "redirect:/customer_views/guest-list";
     }
 
     @PostMapping("/clients/guests/update/{id}")
