@@ -23,7 +23,8 @@ main{
 .vendorBtn{
     background-color: #212727;
     color:white;
-    border-radius: 0;
+    border-radius: 0 0 20px 20px;
+    border-top:0;
     padding-right:5px;
     font-family: nunito;
     width:100%;
@@ -40,15 +41,16 @@ main{
 .vendorImg{
     height: 100%;
     width: 100%;
-    border-radius: 0;
+    border-radius: 20px 20px 0 0;
     object-fit: cover;
-    border: 1px solid #212727;
+    border: .5px solid lightgray;
 }
 
 .card{
-    border-radius: 0;
-    border: 1px solid #212727;
+    border-radius: 20px;
+    border: .5px solid lightgray;
     background-color: #FFFAF7;
+
 
 }
 
