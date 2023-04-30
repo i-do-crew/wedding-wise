@@ -96,7 +96,7 @@
                 <h3><span th:text="${session.user} ? ${session.user.lastName}"></span>-<span th:text="${session.customer} ? ${session.customer.partnerLName}"></span></h3>
             </div>
             <div class="row font " id="dateBg">
-                <h6>Wedding Date: <span th:text="${session.customer} ? ${session.customer.weddingDt}"></span></h6>
+                <h6>Wedding Date: <span th:text="${session.customer} ? ${#temporals.format(session.customer.weddingDt, 'MM-dd-yyyy')}"></span></h6>
             </div>
             <div class="position-absolute bottom-0 px-1" id="bottomBg">
                 <ul>
