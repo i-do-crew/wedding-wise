@@ -2,6 +2,7 @@ package com.idocrew.weddingwise.services.impl;
 
 import com.idocrew.weddingwise.entity.BudgetEntry;
 import com.idocrew.weddingwise.entity.Customer;
+import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.repositories.BudgetEntryRepository;
 import com.idocrew.weddingwise.services.BudgetEntryService;
 import lombok.RequiredArgsConstructor;
@@ -27,4 +28,10 @@ public class BudgetEntryServiceImpl implements BudgetEntryService {
     public void delete(BudgetEntry budgetEntry) {
         budgetEntryRepository.delete(budgetEntry);
     }
+
+    @Override
+    public BudgetEntry findBudgetEntryByCustomerAndVendor(Customer customer, Vendor vendor) {
+        return budgetEntryRepository.findBudgetEntryByCustomerAndVendor(customer, vendor);
+    }
+
 }

@@ -30,63 +30,74 @@
                         <div class="col font">
                             <p>Business Name: <span th:text="${budgetEntry} ? ${budgetEntry.vendor.businessName}"></span></p>
                             <p>Cost: $<span th:text="${budgetEntry} ? ${budgetEntry.amount}"></span></p>
+                            <button id="budgetAmountModalBtn" type="button" class="btn font " data-bs-toggle="modal" data-bs-target="#budgetAmountModal"><i class="fa-solid fa-pencil"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
-
-
-<!--            <div class="section row m-0">-->
-<!--                <div class="row vendor" th:each="category: ${session.categories}">-->
-<!--                    <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="text-decoration-none pb-1"><h4 class="labels" th:text="${category.title}"></h4></a>-->
-<!--                    <div th:each="customerVendor: ${session.customerVendors}">-->
-<!--                        <div class="row vendor-text pt-3" th:block th:if="${customerVendor.vendor.vendorCategory.title} == ${category.title} and ${customerVendor.getSelected()} == true">-->
-<!--                            <a th:href="@{/vendors/individual/{id}(id=${customerVendor.vendor.id})}"><img class="image col" src="/img/client_profile/venue_clientProfile.jpg" alt="image"></a>-->
-<!--                            <div th:insert="~{fragments/fragments :: reactionButtons}"></div>-->
-<!--                            <h5 class="font col" th:text="${customerVendor.vendor.businessName}"></h5>-->
-<!--                            <p class="p col" th:text="${customerVendor.vendor.about}"></p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <hr>-->
-<!--                </div>-->
-<!--            </div>-->
-
         </div>
     </div>
 </main>
 
 <!-- Itemized Budget Modal-->
-
-    <div id="modalBtn" class="modal fade" role="dialog">
-        <div class="container p-4">
-            <div class="modal-dialog">
-                <div class="modal-content card p-4">
-                    <div class="modal-header  ">
-                        <h2 class="modal-title fontTitle text-center">Itemized Budget</h2>
+<div id="modalBtn" class="modal fade" role="dialog">
+    <div class="container p-4">
+        <div class="modal-dialog">
+            <div class="modal-content card p-4">
+                <div class="modal-header  ">
+                    <h2 class="modal-title fontTitle text-center">Itemized Budget</h2>
+                </div>
+                <div class="modal-body ">
+                    <div class="d-grid g-2 mb-3">
+                        <input class="font mb-1" type="text" placeholder="Business Name:">
+                        <input class="font mb-1" type="text" placeholder="Cost: ">
                     </div>
-                    <div class="modal-body ">
-                        <div class="d-grid g-2 mb-3">
-                            <input class="font mb-1" type="text" placeholder="Business Name:">
-                            <input class="font mb-1" type="text" placeholder="Cost: ">
-                        </div>
-                        <div class="d-grid g-2 mb-3">
-                            <input class="font mb-1" type="text" placeholder="Business Name:">
-                            <input class="font" type="text" placeholder="Cost: ">
-                        </div>
-                        <div class="d-grid g-2 mb-3">
-                            <input class="font mb-1" type="text" placeholder="Business Name:">
-                            <input class="font mb-1" type="text" placeholder="Cost: ">
-                        </div>
+                    <div class="d-grid g-2 mb-3">
+                        <input class="font mb-1" type="text" placeholder="Business Name:">
+                        <input class="font" type="text" placeholder="Cost: ">
                     </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <button  type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Save Changes</button>
-                        <button type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Close</button>
+                    <div class="d-grid g-2 mb-3">
+                        <input class="font mb-1" type="text" placeholder="Business Name:">
+                        <input class="font mb-1" type="text" placeholder="Cost: ">
                     </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button  type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Save Changes</button>
+                    <button type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Close</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- EDIT BUDGET AMOUNT MODAL -->
+<div id="budgetAmountModal" class="modal fade" role="dialog">
+    <div class="container p-4">
+        <div class="modal-dialog">
+            <div class="modal-content card p-4">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/budget_tracker/edit}" method="POST" th:object="${budgetEntry}">
+                        <input type="hidden" id="vendor" name="vendor" th:value="${budgetEntry.vendor}" />
+                        <div>
+                            <label for="amount" class="form-label"></label>
+                            <input th:field="*{amount}" type="number" name="amount" class="form-control" id="amount"
+                                   placeholder="Set an amount" th:required>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                            <button  type="submit" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
+                            <button type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
