@@ -52,7 +52,7 @@ a:hover{
 
 /*NAVBAR*/
 #navbar{
-    border-bottom: 1px solid #212727;
+    border-bottom: .5px solid lightgray;
 }
 
 /*CUSTOMER SIDEBAR*/
