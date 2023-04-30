@@ -40,6 +40,7 @@ public class VendorController {
     private final CustomerService customerService;
     private final BudgetEntryService budgetEntryService;
     private final CustomerVendorService customerVendorService;
+    private final VendorRatingsReviewService vendorRatingsReviewService;
 
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         User user = userService.findByUsername(username);
@@ -64,6 +65,9 @@ public class VendorController {
         customerVendor.setCustomer(customer);
         model.addAttribute("customerVendor", customerVendor);
         model.addAttribute("customer", customer);
+//        Vendor reviewVendor = vendorUtility.findVendorByUser(vendor.getUser());
+        List<VendorRatingsReview> vendorRatings = vendorRatingsReviewService.getByVendor(vendor);
+        model.addAttribute("vendorRatings", vendorRatings);
         return "vendors/individual_vendor";
     }
     @GetMapping("/vendors/categories/{id}")

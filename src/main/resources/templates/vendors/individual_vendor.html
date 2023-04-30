@@ -74,18 +74,20 @@
         </div>
         <div class="row container">
           <h2 class="font">Reviews</h2>
-          <div class="card mt-3">
-            <h6 class="card-title font">Review Title</h6>
-            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
+          <div class="card mt-3" th:each="vendorRating: ${vendorRatings}">
+            <h6 class="card-title font" th:text="${title}"><span class="fa-md font" th:text="${customer}"></span></h6>
+            <p th:if="${rating} > 1" th:text="${rating} stars"></p>
+            <p th:if="${rating} < 2" th:text="${rating} star"></p>
+            <p class="card-body font" th:text="${description}"></p>
           </div>
-          <div class="card mt-3">
-            <h6 class="card-title font">Review Title</h6>
-            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-          </div>
-          <div class="card mt-3 mb-3">
-            <h6 class="card-title font">Review Title</h6>
-            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-          </div>
+<!--          <div class="card mt-3">-->
+<!--            <h6 class="card-title font">Review Title</h6>-->
+<!--            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>-->
+<!--          </div>-->
+<!--          <div class="card mt-3 mb-3">-->
+<!--            <h6 class="card-title font">Review Title</h6>-->
+<!--            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>-->
+<!--          </div>-->
         </div>
         <!-- Button trigger modal -->
           <button type="button" class="btn d-grid g-3" id="individualVendorRateBtn" data-bs-toggle="modal" data-bs-target="#rateVendorModalBtn">Rate this Vendor</button>
