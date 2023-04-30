@@ -4,8 +4,8 @@ main{
 
 #mainCard{
     background-color: #FFFAF7;
-    border-radius: 0;
-    border: 1px solid #212727;
+    border-radius: 20px;
+    border: 1px solid lightgrey;
 }
 
 #border {
@@ -21,12 +21,12 @@ main{
 }
 .card{
     background-color: #FFFAF7;
-    border-radius: 0;
-    border: 1px solid #212727;
+    border-radius: 20px;
+    border: 1px solid lightgrey;
 }
 
 .modal-content{
-    border-radius: 0 !important;
+    /*border-radius: 0 !important;*/
 }
 
 #card1, #card2, #card3{
@@ -40,7 +40,7 @@ main{
    color: #E19B6E;
 }
 
-.text-center{
-    margin-top: 5%;
-}
+/*.text-center{*/
+/*    margin-top: 5%;*/
+/*}*/
 

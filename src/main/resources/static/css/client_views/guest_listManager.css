@@ -4,10 +4,15 @@ main{
 
 #mainCard{
     background-color: #FFFAF7;
-    border-radius: 0;
-    border: 1px solid #212727;
+    border-radius: 20px;
+    border: 1px solid lightgray;
 }
 
 .title{
     font-family: "Luxurious Roman";
+}
+
+.card{
+    border-radius: 20px;
+    border: 1px solid lightgray;
 }

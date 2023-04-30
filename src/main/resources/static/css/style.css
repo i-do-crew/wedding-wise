@@ -1,16 +1,18 @@
-/*FIXING MARGIN LINE*/
-*{
-    box-sizing: border-box;
-    margin: 0;
-}
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
+/*ALL PAGES*/
+    /*FIXING MARGIN LINE*/
+    *{
+        box-sizing: border-box;
+        margin: 0;
+    }
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
 
 /*IMAGES*/
 #loginimage{
-    background: url("../img/flowers.jpg") no-repeat;
+    /*background: url("../img/flowers.jpg") no-repeat;*/
     height: 100vh;
     width:50vw;
     background-size: cover;
@@ -21,14 +23,6 @@ html, body {
     width:50px;
 }
 
-/*.image{*/
-/*    height:300px;*/
-/*}*/
-
-/*#businessProfileImg{*/
-/*    height:250px;*/
-/*    width:250px;*/
-/*}*/
 
 /*BACKGROUNDS*/
 #navbar, #footer{
@@ -82,8 +76,6 @@ a:hover{
 
 }
 #bottomBg{
-    /*background-color: #FFFAF7;*/
-    /*border-radius: 20%;*/
     margin:10px;
     text-align: left;
     padding-top: 15px;
@@ -123,8 +115,3 @@ ul{
     font-family: 'Nunito Sans', sans-serif;
 }
 
-/*edit customer profile modal*/
-.card{
-    background-color: #FFFAF7;
-    border-radius: 0;
-    border: 1px solid #212727;}
