@@ -23,6 +23,9 @@
             <div id="edit-guest-group-modal">
                 <div class="modal-header">
                     <h3 id="guest-modal-title" class="mb-0">Add Guest</h3>
+                    <div class="d-flex justify-content-end pe-3">
+                        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-dismiss="addGuestModal" aria-label="Close"></button>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -85,19 +88,16 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-evenly mt-2">
-                                <div class="ms-start">
-                                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-dismiss="addGuestModal">Cancel</button>
-                                </div>
                                 <div class="d-flex justify-content-end w-100">
                                     <button class="btn btn-outline-secondary me-3" type="submit">Save & Close</button>
                                     <button class="btn btn-outline-secondary" type="submit">Save & Add More</button>
                                 </div>
-
                             </div>
                             <label for="plus_one"></label>
                             <input type="hidden" class="form-check-input" id="plus_one" th:field="*{plusOne}">
                             <label for="rsvp"></label>
                             <input type="hidden" name="rsvp" id="rsvp" th:field="*{rsvp}">
+                            <input type="text" th:field="*{id}" disabled>
                         </form>
                     </div>
                 </div>
@@ -108,38 +108,93 @@
 <main>
     <div class="container p-4">
         <div class="card p-5">
-            <h1 class="text-center fontTitle">Your Guests: 0000</h1>
-            <div class="card p-5 m-5" id="card1">
-                <div class="card-title text-center">
-                    <h3 class="fontTitle">Attending: <span th:text="${attending}"></span></h3>
+            <h1 class="text-center fontTitle mt-0">Guest List Manager</h1>
+            <div class="card p-5 mx-5 my-4" id="card1">
+                <div class="card-title text-center mt-0">
+                    <h3 class="fontTitle" >Attending: <span th:text="${attending}"></span></h3>
+                    <hr>
                 </div>
-                <hr>
-                <div class="card-body text-center">
-                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
-                    <hr>
-                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
-                    <hr>
-                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
+                <div class="card-body text-center mt-0 p-0">
+                    <div class="d-flex align-items-center justify-content-around">
+                        <table class="table table-hover card-text">
+                            <thead>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Plus One</th>
+                                <th>Phone</th>
+                                <th colspan="1"></th>
+                            </thead>
+                            <tbody class="font">
+                            <tr th:each="guest : ${guestList}">
+                                <th:block th:if="${guest.rsvp == 'RSVP'}">
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
+                                                data-bs-target="#editGuestModal" th:attr="data-id=${guest.id}">
+                                            Edit <i class="fa-solid fa-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td th:text="${guest.getFullName()}"></td>
+                                    <td th:text="${guest.email}"></td>
+                                    <td th:text="${guest.plusOne}"></td>
+                                    <td th:text="${guest.phNumber}"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                            Decline <i class="fa-regular fa-circle-xmark"></i>
+                                        </button>
+                                    </td>
+                                </th:block>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <div class="card p-5 m-5" id="card2">
-                <div class="card-title text-center">
+            <div class="card p-5 mx-5 my-4" id="card2">
+                <div class="card-title text-center mt-0">
                     <h3 class="fontTitle" >Regretfully Declined: <span th:text="${declined}"></span></h3>
                     <hr>
                 </div>
-                <div class="card-body text-center">
-                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
-                    <hr>
-                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
-                    <hr>
-                    <p class="card-text font" >Guest Name-party number-email address-phone number-street address</p>
+                <div class="card-body text-center mt-0 p-0">
+                    <div class="d-flex align-items-center justify-content-around">
+                        <table class="table table-hover card-text">
+                            <thead>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th colspan="2"></th>
+                            </thead>
+                            <tbody class="font">
+                            <tr th:each="guest : ${guestList}">
+                                <th:block th:if="${guest.rsvp == 'DECLINED'}">
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
+                                                data-bs-target="#editGuestModal" th:attr="data-id=${guest.id}">
+                                            Edit <i class="fa-solid fa-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td th:text="${guest.getFullName()}"></td>
+                                    <td colspan="2" th:text="${guest.email}"></td>
+                                    <td th:text="${guest.phNumber}"></td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                            RSVP <i class="fa-regular fa-circle-check"></i>
+                                        </button>
+                                    </td>
+                                </th:block>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <div class="card p-5 m-5 " id="card3">
-                <div class="card-title text-center">
+            <div class="card p-5 mx-5 my-4" id="card3">
+                <div class="card-title text-center mt-0">
                     <h3 class="fontTitle">Invited: <span th:text="${invited}"></span></h3>
                     <div class="float-end">
-                        <button type="button" class="btn font addModalBtn" data-bs-toggle="modal" data-bs-target="#addGuestModal">
+                        <button type="button" class="btn btn-outline-dark font addModalBtn" data-bs-toggle="modal"
+                                data-bs-target="#addGuestModal" data-id="0">
                             Add Guest <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
@@ -158,26 +213,28 @@
                             </thead>
                             <tbody class="font">
                                 <tr th:each="guest : ${guestList}">
-                                    <td>
-                                        <button type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
-                                                data-bs-target="#editGuestModal">
-                                            Edit <i class="fa-solid fa-pencil"></i>
-                                        </button>
-                                    </td>
-                                    <td th:text="${guest.getFullName()}"></td>
-                                    <td th:text="${guest.email}"></td>
-                                    <td th:text="${guest.plusOne}"></td>
-                                    <td th:text="${guest.phNumber}"></td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline-secondary font">
-                                            RSVP <i class="fa-regular fa-circle-check"></i>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline-secondary font">
-                                            Decline <i class="fa-regular fa-circle-xmark"></i>
-                                        </button>
-                                    </td>
+                                    <th:block th:if="${guest.rsvp == 'INVITED'}">
+                                        <td>
+                                            <button th type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
+                                                    data-bs-target="#editGuestModal" th:attr="data-id=${guest.id}">
+                                                Edit <i class="fa-solid fa-pencil"></i>
+                                            </button>
+                                        </td>
+                                        <td th:text="${guest.getFullName()}"></td>
+                                        <td th:text="${guest.email}"></td>
+                                        <td th:text="${guest.plusOne}"></td>
+                                        <td th:text="${guest.phNumber}"></td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                RSVP <i class="fa-regular fa-circle-check"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                Decline <i class="fa-regular fa-circle-xmark"></i>
+                                            </button>
+                                        </td>
+                                    </th:block>
                                 </tr>
                             </tbody>
                         </table>

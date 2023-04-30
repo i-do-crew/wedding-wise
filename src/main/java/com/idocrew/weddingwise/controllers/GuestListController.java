@@ -42,6 +42,8 @@ public class GuestListController {
         int declined = 0;
         for (Guest guest : guestList) {
             if (guest.isAttending()) {
+                attending += guest.getPlusOne() ? 2 : 1;
+            } else if (guest.isAttending()) {
                 attending++;
             } else if (guest.isDeclined()) {
                 declined++;
