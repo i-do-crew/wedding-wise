@@ -2,19 +2,23 @@ package com.idocrew.weddingwise.controllers;
 
 import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.services.*;
+import com.nimbusds.oauth2.sdk.http.HTTPResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -27,6 +31,8 @@ public class CustomerController {
     private final CustomerVendorService customerVendorService;
     private final VendorCategoryService vendorCategoryService;
     private final VendorUtility vendorUtility;
+    @Value("#{'${us.states}'.split(',')}")
+    private final String[] states;
 
 
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
@@ -40,6 +46,7 @@ public class CustomerController {
         request.getSession().setAttribute("budgetEntries", budgetEntries);
         request.getSession().setAttribute("customerVendors", customerVendors);
         request.getSession().setAttribute("categories", vendorCategories);
+        model.addAttribute("options", states);
     }
     @GetMapping("/ideaboard")
     public String ideaBoard(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
@@ -49,11 +56,25 @@ public class CustomerController {
     @GetMapping("/clients/dashboard")
     public String clientProfile(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
         refactorThisMethod(username, model, request);
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        model.addAttribute("user", user);
+        model.addAttribute("customer", customer);
         return "customer_views/client_profileDashboard";
     }
+
+    @PostMapping("/clients/dashboard")
+    public String clientProfilePost(){
+        return "customer_views/client_profileDashboard";
+    }
+
     @GetMapping("/guest_listManager")
     public String guestListManager(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
         refactorThisMethod(username, model, request);
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        model.addAttribute("user", user);
+        model.addAttribute("customer", customer);
         return "/guest_listManager";
     }
     @GetMapping("/budget_tracker")
@@ -68,7 +89,6 @@ public class CustomerController {
         model.addAttribute("currentBalance", newBalance);
         return "/clients_budgetTracker";
     }
-
     @GetMapping("/likedVendors/toggle/{vendorId}")
     public String toggleLikedVendors(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
         refactorThisMethod(username, model, request);
@@ -98,6 +118,10 @@ public class CustomerController {
     @GetMapping("/likedVendors")
     public String likedVendors(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        model.addAttribute("user", user);
+        model.addAttribute("customer", customer);
         return "/likedVendors";
     }
     @GetMapping("/selectedVendors/toggle/{vendorId}")
@@ -147,5 +171,21 @@ public class CustomerController {
         budgetEntry.setVendor(vendor);
         budgetEntry.setAmount(BigDecimal.valueOf(0));
         return budgetEntry;
+    }
+    @PostMapping("/customer/profile/edit")
+    @Transactional
+    public String customerProfileEditPost(@ModelAttribute("customer") Customer customer, HttpServletRequest request, Model model) {
+        User userTemp = customer.getUser();
+        User userEntity = (User) request.getSession().getAttribute("user");
+        userEntity.setEmail(userTemp.getEmail());
+        userEntity.setFirstName(userTemp.getFirstName());
+        userEntity.setLastName(userTemp.getLastName());
+        userEntity.setCity(userTemp.getCity());
+        userEntity.setState(userTemp.getState());
+        model.addAttribute("options", states);
+        userService.saveUser(userEntity);
+        customerService.saveCustomer(customer);
+
+        return "customer_views/client_profileDashboard";
     }
 }
