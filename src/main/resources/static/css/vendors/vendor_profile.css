@@ -22,8 +22,6 @@ main{
     flex: auto;
     justify-content: center;
     margin: 0 200px 0 150px;
-    border-radius: 20px;
-    border: .5px solid lightgray;
 }
 
 #closeBtn:hover{
