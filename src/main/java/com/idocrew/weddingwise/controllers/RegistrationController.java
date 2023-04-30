@@ -24,7 +24,7 @@ public class RegistrationController {
     private final VendorCategoryService vendorCategoryService;
     private final MusicGenreService musicGenreService;
     private final PhotoFormatService photoFormatService;
-    private final DjsAndLiveBandsCategoryService djsAndLiveBandsCategoryService;
+    private final MusicVendorCategoryService musicVendorCategoryService;
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
     private static final String REDIRECT_LOGIN = "redirect:/login";
@@ -48,7 +48,7 @@ public class RegistrationController {
         model.addAttribute("vendorCategories", vendorCategoryService.findAll());
         model.addAttribute("musicGenres", musicGenreService.findAll());
         model.addAttribute("photoFormats", photoFormatService.findAll());
-        model.addAttribute("musicTypes", djsAndLiveBandsCategoryService.findAll());
+        model.addAttribute("musicTypes", musicVendorCategoryService.findAll());
         return "login_and_signup/vendor_registration";
     }
     @PostMapping("/vendor/registration")
