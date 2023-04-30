@@ -1,5 +1,6 @@
 package com.idocrew.weddingwise.entity;
 
+import com.idocrew.weddingwise.enums.InviteResponseType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,9 +47,14 @@ public class Guest {
     private String zip;
 
     @Column(name = "rsvp", nullable = false, length = 10)
-    private String rsvp;
+    private String rsvp = InviteResponseType.INVITED.getCode();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    @Override
+    public String toString() {
+        return String.format("Guest {%s %s}", fname, lname);
+    }
 }
