@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.context.annotation.Scope;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -35,7 +34,6 @@ public class Customer {
     @Column(name="partner_lname", columnDefinition="varchar(50)", nullable = false)
     private String partnerLName;
     @Column(name="wedding_dt", columnDefinition="date")
-    @DateTimeFormat(pattern="MM/dd/yyyy")
     private LocalDate weddingDt;
     @OneToMany(mappedBy = "customer")
     private List<BudgetEntry> budgetEntries;
