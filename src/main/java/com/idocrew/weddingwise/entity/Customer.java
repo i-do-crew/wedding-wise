@@ -38,7 +38,7 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<BudgetEntry> budgetEntries;
     @OneToMany(mappedBy = "customer")
-    private Set<GuestList> guestLists = new LinkedHashSet<>();
+    private Set<Guest> guests = new LinkedHashSet<>();
     @OneToMany(mappedBy = "customer")
     private Set<IdeaBoard> ideaBoards = new LinkedHashSet<>();
     @OneToMany(mappedBy = "customer")
