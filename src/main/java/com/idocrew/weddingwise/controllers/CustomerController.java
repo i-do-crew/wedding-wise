@@ -46,6 +46,10 @@ public class CustomerController {
     @GetMapping("/ideaboard")
     public String ideaBoard(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
         refactorThisMethod(username, model, request);
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        model.addAttribute("user", user);
+        model.addAttribute("customer", customer);
         return "customer_views/idea_board";
     }
     @GetMapping("/clients/dashboard")
