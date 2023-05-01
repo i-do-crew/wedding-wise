@@ -1,8 +1,12 @@
 package com.idocrew.weddingwise.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.idocrew.weddingwise.entity.Customer;
 import com.idocrew.weddingwise.entity.Guest;
 import com.idocrew.weddingwise.entity.User;
+import com.idocrew.weddingwise.enums.InviteResponseType;
 import com.idocrew.weddingwise.services.CustomerService;
 import com.idocrew.weddingwise.services.GuestListService;
 import com.idocrew.weddingwise.services.UserService;
@@ -64,27 +68,51 @@ public class GuestListController {
     @PostMapping("/clients/guests/add")
     @PreAuthorize("hasRole('CUSTOMER')")
     public String addGuest(@Valid @ModelAttribute("guest") Guest guest, @SessionAttribute("customer") Customer customer,
-                           BindingResult result, Model model){
+                           BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "/customer_views/guest-list";
         }
         guest.setCustomer(customer);
         guestListService.save(guest);
-        return "redirect:/customer_views/guest-list";
+        return "redirect:/clients/guests";
     }
 
     @PostMapping("/clients/guests/update/{id}")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public String updateGuest(@ModelAttribute("guest") Guest guest, @PathVariable long id){
+    public String updateGuest(@ModelAttribute("guest") Guest guest, @SessionAttribute("customer") Customer customer,
+                              BindingResult result, @PathVariable long id){
+        if (result.hasErrors()) {
+            return "/customer_views/guest-list";
+        }
+        guest.setCustomer(customer);
         guestListService.save(guest);
-        return "/customer_views/guest-list";
+        return "redirect:/clients/guests";
     }
 
     @PostMapping("/clients/guests/remove/{id}")
     @PreAuthorize("hasRole('CUSTOMER')")
     public String deleteGuest(@PathVariable long id){
-        guestListService.delete(guestListService.findById(id));
-        return "/customer_views/guest-list";
+        Guest guest = guestListService.findById(id);
+        guestListService.delete(guest);
+        return "redirect:/clients/guests";
+    }
+
+    @PostMapping("/clients/guests/rsvp/{id}")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public String rsvpGuest(@PathVariable long id) {
+        Guest guest = guestListService.findById(id);
+        guest.setRsvp(InviteResponseType.RSVP.getCode());
+        guestListService.save(guest);
+        return "redirect:/clients/guests";
+    }
+
+    @PostMapping("/clients/guests/decline/{id}")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public String declineGuest(@PathVariable long id) {
+        Guest guest = guestListService.findById(id);
+        guest.setRsvp(InviteResponseType.DECLINED.getCode());
+        guestListService.save(guest);
+        return "redirect:/clients/guests";
     }
 
 }

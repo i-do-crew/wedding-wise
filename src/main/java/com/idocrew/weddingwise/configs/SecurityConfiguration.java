@@ -54,7 +54,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/vendor/profile")
                 .hasRole("VENDOR")
-                .requestMatchers("/profile", "/clients/dashboard", "/clients/guests","/clients/guests/add", "/likedVendors/**", "/selectedVendors/**", "/budget_tracker", "/ideaboard")
+                .requestMatchers("/profile", "/clients/dashboard", "/clients/guests","/clients/guests/add", "/clients/guests/rsvp/*", "/likedVendors/**", "/selectedVendors/**", "/budget_tracker", "/ideaboard")
                 .hasRole("CUSTOMER")
                 .requestMatchers( "/", "/aboutus","/vendors","/info/**", "/client/registration", "/vendor/registration", "/register/verify", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**", "/error")
                 .permitAll()

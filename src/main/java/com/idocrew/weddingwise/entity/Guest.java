@@ -1,5 +1,6 @@
 package com.idocrew.weddingwise.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.idocrew.weddingwise.enums.InviteResponseType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -7,6 +8,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.transaction.annotation.Transactional;
 
 @Getter
 @Setter
@@ -60,6 +63,7 @@ public class Guest {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
+    @JsonIgnore
     private Customer customer;
 
     public boolean isAttending(){
@@ -71,5 +75,23 @@ public class Guest {
     }
     public String getFullName() {
         return fname + " " + lname;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id:" + id +
+                ", fname:'" + fname + '\'' +
+                ", lname:'" + lname + '\'' +
+                ", plusOne:" + plusOne +
+                ", email:'" + email + '\'' +
+                ", phNumber:'" + phNumber + '\'' +
+                ", street:'" + street + '\'' +
+                ", aptNo:'" + aptNo + '\'' +
+                ", city:'" + city + '\'' +
+                ", state:'" + state + '\'' +
+                ", zip:'" + zip + '\'' +
+                ", rsvp:'" + rsvp + '\'' +
+                '}';
     }
 }

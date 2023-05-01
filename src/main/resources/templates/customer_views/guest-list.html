@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Guest List Manager</title>
     <link rel="stylesheet" href="/css/guest_list.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/guest_listModal.js"></script>
 </head>
 <body>
 <!--NAVBAR-->
@@ -13,9 +15,6 @@
 <div th:insert="~{fragments/fragments :: sidebarCustomer}"></div>
 <!--VENDOR SIDEBAR-->
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
-<!--EDIT GUEST MODAL -->
-<div id="editGuestModal" class="modal fade" role="dialog">
-</div>
 <!--ADD GUEST MODAL -->
 <div id="addGuestModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -29,7 +28,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form th:action="@{/clients/guests/add}" th:object="${guest}" method="post">
+                        <form action="#" th:action="@{/clients/guests/add}" th:object="${guest}" method="post">
                             <div class="mb-2 row">
                                 <div class="col">
                                     <label for="fname" class="form-label"></label>
@@ -49,8 +48,8 @@
                                         placeholder="E-Mail">
                                 </div>
                                 <div class="col">
-                                    <label for="phone" class="form-label"></label>
-                                    <input type="tel" class="form-control" id="phone" th:field="*{phNumber}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                    <label for="phNumber" class="form-label"></label>
+                                    <input type="tel" class="form-control" id="phNumber" th:field="*{phNumber}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                            placeholder="Phone Number">
                                 </div>
                             </div>
@@ -87,17 +86,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-evenly mt-2">
-                                <div class="d-flex justify-content-end w-100">
-                                    <button class="btn btn-outline-secondary me-3" type="submit">Save & Close</button>
-                                    <button class="btn btn-outline-secondary" type="submit">Save & Add More</button>
-                                </div>
-                            </div>
+                            <!-- HIDDEN FIELDS -->
                             <label for="plus_one"></label>
                             <input type="hidden" class="form-check-input" id="plus_one" th:field="*{plusOne}">
                             <label for="rsvp"></label>
                             <input type="hidden" name="rsvp" id="rsvp" th:field="*{rsvp}">
-                            <input type="text" th:field="*{id}" disabled>
+                            <label for="guest-0-id"></label>
+                            <input type="hidden" th:field="*{id}" id="guest-0-id" disabled>
+                            <!-- END HIDDEN FIELDS -->
+                            <div class="d-flex justify-content-evenly mt-2">
+                                <div class="d-flex justify-content-end w-100">
+                                    <button class="btn btn-outline-secondary me-3" type="submit" id="save-and-close-btn">Save & Close</button>
+                                    <!-- <button class="btn btn-outline-secondary" type="submit">Save & Add More</button>-->
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -123,14 +125,14 @@
                                 <th>Email</th>
                                 <th>Plus One</th>
                                 <th>Phone</th>
-                                <th colspan="1"></th>
+                                <th colspan="2"></th>
                             </thead>
                             <tbody class="font">
                             <tr th:each="guest : ${guestList}">
                                 <th:block th:if="${guest.rsvp == 'RSVP'}">
                                     <td>
                                         <button type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
-                                                data-bs-target="#editGuestModal" th:attr="data-id=${guest.id}">
+                                                data-bs-target="#addGuestModal" th:attr="data-id=${guest.id}, onclick='javascript:edit('+${guest}+');'">
                                             Edit <i class="fa-solid fa-pencil"></i>
                                         </button>
                                     </td>
@@ -139,9 +141,18 @@
                                     <td th:text="${guest.plusOne}"></td>
                                     <td th:text="${guest.phNumber}"></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
-                                            Decline <i class="fa-regular fa-circle-xmark"></i>
-                                        </button>
+                                        <form th:action="'/clients/guests/decline/' + ${guest.id}" th:object="${guest}" th:method="post">
+                                            <button type="submit" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                Decline <i class="fa-solid fa-calendar-xmark"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form th:action="'/clients/guests/remove/' + ${guest.id}" method="POST">
+                                            <button type="submit" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </th:block>
                             </tr>
@@ -170,17 +181,26 @@
                                 <th:block th:if="${guest.rsvp == 'DECLINED'}">
                                     <td>
                                         <button type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
-                                                data-bs-target="#editGuestModal" th:attr="data-id=${guest.id}">
+                                                data-bs-target="#addGuestModal" th:attr="data-id=${guest.id}, onclick='javascript:edit('+${guest}+');'">
                                             Edit <i class="fa-solid fa-pencil"></i>
                                         </button>
                                     </td>
                                     <td th:text="${guest.getFullName()}"></td>
                                     <td colspan="2" th:text="${guest.email}"></td>
                                     <td th:text="${guest.phNumber}"></td>
-                                    <td colspan="2">
-                                        <button type="button" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
-                                            RSVP <i class="fa-regular fa-circle-check"></i>
-                                        </button>
+                                    <td>
+                                        <form th:action="'/clients/guests/rsvp/' + ${guest.id}" method="POST">
+                                            <button type="submit" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                RSVP <i class="fa-solid fa-calendar-check"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form th:action="'/clients/guests/remove/' + ${guest.id}" method="POST">
+                                            <button type="submit" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </th:block>
                             </tr>
@@ -194,7 +214,7 @@
                     <h3 class="fontTitle">Invited: <span th:text="${invited}"></span></h3>
                     <div class="float-end">
                         <button type="button" class="btn btn-outline-dark font addModalBtn" data-bs-toggle="modal"
-                                data-bs-target="#addGuestModal" data-id="0">
+                                data-bs-target="#addGuestModal" data-id="0" id="guest-add-btn">
                             Add Guest <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
@@ -209,14 +229,14 @@
                                 <th>Email</th>
                                 <th>Plus One</th>
                                 <th>Phone</th>
-                                <th colspan="2"></th>
+                                <th colspan="3"></th>
                             </thead>
                             <tbody class="font">
                                 <tr th:each="guest : ${guestList}">
                                     <th:block th:if="${guest.rsvp == 'INVITED'}">
                                         <td>
-                                            <button th type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
-                                                    data-bs-target="#editGuestModal" th:attr="data-id=${guest.id}">
+                                            <button type="button" class="btn btn-outline-secondary font editModalBtn" data-bs-toggle="modal"
+                                                    data-bs-target="#addGuestModal" th:attr="data-id=${guest.id}, onclick='javascript:edit('+${guest}+');'">
                                                 Edit <i class="fa-solid fa-pencil"></i>
                                             </button>
                                         </td>
@@ -225,14 +245,25 @@
                                         <td th:text="${guest.plusOne}"></td>
                                         <td th:text="${guest.phNumber}"></td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
-                                                RSVP <i class="fa-regular fa-circle-check"></i>
-                                            </button>
+                                            <form th:action="'/clients/guests/rsvp/' + ${guest.id}" th:object="${guest}" method="POST">
+                                                <button type="submit" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                    RSVP <i class="fa-solid fa-calendar-check"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
-                                                Decline <i class="fa-regular fa-circle-xmark"></i>
-                                            </button>
+                                            <form th:action="'/clients/guests/decline/' + ${guest.id}" method="POST">
+                                                <button type="submit" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                    Decline <i class="fa-solid fa-calendar-xmark"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form th:action="'/clients/guests/remove/' + ${guest.id}" method="POST">
+                                                <button type="submit" class="btn btn-outline-secondary font" th:attr="data-id=${guest.id}">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </th:block>
                                 </tr>
@@ -250,6 +281,7 @@
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 <!--JAVASCRIPT-->
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/guest_listModal.js"></script>
 </body>
 </html>
