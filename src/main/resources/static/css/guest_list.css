@@ -2,6 +2,11 @@ main{
     background-color: #FFE5D2;
 }
 
+td {
+    vertical-align: middle;
+}
+
+
 #mainCard{
     background-color: #FFFAF7;
     border-radius: 20px;
