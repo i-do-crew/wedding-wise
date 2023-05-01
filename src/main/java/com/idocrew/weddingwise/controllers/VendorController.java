@@ -66,7 +66,7 @@ public class VendorController {
         model.addAttribute("customerVendor", customerVendor);
         model.addAttribute("customer", customer);
 //        Vendor reviewVendor = vendorUtility.findVendorByUser(vendor.getUser());
-        List<VendorRatingsReview> vendorRatings = vendorRatingsReviewService.getByVendor(vendor);
+        List<VendorRatingsReview> vendorRatings = vendorRatingsReviewService.findByVendor(vendor);
         model.addAttribute("vendorRatings", vendorRatings);
         return "vendors/individual_vendor";
     }
