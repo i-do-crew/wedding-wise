@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head >
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
@@ -68,7 +68,7 @@
                     <h5 class="font">Review Title</h5>
 <!--                    <p class="font"> 5 Stars</p>-->
 <!--                    <i class="fa-sharp fa-light fa-star"></i>-->
-                    <i class="star fa-sharp fa-regular fa-star"></i>
+                    <i class="star fa-sharp fa-regular fa-star  mt-1 mb-2"></i>
 <!--                    <p class="font"> Low Cost</p>-->
                     <div class="d-inline">
                     <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i>
@@ -84,7 +84,7 @@
                 <div class="card mt-3">
                     <h5 class="font">Review Title</h5>
 <!--                    <p class="font"> 5 Stars</p>-->
-                    <i class="star fa-sharp fa-regular fa-star"></i>
+                    <i class="star fa-sharp fa-regular fa-star  mt-1 mb-2"></i>
 <!--                    <p class="font"> Low Cost</p>-->
                     <div class="d-inline">
                     <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i>
@@ -100,7 +100,7 @@
                 <div class="card mt-3 mb-3">
                     <h5 class="font">Review Title</h5>
 <!--                    <p class="font"> 5 Stars</p>-->
-                    <i class="star fa-sharp fa-regular fa-star"></i>
+                    <i class="star fa-sharp fa-regular fa-star mt-1 mb-2"></i>
 <!--                    <p class="font"> Low Cost</p>-->
                     <div class="d-inline">
                     <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i>
@@ -118,7 +118,7 @@
 </main>
 
     <!-- EDIT PROFILE MODAL -->
-    <div id="myModal" class="modal fade" role="dialog">
+    <div id="myModal" class="modal fade" role="dialog" sec:authorize="hasRole('ROLE_CUSTOMER')">
         <div class="container p-4">
             <div class="modal-dialog">
                 <div class="modal-content card p-4">
