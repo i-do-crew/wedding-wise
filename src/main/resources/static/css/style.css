@@ -71,7 +71,8 @@ a:hover{
     object-fit: cover;
     height:250px;
     width:300px;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
+    border:none !important;
 }
 .editIcon{
     flex:auto;
@@ -100,6 +101,17 @@ a:hover{
 
 ul{
     list-style-type: circle;
+}
+#editBtn{
+    background-color: gray;
+    color: white;
+    border-radius:15px;
+    border:none;
+
+}
+#editBtnContainer{
+    margin-left: 75px;
+    margin-right:75px;
 }
 
 
