@@ -99,6 +99,98 @@
     </div>
 </div>
 
+<!-- EDIT PROFILE MODAL -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="container p-4">
+        <div class="modal-dialog">
+            <div class="modal-content card p-4">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/customer/profile/edit}" method="POST" th:object="${customer}">
+                        <div>
+                            <!--user hidden fields-->
+                            <input type="hidden" name="id" th:field="*{user.id}">
+                            <input type="hidden" name="username" th:field="*{user.username}">
+                            <input type="hidden" name="password" th:field="*{user.password}">
+                        </div>
+                        <div class="">
+                            <label for="email" class="form-label"></label>
+                            <input th:field="*{user.email}" type="email" name="email" class="form-control" id="email"
+                                   placeholder="Enter your Email" th:required>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="firstName" class="form-label"></label>
+                                <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
+                                       placeholder="Enter your First Name" th:required>
+                            </div>
+                            <div class="col">
+                                <label for="lastName" class="form-label"></label>
+                                <input th:field="*{user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
+                                       placeholder="Enter your Last Name" th:required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="partnerFName" class="form-label"></label>
+                                <input th:field="*{partnerFName}" type="text" name="partnerFName" class="form-control" id="partnerFName"
+                                       placeholder="Enter your partners' first name" th:required>
+                            </div>
+                            <div class="col">
+                                <label for="partnerLName" class="form-label"></label>
+                                <input th:field="*{partnerLName}" type="text" name="lastName" class="form-control" id="partnerLName"
+                                       placeholder="Enter your Last Name" th:required>
+                            </div>
+                        </div>
+                        <div class="row g-3 d-flex align-items-center">
+                            <div class="col-auto">
+                                <label for="vendorCity" class="form-label"></label>
+                                <input th:field="*{user.city}" type="text" name="city" class="form-control" id="vendorCity"
+                                       placeholder="Enter your City">
+                            </div>
+                            <div class="col-auto ">
+                                <label for="vendor-user-state"></label>
+                                <select th:field="*{user.state}" id="vendor-user-state" class="form-select">
+                                    <option th:value="xx">Select your State...</option>
+                                    <option th:each="option : ${options}" th:text="${option}" th:value="${option}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="budget" class="form-label"></label>
+                                <input th:field="*{budget}" type="text" name="budget" class="form-control" id="budget"
+                                       placeholder="Enter your budget amount" th:required>
+                            </div>
+                            <div class="col">
+                                <label for="guestCount" class="form-label"></label>
+                                <input th:field="*{guestCount}" type="text" name="guestCount" class="form-control" id="guestCount"
+                                       placeholder="Enter your guest count" th:required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="weddingDt" class="form-label"></label>
+                                <input th:field="*{weddingDt}" type="date" name="weddingDt" class="form-control" id="weddingDt"
+                                       placeholder="Enter your wedding date" th:required th:value="${weddingDt}">
+                            </div>
+                            <!--Empty col to space the field-->
+                            <div class="col"></div>
+                        </div>
+                        <div class="modal-footer d-flex mt-3 justify-content-between">
+                            <button  type="submit" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
+                            <button type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--FOOTER-->
 <footer th:insert="~{fragments/fragments :: footer}"></footer>
 <!--BOOTSTRAP-->

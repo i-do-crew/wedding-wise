@@ -1,11 +1,9 @@
 package com.idocrew.weddingwise.configs;
 
 
-import com.idocrew.weddingwise.exception.CustomAccessDeniedHandler;
 import com.idocrew.weddingwise.services.impl.AuthenticationSuccessHandlerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,9 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -54,7 +50,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/vendor/profile")
                 .hasRole("VENDOR")
-                .requestMatchers("/profile", "/clients/dashboard", "/guest_listManager","/likedVendors/**", "/selectedVendors/**", "/budget_tracker", "/ideaboard")
+                .requestMatchers("/profile", "/clients/dashboard", "/clients/guests","/clients/guests/add", "/clients/guests/rsvp/*", "/likedVendors/**", "/selectedVendors/**", "/budget_tracker", "/ideaboard")
                 .hasRole("CUSTOMER")
                 .requestMatchers( "/", "/aboutus","/vendors","/info/**", "/client/registration", "/vendor/registration", "/register/verify", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**", "/error", "/logout")
                 .permitAll()

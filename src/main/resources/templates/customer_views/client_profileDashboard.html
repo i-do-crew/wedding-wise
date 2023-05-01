@@ -76,6 +76,18 @@
                                        placeholder="Enter your Last Name" th:required>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="partnerFName" class="form-label"></label>
+                                <input th:field="*{partnerFName}" type="text" name="partnerFName" class="form-control" id="partnerFName"
+                                       placeholder="Enter your partners' first name" th:required>
+                            </div>
+                            <div class="col">
+                                <label for="partnerLName" class="form-label"></label>
+                                <input th:field="*{partnerLName}" type="text" name="lastName" class="form-control" id="partnerLName"
+                                       placeholder="Enter your Last Name" th:required>
+                            </div>
+                        </div>
                         <div class="row g-3 d-flex align-items-center">
                             <div class="col-auto">
                                 <label for="vendorCity" class="form-label"></label>
@@ -90,7 +102,28 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="modal-footer d-flex justify-content-between">
+                        <div class="row">
+                            <div class="col">
+                                <label for="budget" class="form-label"></label>
+                                <input th:field="*{budget}" type="text" name="budget" class="form-control" id="budget"
+                                       placeholder="Enter your budget amount" th:required>
+                            </div>
+                            <div class="col">
+                                <label for="guestCount" class="form-label"></label>
+                                <input th:field="*{guestCount}" type="text" name="guestCount" class="form-control" id="guestCount"
+                                       placeholder="Enter your guest count" th:required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="weddingDt" class="form-label"></label>
+                                <input th:field="*{weddingDt}" type="date" name="weddingDt" class="form-control" id="weddingDt"
+                                       placeholder="Enter your wedding date" th:required th:value="${weddingDt}">
+                            </div>
+                            <!--Empty col to space the field-->
+                            <div class="col"></div>
+                        </div>
+                        <div class="modal-footer d-flex mt-3 justify-content-between">
                             <button  type="submit" class="closeBtn btn btn-default" data-bs-dismiss="modal">Save</button>
                             <button type="button" class="closeBtn btn btn-default" data-bs-dismiss="modal">Close</button>
                         </div>
