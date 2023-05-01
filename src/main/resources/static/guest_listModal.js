@@ -1,8 +1,8 @@
-$(".editModalBtn").click(function(e) {
+$(".editModalBtn").click(function() {
 $   ("#addGuestModal").css("display", "block");
 });
 
-$("#guest-add-btn").click(function(e) {
+$("#guest-add-btn").click(function() {
     $("#guest-modal-title").text("Add Guest");
     $("#save-and-close-btn").removeAttr("formaction");
     $("#save-and-close-btn").text("Save & Close");
