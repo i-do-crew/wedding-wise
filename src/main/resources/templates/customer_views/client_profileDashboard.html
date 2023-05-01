@@ -26,6 +26,7 @@
 <!--                <hr>-->
                 <div class="section row m-0">
                     <!--           VENDOR CATEGORY-->
+                    <hr class="mt-2 mb-2">
                     <div class="row vendorCard" th:each="category: ${session.categories}">
                         <a th:href="@{/vendors/categories/{id}(id=${category.id})}"
                            class="text-decoration-none pb-1"><h4 class="labels" th:text="${category.title}"></h4>
@@ -46,12 +47,12 @@
                                         <!--                        VENDOR LIKE & UNLIKE BTN-->
                                         <!--                        VENDOR INFORMATION        -->
                                         <h5 class="font col" th:text="${customerVendor.vendor.businessName}"></h5>
-                                        <p class="p col" th:text="${customerVendor.vendor.about}"></p>
+                                        <p class="p col text-truncate" th:text="${customerVendor.vendor.about}"></p>
                                             <div th:insert="~{fragments/fragments :: reactionButtons}"></div>
                                         </div>
+                                        <hr class="mt-2 mb-2">
                                     </div>
                                 </div>
-<!--                                <hr>-->
                             </div>
                         </div>
                     </div>
