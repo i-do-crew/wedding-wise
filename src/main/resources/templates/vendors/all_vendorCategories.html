@@ -19,13 +19,13 @@
     <div class="container p-4">
         <div class=" card shadow">
             <h1 class="fontTitle mb-1">Vendor Categories</h1>
-            <div class="card-body flex-wrap d-flex justify-content-center align-items center">
-                <div class="row  me-5 mb-5">
-                    <div th:each="vendorCategory: ${vendorCategories}" class="vendor ">
-                            <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="text-decoration-none"><img class="vendorImg card-img-top " th:src="@{'/img/vendors/' + ${#strings.replace(vendorCategory.title,' ','-')} + '.jpg'}" alt="Card image cap"></a>
-                            <div class="vendorBtnDiv">
-                                <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="vendorBtn btn d-grid gap-3" th:text="${vendorCategory.title}"></a>
-                            </div>
+            <div class="card-body flex-wrap d-flex justify-content-center align-items-center">
+                <div class="row me-5 mb-5">
+                    <div th:each="vendorCategory: ${vendorCategories}" class="vendor">
+                        <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="text-decoration-none"><img class="vendorImg card-img-top" th:src="@{'/img/vendors/' + ${#strings.replace(vendorCategory.title,' ','-')} + '.jpg'}" alt="Card image cap"></a>
+                        <div class="vendorBtnDiv">
+                            <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="vendorBtn btn d-grid gap-3" th:text="${vendorCategory.title}"></a>
+                        </div>
                     </div>
                 </div>
             </div>
