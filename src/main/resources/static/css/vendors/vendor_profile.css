@@ -8,6 +8,11 @@ main{
     padding: 30px;
     border-radius: 20px;
 }
+
+.fontTitle{
+text-align: center;
+}
+
 .image{
     width: 100%;
     height: 300px;
@@ -28,6 +33,15 @@ main{
     color: #E19B6E;
 }
 
-p, h6, font{
-    font-family: nunito;
+p, h6, font, h2, h5{
+    font-family: nunito sans-serif;
 }
+
+.dollar:active, .dollar:hover{
+    color: #E19B6E;
+}
+
+.star:hover{
+    color: #E19B6E;
+}
+

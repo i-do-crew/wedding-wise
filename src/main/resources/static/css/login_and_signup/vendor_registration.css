@@ -21,7 +21,7 @@ main{
 }
 
 .card{
-    border: 1px solid lightgray;
+    border: .5px solid lightgray;
     background-color: #FFFAF7;
     border-radius: 20px;
 

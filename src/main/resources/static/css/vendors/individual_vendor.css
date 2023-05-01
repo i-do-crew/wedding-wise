@@ -14,7 +14,7 @@ main{
 #vendorContact{
     text-align: end;
     align-items: flex-end;
-    padding-right: 250px;
+    /*padding-right: 250px;*/
 }
 #bookBtn{
     margin-left:250px;
@@ -32,6 +32,14 @@ main{
     border-radius: 20px;
     margin-left: 250px;
 
+}
+.businessMapImg{
+    object-fit: cover;
+    border: .5px solid lightgray;
+    padding:0;
+    /*border-radius: 20px;*/
+    width:150px;
+    height:150px;
 }
 
 .image{

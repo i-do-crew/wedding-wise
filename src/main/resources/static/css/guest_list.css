@@ -2,10 +2,15 @@ main{
     background-color: #FFE5D2;
 }
 
+td {
+    vertical-align: middle;
+}
+
+
 #mainCard{
     background-color: #FFFAF7;
     border-radius: 20px;
-    border: 1px solid lightgrey;
+    border: .5px solid lightgrey;
 }
 
 #border {
@@ -22,7 +27,7 @@ main{
 .card{
     background-color: #FFFAF7;
     border-radius: 20px;
-    border: 1px solid lightgrey;
+    border: .5px solid lightgrey;
 }
 
 .modal-content{

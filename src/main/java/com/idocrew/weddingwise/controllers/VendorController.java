@@ -43,12 +43,17 @@ public class VendorController {
     private final VendorRatingsReviewService vendorRatingsReviewService;
 
     private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
-        User user = userService.findByUsername(username);
-        Vendor vendor = vendorUtility.findVendorByUser(user);
+        User user;
+        Vendor vendor;
+        if (!"anonymousUser".equals(username)) {
+            user = userService.findByUsername(username);
+            vendor = vendorUtility.findVendorByUser(user);
+        } else  {
+            vendor = new Vendor();
+        }
         List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
         request.getSession().setAttribute("vendor", vendor);
         request.getSession().setAttribute("categories", vendorCategories);
-        request.getSession().setAttribute("vendor", vendor);
         request.getSession().setAttribute("vendorComposite", new VendorComposite());
     }
     @GetMapping("/vendors/individual/{id}")
@@ -72,6 +77,7 @@ public class VendorController {
     }
     @GetMapping("/vendors/categories/{id}")
     public String vendorCategory(@PathVariable long id, @CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
+        //TODO: Refactor <!--REACTION BUTTONS--> to remove CustomerVendor for anonymous users
         model.addAttribute("id",id);
         User user = (User) request.getSession().getAttribute("user");
         Customer customer = (Customer) request.getSession().getAttribute("customer");

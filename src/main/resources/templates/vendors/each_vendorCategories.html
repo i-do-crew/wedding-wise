@@ -17,7 +17,7 @@
 
 <main >
     <div class="container p-4">
-        <div id="mainCard" class="card shadow-sm">
+        <div id="mainCard" class="card shadow">
             <div class="container-fluid" >
                 <div class="text-center" >
                     <h1 class="fontTitle" th:text="${vendorCategory.title}"></h1>
@@ -31,9 +31,9 @@
                             <div class="col-md-8">
                                 <div class="card-body" >
                                     <h5 class="card-title" th:text="${vendor.businessName}"></h5>
-                                    <p class="card-text" th:text="${vendor.about}"></p>
+                                    <p class="card-text text-truncate" th:text="${vendor.about}"></p>
     <!--                                <div th:insert="~{fragments/fragments :: reactionButtons}" class="fa-lg mb-3"></div>-->
-                                    <a class="" th:href="@{/vendors/individual/{id}(id=${vendor.id})}"><button class="btn btn-outline-dark">Request Quote</button></a>
+                                    <a class="" th:href="@{/vendors/individual/{id}(id=${vendor.id})}"><button class="btn btn-outline-dark">More Info</button></a>
                                 </div>
                             </div>
                         </div>

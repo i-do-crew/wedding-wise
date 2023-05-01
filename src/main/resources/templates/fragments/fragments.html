@@ -27,44 +27,44 @@
             </button>
             <div class="collapse navbar-collapse d-flex justify-content-between font" id="navitems">
                 <ul class="navbar-nav me-auto ">
-                    <li class="nav-item  me-2">
+                    <li class="navbarItem nav-item  me-2">
                         <a class="nav-link" href="/aboutus">About Us</a>
                     </li>
-                    <li class="nav-item me-3">
+                    <li class="navbarItem nav-item me-3">
                         <a class="nav-link" href="/vendors">Vendors</a>
                     </li>
-                    <li class="nav-item me-3">
+                    <li class="navbarItem nav-item me-3">
                         <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" href="/budget_tracker" class="nav-link align-self-center">Budget Tracker</a>
                     </li>
-                    <li class="nav-item me-3">
-                        <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" href="/guest_listManager" class="nav-link  align-self-center">Guest List Manager</a>
+                    <li class="navbarItem nav-item me-3">
+                        <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" href="/clients/guests" class="nav-link  align-self-center">Guest List Manager</a>
                     </li>
-                    <li class="nav-item me-3">
+                    <li class="navbarItem nav-item me-3">
                         <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" href="/ideaboard" class="nav-link align-self-center">Idea Board</a>
                     </li>
-                    <li class="nav-item me-3">
+                    <li class="navbarItem nav-item me-3">
                         <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" href="/likedVendors" class="nav-link  align-self-center">Liked Vendors</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item  me-2">
+                    <li class="navbarItem nav-item  me-2">
                         <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarCustomer">Profile</a>
                         <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSideBarVendor">Profile</a>
                     </li>
-                    <li class="nav-item  me-2">
+                    <li class="navbarItem nav-item  me-2">
                         <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" class="nav-link" href="/clients/dashboard">Dashboard</a>
                         <a th:if="${#authorization.expression('hasRole(''VENDOR'')')}" class="nav-link" href="/vendor/profile">Dashboard</a>
                     </li>
-                    <li class="nav-item me-2" sec:authorize="isAnonymous()">
+                    <li class=" navbarItem nav-item me-2" sec:authorize="isAnonymous()">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
-                    <li class="nav-item me-2" sec:authorize="isAuthenticated()">
+                    <li class="navbarItem nav-item me-2" sec:authorize="isAuthenticated()">
                         <form name="logoutForm" th:action="@{/logout}" method="post">
-                            <input class="nav-link" type="submit" value="Logout"/>
+                            <input id="logoutBtn" class="nav-link" type="submit" value="Logout"/>
                         </form>
                     </li>
-                    <li class="nav-item dropstart" sec:authorize="isAnonymous()">
+                    <li class=" nav-item dropstart" sec:authorize="isAnonymous()">
                         <button id="sign-up-btn" class="dropdown-toggle btn text-light" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sign Up
                         </button>
@@ -104,7 +104,7 @@
                         <a href="/budget_tracker" class="text-decoration-none text-dark font" >Budget: $<span th:text="${session.customer} ? ${session.customer.budget}"></span></a>
                     </li>
                     <li class="row pb-4">
-                        <a href="/guest_listManager" class="text-decoration-none text-dark font" id="guest">Guest Count: <span th:text="${session.customer} ? ${session.customer.guestCount}"></span></a>
+                        <a href="/clients/guests" class="text-decoration-none text-dark font" id="guest">Guest Count: <span th:text="${session.customer} ? ${session.customer.guestCount}"></span></a>
                     </li>
                     <li class="row pb-4">
                         <a href="/ideaboard" class="text-decoration-none text-dark font" id="ideas">Idea Board</a>
@@ -188,9 +188,11 @@
 </footer>
 
 <!--REACTION BUTTONS-->
-<div th:fragment="reactionButtons" class="reaction-buttons">
-    <a class="vendor-heart" th:style="${customerVendor.getSelected() ? 'color:gold' : 'color:black'}" th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-solid fa-check"></i></a>
-    <a class="vendor-heart" th:style="${customerVendor.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor.vendor.id})}" th:attr="data-id=${customerVendor.vendor.id}" ><i class="fa-regular fa-heart"></i></a>
+<div th:fragment="reactionButtons" class="reaction-buttons" sec:authorize="isAuthenticated()">
+    <th:block th:if="${customerVendor != null}">
+        <a class="vendor-heart" th:style="${customerVendor?.getSelected() ? 'color:gold' : 'color:black'}" th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor?.vendor?.id})}" th:attr="data-id=${customerVendor?.vendor?.id}" ><i class="fa-solid fa-check"></i></a>
+        <a class="vendor-heart" th:style="${customerVendor?.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor?.vendor?.id})}" th:attr="data-id=${customerVendor?.vendor?.id}" ><i class="fa-regular fa-heart"></i></a>
+    </th:block>
 </div>
 
 <!--BOOTSTRAP-->
