@@ -33,20 +33,32 @@
     background-color: #212727;
     color: white;
 }
-a:hover{
-    color: #E19B6E !important;
-}
+
 /*FONTS*/
 .navbar-brand{
     font-family: 'Luxurious Roman', cursive;
 }
 .nav-item {
     font-family: 'Nunito Sans', sans-serif;
+    padding:0;
+    border-bottom: 3px solid rgba(255, 250, 247, 0.38);
 }
 
 /*NAVBAR*/
 #navbar{
     border-bottom: .5px solid lightgray;
+    min-height: 60px;
+}
+a:hover{
+    color: #E19B6E !important;
+}
+.navbarItem:hover{
+    border-bottom: 3px solid rgba(225, 155, 110, 0.7);
+    margin-bottom: 0;
+}
+#logoutBtn:hover{
+    color: #E19B6E !important;
+
 }
 
 /*CUSTOMER SIDEBAR*/

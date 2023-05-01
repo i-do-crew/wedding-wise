@@ -5,7 +5,7 @@ main{
 .card{
     background-color: #FFFAF7;
     border-radius: 20px;
-    border: 1px solid lightgray;
+    border: .5px solid lightgray;
 }
 
 .card-body {
@@ -17,7 +17,7 @@ main{
     object-fit: cover;
     margin:5px;
     border-radius: 20px;
-    border: 1px solid lightgray;
+    border: .5px solid lightgray;
 }
 #ideaBoardAddBtn{
     /*border-radius: 0;*/

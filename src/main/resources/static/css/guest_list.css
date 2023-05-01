@@ -10,7 +10,7 @@ td {
 #mainCard{
     background-color: #FFFAF7;
     border-radius: 20px;
-    border: 1px solid lightgrey;
+    border: .5px solid lightgrey;
 }
 
 #border {
@@ -27,7 +27,7 @@ td {
 .card{
     background-color: #FFFAF7;
     border-radius: 20px;
-    border: 1px solid lightgrey;
+    border: .5px solid lightgrey;
 }
 
 .modal-content{
