@@ -17,8 +17,7 @@
 
 <main>
     <div class="container p-4">
-        <div class="card border-secondary container-fluid" id="cardBody">
-<!--            back container-->
+        <div class="card shadow" id="cardBody">
             <div class="text-center pt-4">
                 <h1 class="fontTitle">Welcome to the <span th:text="${session.user.lastName}"></span>-<span
                         th:text="${session.customer.partnerLName}"></span> dashboard!</h1>
@@ -41,14 +40,14 @@
                                         <!--                        VENDOR IMAGE-->
                                         <!--                                vendor-text pt-3-->
                                         <a th:href="@{/vendors/individual/{id}(id=${customerVendor.vendor.id})}"><img
-                                                class="image col" src="/img/client_profile/venue_clientProfile.jpg"
+                                                class="image col shadow-sm" src="/img/client_profile/venue_clientProfile.jpg"
                                                 alt="image"></a>
                                     </div>
                                         <div class="col-9" id="dashboardContent">
                                         <!--                        VENDOR LIKE & UNLIKE BTN-->
                                         <!--                        VENDOR INFORMATION        -->
                                         <h5 class="font col" th:text="${customerVendor.vendor.businessName}"></h5>
-                                        <p class="p col" th:text="${customerVendor.vendor.about}"></p>
+                                        <p class="p col text-truncate" th:text="${customerVendor.vendor.about}"></p>
                                             <div th:insert="~{fragments/fragments :: reactionButtons}"></div>
                                         </div>
                                         <hr class="mt-2 mb-2">

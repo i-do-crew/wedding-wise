@@ -110,12 +110,12 @@ main {
 /*}*/
 
 #vendorImg, #budgetImg, #guestImg, #ideaImg {
-    border-radius: 30px;
+    border-radius: 20px;
     height: auto;
     width: 100%;
     margin-top: 30px;
     margin-bottom: 30px;
-
+    border: .5px solid lightgray;
 }
 
 #budgetImg, #ideaImg {
