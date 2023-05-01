@@ -57,7 +57,7 @@ public class Vendor {
     @OneToMany(mappedBy = "vendor")
     private Set<CustomerVendor> customerVendors = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "vendor")
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER)
     private List<BudgetEntry> budgetEntries;
 
 }

@@ -30,7 +30,10 @@
                         <div class="col font">
                             <p>Business Name: <span th:text="${budgetEntry} ? ${budgetEntry.vendor.businessName}"></span></p>
                             <p>Cost: $<span th:text="${budgetEntry} ? ${budgetEntry.amount}"></span></p>
-                            <button id="budgetAmountModalBtn" type="button" class="btn font " data-bs-toggle="modal" data-bs-target="#budgetAmountModal"><i class="fa-solid fa-pencil"></i></button>
+                            <input type="text" th:field="${budgetEntry.vendor.id}">
+                            <button id="budgetAmountModalBtn" type="button" class="btn font" th:data-id="${budgetEntry.vendor.id}" data-bs-toggle="modal" data-bs-target="#budgetAmountModal">
+                                Add Amount <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -80,7 +83,7 @@
                     <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/budget_tracker/edit}" method="POST" th:object="${budgetEntry}">
+                    <form th:action="@{/budget/edit}" method="POST" th:object="${budgetEntry}">
                         <input type="hidden" id="vendor" name="vendor" th:value="${budgetEntry.vendor}" />
                         <div>
                             <label for="amount" class="form-label"></label>
