@@ -2,6 +2,7 @@
     font-family: "Luxurious Roman";
     margin-top: 30px;
     margin-bottom: 25px;
+    align-content: center;
 }
 
 .p{
@@ -56,6 +57,7 @@ img{
 #likedVendorImg{
     padding-left:100px;
 }
+
 
 
 /*.content {*/

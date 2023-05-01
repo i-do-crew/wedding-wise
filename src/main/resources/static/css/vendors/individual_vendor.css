@@ -77,3 +77,6 @@ main{
     font-family: nunito;
 }
 
+.card-body{
+    padding:0;
+}
