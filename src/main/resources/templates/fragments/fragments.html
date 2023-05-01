@@ -191,8 +191,10 @@
 
 <!--REACTION BUTTONS-->
 <div th:fragment="reactionButtons" class="reaction-buttons" sec:authorize="isAuthenticated()">
-    <a class="vendor-heart" th:style="${customerVendor?.getSelected() ? 'color:gold' : 'color:black'}" th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor?.vendor?.id})}" th:attr="data-id=${customerVendor?.vendor?.id}" ><i class="fa-solid fa-check"></i></a>
-    <a class="vendor-heart" th:style="${customerVendor?.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor?.vendor?.id})}" th:attr="data-id=${customerVendor?.vendor?.id}" ><i class="fa-regular fa-heart"></i></a>
+    <th:block th:if="${customerVendor != null}">
+        <a class="vendor-heart" th:style="${customerVendor?.getSelected() ? 'color:gold' : 'color:black'}" th:href="@{/selectedVendors/toggle/{vendorId}(vendorId=${customerVendor?.vendor?.id})}" th:attr="data-id=${customerVendor?.vendor?.id}" ><i class="fa-solid fa-check"></i></a>
+        <a class="vendor-heart" th:style="${customerVendor?.getLiked() ? 'color:gold' : 'color:black'}" th:href="@{/likedVendors/toggle/{vendorId}(vendorId=${customerVendor?.vendor?.id})}" th:attr="data-id=${customerVendor?.vendor?.id}" ><i class="fa-regular fa-heart"></i></a>
+    </th:block>
 </div>
 
 <!--BOOTSTRAP-->
