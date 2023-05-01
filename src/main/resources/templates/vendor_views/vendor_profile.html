@@ -63,53 +63,18 @@
             </div>
             <hr>
             <div class="row container font ms-1">
-                <h2 class="mt-3">Reviews</h2>
-                <div class="card mt-3">
-                    <h5 class="font">Review Title</h5>
-<!--                    <p class="font"> 5 Stars</p>-->
-<!--                    <i class="fa-sharp fa-light fa-star"></i>-->
-                    <i class="star fa-sharp fa-regular fa-star"></i>
-<!--                    <p class="font"> Low Cost</p>-->
-                    <div class="d-inline">
-                    <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i>
-                    </div>
-                    <p class="font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-                    <div>
-                        <button type="button" class="btn font d-flex justify-content-start" data-bs-toggle="modal" data-bs-target="#editModal">
-<!--                            <i class="fa-sharp fa-light fa-reply"></i>-->
-                            <i class="reply fa-solid fa-reply"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <h5 class="font">Review Title</h5>
-<!--                    <p class="font"> 5 Stars</p>-->
-                    <i class="star fa-sharp fa-regular fa-star"></i>
-<!--                    <p class="font"> Low Cost</p>-->
-                    <div class="d-inline">
-                    <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i>
-                    </div>
-                    <p class="font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-                    <div>
-                        <button type="button" class="btn font d-flex justify-content-start" data-bs-toggle="modal" data-bs-target="#editModal">
-<!--                            <i class="fa-sharp fa-regular fa-reply"></i>-->
-                            <i class="reply fa-solid fa-reply"></i>
-                        </button>
-                    </div>
-                </div>
                 <div class="card mt-3 mb-3">
-                    <h5 class="font">Review Title</h5>
-<!--                    <p class="font"> 5 Stars</p>-->
-                    <i class="star fa-sharp fa-regular fa-star"></i>
-<!--                    <p class="font"> Low Cost</p>-->
-                    <div class="d-inline">
-                    <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i> <i class="dollar fa-sharp fa-solid fa-dollar-sign"></i>
+                    <div class="row container">
+                        <h2 class="font">Reviews</h2>
+                        <div class="card mt-3" th:each="vendorRating: ${vendorRatings}">
+                            <h6 class="card-title font"><span class="fa-md font" th:text="${vendorRating.title}"></span> - <span class="fa-md font" th:text="${vendorRating.customer.user.firstName}"></span></h6>
+                            <p class="card-body font"><span class="fa-md font" th:text="${vendorRating.rating}"></span> Star(s)</p>
+                            <p class="card-body font" th:text="${vendorRating.description}"></p>
+                        </div>
                     </div>
-                    <p class="font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-                    <div>
-                        <button type="button" class="btn font d-flex justify-content-start" data-bs-toggle="modal" data-bs-target="#editModal">
-                            <i class="reply fa-solid fa-reply"></i>
-                        </button>
+<!--                        <button type="button" class="btn font d-flex justify-content-start" data-bs-toggle="modal" data-bs-target="#editModal">-->
+<!--                            <i class="reply fa-solid fa-reply"></i>-->
+<!--                        </button>-->
                     </div>
                 </div>
             </div>
@@ -117,8 +82,8 @@
     </div>
 </main>
 
-    <!-- EDIT PROFILE MODAL -->
-    <div id="myModal" class="modal fade" role="dialog" sec:authorize="hasRole('ROLE_CUSTOMER')">
+    <!-- EDIT VENDOR PROFILE MODAL -->
+    <div id="myModal" class="modal fade" role="dialog" sec:authorize="hasRole('ROLE_VENDOR')">
         <div class="container p-4">
             <div class="modal-dialog">
                 <div class="modal-content card p-4">
@@ -273,7 +238,7 @@
                         <form th:action="@{/vendor/profile/edit/about}" th:method="POST" th:object="${vendorComposite}">
                             <div class="d-grid g-2 mb-1">
 <!--                                <input th:type="text" th:field="*{vendor.businessName}" class="mb-4 font">-->
-                                <input th:type="textarea" th:field="*{vendor.about}" class="mb-4 font">
+                                <input th:type="textarea" th:field="*{vendor.about}" th:value="*{vendor.about}" class="mb-4 font">
                             </div>
                             <hr>
                             <div class="modal-footer d-flex justify-content-between">
