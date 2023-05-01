@@ -151,7 +151,7 @@ b {
     font-family: 'Nunito Sans', sans-serif;
 }
 
-.container-fluid{
+#featureContainer{
     padding-right: 10rem !important;
     padding-left: 10rem !important;
 
