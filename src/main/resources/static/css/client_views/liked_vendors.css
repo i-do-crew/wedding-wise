@@ -1,18 +1,21 @@
 .text-center{
     font-family: "Luxurious Roman";
-    margin-top: 30px;
-    margin-bottom: 25px;
 }
 
-.p{
+p{
     font-family: nunito;
 }
 
 .title-text{
     font-family: "Luxurious Roman";
     color: black;
-    text-decoration: none;
+    margin-left: 10%;
 }
+
+.title-text:hover{
+    color: #E19B6E;
+}
+
 
 /*hr{*/
 /*    width: 50%;*/
@@ -28,10 +31,10 @@ main{
     border: 1px solid #212727;
 }
 
-.col{
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
+/*.col{*/
+/*    margin-top: 50px;*/
+/*    margin-bottom: 50px;*/
+/*}*/
 
 img{
     object-fit: cover;
@@ -42,6 +45,15 @@ img{
     margin: auto;
     margin-left: 20px;
 }
+#likedVendorText{
+    padding-right:125px !important;
+    padding-left: 100px;
+    padding-top: 25px;
+}
+#likedVendorImg{
+    padding-left:100px;
+}
+
 
 /*.content {*/
 /*    position: relative;*/
