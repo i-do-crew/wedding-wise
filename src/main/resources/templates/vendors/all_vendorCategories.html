@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1">
     <title>Vendor Categories</title>
     <link th:rel="stylesheet" href="/css/vendors/all_vendors.css">
 </head>
@@ -16,18 +16,13 @@
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <main>
-    <div class="container p-3">
-        <div class=" card ">
+    <div class="container p-4">
+        <div class=" card shadow">
             <h1 class="fontTitle mb-1">Vendor Categories</h1>
-            <div class="card-body flex-wrap d-flex  justify-content-center">
-                <div class="row ms-5 me-5 mb-5">
+            <div class="card-body flex-wrap d-flex justify-content-center align-items-center">
+                <div class="row me-5 mb-5">
                     <div th:each="vendorCategory: ${vendorCategories}" class="vendor">
-
-                        <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}">
-<!--                            th:text="${vendorCategory.title}"-->
-                        <img class="vendorImg card-img-top" th:src="@{'/img/vendors/' + ${#strings.replace(vendorCategory.title,' ','-')} + '.jpg'}" alt="Card image cap">
-                        </a>
-
+                        <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="text-decoration-none"><img class="vendorImg card-img-top" th:src="@{'/img/vendors/' + ${#strings.replace(vendorCategory.title,' ','-')} + '.jpg'}" alt="Card image cap"></a>
                         <div class="vendorBtnDiv">
                             <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="vendorBtn btn d-grid gap-3" th:text="${vendorCategory.title}"></a>
                         </div>
