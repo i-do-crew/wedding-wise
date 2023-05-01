@@ -22,7 +22,7 @@
             <div class="card-body flex-wrap d-flex justify-content-center align-items center">
                 <div class="row  me-5 mb-5">
                     <div th:each="vendorCategory: ${vendorCategories}" class="vendor">
-                            <img class="vendorImg card-img-top" th:src="@{'/img/vendors/' + ${#strings.replace(vendorCategory.title,' ','-')} + '.jpg'}" alt="Card image cap">
+                            <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="text-decoration-none"><img class="vendorImg card-img-top" th:src="@{'/img/vendors/' + ${#strings.replace(vendorCategory.title,' ','-')} + '.jpg'}" alt="Card image cap"></a>
                             <div class="vendorBtnDiv">
                                 <a th:href="@{/vendors/categories/{id}(id=${vendorCategory.id})}" class="vendorBtn btn d-grid gap-3" th:text="${vendorCategory.title}"></a>
                             </div>
