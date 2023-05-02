@@ -10,8 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.PortMapperImpl;
+import org.springframework.security.web.PortResolverImpl;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -34,29 +39,42 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        PortMapperImpl portMapper = new PortMapperImpl();
+        portMapper.setPortMappings(Collections.singletonMap("8080","8080"));
+        PortResolverImpl portResolver = new PortResolverImpl();
+        portResolver.setPortMapper(portMapper);
+        LoginUrlAuthenticationEntryPoint entryPoint = new LoginUrlAuthenticationEntryPoint(
+                "/login");
+        entryPoint.setPortMapper(portMapper);
+        entryPoint.setPortResolver(portResolver);
+
         http
-            .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .successHandler(myAuthenticationSuccessHandler())
-                .failureUrl("/login-error")
-                .permitAll() // Anyone can go to the login page
+            .exceptionHandling()
+            .authenticationEntryPoint(entryPoint)
             .and()
-            .logout()
-                .logoutSuccessUrl("/") // append a query string value
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-            .and()
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/vendor/profile")
-                .hasRole("VENDOR")
-                .requestMatchers("/profile", "/clients/dashboard", "/clients/guests","/clients/guests/add", "/clients/guests/rsvp/*", "/likedVendors/**", "/selectedVendors/**", "/budget_tracker", "/ideaboard")
-                .hasRole("CUSTOMER")
-                .requestMatchers( "/", "/aboutus","/vendors","/info/**", "/client/registration", "/vendor/registration", "/register/verify", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**", "/error")
-                .permitAll()
-                .anyRequest()
-                .permitAll()
-            );
+        .formLogin()
+            .loginPage("/login")
+            .loginProcessingUrl("/login")
+            .successHandler(myAuthenticationSuccessHandler())
+            .failureUrl("/login-error")
+            .permitAll() // Anyone can go to the login page
+        .and()
+        .logout()
+            .logoutSuccessUrl("/") // append a query string value
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
+        .and()
+        .authorizeHttpRequests(authorize -> authorize
+            .requestMatchers("/vendor/profile")
+            .hasRole("VENDOR")
+            .requestMatchers("/profile", "/clients/dashboard", "/clients/guests","/clients/guests/add", "/clients/guests/rsvp/*", "/likedVendors/**", "/selectedVendors/**", "/budget_tracker", "/ideaboard")
+            .hasRole("CUSTOMER")
+            .requestMatchers( "/", "/aboutus","/vendors","/info/**", "/client/registration", "/vendor/registration", "/register/verify", "/vendors/categories/*","/vendors/individual/*", "/login", "/sign-up", "/js/**","/img/**", "/css/**", "/error")
+            .permitAll()
+            .anyRequest()
+            .permitAll()
+        );
         return http.build();
     }
 
