@@ -4,11 +4,13 @@ package com.idocrew.weddingwise.controllers;
 import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.services.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -58,7 +60,13 @@ public class BudgetController {
     }
 
     @PostMapping("/budget/edit/{vendorId}")
-    public String editBudgetCost(@SessionAttribute("customer") Customer customer, @ModelAttribute("budgetEntry") BudgetEntry budgetEntry, @PathVariable Long vendorId){
+    public String editBudgetCost(@Valid BudgetEntry budgetEntry,
+                                 BindingResult bindingResult, @SessionAttribute("customer") Customer customer,
+                                 @PathVariable Long vendorId) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/budget";
+        }
+
         Vendor vendor = vendorUtility.findById(vendorId);
         BudgetEntry budgetEntryEntity = budgetEntryService.findBudgetEntryByCustomerAndVendor(customer, vendor);
         budgetEntryEntity.setCustomer(customer);
