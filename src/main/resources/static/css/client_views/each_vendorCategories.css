@@ -24,6 +24,19 @@ main{
     background-color: #FFFAF7;
 }
 
+.subCards{
+    max-width: 900px;
+    background-color: #FFE5D2}
+
+.vendorImg{
+    width: 20rem;
+    height:22rem;
+}
+
+.vendorCol{
+    padding-top:10%;
+}
+
 /*<<<<<<< HEAD*/
 /*.card-body{*/
 /*font-family: 'Nunito Sans', sans-serif;*/
