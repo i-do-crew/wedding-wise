@@ -22,7 +22,6 @@ main{
     flex:auto;
     justify-content: space-between !important;
     align-items: center;
-    padding-left:150px !important;
 }
 
 #budgetModalBtn{
@@ -50,4 +49,14 @@ main{
 .text-center{
     margin-top: 5%;
     margin-bottom: 5%;
+}
+.vendorText{
+    padding-left: 100px;
+}
+.vendorBudget{
+    padding-left:150px !important;
+
+}
+.budgetVendorTitle{
+    /*padding-left: 200px;*/
 }
