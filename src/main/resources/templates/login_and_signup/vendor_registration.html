@@ -93,24 +93,24 @@
                             <input th:field="*{venue.capacity}" type="text" name="capacity" class="form-control mb-3" id="capacity" placeholder="Enter your venue capacity">
                         </div>
                         <div class=" d-none" id="VendorPhotoFormat">
-                                    <label for="photoType" class="form-label"></label>
-                                    <select th:field="*{photoFormat}" id="photoType" class="form-select mb-3">
-                                        <option th:value="0" selected>Select your formats available...</option>
-                                        <option th:each="format : ${photoFormats}" th:text="${format.title}" th:value="${format.id}"></option>
-                                    </select>
-                                </div>
-                        <div class=" d-none" id="musicGenre">
-                                    <label for="musicType" class="form-label"></label>
-                                    <select th:field="*{musicVendorCategory}" id="musicType" class="form-select">
-                                        <option th:value="0" selected>Select the type of musical group...</option>
-                                        <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.id}"></option>
-                                    </select>
-                                    <label for="genre" class="form-label"></label>
-                                    <select th:field="*{musicGenres}" id="genre" class="form-select mb-3" multiple="multiple">
-                                        <option th:value="0" selected>Select your genre(s)...</option>
-                                        <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.id}"></option>
-                                    </select>
-                                </div>
+                                <label for="photoType" class="form-label"></label>
+                                <select th:field="*{photoFormat}" id="photoType" class="form-select mb-3">
+                                    <option th:value="0" selected>Select your formats available...</option>
+                                    <option th:each="format : ${photoFormats}" th:text="${format.title}" th:value="${format.id}"></option>
+                                </select>
+                            </div>
+                            <div class=" d-none" id="musicGenre">
+                                <label for="musicType" class="form-label"></label>
+                                <select th:field="*{musicVendorCategory}" id="musicType" class="form-select">
+                                    <option th:value="0" selected>Select the type of musical group...</option>
+                                    <option th:each="type : ${musicTypes}" th:text="${type.title}" th:value="${type.id}"></option>
+                                </select>
+                                <label for="genre" class="form-label"></label>
+                                <select th:field="*{musicGenres}" id="genre" class="form-select mb-3" multiple="multiple">
+                                    <option th:value="0" selected>Select your genre(s)...</option>
+                                    <option th:each="genre : ${musicGenres}" th:text="${genre.title}" th:value="${genre.id}"></option>
+                                </select>
+                            </div>
                         </div>
                         <button type="submit" id="verifyBtn" class="btn btn-secondary mb-3">Sign Up</button>
                     </form>

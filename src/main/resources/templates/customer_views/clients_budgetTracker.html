@@ -18,7 +18,7 @@
 <main>
     <div class="container p-4">
         <div class="card p-3 shadow">
-            <h1 class="text-center fontTitle">Your Current Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$<span th:text="${currentBalance}"></span>.00</button></h1>
+            <h1 class="text-center fontTitle">Your Current Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$<span th:text="${currentBalance}"></span></button></h1>
             <hr>
             <div class="row vendor" th:each="category: ${session.categories}">
                 <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="text-decoration-none text-black fontTitle vendorTitle"><h4 th:text="${category.title}"></h4></a>
