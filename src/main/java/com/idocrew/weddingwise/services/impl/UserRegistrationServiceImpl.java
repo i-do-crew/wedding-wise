@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -148,7 +149,13 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private boolean checkIfUserExist(String userName) {
-        return userService.findByUsername(userName) != null;
+        User userEntity = null;
+        try {
+            userEntity = userService.findByUsername(userName);
+        } catch (UsernameNotFoundException e) {
+            // we expect to get a username not found exception
+        }
+        return userEntity != null;
     }
 
     private void sendRegistrationConfirmationEmail(User userEntity) {
