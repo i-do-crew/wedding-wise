@@ -31,14 +31,14 @@
               <button type="button" class="btn font ms-1 mb-3" id="bookBtn">Request Quote</button>
             </div>
           </div>
-            <p class="text-center px-5 font" th:text="${vendor.about}"></p>
-          <img th:if="${vid == 1}" src="/img/vendors/Venues.jpg" alt="picture" class="businessProfileImg">
-          <img th:if="${vid == 2}" src="/img/vendors/Photographers.jpg" alt="picture" class="businessProfileImg">
-          <img th:if="${vid == 3}" src="/img/vendors/Florists.jpg" alt="picture" class="businessProfileImg">
-          <img th:if="${vid == 4}" src="/img/vendors/Catering.jpg" alt="picture" class="businessProfileImg">
-          <img th:if="${vid == 5}" src="/img/vendors/Cakes-and-Dessert.jpg" alt="picture" class="businessProfileImg">
-          <img th:if="${vid == 6}" src="/img/vendors/Bar-and-Beverage.jpg" alt="picture" class="businessProfileImg">
-          <img th:if="${vid == 7}" src="/img/vendors/Bands-and-DJs.jpg" alt="picture" class="businessProfileImg">
+            <p class="px-5 font" th:text="${vendor.about}"></p>
+          <img th:if="${vendor.vendorCategory.id  == 1}" src="/img/vendors/Venues.jpg" alt="picture" class="businessProfileImg">
+          <img th:if="${vendor.vendorCategory.id  == 2}" src="/img/vendors/Photographers.jpg" alt="picture" class="businessProfileImg">
+          <img th:if="${vendor.vendorCategory.id  == 3}" src="/img/vendors/Florists.jpg" alt="picture" class="businessProfileImg">
+          <img th:if="${vendor.vendorCategory.id  == 4}" src="/img/vendors/Catering.jpg" alt="picture" class="businessProfileImg">
+          <img th:if="${vendor.vendorCategory.id  == 5}" src="/img/vendors/Cakes-and-Dessert.jpg" alt="picture" class="businessProfileImg">
+          <img th:if="${vendor.vendorCategory.id  == 6}" src="/img/vendors/Bar-and-Beverage.jpg" alt="picture" class="businessProfileImg">
+          <img th:if="${vendor.vendorCategory.id  == 7}" src="/img/vendors/Bands-and-DJs.jpg" alt="picture" class="businessProfileImg">
 
         </div>
         <hr class="mt-4 mb-4"/>
@@ -51,13 +51,31 @@
           <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="/img/flowers.jpg" class="d-block  image" alt="pic1">
+                <img th:if="${vendor.vendorCategory.id == 1}" src="/img/carousel/venues_1.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 2}" src="/img/carousel/photos_1.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 3}" src="/img/carousel/flowers_1.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 4}" src="/img/carousel/catering_1.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 5}" src="/img/carousel/cakes_1.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 6}" src="/img/carousel/drinks_1.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 7}" src="/img/carousel/bands_1.jpg" alt="picture" class="image">
               </div>
               <div class="carousel-item">
-                <img src="/img/flowers.jpg" class="d-block  image" alt="pic2">
+                <img th:if="${vendor.vendorCategory.id  == 1}" src="/img/carousel/venues_2.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 2}" src="/img/carousel/photos_2.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 3}" src="/img/carousel/flowers_2.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 4}" src="/img/carousel/catering_2.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 5}" src="/img/carousel/cakes_2.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 6}" src="/img/carousel/drinks_2.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 7}" src="/img/carousel/bands_2.jpg" alt="picture" class="image">
               </div>
               <div class="carousel-item">
-                <img src="/img/flowers.jpg" class="d-block   image" alt="pic3">
+                <img th:if="${vendor.vendorCategory.id  == 1}" src="/img/carousel/venues_3.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 2}" src="/img/carousel/photos_3.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 3}" src="/img/carousel/flowers_3.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 4}" src="/img/carousel/catering_3.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 5}" src="/img/carousel/cakes_3.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 6}" src="/img/carousel/drinks_3.jpg" alt="picture" class="image">
+                <img th:if="${vendor.vendorCategory.id  == 7}" src="/img/carousel/bands_3.jpg" alt="picture" class="image">
               </div>
             </div>
             <button class="carousel-control-prev ps-5" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
