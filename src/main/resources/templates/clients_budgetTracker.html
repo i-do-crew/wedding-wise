@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head >
     <th:block th:replace="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
@@ -17,8 +17,8 @@
 
 <main>
     <div class="container p-4">
-        <div class="card p-3 ">
-            <h1 class="text-center fontTitle">Your Current Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$<span th:text="${currentBalance}"></span></button></h1>
+        <div class="card p-3 shadow">
+            <h1 class="text-center fontTitle">Your Current Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$<span th:text="${currentBalance}"></span>.00</button></h1>
             <hr>
             <div class="row vendor" th:each="category: ${session.categories}">
                 <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="text-decoration-none text-black fontTitle vendorTitle"><h4 th:text="${category.title}"></h4></a>
@@ -103,7 +103,7 @@
 </div>
 
 <!-- EDIT PROFILE MODAL -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="myModal" class="modal fade" role="dialog" sec:authorize="hasRole('ROLE_CUSTOMER')">
     <div class="container p-4">
         <div class="modal-dialog">
             <div class="modal-content card p-4">

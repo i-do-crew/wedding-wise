@@ -15,8 +15,8 @@
 <div th:insert="~{fragments/fragments :: sidebarVendor}"></div>
 
 <main>
-    <div class="container p-3">
-        <div class="card border-secondary container-fluid" id="mainCard">
+    <div class="container p-4">
+        <div class="card container-fluid shadow" id="mainCard">
             <div class="row" id="titleRow">
                 <div class="col">
                     <h1 class="title">The I Do Crew</h1>
@@ -35,12 +35,12 @@
                     <a href="https://github.com/micah810" class="text-dark text-decoration-none fa-2x"><i class="fa-brands fa-github"></i></a>
                 </div>
                 <div class="col">
-                    <img id="micahpic" src="/img/headshots/micah_larson_headshot.jpg" alt="micah headshot">
+                    <img class="index-box-shadow" id="micahpic" src="/img/headshots/micah_larson_headshot.jpg" alt="micah headshot">
                 </div>
             </div>
             <div class="row" id="andreaRow">
                 <div class="col">
-                    <img id="andreapic" src="/img/headshots/andrea_varnado_headshot.jpg" alt="andrea headshot">
+                    <img class="index-box-shadow" id="andreapic" src="/img/headshots/andrea_varnado_headshot.jpg" alt="andrea headshot">
                 </div>
                 <div class="col" id="andreaCol">
                     <h4 class="font">Andrea Varnado</h4>
@@ -65,12 +65,12 @@
                     <a href="https://github.com/BDorries/" class="text-dark text-decoration-none fa-2x"><i class="fa-brands fa-github"></i></a>
                 </div>
                 <div class="col">
-                    <img id="billiepic" src="/img/headshots/billie_dorries_headshot.png" alt="billie headshot">
+                    <img class="index-box-shadow" id="billiepic" src="/img/headshots/billie_dorries_headshot.png" alt="billie headshot">
                 </div>
             </div>
             <div class="row" id="claytonRow">
                 <div class="col">
-                    <img id="claytonpic" src="/img/headshots/clayton_priestley_headshot.jpg" alt="clayton headshot">
+                    <img class="index-box-shadow" id="claytonpic" src="/img/headshots/clayton_priestley_headshot.jpg" alt="clayton headshot">
                 </div>
                 <div class="col" id="claytonCol">
                     <h4 class="font">Clayton Priestley</h4>
@@ -88,7 +88,7 @@
 </main>
 
 <!-- EDIT PROFILE MODAL -->
-<div id="myModal" class="modal fade" role="dialog" sec:authorize="!isAnonymous()">
+<div id="myModal" class="modal fade" role="dialog" sec:authorize="hasRole('ROLE_CUSTOMER')">
     <div class="container p-4">
         <div class="modal-dialog">
             <div class="modal-content card p-4">

@@ -2,6 +2,7 @@
     font-family: "Luxurious Roman";
     margin-top: 30px;
     margin-bottom: 25px;
+    align-content: center;
 }
 
 .p{
@@ -11,8 +12,14 @@
 .title-text{
     font-family: "Luxurious Roman";
     color: black;
-    text-decoration: none;
+    text-decoration: none !important;
+    margin-left: 10%;
 }
+
+.title-text:hover{
+    color: #E19B6E;
+}
+
 
 /*hr{*/
 /*    width: 50%;*/
@@ -24,8 +31,8 @@ main{
 
 #mainCard{
     background-color: #FFFAF7;
-    border-radius: 0;
-    border: 1px solid #212727;
+    border-radius: 20px !important;
+    border: .5px solid lightgray !important;
 }
 
 .col{
@@ -42,6 +49,16 @@ img{
     margin: auto;
     margin-left: 20px;
 }
+#likedVendorText{
+    padding-right:125px !important;
+    padding-left: 100px;
+    padding-top: 25px;
+}
+#likedVendorImg{
+    padding-left:100px;
+}
+
+
 
 /*.content {*/
 /*    position: relative;*/

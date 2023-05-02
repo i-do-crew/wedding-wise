@@ -9,8 +9,8 @@ td {
 
 #mainCard{
     background-color: #FFFAF7;
-    border-radius: 0;
-    border: 1px solid #212727;
+    border-radius: 20px;
+    border: .5px solid lightgrey;
 }
 
 #border {
@@ -26,12 +26,12 @@ td {
 }
 .card{
     background-color: #FFFAF7;
-    border-radius: 0;
-    border: 1px solid #212727;
+    border-radius: 20px;
+    border: .5px solid lightgrey;
 }
 
 .modal-content{
-    border-radius: 0 !important;
+    /*border-radius: 0 !important;*/
 }
 
 #card1, #card2, #card3{
@@ -45,7 +45,10 @@ td {
    color: #E19B6E;
 }
 
-.text-center{
-    margin-top: 5%;
-}
+/*.text-center{*/
+/*    margin-top: 5%;*/
+/*}*/
 
+.index-box-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

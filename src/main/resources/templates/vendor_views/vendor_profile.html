@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head >
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Vendor Profile</title>
     <link rel="stylesheet" href="/css/vendors/vendor_profile.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css">
+
 </head>
 <body>
 <!--NAVBAR-->
@@ -16,9 +19,9 @@
 
 <main>
     <div class="container p-4">
-        <div class="card container">
+        <div class="card container shadow">
             <div class="row mx-4 mt-4">
-                <div class="col-11">
+                <div class="col-11 d-flex justify-content-center ps-3">
                     <h1 class="fontTitle pb-3" th:text="${session.vendor.businessName}"></h1>
                 </div>
                 <div class="col-1 d-flex justify-content-end">
@@ -58,33 +61,20 @@
                     </button>
                 </div>
             </div>
+            <hr>
             <div class="row container font ms-1">
-                <h2>Reviews</h2>
-                <div class="card mt-3">
-                    <h5 class="font">Review Title</h5>
-                    <p class="font"> 5 Stars</p>
-                    <p class="font"> Low Cost</p>
-                    <p class="font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-                    <div>
-                        <button type="button" class="btn font d-flex justify-content-start" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-regular fa-comment"></i></button>
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <h5 class="font">Review Title</h5>
-                    <p class="font"> 5 Stars</p>
-                    <p class="font"> Low Cost</p>
-                    <p class="font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-                    <div>
-                        <button type="button" class="btn font d-flex justify-content-start" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-regular fa-comment"></i></button>
-                    </div>
-                </div>
                 <div class="card mt-3 mb-3">
-                    <h5 class="font">Review Title</h5>
-                    <p class="font"> 5 Stars</p>
-                    <p class="font"> Low Cost</p>
-                    <p class="font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-                    <div>
-                        <button type="button" class="btn font d-flex justify-content-start" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-regular fa-comment"></i></button>
+                    <div class="row container">
+                        <h2 class="font">Reviews</h2>
+                        <div class="card mt-3" th:each="vendorRating: ${vendorRatings}">
+                            <h6 class="card-title font"><span class="fa-md font" th:text="${vendorRating.title}"></span> - <span class="fa-md font" th:text="${vendorRating.customer.user.firstName}"></span></h6>
+                            <p class="card-body font"><span class="fa-md font" th:text="${vendorRating.rating}"></span> Star(s)</p>
+                            <p class="card-body font" th:text="${vendorRating.description}"></p>
+                        </div>
+                    </div>
+<!--                        <button type="button" class="btn font d-flex justify-content-start" data-bs-toggle="modal" data-bs-target="#editModal">-->
+<!--                            <i class="reply fa-solid fa-reply"></i>-->
+<!--                        </button>-->
                     </div>
                 </div>
             </div>
@@ -92,8 +82,8 @@
     </div>
 </main>
 
-    <!-- EDIT PROFILE MODAL -->
-    <div id="myModal" class="modal fade" role="dialog">
+    <!-- EDIT VENDOR PROFILE MODAL -->
+    <div id="myModal" class="modal fade" role="dialog" sec:authorize="hasRole('ROLE_VENDOR')">
         <div class="container p-4">
             <div class="modal-dialog">
                 <div class="modal-content card p-4">
@@ -112,7 +102,7 @@
                                 <input type="hidden" name="category" th:field="*{vendor.vendorCategory.id}">
                                 <input type="hidden" name="about" th:field="*{vendor.about}">
 <!--                                <input type="hidden" name="id" th:field="*{vendor.user.id}">-->
-
+<!---->
 <!--                                //venue-->
 <!--                                //photographers-->
 <!--                                //bands and djs-->
@@ -217,12 +207,16 @@
                     <div class="modal-body">
                         <div>
                             <h5 class="font">Review Title</h5>
-                            <p class="font"> 5 Stars</p>
+<!--                            <p class="font"> 5 Stars</p>-->
+                            <i class="fa-sharp fa-light fa-star"></i>
                             <p class="font"> Low Cost</p>
                             <p class="font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt officiis quod recusandae temporibus voluptas? Ad, aspernatur delectus enim, excepturi ipsam iure magnam maiores minima nesciunt pariatur provident sapiente tempore voluptas.</p>
                         </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-reply"></i>
+                        </div>
                         <div class="d-grid g-2 mb-1">
-                            <input type="text" placeholder="Leave your comment..." class="mb-4 font">
+                            <input type="text" placeholder="Leave your comment..." class="mb-4 font"  onfocus="this.style.fontWeight='bold'"  onblur="this.style.fontWeight='normal'">
                         </div>
                     </div>
                     <div class="modal-footer">

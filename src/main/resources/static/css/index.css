@@ -97,11 +97,13 @@ main {
 #vendorRow, #budgetRow, #guestRow, #ideaRow {
     text-align: left;
     position: relative;
+    height: 30%;
 }
 
 #vendorCol, #budgetCol, #guestCol, #ideaCol {
     font-family: 'Nunito Sans', sans-serif;
     font-size: x-large;
+    height: auto;
 }
 
 /*#vendorColImg, #budgetColImg, #guestColImg, #ideaColImg {*/
@@ -110,12 +112,13 @@ main {
 /*}*/
 
 #vendorImg, #budgetImg, #guestImg, #ideaImg {
-    border-radius: 30px;
-    height: auto;
-    width: 100%;
-    margin-top: 30px;
-    margin-bottom: 30px;
-
+    border-radius: 20px;
+    height: 350px;
+    width: auto;
+    object-fit: cover;
+    /*margin-top: 30px;*/
+    /*margin-bottom: 30px;*/
+    border: .5px solid lightgray;
 }
 
 #budgetImg, #ideaImg {
@@ -146,4 +149,14 @@ p {
 
 b {
     font-family: 'Nunito Sans', sans-serif;
+}
+
+#featureContainer{
+    padding-right: 10rem !important;
+    padding-left: 10rem !important;
+
+}
+
+.index-box-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
