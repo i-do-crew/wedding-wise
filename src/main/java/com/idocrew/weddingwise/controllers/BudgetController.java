@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -48,53 +47,26 @@ public class BudgetController {
         BudgetEntry budgetEntry = new BudgetEntry();
         model.addAttribute("budgetEntry", budgetEntry);
         List<BudgetEntry> budgetEntries = budgetEntryService.findBudgetEntriesByCustomer(customer);
-        fixBudgetEntryVendors(customer, budgetEntries);
         request.getSession().setAttribute("budgetEntries", budgetEntries);
+        model.addAttribute("budgetEntries", budgetEntries);
         BigDecimal balance = customer.getBudget();
         for (BudgetEntry entry: budgetEntries) {
             balance = balance.subtract(entry.getAmount());
         }
         model.addAttribute("currentBalance", balance);
-        return "/clients_budgetTracker";
+        return "customer_views/clients_budgetTracker";
     }
 
-    private void fixBudgetEntryVendors(Customer customer, List<BudgetEntry> budgetEntries) {
-        List<SimpleBudgetEntry> simpleBudgetEntries = budgetEntryService.findSimpleBudgetEntriesByCustomer(customer);
-        for (int i = 0; i < budgetEntries.size(); i++) {
-            Vendor vendor = vendorUtility.findById(simpleBudgetEntries.get(i).getVendorId());
-            budgetEntries.get(i).setVendor(vendor);
-        }
-    }
-
-    @GetMapping("/budget/edit/{vendorId}")
-    public String editBudgetCost(@SessionAttribute("customer") Customer customer, @PathVariable Long vendorId){
+    @PostMapping("/budget/edit/{vendorId}")
+    public String editBudgetCost(@SessionAttribute("customer") Customer customer, @ModelAttribute("budgetEntry") BudgetEntry budgetEntry, @PathVariable Long vendorId){
         Vendor vendor = vendorUtility.findById(vendorId);
-        BudgetEntry budgetEntry = budgetEntryService.findBudgetEntryByCustomerAndVendor(customer, vendor);
-        budgetEntry.setAmount(BigDecimal.valueOf(0));
-        //model.addAttribute("customer", customer);
-        //model.addAttribute("budgetEntry", budgetEntry);
-        return ("/clients_budgetTracker");
+        BudgetEntry budgetEntryEntity = budgetEntryService.findBudgetEntryByCustomerAndVendor(customer, vendor);
+        budgetEntryEntity.setCustomer(customer);
+        budgetEntryEntity.setVendor(vendor);
+        budgetEntryEntity.setAmount(budgetEntry.getAmount());
+        budgetEntryService.save(budgetEntryEntity);
+        return "redirect:/budget";
     }
-    @PostMapping("/budget/edit")
-    public String postBudgetCost(@CurrentSecurityContext(expression = "authentication?.name") String username,
-                                 @ModelAttribute("budgetEntry") BudgetEntry budgetEntry,
-                                 @ModelAttribute("vendor") Vendor vendor, Model model, HttpServletRequest request){
-        refactorThisMethod(username, model, request);
-        List<BudgetEntry> budgetEntries = (List<BudgetEntry>) request.getSession().getAttribute("budgetEntries");
-        Customer customer = (Customer) request.getSession().getAttribute("customer");
-        budgetEntry.setCustomer(customer);
-        budgetEntry.setVendor(vendor);
-        for (BudgetEntry entry : budgetEntries) {
-            if (entry.getCustomer().equals(budgetEntry.getCustomer()) && entry.getVendor().equals(budgetEntry.getVendor())) {
-                entry.setAmount(budgetEntry.getAmount());
-            }
-        }
-        budgetEntryService.save(budgetEntries);
-        return ("/clients_budgetTracker");
-    }
-    //create
-    //read
-    //update
-    //delete
+
 
 }

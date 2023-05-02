@@ -25,6 +25,6 @@ public class VendorCategory {
     @Column(name="title", columnDefinition="varchar(50)")
     private String title;
 
-    @OneToMany(mappedBy = "vendorCategory")
+    @OneToMany(mappedBy = "vendorCategory", fetch = FetchType.EAGER)
     private Set<Vendor> vendors = new LinkedHashSet<>();
 }

@@ -22,17 +22,19 @@
             <hr>
             <div class="row vendor" th:each="category: ${session.categories}">
                 <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="text-decoration-none text-black fontTitle vendorTitle"><h4 th:text="${category.title}"></h4></a>
-                <div th:each="budgetEntry : ${session.budgetEntries}">
-                    <div th:if="${budgetEntry.vendor.vendorCategory.title} == ${category.title}">
+                <div th:each="entry : ${budgetEntries}">
+                    <div th:if="${entry.vendor.vendorCategory.title} == ${category.title}">
                         <div class="col">
                             <a href="/vendors/individual/1"><img class="image" src="/img/client_profile/venue_clientProfile.jpg" alt="Vendor Img"></a>
                         </div>
                         <div class="col font">
-                            <p>Business Name: <span th:text="${budgetEntry} ? ${budgetEntry.vendor.businessName}"></span></p>
-                            <p>Cost: $<span th:text="${budgetEntry} ? ${budgetEntry.amount}"></span></p>
-                            <input type="text" th:field="${budgetEntry.vendor.id}">
-                            <button id="budgetAmountModalBtn" type="button" class="btn font" th:data-id="${budgetEntry.vendor.id}" data-bs-toggle="modal" data-bs-target="#budgetAmountModal">
-                                Add Amount <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                            <p>Business Name: <span th:text="${entry} ? ${entry.vendor.businessName}"></span></p>
+                            <p>Cost: $<span th:text="${entry} ? ${entry.amount}"></span></p>
+                            <label>
+                                <input type="text" th:text="${entry} ? ${entry.vendor.id}">
+                            </label>
+                            <button type="button" class="btn font budgetAmountModalBtn" th:name="${entry} ? ${entry.vendor.businessName}" th:data-id="${entry} ? ${entry.vendor.id}" data-bs-toggle="modal" data-bs-target="#budgetAmountModal">
+                                Update Amount <i class="fa-solid fa-circle-dollar-to-slot"></i>
                             </button>
                         </div>
                     </div>
@@ -79,11 +81,12 @@
     <div class="container p-4">
         <div class="modal-dialog">
             <div class="modal-content card p-4">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center fontTitle">Edit your profile</h4>
+                <div class="modal-header d-flex flex-column">
+                    <h4 class="modal-title text-center fontTitle mb-0">Update Expense For</h4>
+                    <h5 class="modal-title text-center fontTitle mt-0" id="expense-update-title">Vendor<</h5>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/budget/edit}" method="POST" th:object="${budgetEntry}">
+                    <form th:action="@{/budget/edit/}" method="POST" th:object="${budgetEntry}" id="budget-entry-model">
                         <input type="hidden" id="vendor" name="vendor" th:value="${budgetEntry.vendor}" />
                         <div>
                             <label for="amount" class="form-label"></label>
@@ -199,6 +202,7 @@
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 <!--JAVASCRIPT-->
-<script type="text/javascript" src="/static/budgetModal.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/budgetModal.js"></script>
 </body>
 </html>

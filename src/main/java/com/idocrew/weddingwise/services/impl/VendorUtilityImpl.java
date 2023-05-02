@@ -20,10 +20,9 @@ public class VendorUtilityImpl implements VendorUtility {
 
     @Override
     public Vendor findById(long id) {
-        String query = String.format("select * from vendor where id = %d", id);
-        Vendor vendor = (Vendor) em.createNativeQuery(query, Vendor.class).getSingleResult();
-        return vendor;
-        //return vendorRepository.getReferenceById(id);
+        //String query = String.format("select * from vendors where id = %d", id);
+        //return (Vendor) em.createNativeQuery(query, Vendor.class).getSingleResult();
+        return vendorRepository.findById(id);
     }
 
     @Override

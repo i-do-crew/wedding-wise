@@ -34,7 +34,7 @@
                         <a class="nav-link" href="/vendors">Vendors</a>
                     </li>
                     <li class="navbarItem nav-item me-3">
-                        <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" href="/budget_tracker" class="nav-link align-self-center">Budget Tracker</a>
+                        <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" href="/budget" class="nav-link align-self-center">Budget Tracker</a>
                     </li>
                     <li class="navbarItem nav-item me-3">
                         <a th:if="${#authorization.expression('hasRole(''CUSTOMER'')')}" href="/clients/guests" class="nav-link  align-self-center">Guest List Manager</a>
@@ -102,7 +102,7 @@
             <div class="position-absolute bottom-0 px-1" id="bottomBg">
                 <ul>
                     <li class="row pb-4">
-                        <a href="/budget_tracker" class="text-decoration-none text-dark font fa-lg" ><i class="fa-solid fa-coins me-2"></i>  Budget: $<span th:text="${session.customer} ? ${session.customer.budget}"></span></a>
+                        <a href="/budget" class="text-decoration-none text-dark font fa-lg" ><i class="fa-solid fa-coins me-2"></i>  Budget: $<span th:text="${session.customer} ? ${session.customer.budget}"></span></a>
                     </li>
                     <li class="row pb-4">
                         <a href="/clients/guests" class="text-decoration-none text-dark font fa-lg" id="guest"><i class="fa-solid fa-people-group me-2"></i>  Guest Count: <span th:text="${session.customer} ? ${session.customer.guestCount}"></span></a>

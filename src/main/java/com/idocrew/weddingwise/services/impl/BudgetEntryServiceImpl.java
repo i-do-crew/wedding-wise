@@ -34,6 +34,11 @@ public class BudgetEntryServiceImpl implements BudgetEntryService {
     }
 
     @Override
+    public void save(BudgetEntry budgetEntry) {
+        budgetEntryRepository.save(budgetEntry);
+    }
+
+    @Override
     public void save(List<BudgetEntry> budgetEntries) {
         budgetEntryRepository.saveAll(budgetEntries);
     }

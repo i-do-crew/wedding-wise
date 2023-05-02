@@ -13,6 +13,8 @@ public interface BudgetEntryService {
 
     List<BudgetEntry> findBudgetEntriesByCustomer(Customer customer);
 
+    void save(BudgetEntry budgetEntry);
+
     void save(List<BudgetEntry> budgetEntries);
 
     void delete(BudgetEntry budgetEntry);
