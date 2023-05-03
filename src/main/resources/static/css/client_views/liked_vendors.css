@@ -9,6 +9,12 @@
     font-family: nunito;
 }
 
+.section {
+    padding: 20px 200px 20px 200px;
+    flex: auto;
+    justify-content: center;
+}
+
 .title-text{
     font-family: "Luxurious Roman";
     color: black;

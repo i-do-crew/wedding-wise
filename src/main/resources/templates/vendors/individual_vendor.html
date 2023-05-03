@@ -25,14 +25,10 @@
                 <div th:insert="~{fragments/fragments :: reactionButtons}" class="fa-lg"></div>
               </div>
             </div>
-            <div class="row d-inline-flex ">
-              <div id="vendorContact" class="col font">
-                <p th:text="${user.email}"></p>
-                <p>000-000-0000</p>
-                <p>000 Vendor St</p>
-                <button type="button" class="btn font ms-1 mb-3" id="bookBtn">Request Quote</button>
-              </div>
-                <img th:if="${vid == 1}"  alt="map" id="businessMap" src="https://via.placeholder.com/50x50" class="businessMapImg ">
+            <div id="vendorContact" class="col font">
+              <p th:text="${user.email}"></p>
+              <p><span th:text="${user.city}"></span>,<span th:text="${user.state}"></span></p>
+              <button type="button" class="btn font ms-1 mb-3" id="bookBtn">Request Quote</button>
             </div>
           </div>
             <p class="text-center px-5 font" th:text="${vendor.about}"></p>
@@ -75,25 +71,28 @@
           </div>
         </div>
         <div class="row container">
-          <hr>
-          <h2 class="font mt-4 mb-3">Reviews</h2>
-          <div class="card mt-3">
-            <h6 class="card-title font">Review Title</h6>
-            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
+          <h2 class="font">Reviews</h2>
+          <div class="card mt-3" th:each="vendorRating: ${vendorRatings}">
+            <h6 class="card-title font"><span class="fa-md font" th:text="${vendorRating.title}"></span> - <span class="fa-md font" th:text="${vendorRating.customer.user.firstName}"></span></h6>
+            <p class="card-body font"><span class="fa-md font" th:text="${vendorRating.rating}"></span> Star(s)</p>
+            <p class="card-body font" th:text="${vendorRating.description}"></p>
           </div>
-          <div class="card mt-3">
-            <h6 class="card-title font">Review Title</h6>
-            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-          </div>
-          <div class="card mt-3 mb-3">
-            <h6 class="card-title font">Review Title</h6>
-            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>
-          </div>
-        </div>
+
+          <!--          <div class="card mt-3">-->
+          <!--            <h6 class="card-title font">Review Title</h6>-->
+          <!--            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>-->
+          <!--          </div>-->
+          <!--          <div class="card mt-3 mb-3">-->
+          <!--            <h6 class="card-title font">Review Title</h6>-->
+          <!--            <p class="card-body font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam assumenda cum eaque eum maiores optio quibusdam similique veniam. Earum?</p>-->
+
+
+
         <!-- Button trigger modal -->
           <button type="button" class="btn d-grid g-3" id="individualVendorRateBtn" data-bs-toggle="modal" data-bs-target="#rateVendorModalBtn">Rate this Vendor</button>
         </div>
       </div>
+    </div>
 </main>
 
 <!--RATE THIS VENDOR MODAL-->

@@ -21,7 +21,7 @@
         <div class="card p-3 shadow border-secondary container-fluid" id="mainCard">
             <!-- back container -->
             <h1 class="text-center">Liked Vendors</h1>
-            <hr>
+            <div class="section row m-0">
             <div class=" vendorCard" th:each="category: ${session.categories}">
                 <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="labels text-decoration-none"><h4 class="title-text"
                                                                                 th:text="${category.title}"></h4></a>
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="col-9" id="likedVendorText">
                                     <h5 class="font" th:text="${customerVendor.vendor.businessName}"></h5>
-                                    <p class="font" th:text="${customerVendor.vendor.about}"></p>
+                                    <p class="font text-truncate" th:text="${customerVendor.vendor.about}"></p>
                                     <div th:insert="~{fragments/fragments :: reactionButtons}" class="fa-lg"></div>
                                 </div>
                             </div>
@@ -249,6 +249,7 @@
             <!--            </div>-->
 
         </div>
+    </div>
     </div>
 </main>
 <!--FOOTER-->

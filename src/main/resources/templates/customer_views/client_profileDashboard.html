@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:insert="~{fragments/fragments :: head}"></th:block>
     <meta charset="UTF-8">
@@ -63,7 +63,7 @@
 </main>
 
 <!-- EDIT PROFILE MODAL -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="myModal" class="modal fade" role="dialog" sec:authorize="hasRole('ROLE_CUSTOMER')">
     <div class="container p-4">
         <div class="modal-dialog">
             <div class="modal-content card p-4">
