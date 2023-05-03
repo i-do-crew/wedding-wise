@@ -5,6 +5,7 @@ import com.idocrew.weddingwise.entity.Vendor;
 import com.idocrew.weddingwise.entity.VendorCategory;
 import com.idocrew.weddingwise.repositories.VendorRepository;
 import com.idocrew.weddingwise.services.VendorUtility;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,13 @@ import java.util.List;
 public class VendorUtilityImpl implements VendorUtility {
 
     private final VendorRepository vendorRepository;
+    private final EntityManager em;
 
     @Override
     public Vendor findById(long id) {
-        return vendorRepository.getReferenceById(id);
+        //String query = String.format("select * from vendors where id = %d", id);
+        //return (Vendor) em.createNativeQuery(query, Vendor.class).getSingleResult();
+        return vendorRepository.findById(id);
     }
 
     @Override

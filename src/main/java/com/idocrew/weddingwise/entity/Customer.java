@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.context.annotation.Scope;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Customer {
     @Column(name = "id", nullable = false)
     private long id;
     @Column(name="budget", columnDefinition="int(11)")
-    private Integer budget = null;
+    private BigDecimal budget = null;
     @Column(name="guest_count", columnDefinition="int(11)")
     private Integer guestCount = null;
     @Column(name="partner_fname", columnDefinition="varchar(50)", nullable = false)

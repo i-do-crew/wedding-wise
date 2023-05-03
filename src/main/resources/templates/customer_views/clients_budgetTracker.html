@@ -18,140 +18,96 @@
 <main>
     <div class="container p-4">
         <div class="card p-3 shadow">
-            <h1 class="text-center fontTitle">Your Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$<span th:text="${customer} ? ${customer.budget}"></span>.00</button></h1>
-            <hr>
-            <div class="row vendor ">
-                <a href="/vendors/categories/1" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Venues</h4></a>
-                <div class="col">
-                    <a href="/vendors/individual/1"><img class="image" src="/img/client_profile/venue_clientProfile.jpg" alt="Vendor Img"></a>
-                </div>
-                <div class="col font">
-                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
-                    <p>Cost: $000.00</p>
-                </div>
-                <div class="col ps-3">
-<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
-                </div>
-            </div>
-            <hr>
-            <div class="row vendor ">
-                <a href="/vendors/categories/2" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Photographers</h4></a>
-                <div class="col">
-                    <a href="/vendors/individual/2"><img class="image"  src="/img/client_profile/photo_clientProfile.jpg" alt="Vendor Img"></a>
-                </div>
-                <div class="col font">
-                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
-                    <p>Cost: $000.00</p>
-                </div>
-                <div class="col ps-3">
-<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
+            <h1 class="text-center fontTitle">Your Current Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$<span th:text="${currentBalance}"></span></button></h1>
+<!--            <hr>-->
+            <div class="row  d-flex justify-content-center align-items-center" th:each="category: ${session.categories}">
+                <hr class="px-5" >
+                <div class="section">
+                <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="text-decoration-none text-black fontTitle vendorTitle"><h4 th:text="${category.title}"></h4></a>
+                <div th:each="entry : ${budgetEntries}">
+                    <div th:if="${entry.vendor.vendorCategory.title} == ${category.title}">
+                        <div class="row my-4 vendorText">
+                            <div class="col-3">
+                                <a href="/vendors/individual/1"><img class="image" src="/img/client_profile/venue_clientProfile.jpg" alt="Vendor Img"></a>
+                            </div>
+                            <div class="col-9 font">
+                                <p>Business Name: <span th:text="${entry} ? ${entry.vendor.businessName}"></span></p>
+                                <p>Cost: $<span th:text="${entry} ? ${entry.amount}"></span></p>
+<!--                                <label>-->
+<!--                                    <input type="text" th:text="${entry} ? ${entry.vendor.id}">-->
+<!--                                </label>-->
+                                <button type="button" class="btn btn-dark font budgetAmountModalBtn" th:name="${entry} ? ${entry.vendor.businessName}" th:data-id="${entry} ? ${entry.vendor.id}" data-bs-toggle="modal" data-bs-target="#budgetAmountModal">
+                                    Update Amount <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <hr>
-            <div class="row vendor ">
-                <a href="/vendors/categories/3" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Florists</h4></a>
-                <div class="col">
-                    <a href="/vendors/individual/3"><img class="image" src="/img/client_profile/florists_clientPage.jpg" alt="Vendor Img"></a>
-                </div>
-                <div class="col font">
-                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
-                    <p>Cost: $000.00</p>
-                </div>
-                <div class="col ps-3">
-<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
-                </div>
-            </div>
-            <hr>
-            <div class="row vendor ">
-                <a href="/vendors/categories/4" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Caterers</h4></a>
-                <div class="col">
-                    <a href="/vendors/individual/4"><img class="image"  src="/img/client_profile/cater_clientProfile.jpg" alt="Vendor Img"></a>
-                </div>
-                <div class="col font">
-                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
-                    <p>Cost: $000.00</p>
-                </div>
-                <div class="col ps-3">
-<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
-                </div>
-            </div>
-            <hr>
-            <div class="row vendor ">
-                <a href="/vendors/categories/5" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Bakeries</h4></a>
-                <div class="col">
-                    <a href="/vendors/individual/5"><img class="image"  src="/img/client_profile/cake_clientProfile.jpg" alt="Vendor Img"></a>
-                </div>
-                <div class="col font">
-                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
-                    <p>Cost: $000.00</p>
-                </div>
-                <div class="col ps-3">
-<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
-                </div>
-            </div>
-            <hr>
-            <div class="row vendor ">
-                <a href="/vendors/categories/6" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Bars and Beverages</h4></a>
-                <div class="col">
-                    <a href="/vendors/individual/6"><img class="image" src="/img/client_profile/bar_clientProfile.webp" alt="Vendor Img"></a>
-                </div>
-                <div class="col font">
-                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
-                    <p>Cost: $000.00</p>
-                </div>
-                <div class="col ps-3">
-<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
-                </div>
-            </div>
-            <hr>
-            <div class="row vendor ">
-                <a href="/vendors/categories/7" class="text-decoration-none text-black fontTitle vendorTitle"><h4>Bands/DJs</h4></a>
-                <div class="col">
-                    <a href="/vendors/individual/7"><img class="image"  src="/img/client_profile/dj_clientProfile.jpg" alt="Vendor Img"></a>
-                </div>
-                <div class="col font">
-                    <p>Business Name: Lorem ipsum dolor sit amet.</p>
-                    <p>Cost: $000.00</p>
-                </div>
-                <div class="col ps-3">
-<!--                    <button class="budgetBtn"><i class="fa-solid fa-pencil"></i></button>-->
-                </div>
             </div>
         </div>
     </div>
 </main>
 
 <!-- Itemized Budget Modal-->
-
-    <div id="modalBtn" class="modal fade" role="dialog">
-        <div class="container p-4">
-            <div class="modal-dialog">
-                <div class="modal-content card p-4">
-                    <div class="modal-header  ">
-                        <h2 class="modal-title fontTitle text-center">Itemized Budget</h2>
+<div id="modalBtn" class="modal fade" role="dialog">
+    <div class="container p-4">
+        <div class="modal-dialog">
+            <div class="modal-content card p-4">
+                <div class="modal-header  ">
+                    <h2 class="modal-title fontTitle text-center">Itemized Budget</h2>
+                </div>
+                <div class="modal-body ">
+                    <div class="d-grid g-2 mb-3">
+                        <input class="font mb-1" type="text" placeholder="Business Name:">
+                        <input class="font mb-1" type="text" placeholder="Cost: ">
                     </div>
-                    <div class="modal-body ">
-                        <div class="d-grid g-2 mb-3">
-                            <input class="font mb-1" type="text" placeholder="Business Name:">
-                            <input class="font mb-1" type="text" placeholder="Cost: ">
-                        </div>
-                        <div class="d-grid g-2 mb-3">
-                            <input class="font mb-1" type="text" placeholder="Business Name:">
-                            <input class="font" type="text" placeholder="Cost: ">
-                        </div>
-                        <div class="d-grid g-2 mb-3">
-                            <input class="font mb-1" type="text" placeholder="Business Name:">
-                            <input class="font mb-1" type="text" placeholder="Cost: ">
-                        </div>
+                    <div class="d-grid g-2 mb-3">
+                        <input class="font mb-1" type="text" placeholder="Business Name:">
+                        <input class="font" type="text" placeholder="Cost: ">
                     </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <button  type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Save Changes</button>
-                        <button type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Close</button>
+                    <div class="d-grid g-2 mb-3">
+                        <input class="font mb-1" type="text" placeholder="Business Name:">
+                        <input class="font mb-1" type="text" placeholder="Cost: ">
                     </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button  type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Save Changes</button>
+                    <button type="button" class="closeBtn btn btn-default" data-bs-toggle="modal" data-bs-dismiss="modalBtn">Close</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- EDIT BUDGET AMOUNT MODAL -->
+<div id="budgetAmountModal" class="modal fade" role="dialog">
+    <div class="container p-4">
+        <div class="modal-dialog">
+            <div class="modal-content card p-4">
+                <div class="modal-header d-flex flex-column">
+                    <h4 class="modal-title text-center fontTitle mb-0">Update Expense For</h4>
+                    <h5 class="modal-title text-center fontTitle mt-0" id="expense-update-title">Vendor<</h5>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/budget/edit/}" method="POST" th:object="${budgetEntry}" id="budget-entry-model">
+                        <input type="hidden" id="vendor" name="vendor" th:value="${budgetEntry.vendor}" />
+                        <div>
+                            <label for="amount" class="form-label"></label>
+                            <input th:field="*{amount}" type="number" name="amount" class="form-control" id="amount"
+                                   placeholder="Set an amount" th:required>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                            <button  type="submit" class="btn btn-dark font budgetAmountModalBtn" data-bs-dismiss="modal">Save</button>
+                            <button type="button" class="btn btn-dark font budgetAmountModalBtn" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- EDIT PROFILE MODAL -->
 <div id="myModal" class="modal fade" role="dialog" sec:authorize="hasRole('ROLE_CUSTOMER')">
@@ -250,6 +206,7 @@
 <!--BOOTSTRAP-->
 <div th:insert="~{fragments/fragments :: bootstrapJs}"></div>
 <!--JAVASCRIPT-->
-<script type="text/javascript" src="/static/budgetModal.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/budgetModal.js"></script>
 </body>
 </html>

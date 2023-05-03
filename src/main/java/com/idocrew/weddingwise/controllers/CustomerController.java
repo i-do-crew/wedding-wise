@@ -11,21 +11,22 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @RequiredArgsConstructor
 @Controller
-@SessionAttributes({"user","customer","budget"})
+@SessionAttributes({"user","customer", "budgetEntries"})
 public class CustomerController {
 
     private final UserService userService;
     private final CustomerService customerService;
-    private final BudgetEntryService budgetEntryService;
     private final CustomerVendorService customerVendorService;
     private final VendorCategoryService vendorCategoryService;
     private final VendorUtility vendorUtility;
+    private final BudgetEntryService budgetEntryService;
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
 
@@ -34,11 +35,11 @@ public class CustomerController {
         User user = userService.findByUsername(username);
         Customer customer = customerService.findCustomerByUser(user);
         List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
-        List<BudgetEntry> budget = budgetEntryService.findBudgetEntriesByCustomer(customer);
+        List<BudgetEntry> budgetEntries = budgetEntryService.findBudgetEntriesByCustomer(customer);
         Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("customer", customer);
-        request.getSession().setAttribute("budget", budget);
+        request.getSession().setAttribute("budgetEntries", budgetEntries);
         request.getSession().setAttribute("customerVendors", customerVendors);
         request.getSession().setAttribute("categories", vendorCategories);
         model.addAttribute("options", states);
@@ -60,15 +61,6 @@ public class CustomerController {
         model.addAttribute("user", user);
         model.addAttribute("customer", customer);
         return "customer_views/client_profileDashboard";
-    }
-    @GetMapping("/budget_tracker")
-    public String budgetTracker(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
-        refactorThisMethod(username, model, request);
-        User user = (User) request.getSession().getAttribute("user");
-        Customer customer = (Customer) request.getSession().getAttribute("customer");
-        model.addAttribute("user", user);
-        model.addAttribute("customer", customer);
-        return "/clients_budgetTracker";
     }
     @GetMapping("/likedVendors/toggle/{vendorId}")
     public String toggleLikedVendors(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
@@ -106,29 +98,39 @@ public class CustomerController {
         return "/likedVendors";
     }
     @GetMapping("/selectedVendors/toggle/{vendorId}")
-    public String addSelectedVendor(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
+    public String toggleSelectedVendor(@PathVariable Long vendorId, @CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
         refactorThisMethod(username, model, request);
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Vendor vendor = vendorUtility.findById(vendorId);
+        List<BudgetEntry> budgetEntries = (List<BudgetEntry>) request.getSession().getAttribute("budgetEntries");
         Optional<CustomerVendor> opt = customerVendorService.findByCustomerAndVendor(customer, vendor);
         CustomerVendor selectedVendor = null;
+        BudgetEntry budgetEntry = budgetEntryService.createBudgetEntry(customer, vendor);
         if(opt.isPresent()) {
             selectedVendor = opt.get();
             if(!selectedVendor.getSelected()){
                 selectedVendor.setSelected(true);
+                budgetEntries.add(budgetEntry);
             } else{
                 selectedVendor.setSelected(false);
+                budgetEntries.remove(budgetEntry);
+                budgetEntryService.delete(budgetEntry);
             }
         } else {
             selectedVendor = new CustomerVendor();
             selectedVendor.setCustomer(customer);
             selectedVendor.setVendor(vendor);
             selectedVendor.setSelected(true);
+            budgetEntries.add(budgetEntry);
         }
+        budgetEntryService.save(budgetEntries);
+        budgetEntries = budgetEntryService.findBudgetEntriesByCustomer(customer);
+        request.getSession().setAttribute("budgetEntries", budgetEntries);
         customerVendorService.save(selectedVendor);
         Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
         request.getSession().setAttribute("customerVendors", customerVendors);
         String referer = request.getHeader("Referer");
+        model.addAttribute("selectedVendor", selectedVendor); // add selectedVendor to model
         return "redirect:" + referer;
     }
     @PostMapping("/customer/profile/edit")

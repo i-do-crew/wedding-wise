@@ -12,11 +12,12 @@ window.onclick = function(event) {
     }
 }
 
-closeBtn.onclick = function()  {
-    modal.hide();
-}
-// $(document).ready(function(){
-//     $("#budgetModal").click(function(){
-//         $("#budgetModalBtn").modal();
-//     });
-// });
+$(".budgetAmountModalBtn").click(function (e) {
+    const vendorId = e.target.getAttribute('data-id');
+    const vendorName = e.target.getAttribute('name');
+    const amount = $("button[name='" + vendorName + "']").closest('span').text();
+    console.log("Amount Is: " + amount);
+    $("#budget-entry-model").attr('action', '/budget/edit/' + vendorId);
+    $("#expense-update-title").text(vendorName);
+    $("#amount").val(amount);
+})

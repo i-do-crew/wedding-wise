@@ -1,6 +1,7 @@
 package com.idocrew.weddingwise.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.annotation.Scope;
@@ -18,14 +19,15 @@ public class BudgetEntry {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "vendor_id", nullable = false)
     private Vendor vendor;
 
+    @Min(value = 0, message = "Amount cannot be less than 0")
     @Column(name = "amount", nullable = false, precision = 19, scale = 2)
     private BigDecimal amount;
 }
