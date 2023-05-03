@@ -21,21 +21,24 @@
             <h1 class="text-center fontTitle">Your Current Budget: <button id="budgetBtn" type="button" data-bs-toggle="modal" data-bs-target="#modalBtn">$<span th:text="${currentBalance}"></span></button></h1>
             <hr>
             <div class="row vendor" th:each="category: ${session.categories}">
+                <hr >
                 <a th:href="@{/vendors/categories/{id}(id=${category.id})}" class="text-decoration-none text-black fontTitle vendorTitle"><h4 th:text="${category.title}"></h4></a>
                 <div th:each="entry : ${budgetEntries}">
                     <div th:if="${entry.vendor.vendorCategory.title} == ${category.title}">
-                        <div class="col">
-                            <a href="/vendors/individual/1"><img class="image" src="/img/client_profile/venue_clientProfile.jpg" alt="Vendor Img"></a>
-                        </div>
-                        <div class="col font">
-                            <p>Business Name: <span th:text="${entry} ? ${entry.vendor.businessName}"></span></p>
-                            <p>Cost: $<span th:text="${entry} ? ${entry.amount}"></span></p>
-                            <label>
-                                <input type="text" th:text="${entry} ? ${entry.vendor.id}">
-                            </label>
-                            <button type="button" class="btn font budgetAmountModalBtn" th:name="${entry} ? ${entry.vendor.businessName}" th:data-id="${entry} ? ${entry.vendor.id}" data-bs-toggle="modal" data-bs-target="#budgetAmountModal">
-                                Update Amount <i class="fa-solid fa-circle-dollar-to-slot"></i>
-                            </button>
+                        <div class="row p-3">
+                            <div class="col-3">
+                                <a href="/vendors/individual/1"><img class="image" src="/img/client_profile/venue_clientProfile.jpg" alt="Vendor Img"></a>
+                            </div>
+                            <div class="col-9 font">
+                                <p>Business Name: <span th:text="${entry} ? ${entry.vendor.businessName}"></span></p>
+                                <p>Cost: $<span th:text="${entry} ? ${entry.amount}"></span></p>
+<!--                                <label>-->
+<!--                                    <input type="text" th:text="${entry} ? ${entry.vendor.id}">-->
+<!--                                </label>-->
+                                <button type="button" class="btn btn-dark font budgetAmountModalBtn" th:name="${entry} ? ${entry.vendor.businessName}" th:data-id="${entry} ? ${entry.vendor.id}" data-bs-toggle="modal" data-bs-target="#budgetAmountModal">
+                                    Update Amount <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
