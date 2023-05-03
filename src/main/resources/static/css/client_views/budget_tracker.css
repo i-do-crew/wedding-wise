@@ -19,10 +19,20 @@ main{
     opacity: .3;
 }
 .vendor{
-    flex:auto;
-    justify-content: space-between !important;
-    align-items: center;
-    padding-left:150px !important;
+    /*flex:auto;*/
+    /*justify-content: center !important;*/
+    /*align-items: center;*/
+    padding-left:385px !important;
+
+}
+hr{
+    margin-left:auto;
+    margin-right:auto;
+    width:65% !important;
+    font-size: 1.5em;
+}
+.vendorText{
+    /*padding-left:0px;*/
 }
 
 #budgetModalBtn{
