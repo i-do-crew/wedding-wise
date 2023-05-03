@@ -25,43 +25,43 @@
                         <div class="mb-1">
                             <label for="email" class="form-label"></label>
                             <input th:field="*{user.email}" type="email" name="email" class="form-control" id="email"
-                                   placeholder="Enter your Email">
+                                   placeholder="Email">
                         </div>
                         <div class="mb-1">
                             <label for="password" class="form-label"></label>
                             <input th:field="*{user.password}" type="password" name="password" class="form-control" id="password"
-                                   placeholder="Select a password">
+                                   placeholder="Password">
                         </div>
                         <div class="mb-1">
                             <label for="cPassword" class="form-label"></label>
                             <input type="password" name="cPassword" class="form-control" id="cPassword"
-                                   placeholder="Confirm your password">
+                                   placeholder="Password Confirmation">
                         </div>
                         <div class="mb-1">
                             <label for="firstName" class="form-label"></label>
                             <input th:field="*{user.firstName}" type="text" name="firstName" class="form-control" id="firstName"
-                                   placeholder="Enter your First Name">
+                                   placeholder="Your First Name">
                         </div>
                         <div class="mb-1">
                             <label for="lastName" class="form-label"></label>
                             <input th:field="*{user.lastName}" type="text" name="lastName" class="form-control" id="lastName"
-                                   placeholder="Enter your Last Name">
+                                   placeholder="Your Last Name">
                         </div>
                         <div class="mb-1">
                             <label for="partnerFName" class="form-label"></label>
                             <input th:field="*{partnerFName}" type="text" name="partnerFName" class="form-control" id="partnerFName"
-                                   placeholder="Enter your Partner's First Name">
+                                   placeholder="Partner's First Name">
                         </div>
                         <div class="mb-1">
                             <label for="partnerLName" class="form-label"></label>
                             <input th:field="*{partnerLName}" type="text" name="partnerLName" class="form-control" id="partnerLName"
-                                   placeholder="Enter your Partner's Last Name">
+                                   placeholder="Partner's Last Name">
                         </div>
                         <div class="row g-1 d-flex align-items-center">
                             <div class="col-auto">
                                 <label for="city" class="form-label"></label>
                                 <input th:field="*{user.city}" type="text" name="city" class="form-control" id="city"
-                                       placeholder="Enter your City">
+                                       placeholder="Your City">
                             </div>
                             <div class="col-auto pt-4">
                                 <select th:field="*{user.state}" class="form-select ">
@@ -77,12 +77,12 @@
                         <div class="mb-1">
                             <label for="budget" class="form-label"></label>
                             <input th:field="*{budget}" type="text" name="budget" class="form-control" id="budget"
-                                   placeholder="Enter your Budget Range">
+                                   placeholder="Estimated Budget">
                         </div>
                         <div class="mb-1">
                             <label for="guestCount" class="form-label"></label>
                             <input th:field="*{guestCount}" type="text" name="guestCount" class="form-control" id="guestCount"
-                                   placeholder="Enter your Estimated Guest Count">
+                                   placeholder="Estimated Guest Count">
                         </div>
                         <button type="submit" id="verifyBtn" class="mt-4 p-2 font">Sign Up</button>
                     </form>
