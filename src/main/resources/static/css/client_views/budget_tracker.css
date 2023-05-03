@@ -22,8 +22,7 @@ main{
     /*flex:auto;*/
     /*justify-content: center !important;*/
     /*align-items: center;*/
-    padding-left:385px !important;
-
+    /*padding-left:385px !important;*/
 }
 hr{
     margin-left:auto;
@@ -68,4 +67,9 @@ hr{
 }
 .budgetVendorTitle{
     /*padding-left: 200px;*/
+}
+.section{
+    padding: 20px 200px 20px 200px;
+    flex:auto;
+    justify-content: center;
 }

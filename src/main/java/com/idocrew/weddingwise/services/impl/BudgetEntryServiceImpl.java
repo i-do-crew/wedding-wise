@@ -2,7 +2,6 @@ package com.idocrew.weddingwise.services.impl;
 
 import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.repositories.BudgetEntryRepository;
-import com.idocrew.weddingwise.repositories.SimpleBudgetEntryRepository;
 import com.idocrew.weddingwise.services.BudgetEntryService;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +14,7 @@ import java.util.List;
 @Service("budgetEntryService")
 public class BudgetEntryServiceImpl implements BudgetEntryService {
     private final BudgetEntryRepository budgetEntryRepository;
-    private final SimpleBudgetEntryRepository simpleBudgetEntryRepository;
     private final EntityManager em;
-
-
-    @Override
-    public List<SimpleBudgetEntry> findSimpleBudgetEntriesByCustomer(Customer customer) {
-        String query = String.format("select * from budget_entries where customer_id = %d;", customer.getId());
-        return (List<SimpleBudgetEntry>) em.createNativeQuery(query, SimpleBudgetEntry.class).getResultList();
-
-    }
 
     @Override
     public List<BudgetEntry> findBudgetEntriesByCustomer(Customer customer) {
