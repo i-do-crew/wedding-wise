@@ -94,12 +94,12 @@
                         <input type="hidden" id="vendor" name="vendor" th:value="${budgetEntry.vendor}" />
                         <div>
                             <label for="amount" class="form-label"></label>
-                            <input th:field="*{amount}" type="number" name="amount" class="form-control" id="amount"
-                                   placeholder="Set an amount" th:required>
+                            <input type="number" th:field="*{amount}" name="amount" class="form-control" id="amount"
+                                   placeholder="Amount Quoted" th:required>
                         </div>
                         <div class="modal-footer d-flex justify-content-between">
-                            <button  type="submit" class="btn btn-dark font budgetAmountModalBtn" data-bs-dismiss="modal">Save</button>
-                            <button type="button" class="btn btn-dark font budgetAmountModalBtn" data-bs-dismiss="modal">Close</button>
+                            <button  type="submit" class="btn btn-dark font" data-bs-dismiss="modal">Save</button>
+                            <button type="button" class="btn btn-dark font" data-bs-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
