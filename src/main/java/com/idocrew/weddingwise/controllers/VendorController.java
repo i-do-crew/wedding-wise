@@ -6,7 +6,6 @@ import com.idocrew.weddingwise.services.impl.VendorPhotoFormatService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
@@ -42,7 +41,7 @@ public class VendorController {
     private final CustomerVendorService customerVendorService;
     private final VendorRatingsReviewService vendorRatingsReviewService;
 
-    private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
+    private void setSessionAttributes(String username, HttpServletRequest request) {
         User user;
         Vendor vendor;
         if (!"anonymousUser".equals(username)) {
@@ -51,14 +50,13 @@ public class VendorController {
         } else  {
             vendor = new Vendor();
         }
-        List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
         request.getSession().setAttribute("vendor", vendor);
-        request.getSession().setAttribute("categories", vendorCategories);
+        request.getSession().setAttribute("categories", vendorCategoryService.findAll());
         request.getSession().setAttribute("vendorComposite", new VendorComposite());
     }
     @GetMapping("/vendors/individual/{id}")
     public String showVendor(@PathVariable long id,@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request) {
-        refactorThisMethod(username, model, request);
+        setSessionAttributes(username, request);
         model.addAttribute("vid",id);
         Vendor vendor = vendorUtility.findById(id);
         model.addAttribute("vendor",vendor);
@@ -92,7 +90,7 @@ public class VendorController {
         customerVendor.setVendor(vendor);
         customerVendor.setCustomer(customer);
         model.addAttribute("customerVendor", customerVendor);
-        refactorThisMethod(username, model, request);
+        setSessionAttributes(username, request);
         return "vendors/each_vendorCategories";
     }
     @GetMapping("/vendors")
@@ -153,38 +151,20 @@ public class VendorController {
     @Transactional
     public String vendorProfileEditPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite, HttpServletRequest request, Model model) {
         Vendor vendorEntity = vendorComposite.getVendor();
-        User userTemp = vendorEntity.getUser();
-        User userEntity = (User) request.getSession().getAttribute("user");
-        userEntity.setEmail(userTemp.getEmail());
-        userEntity.setFirstName(userTemp.getFirstName());
-        userEntity.setLastName(userTemp.getLastName());
-        userEntity.setCity(userTemp.getCity());
-        userEntity.setState(userTemp.getState());
-
-        model.addAttribute("vendorCategories", vendorCategoryService.findAll());
-        model.addAttribute("options", states);
-        model.addAttribute("musicGenres", musicGenreService.findAll());
-        model.addAttribute("photoFormats", photoFormatService.findAll());
-        model.addAttribute("musicTypes", musicVendorCategoryService.findAll());
-
-        userService.saveUser(userEntity);
+        userService.editUserProfile(request, vendorEntity.getUser());
+//        model.addAttribute("vendorCategories", vendorCategoryService.findAll());
+//        model.addAttribute("options", states);
+//        model.addAttribute("musicGenres", musicGenreService.findAll());
+//        model.addAttribute("photoFormats", photoFormatService.findAll());
+//        model.addAttribute("musicTypes", musicVendorCategoryService.findAll());
         vendorUtility.saveVendor(vendorEntity);
-        switch (vendorEntity.getVendorCategory().getTitle()) {
-            case "Venues" -> saveVenue(vendorEntity, vendorComposite);
-            case "Photographers" -> savePhotographer(vendorEntity, vendorComposite.getPhotoFormat());
-            case "Bands and DJs" -> {
-                MusicVendor musicVendor = saveMusicVendor(vendorEntity, vendorComposite.getMusicVendorCategory());
-                saveMusicVendorMusicGenres(musicVendor, vendorComposite.getMusicGenres());
-            }
-            default -> {
-            }
-        }
+        vendorUtility.savedVendorAttributes(vendorComposite, vendorEntity);
         return "vendor_views/vendor_profile";
     }
 
     @GetMapping("/vendor/profile/edit/about")
     public String vendorProfileEditAbout(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request){
-        refactorThisMethod(username, model, request);
+        setSessionAttributes(username, request);
         Vendor vendor = (Vendor) request.getSession().getAttribute("vendor");
         model.addAttribute("vendor", vendor);
         return "vendor_views/vendor_profile";
@@ -193,52 +173,8 @@ public class VendorController {
     @PostMapping("/vendor/profile/edit/about")
     public String vendorProfileEditAboutPost(@ModelAttribute("vendorComposite") VendorComposite vendorComposite){
         Vendor vendorEntity = vendorComposite.getVendor();
-        saveVendor(vendorEntity);
+        vendorUtility.saveVendor(vendorEntity);
         return "vendor_views/vendor_profile";
-    }
-
-    private MusicVendor saveMusicVendor(Vendor vendorEntity, MusicVendorCategory category) {
-        MusicVendor musicVendor = new MusicVendor(vendorEntity, category);
-        if (musicVendor.getId() > 0) {
-            return musicVendorService.saveMusicVendor(musicVendor);
-        }
-        return null;
-    }
-
-    private void saveMusicVendorMusicGenres(MusicVendor musicVendor, Set<MusicGenre> musicGenres) {
-        Set<MusicVendorGenre> set = musicGenres
-                .stream()
-                .map(musicGenre -> new MusicVendorGenre(musicVendor, musicGenre))
-                .collect(Collectors.toSet());
-        if (musicGenres != null) {
-            musicVendorGenreService.saveAllMusicVendorMusicGenres(set);
-        }
-    }
-
-    private void savePhotographer(Vendor vendorEntity, PhotoFormat photoFormat) {
-        VendorPhotoFormat vendorPhotoFormatEntity = new VendorPhotoFormat();
-        vendorPhotoFormatEntity.setVendor(vendorEntity);
-        vendorPhotoFormatEntity.setPhotoFormat(photoFormat);
-        if (vendorPhotoFormatEntity.getId() > 0) {
-            vendorPhotoFormatService.saveVendorPhotoFormat(vendorPhotoFormatEntity);
-        }
-    }
-
-    private void saveVenue(Vendor vendorEntity, VendorComposite vendorComposite) {
-        Venue venueEntity = new Venue();
-        BeanUtils.copyProperties(vendorComposite.getVenue(), venueEntity);
-        venueEntity.setVendor(vendorEntity);
-        if (venueEntity.getId() > 0) {
-            venueService.saveVenue(venueEntity);
-        }
-    }
-
-    private void saveVendor(Vendor vendor) {
-        Vendor vendorEntity = new Vendor();
-        BeanUtils.copyProperties(vendor, vendorEntity);
-        if(vendorEntity.getId() > 0) {
-            vendorUtility.saveVendor(vendorEntity);
-        }
     }
 
 }

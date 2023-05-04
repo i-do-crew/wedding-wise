@@ -17,8 +17,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Scope("session")
 @Entity
+@Scope("session")
 @Table(name="customers", schema = "weddingwise")
 public class Customer {
 

@@ -4,6 +4,7 @@ package com.idocrew.weddingwise.controllers;
 import com.idocrew.weddingwise.entity.*;
 import com.idocrew.weddingwise.services.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @Controller
@@ -30,20 +30,17 @@ public class BudgetController {
     @Value("#{'${us.states}'.split(',')}")
     private final String[] states;
 
-    private void refactorThisMethod(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
-        User user = userService.findByUsername(username);
-        Customer customer = customerService.findCustomerByUser(user);
-        List<VendorCategory> vendorCategories = vendorCategoryService.findAll();
-        Set<CustomerVendor> customerVendors = customerVendorService.findByCustomer(customer);
-        request.getSession().setAttribute("user", user);
-        request.getSession().setAttribute("customer", customer);
-        request.getSession().setAttribute("customerVendors", customerVendors);
-        request.getSession().setAttribute("categories", vendorCategories);
+    private void setSessionAttributes(@CurrentSecurityContext(expression = "authentication?.name") String username, Model model, HttpServletRequest request) {
+        HttpSession session =  request.getSession();
+        Customer customer = customerService.findCustomerByUser(userService.findByUsername(username));
+        session.setAttribute("customer", customer);
+        session.setAttribute("customerVendors", customerVendorService.findByCustomer(customer));
+        session.setAttribute("categories", vendorCategoryService.findAll());
         model.addAttribute("options", states);
     }
     @GetMapping("/budget")
     public String budgetTracker(@CurrentSecurityContext(expression="authentication?.name") String username, Model model, HttpServletRequest request){
-        refactorThisMethod(username, model, request);
+        setSessionAttributes(username, model, request);
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         model.addAttribute("customer", customer);
         BudgetEntry budgetEntry = new BudgetEntry();

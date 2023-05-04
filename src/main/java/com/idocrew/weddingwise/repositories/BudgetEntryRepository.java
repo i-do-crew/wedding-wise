@@ -11,4 +11,5 @@ public interface BudgetEntryRepository extends JpaRepository<BudgetEntry, Long> 
 
     List<BudgetEntry> findAllByCustomer(Customer customer);
     BudgetEntry findBudgetEntryByCustomerAndVendor(Customer customer, Vendor vendor);
+    void deleteAllByCustomerAndVendor(Customer customer, Vendor vendor);
 }

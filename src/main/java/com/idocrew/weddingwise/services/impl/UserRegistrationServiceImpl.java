@@ -70,18 +70,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         Vendor vendorEntity = new Vendor();
         BeanUtils.copyProperties(vendorComposite.getVendor(), vendorEntity);
         vendorEntity.setUser(userEntity);
-        vendorEntity = saveVendor(vendorEntity);
-
-        switch (vendorEntity.getVendorCategory().getTitle()) {
-            case "Venues" -> saveVenue(vendorEntity, vendorComposite);
-            case "Photographers" -> savePhotographer(vendorEntity, vendorComposite.getPhotoFormat());
-            case "Bands and DJs" -> {
-                MusicVendor musicVendor = saveMusicVendor(vendorEntity, vendorComposite.getMusicVendorCategory());
-                saveMusicVendorMusicGenres(musicVendor, vendorComposite.getMusicGenres());
-            }
-            default -> {
-            }
-        }
+        vendorEntity = vendorUtility.saveVendor(vendorEntity);
+        vendorUtility.savedVendorAttributes(vendorComposite, vendorEntity);
         sendRegistrationConfirmationEmail(userEntity);
     }
 

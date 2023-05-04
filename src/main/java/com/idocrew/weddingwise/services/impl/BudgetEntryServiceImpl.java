@@ -53,4 +53,9 @@ public class BudgetEntryServiceImpl implements BudgetEntryService {
         return budgetEntry;
     }
 
+    @Override
+    public void deleteByCustomerAndVendor(Customer customer, Vendor vendor) {
+        budgetEntryRepository.deleteAllByCustomerAndVendor(customer, vendor);
+    }
+
 }

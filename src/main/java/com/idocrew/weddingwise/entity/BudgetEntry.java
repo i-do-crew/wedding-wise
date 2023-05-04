@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@Scope("session")
 @Entity
+@Scope("session")
 @Table(name="budget_entries", schema="weddingwise")
 public class BudgetEntry {
     @Id

@@ -19,4 +19,6 @@ public interface BudgetEntryService {
     BudgetEntry findBudgetEntryByCustomerAndVendor(Customer customer, Vendor vendor);
 
     BudgetEntry createBudgetEntry(Customer customer, Vendor vendor);
+
+    void deleteByCustomerAndVendor(Customer customer, Vendor vendor);
 }

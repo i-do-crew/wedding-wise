@@ -14,8 +14,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Scope("session")
 @Entity
+@Scope("session")
 @Table(name = "users", schema = "weddingwise",
     indexes = {
         @Index(name = "email", columnList = "email", unique = true),
