@@ -5,6 +5,10 @@
 ### Wedding Wise is a web-based application designed to help couples plan their dream wedding on a budget. With features like Budget Tracking, Vendor Rating, Vendor Directories, Idea Board, Guest List Manager, Google Maps API, and Email Services, Wedding Wise is the perfect tool for any couple planning their big day!
 
 
+## Live Demo
+### [Wedding Wise Live Demo](https://weddingwise.online:8080/)
+
+
 ## Features
 
 Wedding Wise offers the following features:
